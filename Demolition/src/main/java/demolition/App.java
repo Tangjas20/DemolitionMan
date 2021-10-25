@@ -21,8 +21,16 @@ public class App extends PApplet {
     private yellowEnemy yellowEnemy;
     private String[][] firstBoard = new String[13][15];
     private String[][] secondBoard = new String[13][15];
+    private List<SolidWall> solidWalls = new ArrayList<SolidWall>();
     private List<yellowEnemy> yellowList = new ArrayList<yellowEnemy>();
-
+    private List<BrokenWall> brokenWalls = new ArrayList<BrokenWall>();
+    private List<EmptyWall> emptyWalls = new ArrayList<EmptyWall>();
+    private List<GoalTile> goalTile = new ArrayList<GoalTile>();
+    List<PImage[]> yellowEnemyImageList = new ArrayList<PImage[]>();
+    List<PImage[]> redEnemyImageList = new ArrayList<PImage[]>();
+    List<PImage[]> imageList = new ArrayList<PImage[]>();
+    Boolean redEnemyTF = false;
+    Boolean yellowEnemyTF = false;
 
     public App() {
         //construct objects here
@@ -59,27 +67,17 @@ public class App extends PApplet {
         playerLeftGif[2] = loadImage("src/main/resources/player/player_left3.png");
         playerLeftGif[3] = loadImage("src/main/resources/player/player_left4.png");
 
-        List<PImage[]> imageList = new ArrayList<PImage[]>();
+
         imageList.add(playerGif);
         imageList.add(playerUpGif);
         imageList.add(playerRightGif);
         imageList.add(playerLeftGif);
 
-        this.player = new Player(30, 200, imageList);
 
-        //Tiles
 
-        //GoalTile
-        this.GoalImage = new GoalTile(100, 200, this.loadImage("src/main/resources/goal/goal.png"));
+        
 
-        //SolidTile
-        this.SolidImage = new SolidWall(160, 200, this.loadImage("src/main/resources/wall/solid.png"));
-
-        //EmptyTile
-        this.EmptyImage = new EmptyWall(220, 200, this.loadImage("src/main/resources/empty/empty.png"));
-
-        //Broken
-        this.BrokenImage = new BrokenWall(280, 200, this.loadImage("src/main/resources/broken/broken.png"));
+        
 
 
         //Enemy Red Sprite
@@ -107,13 +105,13 @@ public class App extends PApplet {
         redEnemyLeftSprite[2] = loadImage("src/main/resources/red_enemy/red_left3.png");
         redEnemyLeftSprite[3] = loadImage("src/main/resources/red_enemy/red_left4.png");
 
-        List<PImage[]> redEnemyImageList = new ArrayList<PImage[]>();
+
         redEnemyImageList.add(redEnemySprite);
         redEnemyImageList.add(redEnemyUpSprite);
         redEnemyImageList.add(redEnemyRightSprite);
         redEnemyImageList.add(redEnemyLeftSprite);
 
-        this.redEnemy = new redEnemy(320, 200, redEnemyImageList);
+
 
         //Enemy Yellow Sprite
                 //Enemy Red Sprite
@@ -141,55 +139,99 @@ public class App extends PApplet {
                 yellowEnemyLeftSprite[2] = loadImage("src/main/resources/yellow_enemy/yellow_left3.png");
                 yellowEnemyLeftSprite[3] = loadImage("src/main/resources/yellow_enemy/yellow_left4.png");
         
-                List<PImage[]> yellowEnemyImageList = new ArrayList<PImage[]>();
+
                 yellowEnemyImageList.add(yellowEnemySprite);
                 yellowEnemyImageList.add(yellowEnemyUpSprite);
                 yellowEnemyImageList.add(yellowEnemyRightSprite);
                 yellowEnemyImageList.add(yellowEnemyLeftSprite);
         
-                this.yellowEnemy = new yellowEnemy(380, 200, yellowEnemyImageList);
-                yellowList.add(yellowEnemy);
-                this.yellowEnemy = new yellowEnemy(450, 200, yellowEnemyImageList);
-                yellowList.add(yellowEnemy);
+
 
                 //Board
                 Board board = new Board();
                 firstBoard = board.make1stBoard();
                 secondBoard = board.make2ndBoard();
-                /*for(int i = 0; i < firstBoard.length; i++){
-                    for(int j = 0; j < firstBoard[0].length; j++){
-                        String mapTile = firstBoard[i][j];
-                        if(mapTile == "W"){
-                            
+                map(secondBoard);
+    }
+        public void map(String[][] mapBoard){
+                redEnemyTF = false;
+                yellowEnemyTF = false;
+                for(int i = 0; i < mapBoard.length; i++){
+                    for(int j = 0; j < mapBoard[0].length; j++){
+                        int x = 32*j;
+                        int y = 64+32*i;
+                        String mapTile = mapBoard[i][j];
+                        if(mapTile.equals("P")){
+                            this.player = new Player(x, y-16, imageList);
+                        }
+
+                        if(mapTile.equals("Y")){
+                            this.yellowEnemy = new yellowEnemy(x, y-16, yellowEnemyImageList);
+                            yellowEnemyTF = true;
+                        }
+
+                        if(mapTile.equals("R")){
+                            this.redEnemy = new redEnemy(x, y-16, redEnemyImageList);
+                            redEnemyTF = true;
+                        }
+
+                        if(mapTile.equals("W")){
+
+                            this.SolidImage = new SolidWall(x, y, this.loadImage("src/main/resources/wall/solid.png"));
+                            solidWalls.add(SolidImage);
+                        }
+                        else if(mapTile.equals("B")){
+                            //Broken
+                            this.BrokenImage = new BrokenWall(x, y, this.loadImage("src/main/resources/broken/broken.png"));
+                            brokenWalls.add(BrokenImage);
+                        }
+                        else if(mapTile.equals(" ") || mapTile.equals("P") || mapTile.equals("R") || mapTile.equals("Y")){
+                            //EmptyTile
+                            this.EmptyImage = new EmptyWall(x, y, this.loadImage("src/main/resources/empty/empty.png"));
+                            emptyWalls.add(EmptyImage);
+                        }
+                        else if(mapTile.equals("G")){
+                            //GoalTile
+                            this.GoalImage = new GoalTile(x, y, this.loadImage("src/main/resources/goal/goal.png"));
+                            goalTile.add(GoalImage);
                         }
                     }
-                }*/
+                }
     }
 
     public void draw() {
         //Main loop here        
         if(frameCount % 12 == 1){
             background(255, 128, 0);
-            this.redEnemy.tick();
-            this.redEnemy.draw(this);
 
-            for(yellowEnemy i: yellowList){
-            this.yellowEnemy = i;
-            this.yellowEnemy.tick();
-            this.yellowEnemy.draw(this);
+
+            for(SolidWall i: solidWalls){
+                this.SolidImage = i;
+                this.SolidImage.draw(this);
             }
-
-            this.GoalImage.draw(this);
-
-            this.SolidImage.draw(this);
-
-            this.EmptyImage.draw(this);
-
-            this.BrokenImage.draw(this);
-
+            for(BrokenWall i: brokenWalls){
+                this.BrokenImage = i;
+                this.BrokenImage.draw(this);
+            }
+            for(EmptyWall i: emptyWalls){
+                this.EmptyImage = i;
+                this.EmptyImage.draw(this);
+            }
+            for(GoalTile i: goalTile){
+                this.GoalImage = i;
+                this.GoalImage.draw(this);
+            }
+            if(redEnemyTF == true){
+                this.redEnemy.tick();
+                this.redEnemy.draw(this);
+            }
+            if(yellowEnemyTF == true){
+                this.yellowEnemy.tick();
+                this.yellowEnemy.draw(this);
+            }   
             this.player.tick();
             this.player.draw(this);
-
+            
         }
     }
 
