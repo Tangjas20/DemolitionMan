@@ -151,8 +151,10 @@ public class App extends PApplet {
                 Board board = new Board();
                 firstBoard = board.make1stBoard();
                 secondBoard = board.make2ndBoard();
-                map(secondBoard);
+                map(firstBoard);
+                //map(secondBoard);
     }
+    
         public void map(String[][] mapBoard){
                 redEnemyTF = false;
                 yellowEnemyTF = false;
