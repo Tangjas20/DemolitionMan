@@ -160,20 +160,20 @@ public class App extends PApplet {
                 yellowEnemyTF = false;
                 for(int i = 0; i < mapBoard.length; i++){
                     for(int j = 0; j < mapBoard[0].length; j++){
-                        int x = 32*j;
-                        int y = 64+32*i;
+                        int x = j;
+                        int y = i;
                         String mapTile = mapBoard[i][j];
                         if(mapTile.equals("P")){
-                            this.player = new Player(x, y-16, imageList);
+                            this.player = new Player(x, y, imageList);
                         }
 
                         if(mapTile.equals("Y")){
-                            this.yellowEnemy = new yellowEnemy(x, y-16, yellowEnemyImageList);
+                            this.yellowEnemy = new yellowEnemy(x, y, yellowEnemyImageList);
                             yellowEnemyTF = true;
                         }
 
                         if(mapTile.equals("R")){
-                            this.redEnemy = new redEnemy(x, y-16, redEnemyImageList);
+                            this.redEnemy = new redEnemy(x, y, redEnemyImageList);
                             redEnemyTF = true;
                         }
 
@@ -233,6 +233,7 @@ public class App extends PApplet {
             }   
             this.player.tick();
             this.player.draw(this);
+            System.out.println(this.player.getY());
             
         }
     }
@@ -247,18 +248,40 @@ public class App extends PApplet {
         if (key == CODED) {
             if (keyCode == DOWN) {
                 player.changeOrientation(0);
+                if(firstBoard[player.getY()+1][player.getX()].equals(" ")){
+                    firstBoard[player.getY()][player.getX()] = " ";
+                    player.movementDOWN();
+                    firstBoard[player.getY()][player.getX()] = "P";
+                }
 
             } else if (keyCode == UP) {
                 player.changeOrientation(1);
+                if(firstBoard[player.getY()-1][player.getX()].equals(" ")){
+                    firstBoard[player.getY()][player.getX()] = " ";
+                    player.movementUP();
+                    firstBoard[player.getY()][player.getX()] = "P";
+                }
 
             } else if (keyCode == RIGHT) {
                 player.changeOrientation(2);
+                if(firstBoard[player.getY()][player.getX()+1].equals(" ")){
+                    firstBoard[player.getY()][player.getX()] = " ";
+                    player.movementRight();
+                    firstBoard[player.getY()][player.getX()] = "P";
+                }
 
             } else if (keyCode == LEFT) {
                 player.changeOrientation(3);
-
+                if(firstBoard[player.getY()][player.getX()-1].equals(" ")){
+                    firstBoard[player.getY()][player.getX()] = " ";
+                    player.movementLeft();
+                    firstBoard[player.getY()][player.getX()] = "P";
+                }
             }
         }
+    }
+
+    public void updateBoard(){
     }
     
     public static void main(String[] args) {

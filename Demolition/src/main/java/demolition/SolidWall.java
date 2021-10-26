@@ -24,6 +24,6 @@ public class SolidWall {
     public void draw(PApplet app) {
         //Handling graphics -- Single line or so, no logics
 
-        app.image(this.solid, this.x, this.y);
+        app.image(this.solid, this.x*32, this.y*32+64);
     }
 }

@@ -23,6 +23,6 @@ public class EmptyWall {
 
     public void draw(PApplet app) {
         //Handling graphics -- Single line or so, no logics
-        app.image(this.empty, this.x, this.y);
+        app.image(this.empty, this.x*32, this.y*32+64);
     }
 }

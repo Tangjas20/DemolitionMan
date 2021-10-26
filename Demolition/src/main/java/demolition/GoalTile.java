@@ -24,6 +24,6 @@ public class GoalTile {
     public void draw(PApplet app) {
         //Handling graphics -- Single line or so, no logics
 
-        app.image(this.goal, this.x, this.y);
+        app.image(this.goal, this.x*32, this.y*32+64);
     }
 }
