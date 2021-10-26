@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Board {
+    
     String[][] firstBoard = new String[13][15];
     String[][] secondBoard = new String[13][15];
     public Board(){

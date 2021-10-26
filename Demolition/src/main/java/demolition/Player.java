@@ -10,6 +10,8 @@ public class Player {
     
     private int x;
     private int y;
+    private int newX;
+    private int newY;
     private int imageTick = 0;
     private List<PImage[]> sprites = new ArrayList<PImage[]>();
     int orientation = 0;
@@ -30,6 +32,40 @@ public class Player {
             }
         
     }
+    public void movementLeft(){
+        newX = x-1;
+        newY = y;
+        x = newX;
+        y = newY;
+    }
+
+    public void movementRight(){
+        newX = x+1;
+        x = newX;
+    }
+    public void movementUP(){
+        newX = x;
+        newY = y-1;
+        x = newX;
+        y = newY;
+    }
+
+    public void movementDOWN(){
+        newX = x;
+        newY = y+1;
+        x = newX;
+        y = newY;
+    }
+
+    public int getX(){
+        return this.x;
+    }
+
+    public int getY(){
+        return this.y;
+    }
+
+
 
     public void changeOrientation(int orientation){
         this.orientation = orientation;
@@ -38,7 +74,7 @@ public class Player {
     public void draw(PApplet app) {
         //Handling graphics -- Single line or so, no logics
 
-        app.image(this.sprites.get(orientation)[imageTick], this.x, this.y);
+        app.image(this.sprites.get(orientation)[imageTick], this.x*32, this.y*32+48);
     }
 
     

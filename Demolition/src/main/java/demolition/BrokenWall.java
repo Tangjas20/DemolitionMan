@@ -24,6 +24,6 @@ public class BrokenWall {
 
     public void draw(PApplet app) {
         //Handling graphics -- Single line or so, no logics
-        app.image(this.broken, this.x, this.y);
+        app.image(this.broken, this.x*32, this.y*32+64);
     }
 }

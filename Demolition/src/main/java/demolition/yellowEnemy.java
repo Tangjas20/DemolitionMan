@@ -28,7 +28,6 @@ public class yellowEnemy {
             else{
                 imageTick = 0;
             }
-            
         
     }
 
@@ -39,7 +38,7 @@ public class yellowEnemy {
     public void draw(PApplet app) {
         //Handling graphics -- Single line or so, no logics
 
-        app.image(this.enemyYellowSprite.get(orientation)[imageTick], this.x, this.y);
+        app.image(this.enemyYellowSprite.get(orientation)[imageTick], this.x*32, this.y*32+48);
     }
 
     

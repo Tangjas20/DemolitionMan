@@ -38,7 +38,7 @@ public class redEnemy {
     public void draw(PApplet app) {
         //Handling graphics -- Single line or so, no logics
 
-        app.image(this.enemyRedSprite.get(orientation)[imageTick], this.x, this.y);
+        app.image(this.enemyRedSprite.get(orientation)[imageTick], this.x*32, this.y*32+48);
     }
 
     
