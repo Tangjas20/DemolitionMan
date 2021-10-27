@@ -36,7 +36,8 @@ public class App extends PApplet {
     private List<String> boardArrayName = new ArrayList<String>();
     private List<Integer> boardArrayTime = new ArrayList<Integer>();
     private int boardCounter = 0;
-
+    private int lives;
+    private timer timerIcon;
     public App() {
         //construct objects here
     }
@@ -49,11 +50,11 @@ public class App extends PApplet {
         frameRate(FPS);
         // Load images during setup
         //Board
+
         readJsonObject fileData = new readJsonObject();
         fileData.readFiles("config.json");
-        
+        this.lives = fileData.getLives();
         pathTimeMap = fileData.getPathTimeHashMap();
-
         //map(currentBoard);//Need to change this so that it can change boards when the goal tile is hit
 
         for (Map.Entry<String, String> entry : pathTimeMap.entrySet()) {
@@ -65,6 +66,7 @@ public class App extends PApplet {
 
         currentBoard = board.makeBoard(boardArrayName.get(boardCounter));
         currentTimer =  boardArrayTime.get(boardCounter);
+
         map(currentBoard);
     }
     
@@ -75,6 +77,7 @@ public class App extends PApplet {
         emptyWalls.clear();
         brokenWalls.clear();
         goalTile.clear();
+        this.timerIcon = new timer(180, this.loadImage("src/main/resources/icons/clock.png"));
         for(int i = 0; i < mapBoard.length; i++){
             for(int j = 0; j < mapBoard[0].length; j++){
                 int x = j;
@@ -119,9 +122,13 @@ public class App extends PApplet {
     }
 
     public void draw() {
-        //Main loop here        
-        if(frameCount % 12 == 1){
+        //Main loop here
+        if(frameCount % 60 == 1){
             background(255, 128, 0);
+            this.timerIcon.draw(this);
+        }
+        if(frameCount % 12 == 1){
+
             for(SolidWall i: solidWalls){
                 this.SolidImage = i;
                 this.SolidImage.draw(this);
@@ -148,6 +155,8 @@ public class App extends PApplet {
             }   
             this.player.tick();
             this.player.draw(this);
+
+
             if(this.player.getX() == GoalImage.getX() && this.player.getY() == GoalImage.getY()){
 
                 boardCounter ++;
