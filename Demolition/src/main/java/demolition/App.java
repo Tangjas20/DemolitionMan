@@ -4,6 +4,8 @@ import processing.core.PApplet;
 import processing.core.PImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class App extends PApplet {
 
@@ -22,13 +24,13 @@ public class App extends PApplet {
     private String[][] firstBoard = new String[13][15];
     private String[][] secondBoard = new String[13][15];
     private List<SolidWall> solidWalls = new ArrayList<SolidWall>();
-    private List<yellowEnemy> yellowList = new ArrayList<yellowEnemy>();
     private List<BrokenWall> brokenWalls = new ArrayList<BrokenWall>();
     private List<EmptyWall> emptyWalls = new ArrayList<EmptyWall>();
     private List<GoalTile> goalTile = new ArrayList<GoalTile>();
     List<PImage[]> yellowEnemyImageList = new ArrayList<PImage[]>();
     List<PImage[]> redEnemyImageList = new ArrayList<PImage[]>();
     List<PImage[]> imageList = new ArrayList<PImage[]>();
+    private Map<String, String> pathTimeMap = new HashMap<String, String>();
     Boolean redEnemyTF = false;
     Boolean yellowEnemyTF = false;
 
@@ -148,10 +150,13 @@ public class App extends PApplet {
 
 
                 //Board
+                readJsonObject fileData = new readJsonObject();
+                fileData.readFiles("config.json");
                 Board board = new Board();
                 firstBoard = board.make1stBoard();
                 secondBoard = board.make2ndBoard();
-                map(firstBoard);
+                pathTimeMap = fileData.getPathTimeHashMap();
+                map(firstBoard);//Need to change this so that it can change boards when the goal tile is hit
                 //map(secondBoard);
     }
     
@@ -233,7 +238,6 @@ public class App extends PApplet {
             }   
             this.player.tick();
             this.player.draw(this);
-            System.out.println(this.player.getY());
             
         }
     }
