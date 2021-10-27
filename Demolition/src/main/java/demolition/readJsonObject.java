@@ -11,6 +11,7 @@ import processing.data.JSONObject;
 public class readJsonObject {
     String fileRead = "";
     int numberOfLevels = 0;
+    private int lives;
     private Map<String, String> pathTimeMap = new LinkedHashMap<String, String>();
 
     public void readFiles(String configFile){
@@ -42,6 +43,7 @@ public class readJsonObject {
         
         for(int i = 0; i < numberOfLevels; i++){
             JSONObject jsn1 = jsn.getJSONArray("levels").getJSONObject(i);
+            lives = jsn.getInt("lives");
             pathTimeMap.put(jsn1.getString("path"), jsn1.get("time").toString());
            //System.out.println(jsn1.get("path"));
            // System.out.println(jsn1.get("time"));
@@ -58,11 +60,14 @@ public class readJsonObject {
        //JSONObject jsn1 = JSONObject.parse(jsn.get("levels"));
 
        //json.getJSONArray("content").getJSONObject(0).getString("article")
-    
     }
 
     public Map<String, String> getPathTimeHashMap() {
         return this.pathTimeMap;
+    }
+
+    public int getLives() {
+        return this.lives;
     }
  
 }
