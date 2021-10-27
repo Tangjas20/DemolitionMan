@@ -63,6 +63,8 @@ public class Board {
         return null;
     }
 
+    
+
     public static void main(String[] args){
         /*Board board = new Board();
         board.make1stBoard();
