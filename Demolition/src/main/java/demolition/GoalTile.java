@@ -21,6 +21,14 @@ public class GoalTile {
         goal.resize(32, 32);
     }
 
+    public int getX(){
+        return this.x;
+    }
+
+    public int getY(){
+        return this.y;
+    }
+
     public void draw(PApplet app) {
         //Handling graphics -- Single line or so, no logics
 

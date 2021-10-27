@@ -13,7 +13,7 @@ public class App extends PApplet {
     public static final int HEIGHT = 480;
 
     public static final int FPS = 60;
-
+    Board board = new Board();
     private Player player;
     private GoalTile GoalImage;
     private SolidWall SolidImage;
@@ -21,8 +21,8 @@ public class App extends PApplet {
     private BrokenWall BrokenImage;
     private redEnemy redEnemy;
     private yellowEnemy yellowEnemy;
-    private String[][] firstBoard = new String[13][15];
-    private String[][] secondBoard = new String[13][15];
+    private String[][] currentBoard = new String[13][15];
+    private Integer currentTimer = 0;
     private List<SolidWall> solidWalls = new ArrayList<SolidWall>();
     private List<BrokenWall> brokenWalls = new ArrayList<BrokenWall>();
     private List<EmptyWall> emptyWalls = new ArrayList<EmptyWall>();
@@ -33,6 +33,9 @@ public class App extends PApplet {
     private Map<String, String> pathTimeMap = new HashMap<String, String>();
     Boolean redEnemyTF = false;
     Boolean yellowEnemyTF = false;
+    private List<String> boardArrayName = new ArrayList<String>();
+    private List<Integer> boardArrayTime = new ArrayList<Integer>();
+    private int boardCounter = 0;
 
     public App() {
         //construct objects here
@@ -48,17 +51,30 @@ public class App extends PApplet {
         //Board
         readJsonObject fileData = new readJsonObject();
         fileData.readFiles("config.json");
-        Board board = new Board();
-        firstBoard = board.make1stBoard();
-        secondBoard = board.make2ndBoard();
+        
         pathTimeMap = fileData.getPathTimeHashMap();
-        map(firstBoard);//Need to change this so that it can change boards when the goal tile is hit
-        //map(secondBoard);
+
+        //map(currentBoard);//Need to change this so that it can change boards when the goal tile is hit
+
+        for (Map.Entry<String, String> entry : pathTimeMap.entrySet()) {
+            String key = entry.getKey();
+            Integer value = parseInt(entry.getValue());
+            boardArrayTime.add(value);
+            boardArrayName.add(key);
+        }
+
+        currentBoard = board.makeBoard(boardArrayName.get(boardCounter));
+        currentTimer =  boardArrayTime.get(boardCounter);
+        map(currentBoard);
     }
     
     public void map(String[][] mapBoard){
         redEnemyTF = false;
         yellowEnemyTF = false;
+        solidWalls.clear();
+        emptyWalls.clear();
+        brokenWalls.clear();
+        goalTile.clear();
         for(int i = 0; i < mapBoard.length; i++){
             for(int j = 0; j < mapBoard[0].length; j++){
                 int x = j;
@@ -132,6 +148,13 @@ public class App extends PApplet {
             }   
             this.player.tick();
             this.player.draw(this);
+            if(this.player.getX() == GoalImage.getX() && this.player.getY() == GoalImage.getY()){
+
+                boardCounter ++;
+                currentBoard = board.makeBoard(boardArrayName.get(boardCounter));
+                currentTimer =  boardArrayTime.get(boardCounter);
+                map(currentBoard);
+            }
             
         }
     }
@@ -146,34 +169,34 @@ public class App extends PApplet {
         if (key == CODED) {
             if (keyCode == DOWN) {
                 player.changeOrientation(0);
-                if(firstBoard[player.getY()+1][player.getX()].equals(" ")){
-                    firstBoard[player.getY()][player.getX()] = " ";
+                if((currentBoard[player.getY()+1][player.getX()].equals(" ")) || (currentBoard[player.getY()+1][player.getX()].equals(" "))){
+                    currentBoard[player.getY()][player.getX()] = " ";
                     player.movementDOWN();
-                    firstBoard[player.getY()][player.getX()] = "P";
+                    currentBoard[player.getY()][player.getX()] = "P";
                 }
 
             } else if (keyCode == UP) {
                 player.changeOrientation(1);
-                if(firstBoard[player.getY()-1][player.getX()].equals(" ")){
-                    firstBoard[player.getY()][player.getX()] = " ";
+                if((currentBoard[player.getY()-1][player.getX()].equals(" ")) || (currentBoard[player.getY()-1][player.getX()].equals("G"))){
+                    currentBoard[player.getY()][player.getX()] = " ";
                     player.movementUP();
-                    firstBoard[player.getY()][player.getX()] = "P";
+                    currentBoard[player.getY()][player.getX()] = "P";
                 }
 
             } else if (keyCode == RIGHT) {
                 player.changeOrientation(2);
-                if(firstBoard[player.getY()][player.getX()+1].equals(" ")){
-                    firstBoard[player.getY()][player.getX()] = " ";
+                if((currentBoard[player.getY()][player.getX()+1].equals(" ")) || (currentBoard[player.getY()][player.getX()+1].equals("G"))){
+                    currentBoard[player.getY()][player.getX()] = " ";
                     player.movementRight();
-                    firstBoard[player.getY()][player.getX()] = "P";
+                    currentBoard[player.getY()][player.getX()] = "P";
                 }
 
             } else if (keyCode == LEFT) {
                 player.changeOrientation(3);
-                if(firstBoard[player.getY()][player.getX()-1].equals(" ")){
-                    firstBoard[player.getY()][player.getX()] = " ";
+                if((currentBoard[player.getY()][player.getX()-1].equals(" ")) || (currentBoard[player.getY()][player.getX()-1].equals(" "))){
+                    currentBoard[player.getY()][player.getX()] = " ";
                     player.movementLeft();
-                    firstBoard[player.getY()][player.getX()] = "P";
+                    currentBoard[player.getY()][player.getX()] = "P";
                 }
             }
         }
