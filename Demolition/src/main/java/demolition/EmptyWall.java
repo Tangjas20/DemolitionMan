@@ -10,10 +10,10 @@ public class EmptyWall {
     private int y;
     private PImage empty;
 
-    public EmptyWall(int x, int y, PImage empty) {
+    public EmptyWall(int x, int y, PApplet app) {
         this.x = x;
         this.y = y;
-        this.empty = empty;
+        this.empty = app.loadImage("src/main/resources/empty/empty.png");
     }
 
     public void tick() {

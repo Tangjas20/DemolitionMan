@@ -99,22 +99,22 @@ public class App extends PApplet {
 
                 if(mapTile.equals("W")){
 
-                    this.SolidImage = new SolidWall(x, y, this.loadImage("src/main/resources/wall/solid.png"));
+                    this.SolidImage = new SolidWall(x, y, this);
                     solidWalls.add(SolidImage);
                 }
                 else if(mapTile.equals("B")){
                     //Broken
-                    this.BrokenImage = new BrokenWall(x, y, this.loadImage("src/main/resources/broken/broken.png"));
+                    this.BrokenImage = new BrokenWall(x, y, this);
                     brokenWalls.add(BrokenImage);
                 }
                 else if(mapTile.equals(" ") || mapTile.equals("P") || mapTile.equals("R") || mapTile.equals("Y")){
                     //EmptyTile
-                    this.EmptyImage = new EmptyWall(x, y, this.loadImage("src/main/resources/empty/empty.png"));
+                    this.EmptyImage = new EmptyWall(x, y, this);
                     emptyWalls.add(EmptyImage);
                 }
                 else if(mapTile.equals("G")){
                     //GoalTile
-                    this.GoalImage = new GoalTile(x, y, this.loadImage("src/main/resources/goal/goal.png"));
+                    this.GoalImage = new GoalTile(x, y, this);
                     goalTile.add(GoalImage);
                 }
             }

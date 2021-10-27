@@ -10,10 +10,10 @@ public class GoalTile {
     private int y;
     private PImage goal;
 
-    public GoalTile(int x, int y, PImage goal) {
+    public GoalTile(int x, int y, PApplet app) {
         this.x = x;
         this.y = y;
-        this.goal = goal;
+        this.goal = app.loadImage("src/main/resources/goal/goal.png");
     }
 
     public void tick() {

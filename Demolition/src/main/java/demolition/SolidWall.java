@@ -10,10 +10,10 @@ public class SolidWall {
     private int y;
     private PImage solid;
 
-    public SolidWall(int x, int y, PImage solid) {
+    public SolidWall(int x, int y, PApplet app) {
         this.x = x;
         this.y = y;
-        this.solid = solid;
+        this.solid = app.loadImage("src/main/resources/wall/solid.png");
     }
 
     public void tick() {
