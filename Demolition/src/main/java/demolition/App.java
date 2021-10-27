@@ -13,7 +13,7 @@ public class App extends PApplet {
     public static final int HEIGHT = 480;
 
     public static final int FPS = 60;
-
+    Board board = new Board();
     private Player player;
     private GoalTile GoalImage;
     private SolidWall SolidImage;
@@ -21,8 +21,8 @@ public class App extends PApplet {
     private BrokenWall BrokenImage;
     private redEnemy redEnemy;
     private yellowEnemy yellowEnemy;
-    private String[][] firstBoard = new String[13][15];
-    private String[][] secondBoard = new String[13][15];
+    private String[][] currentBoard = new String[13][15];
+    private Integer currentTimer = 0;
     private List<SolidWall> solidWalls = new ArrayList<SolidWall>();
     private List<BrokenWall> brokenWalls = new ArrayList<BrokenWall>();
     private List<EmptyWall> emptyWalls = new ArrayList<EmptyWall>();
@@ -33,6 +33,9 @@ public class App extends PApplet {
     private Map<String, String> pathTimeMap = new HashMap<String, String>();
     Boolean redEnemyTF = false;
     Boolean yellowEnemyTF = false;
+    private List<String> boardArrayName = new ArrayList<String>();
+    private List<Integer> boardArrayTime = new ArrayList<Integer>();
+    private int boardCounter = 0;
 
     public App() {
         //construct objects here
@@ -45,173 +48,80 @@ public class App extends PApplet {
     public void setup() {
         frameRate(FPS);
         // Load images during setup
-        PImage[] playerGif = new PImage[4];
-        playerGif[0] = loadImage("src/main/resources/player/player1.png");
-        playerGif[1] = loadImage("src/main/resources/player/player2.png");
-        playerGif[2] = loadImage("src/main/resources/player/player3.png");
-        playerGif[3] = loadImage("src/main/resources/player/player4.png");
-
-        PImage[] playerUpGif = new PImage[4];
-        playerUpGif[0] = loadImage("src/main/resources/player/player_up1.png");
-        playerUpGif[1] = loadImage("src/main/resources/player/player_up2.png");
-        playerUpGif[2] = loadImage("src/main/resources/player/player_up3.png");
-        playerUpGif[3] = loadImage("src/main/resources/player/player_up4.png");
-
-        PImage[] playerRightGif = new PImage[4];
-        playerRightGif[0] = loadImage("src/main/resources/player/player_right1.png");
-        playerRightGif[1] = loadImage("src/main/resources/player/player_right2.png");
-        playerRightGif[2] = loadImage("src/main/resources/player/player_right3.png");
-        playerRightGif[3] = loadImage("src/main/resources/player/player_right4.png");
-
-        PImage[] playerLeftGif = new PImage[4];
-        playerLeftGif[0] = loadImage("src/main/resources/player/player_left1.png");
-        playerLeftGif[1] = loadImage("src/main/resources/player/player_left2.png");
-        playerLeftGif[2] = loadImage("src/main/resources/player/player_left3.png");
-        playerLeftGif[3] = loadImage("src/main/resources/player/player_left4.png");
-
-
-        imageList.add(playerGif);
-        imageList.add(playerUpGif);
-        imageList.add(playerRightGif);
-        imageList.add(playerLeftGif);
-
-
-
+        //Board
+        readJsonObject fileData = new readJsonObject();
+        fileData.readFiles("config.json");
         
+        pathTimeMap = fileData.getPathTimeHashMap();
 
-        
+        //map(currentBoard);//Need to change this so that it can change boards when the goal tile is hit
 
+        for (Map.Entry<String, String> entry : pathTimeMap.entrySet()) {
+            String key = entry.getKey();
+            Integer value = parseInt(entry.getValue());
+            boardArrayTime.add(value);
+            boardArrayName.add(key);
+        }
 
-        //Enemy Red Sprite
-        PImage[] redEnemySprite = new PImage[4];
-        redEnemySprite [0] = loadImage("src/main/resources/red_enemy/red_down1.png");
-        redEnemySprite [1] = loadImage("src/main/resources/red_enemy/red_down2.png");
-        redEnemySprite [2] = loadImage("src/main/resources/red_enemy/red_down3.png");
-        redEnemySprite [3] = loadImage("src/main/resources/red_enemy/red_down4.png");
-
-        PImage[] redEnemyUpSprite = new PImage[4];
-        redEnemyUpSprite[0] = loadImage("src/main/resources/red_enemy/red_up1.png");
-        redEnemyUpSprite[1] = loadImage("src/main/resources/red_enemy/red_up2.png");
-        redEnemyUpSprite[2] = loadImage("src/main/resources/red_enemy/red_up3.png");
-        redEnemyUpSprite[3] = loadImage("src/main/resources/red_enemy/red_up4.png");
-
-        PImage[] redEnemyRightSprite = new PImage[4];
-        redEnemyRightSprite[0] = loadImage("src/main/resources/red_enemy/red_right1.png");
-        redEnemyRightSprite[1] = loadImage("src/main/resources/red_enemy/red_right2.png");
-        redEnemyRightSprite[2] = loadImage("src/main/resources/red_enemy/red_right3.png");
-        redEnemyRightSprite[3] = loadImage("src/main/resources/red_enemy/red_right4.png");
-
-        PImage[] redEnemyLeftSprite = new PImage[4];
-        redEnemyLeftSprite[0] = loadImage("src/main/resources/red_enemy/red_left1.png");
-        redEnemyLeftSprite[1] = loadImage("src/main/resources/red_enemy/red_left2.png");
-        redEnemyLeftSprite[2] = loadImage("src/main/resources/red_enemy/red_left3.png");
-        redEnemyLeftSprite[3] = loadImage("src/main/resources/red_enemy/red_left4.png");
-
-
-        redEnemyImageList.add(redEnemySprite);
-        redEnemyImageList.add(redEnemyUpSprite);
-        redEnemyImageList.add(redEnemyRightSprite);
-        redEnemyImageList.add(redEnemyLeftSprite);
-
-
-
-        //Enemy Yellow Sprite
-                //Enemy Red Sprite
-                PImage[] yellowEnemySprite = new PImage[4];
-                yellowEnemySprite [0] = loadImage("src/main/resources/yellow_enemy/yellow_down1.png");
-                yellowEnemySprite [1] = loadImage("src/main/resources/yellow_enemy/yellow_down2.png");
-                yellowEnemySprite [2] = loadImage("src/main/resources/yellow_enemy/yellow_down3.png");
-                yellowEnemySprite [3] = loadImage("src/main/resources/yellow_enemy/yellow_down4.png");
-        
-                PImage[] yellowEnemyUpSprite = new PImage[4];
-                yellowEnemyUpSprite[0] = loadImage("src/main/resources/yellow_enemy/yellow_up1.png");
-                yellowEnemyUpSprite[1] = loadImage("src/main/resources/yellow_enemy/yellow_up2.png");
-                yellowEnemyUpSprite[2] = loadImage("src/main/resources/yellow_enemy/yellow_up3.png");
-                yellowEnemyUpSprite[3] = loadImage("src/main/resources/yellow_enemy/yellow_up4.png");
-        
-                PImage[]yellowEnemyRightSprite = new PImage[4];
-                yellowEnemyRightSprite[0] = loadImage("src/main/resources/yellow_enemy/yellow_right1.png");
-                yellowEnemyRightSprite[1] = loadImage("src/main/resources/yellow_enemy/yellow_right2.png");
-                yellowEnemyRightSprite[2] = loadImage("src/main/resources/yellow_enemy/yellow_right3.png");
-                yellowEnemyRightSprite[3] = loadImage("src/main/resources/yellow_enemy/yellow_right4.png");
-        
-                PImage[] yellowEnemyLeftSprite = new PImage[4];
-                yellowEnemyLeftSprite[0] = loadImage("src/main/resources/yellow_enemy/yellow_left1.png");
-                yellowEnemyLeftSprite[1] = loadImage("src/main/resources/yellow_enemy/yellow_left2.png");
-                yellowEnemyLeftSprite[2] = loadImage("src/main/resources/yellow_enemy/yellow_left3.png");
-                yellowEnemyLeftSprite[3] = loadImage("src/main/resources/yellow_enemy/yellow_left4.png");
-        
-
-                yellowEnemyImageList.add(yellowEnemySprite);
-                yellowEnemyImageList.add(yellowEnemyUpSprite);
-                yellowEnemyImageList.add(yellowEnemyRightSprite);
-                yellowEnemyImageList.add(yellowEnemyLeftSprite);
-        
-
-
-                //Board
-                readJsonObject fileData = new readJsonObject();
-                fileData.readFiles("config.json");
-                Board board = new Board();
-                firstBoard = board.make1stBoard();
-                secondBoard = board.make2ndBoard();
-                pathTimeMap = fileData.getPathTimeHashMap();
-                map(firstBoard);//Need to change this so that it can change boards when the goal tile is hit
-                //map(secondBoard);
+        currentBoard = board.makeBoard(boardArrayName.get(boardCounter));
+        currentTimer =  boardArrayTime.get(boardCounter);
+        map(currentBoard);
     }
     
-        public void map(String[][] mapBoard){
-                redEnemyTF = false;
-                yellowEnemyTF = false;
-                for(int i = 0; i < mapBoard.length; i++){
-                    for(int j = 0; j < mapBoard[0].length; j++){
-                        int x = j;
-                        int y = i;
-                        String mapTile = mapBoard[i][j];
-                        if(mapTile.equals("P")){
-                            this.player = new Player(x, y, imageList);
-                        }
-
-                        if(mapTile.equals("Y")){
-                            this.yellowEnemy = new yellowEnemy(x, y, yellowEnemyImageList);
-                            yellowEnemyTF = true;
-                        }
-
-                        if(mapTile.equals("R")){
-                            this.redEnemy = new redEnemy(x, y, redEnemyImageList);
-                            redEnemyTF = true;
-                        }
-
-                        if(mapTile.equals("W")){
-
-                            this.SolidImage = new SolidWall(x, y, this.loadImage("src/main/resources/wall/solid.png"));
-                            solidWalls.add(SolidImage);
-                        }
-                        else if(mapTile.equals("B")){
-                            //Broken
-                            this.BrokenImage = new BrokenWall(x, y, this.loadImage("src/main/resources/broken/broken.png"));
-                            brokenWalls.add(BrokenImage);
-                        }
-                        else if(mapTile.equals(" ") || mapTile.equals("P") || mapTile.equals("R") || mapTile.equals("Y")){
-                            //EmptyTile
-                            this.EmptyImage = new EmptyWall(x, y, this.loadImage("src/main/resources/empty/empty.png"));
-                            emptyWalls.add(EmptyImage);
-                        }
-                        else if(mapTile.equals("G")){
-                            //GoalTile
-                            this.GoalImage = new GoalTile(x, y, this.loadImage("src/main/resources/goal/goal.png"));
-                            goalTile.add(GoalImage);
-                        }
-                    }
+    public void map(String[][] mapBoard){
+        redEnemyTF = false;
+        yellowEnemyTF = false;
+        solidWalls.clear();
+        emptyWalls.clear();
+        brokenWalls.clear();
+        goalTile.clear();
+        for(int i = 0; i < mapBoard.length; i++){
+            for(int j = 0; j < mapBoard[0].length; j++){
+                int x = j;
+                int y = i;
+                String mapTile = mapBoard[i][j];
+                if(mapTile.equals("P")){
+                    this.player = new Player(x, y, this);
                 }
+
+                if(mapTile.equals("Y")){
+                    this.yellowEnemy = new yellowEnemy(x, y, this);
+                    yellowEnemyTF = true;
+                }
+
+                if(mapTile.equals("R")){
+                    this.redEnemy = new redEnemy(x, y, this);
+                    redEnemyTF = true;
+                }
+
+                if(mapTile.equals("W")){
+
+                    this.SolidImage = new SolidWall(x, y, this.loadImage("src/main/resources/wall/solid.png"));
+                    solidWalls.add(SolidImage);
+                }
+                else if(mapTile.equals("B")){
+                    //Broken
+                    this.BrokenImage = new BrokenWall(x, y, this.loadImage("src/main/resources/broken/broken.png"));
+                    brokenWalls.add(BrokenImage);
+                }
+                else if(mapTile.equals(" ") || mapTile.equals("P") || mapTile.equals("R") || mapTile.equals("Y")){
+                    //EmptyTile
+                    this.EmptyImage = new EmptyWall(x, y, this.loadImage("src/main/resources/empty/empty.png"));
+                    emptyWalls.add(EmptyImage);
+                }
+                else if(mapTile.equals("G")){
+                    //GoalTile
+                    this.GoalImage = new GoalTile(x, y, this.loadImage("src/main/resources/goal/goal.png"));
+                    goalTile.add(GoalImage);
+                }
+            }
+        }
     }
 
     public void draw() {
         //Main loop here        
         if(frameCount % 12 == 1){
             background(255, 128, 0);
-
-
             for(SolidWall i: solidWalls){
                 this.SolidImage = i;
                 this.SolidImage.draw(this);
@@ -238,6 +148,13 @@ public class App extends PApplet {
             }   
             this.player.tick();
             this.player.draw(this);
+            if(this.player.getX() == GoalImage.getX() && this.player.getY() == GoalImage.getY()){
+
+                boardCounter ++;
+                currentBoard = board.makeBoard(boardArrayName.get(boardCounter));
+                currentTimer =  boardArrayTime.get(boardCounter);
+                map(currentBoard);
+            }
             
         }
     }
@@ -252,41 +169,39 @@ public class App extends PApplet {
         if (key == CODED) {
             if (keyCode == DOWN) {
                 player.changeOrientation(0);
-                if(firstBoard[player.getY()+1][player.getX()].equals(" ")){
-                    firstBoard[player.getY()][player.getX()] = " ";
+                if((currentBoard[player.getY()+1][player.getX()].equals(" ")) || (currentBoard[player.getY()+1][player.getX()].equals(" "))){
+                    currentBoard[player.getY()][player.getX()] = " ";
                     player.movementDOWN();
-                    firstBoard[player.getY()][player.getX()] = "P";
+                    currentBoard[player.getY()][player.getX()] = "P";
                 }
 
             } else if (keyCode == UP) {
                 player.changeOrientation(1);
-                if(firstBoard[player.getY()-1][player.getX()].equals(" ")){
-                    firstBoard[player.getY()][player.getX()] = " ";
+                if((currentBoard[player.getY()-1][player.getX()].equals(" ")) || (currentBoard[player.getY()-1][player.getX()].equals("G"))){
+                    currentBoard[player.getY()][player.getX()] = " ";
                     player.movementUP();
-                    firstBoard[player.getY()][player.getX()] = "P";
+                    currentBoard[player.getY()][player.getX()] = "P";
                 }
 
             } else if (keyCode == RIGHT) {
                 player.changeOrientation(2);
-                if(firstBoard[player.getY()][player.getX()+1].equals(" ")){
-                    firstBoard[player.getY()][player.getX()] = " ";
+                if((currentBoard[player.getY()][player.getX()+1].equals(" ")) || (currentBoard[player.getY()][player.getX()+1].equals("G"))){
+                    currentBoard[player.getY()][player.getX()] = " ";
                     player.movementRight();
-                    firstBoard[player.getY()][player.getX()] = "P";
+                    currentBoard[player.getY()][player.getX()] = "P";
                 }
 
             } else if (keyCode == LEFT) {
                 player.changeOrientation(3);
-                if(firstBoard[player.getY()][player.getX()-1].equals(" ")){
-                    firstBoard[player.getY()][player.getX()] = " ";
+                if((currentBoard[player.getY()][player.getX()-1].equals(" ")) || (currentBoard[player.getY()][player.getX()-1].equals(" "))){
+                    currentBoard[player.getY()][player.getX()] = " ";
                     player.movementLeft();
-                    firstBoard[player.getY()][player.getX()] = "P";
+                    currentBoard[player.getY()][player.getX()] = "P";
                 }
             }
         }
     }
 
-    public void updateBoard(){
-    }
     
     public static void main(String[] args) {
         PApplet.main("demolition.App");

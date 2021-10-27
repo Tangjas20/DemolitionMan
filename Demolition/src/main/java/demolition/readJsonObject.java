@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.io.File;
 import processing.data.JSONObject;
 
 public class readJsonObject {
     String fileRead = "";
     int numberOfLevels = 0;
-    private Map<String, String> pathTimeMap = new HashMap<String, String>();
+    private Map<String, String> pathTimeMap = new LinkedHashMap<String, String>();
 
     public void readFiles(String configFile){
         try{

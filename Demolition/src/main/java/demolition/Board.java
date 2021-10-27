@@ -7,48 +7,31 @@ import java.util.Scanner;
 
 public class Board {
     
-    String[][] firstBoard = new String[13][15];
-    String[][] secondBoard = new String[13][15];
+    String[][] madeBoard = new String[13][15];
     public Board(){
     }
 
-    public String[][] make1stBoard() {
+    public String[][] makeBoard(String fileName) {
 
         try{
-            File firstFile = new File("level1.txt");
+            File firstFile = new File(fileName);
             Scanner scanner = new Scanner(firstFile);
             int i = 0;
 
             while(scanner.hasNextLine()){
                 String data = scanner.nextLine();
-                firstBoard[i] = data.split("(?!^)");
+                madeBoard[i] = data.split("(?!^)");
                 i++;
             }
             scanner.close();
         } catch(FileNotFoundException e) {
             System.out.println("No such file.");
         }
-        return firstBoard;
+        return madeBoard;
     }
 
-    public String[][] make2ndBoard() {
 
-        try{
-            File secondFile = new File("level2.txt");
-            Scanner scanner2 = new Scanner(secondFile);
-            int i = 0;
-            while(scanner2.hasNextLine()){
-                String data = scanner2.nextLine();
-                secondBoard[i] = data.split("(?!^)");
-                i++;
-            }
-            scanner2.close();
-        } catch(FileNotFoundException e) {
-            System.out.println("No such file.");
-        }
-        return secondBoard;
-    }
-
+/*
     public void get1stBoard() {
         for(int i = 0; i < firstBoard.length; i++){
             if(i >= 1)
@@ -57,11 +40,13 @@ public class Board {
                 System.out.print(firstBoard[i][j]);
             }
         }
-    }
+    }*/
 
     public String[][] get2ndBoard() {
         return null;
     }
+
+    
 
     public static void main(String[] args){
         /*Board board = new Board();
