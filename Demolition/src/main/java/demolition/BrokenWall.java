@@ -10,10 +10,10 @@ public class BrokenWall {
     private int y;
     private PImage broken;
 
-    public BrokenWall(int x, int y, PImage broken) {
+    public BrokenWall(int x, int y, PApplet app) {
         this.x = x;
         this.y = y;
-        this.broken = broken;
+        this.broken = app.loadImage("src/main/resources/broken/broken.png");
     }
 
     public void tick() {
