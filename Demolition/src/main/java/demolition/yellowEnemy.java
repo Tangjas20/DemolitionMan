@@ -56,8 +56,8 @@ public class yellowEnemy {
             else{
                 imageTick = 0;
             }
-        
     }
+
 
     public void changeOrientation(int orientation){
         this.orientation = orientation;

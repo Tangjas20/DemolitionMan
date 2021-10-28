@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
+import processing.core.PFont;
 
 public class App extends PApplet {
 
@@ -38,6 +39,8 @@ public class App extends PApplet {
     private int boardCounter = 0;
     private int lives;
     private timer timerIcon;
+    PFont font;
+
     public App() {
         //construct objects here
     }
@@ -50,6 +53,8 @@ public class App extends PApplet {
         frameRate(FPS);
         // Load images during setup
         //Board
+        font = createFont("PressStart2P-regular.ttf", 16);
+        textFont(font);
 
         readJsonObject fileData = new readJsonObject();
         fileData.readFiles("config.json");
@@ -77,7 +82,7 @@ public class App extends PApplet {
         emptyWalls.clear();
         brokenWalls.clear();
         goalTile.clear();
-        this.timerIcon = new timer(180, this.loadImage("src/main/resources/icons/clock.png"));
+        this.timerIcon = new timer(180, this);
         for(int i = 0; i < mapBoard.length; i++){
             for(int j = 0; j < mapBoard[0].length; j++){
                 int x = j;
@@ -126,6 +131,9 @@ public class App extends PApplet {
         if(frameCount % 60 == 1){
             background(255, 128, 0);
             this.timerIcon.draw(this);
+            this.timerIcon.tick();
+            text(timerIcon.getTimer(), 350, 40);
+            text(lives, 145, 40);
         }
         if(frameCount % 12 == 1){
 
