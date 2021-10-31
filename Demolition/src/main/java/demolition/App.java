@@ -14,32 +14,35 @@ public class App extends PApplet {
     public static final int HEIGHT = 480;
 
     public static final int FPS = 60;
-    private Player player;
-    private redEnemy redEnemy;
-    private yellowEnemy yellowEnemy;
     private String[][] currentBoard = new String[13][15];
     private Integer currentTimer = 0;
     List<PImage[]> yellowEnemyImageList = new ArrayList<PImage[]>();
     List<PImage[]> redEnemyImageList = new ArrayList<PImage[]>();
     List<PImage[]> imageList = new ArrayList<PImage[]>();
     private Map<String, String> pathTimeMap = new HashMap<String, String>();
-    Boolean hasRedEnemy = false;
-    Boolean hasYellowEnemy = false;
     private List<String> boardArrayName = new ArrayList<String>();
     private List<Integer> boardArrayTime = new ArrayList<Integer>();
     private int boardCounter = 0;
-    private int lives;
-    private timer timerIcon;
     PFont font;
     boolean keyReleased = true;
-    Board board = new Board();
+    Board board;
+    private int lives;
+    private timer timerIcon;
+
     public App() {
         //construct objects here
-        player = board.getPlayer();
+        board = new Board();
     }
 
     public void settings() {
         size(WIDTH, HEIGHT);
+    }
+
+    public void resetGame(){
+        currentBoard = board.makeBoard(boardArrayName.get(boardCounter), this);
+        currentTimer =  boardArrayTime.get(boardCounter);
+        board.map(currentBoard, this);
+        this.timerIcon = new timer(currentTimer, this);
     }
 
     public void setup() {
@@ -47,13 +50,14 @@ public class App extends PApplet {
 
         // Load images during setup
         //Board
+        
         font = createFont("PressStart2P-regular.ttf", 16);
         textFont(font);
-
         readJsonObject fileData = new readJsonObject();
         fileData.readFiles("config.json");
         this.lives = fileData.getLives();
         pathTimeMap = fileData.getPathTimeHashMap();
+        
         //map(currentBoard);//Need to change this so that it can change boards when the goal tile is hit
 
         for (Map.Entry<String, String> entry : pathTimeMap.entrySet()) {
@@ -67,16 +71,18 @@ public class App extends PApplet {
         currentTimer =  boardArrayTime.get(boardCounter);
 
         board.map(currentBoard, this);
+        this.timerIcon = new timer(currentTimer, this);
     }
 
     public void draw() {
         //Main loop here
+        checkGameState();
         if(frameCount % 60 == 1){
             background(255, 128, 0);
-           // this.timerIcon.draw(this);
-            //this.timerIcon.tick();
-            //text(timerIcon.getTimer(), 350, 40);
-            //text(lives, 145, 40);
+           this.timerIcon.draw(this);
+            this.timerIcon.tick();
+            text(timerIcon.getTimer(), 350, 40);
+            text(lives, 145, 40);
         }
         if(frameCount % 12 == 1){
 
@@ -92,31 +98,34 @@ public class App extends PApplet {
             for(GoalTile goalImage: board.getGoalTileList()){
                 goalImage.draw(this);
             }
-            if(hasRedEnemy == true){
-                this.redEnemy.tick();
-                this.redEnemy.draw(this);
+            if(board.redEnemyTF == true){
+                board.getRedEnemy().tick();
+                board.getRedEnemy().draw(this);
             }
-            if(hasYellowEnemy == true){
-                this.yellowEnemy.tick();
-                this.yellowEnemy.draw(this);
-            }   
-            this.player.tick();
-            this.player.draw(this);
+            if(board.yellowEnemyTF == true){
+                board.getYellowEnemy().tick();
+                board.getYellowEnemy().draw(this);
+            }
+            board.getPlayer().tick();
+            board.getPlayer().draw(this);
 
 //Change this into a for loop to check or every GoalImage in the GoalTile Array
             for(GoalTile i: board.getGoalTileList()){
-                if(this.player.getX() == i.getX() && this.player.getY() == i.getY()){
+                if(board.getPlayer().getX() == i.getX() && board.getPlayer().getY() == i.getY()){
 
                     boardCounter ++;
-                    currentBoard = board.makeBoard(boardArrayName.get(boardCounter), this);
-                    currentTimer =  boardArrayTime.get(boardCounter);
-                    board.map(currentBoard, this);
+                    resetGame();
                 }
             }
             
         }
     }
-
+    public void checkGameState(){
+        if(board.getPlayer().getX() == board.getRedEnemy().getX() && board.getPlayer().getY() == board.getRedEnemy().getY()){
+            resetGame();
+            lives--;
+        }
+    }
     public void keyPressed() {
         /*
             .get(0) corresponds with base player
@@ -126,35 +135,35 @@ public class App extends PApplet {
         */
         if (key == CODED) {
             if (keyCode == DOWN && keyReleased == true) {
-                player.changeOrientation(0);
-                if((currentBoard[player.getY()+1][player.getX()].equals(" ")) || (currentBoard[player.getY()+1][player.getX()].equals(" "))){
-                    currentBoard[player.getY()][player.getX()] = " ";
-                    player.movementDOWN();
-                    currentBoard[player.getY()][player.getX()] = "P";
+                board.getPlayer().changeOrientation(0);
+                if((currentBoard[board.getPlayer().getY()+1][board.getPlayer().getX()].equals(" ")) || (currentBoard[board.getPlayer().getY()+1][board.getPlayer().getX()].equals(" "))){
+                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = " ";
+                    board.getPlayer().movementDOWN();
+                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = "P";
                 }
 
             } else if (keyCode == UP && keyReleased == true) {
-                player.changeOrientation(1);
-                if((currentBoard[player.getY()-1][player.getX()].equals(" ")) || (currentBoard[player.getY()-1][player.getX()].equals("G"))){
-                    currentBoard[player.getY()][player.getX()] = " ";
-                    player.movementUP();
-                    currentBoard[player.getY()][player.getX()] = "P";
+                board.getPlayer().changeOrientation(1);
+                if((currentBoard[board.getPlayer().getY()-1][board.getPlayer().getX()].equals(" ")) || (currentBoard[board.getPlayer().getY()-1][board.getPlayer().getX()].equals("G"))){
+                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = " ";
+                    board.getPlayer().movementUP();
+                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = "P";
                 }
 
             } else if (keyCode == RIGHT && keyReleased == true) {
-                player.changeOrientation(2);
-                if((currentBoard[player.getY()][player.getX()+1].equals(" ")) || (currentBoard[player.getY()][player.getX()+1].equals("G"))){
-                    currentBoard[player.getY()][player.getX()] = " ";
-                    player.movementRight();
-                    currentBoard[player.getY()][player.getX()] = "P";
+                board.getPlayer().changeOrientation(2);
+                if((currentBoard[board.getPlayer().getY()][board.getPlayer().getX()+1].matches(" |R")) || (currentBoard[board.getPlayer().getY()][board.getPlayer().getX()+1].equals("G"))){
+                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = " ";
+                    board.getPlayer().movementRight();
+                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = "P";
                 }
 
             } else if (keyCode == LEFT && keyReleased == true) {
-                player.changeOrientation(3);
-                if((currentBoard[player.getY()][player.getX()-1].equals(" ")) || (currentBoard[player.getY()][player.getX()-1].equals(" "))){
-                    currentBoard[player.getY()][player.getX()] = " ";
-                    player.movementLeft();
-                    currentBoard[player.getY()][player.getX()] = "P";
+                board.getPlayer().changeOrientation(3);
+                if((currentBoard[board.getPlayer().getY()][board.getPlayer().getX()-1].equals(" ")) || (currentBoard[board.getPlayer().getY()][board.getPlayer().getX()-1].equals(" "))){
+                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = " ";
+                    board.getPlayer().movementLeft();
+                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = "P";
                 }
             }
         }

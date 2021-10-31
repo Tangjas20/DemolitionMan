@@ -60,6 +60,14 @@ public class redEnemy {
         
     }
 
+    public int getX(){
+        return this.x;
+    }
+
+    public int getY(){
+        return this.y;
+    }
+
     public void changeOrientation(int orientation){
         this.orientation = orientation;
     }

@@ -15,7 +15,6 @@ public class Board {
     private List<GoalTile> goalTile = new ArrayList<GoalTile>();
     boolean redEnemyTF;
     boolean yellowEnemyTF;
-    private timer timerIcon;
     private redEnemy redEnemy;
     private yellowEnemy yellowEnemy;
     private Player player;
@@ -24,6 +23,7 @@ public class Board {
 
     public Board(){
     }
+
 
     public String[][] makeBoard(String fileName, PApplet app) {
 
@@ -51,7 +51,7 @@ public class Board {
         emptyWalls.clear();
         brokenWalls.clear();
         goalTile.clear();
-        this.timerIcon = new timer(180, app);
+
         for(int i = 0; i < mapBoard.length; i++){
             for(int j = 0; j < mapBoard[0].length; j++){
                 int x = j;
@@ -114,6 +114,17 @@ public class Board {
     public Player getPlayer(){
         return this.player;
     }
+
+    public redEnemy getRedEnemy(){
+        return this.redEnemy;
+    }
+
+    public yellowEnemy getYellowEnemy(){
+        return this.yellowEnemy;
+    }
+
+    
+
 
 
     public static void main(String[] args){
