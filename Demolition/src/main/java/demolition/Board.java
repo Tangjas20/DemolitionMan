@@ -51,8 +51,8 @@ public class Board {
         brokenWalls.clear();
         goalTile.clear();
 
-        for(int i = 0; i < mapBoard.length; i++){
-            for(int j = 0; j < mapBoard[0].length; j++){
+        for(int j = 0; j < mapBoard[0].length; j++){
+            for(int i = 0; i < mapBoard.length; i++){
                 int x = j;
                 int y = i;
                 String mapTile = mapBoard[i][j];

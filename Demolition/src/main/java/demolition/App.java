@@ -28,6 +28,7 @@ public class App extends PApplet {
     Board board;
     private int lives;
     private timer timerIcon;
+    boolean drewPlayer = false;
 
     public App() {
         //construct objects here
@@ -73,6 +74,7 @@ public class App extends PApplet {
 
     public void draw() {
         //Main loop here
+        drewPlayer = false;
         checkGameState();
         if(frameCount % 60 == 1){
             background(255, 128, 0);
@@ -86,25 +88,46 @@ public class App extends PApplet {
             for(SolidWall solidWall: board.getSolidWallsList()){
                 solidWall.draw(this);
             }
+
             for(BrokenWall brokenWall: board.getBrokenWallsList()){
                 brokenWall.draw(this);
             }
+
             for(EmptyWall emptyWall: board.getEmptyWallsList()){
                 emptyWall.draw(this);
             }
+
             for(GoalTile goalImage: board.getGoalTileList()){
                 goalImage.draw(this);
             }
+
+            
             if(board.redEnemyTF == true){
+                if((board.getPlayer().getX() == board.getRedEnemy().getX()) && (board.getPlayer().getY() == (board.getRedEnemy().getY()-1))){
+                    board.getPlayer().tick();
+                    board.getPlayer().draw(this);
+                    drewPlayer = true;
+                }
                 board.getRedEnemy().tick();
                 board.getRedEnemy().draw(this);
+
             }
+
             if(board.yellowEnemyTF == true){
+                if((board.getPlayer().getX() == board.getYellowEnemy().getX()) && (board.getPlayer().getY() == (board.getYellowEnemy().getY()-1))){
+                    board.getPlayer().tick();
+                    board.getPlayer().draw(this);
+                    drewPlayer = true;
+                }
                 board.getYellowEnemy().tick();
                 board.getYellowEnemy().draw(this);
             }
-            board.getPlayer().tick();
-            board.getPlayer().draw(this);
+
+            if(drewPlayer == false){
+                board.getPlayer().tick();
+                board.getPlayer().draw(this);
+            }
+
 
 //Change this into a for loop to check or every GoalImage in the GoalTile Array
             for(GoalTile i: board.getGoalTileList()){
@@ -118,14 +141,15 @@ public class App extends PApplet {
             
         }
     }
+
     public void checkGameState(){
         if((board.getPlayer().getX() == board.getRedEnemy().getX() && board.getPlayer().getY() == board.getRedEnemy().getY())
         || (board.getPlayer().getX() == board.getYellowEnemy().getX() && board.getPlayer().getY() == board.getYellowEnemy().getY())){
             resetGame();
             lives--;
         }
-
     }
+    
     public void keyPressed() {
         /*
             .get(0) corresponds with base player
