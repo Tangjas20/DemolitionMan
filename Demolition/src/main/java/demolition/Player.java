@@ -6,19 +6,15 @@ import processing.core.PImage;
 import processing.core.PApplet;
 
 
-public class Player {
+public class Player extends PlayerClasses{
     
-    private int x;
-    private int y;
-    private int newX;
-    private int newY;
-    private int imageTick = 0;
-    private List<PImage[]> sprites = new ArrayList<PImage[]>();
+    protected int imageTick = 0;
+    protected List<PImage[]> sprites = new ArrayList<PImage[]>();
     int orientation = 0;
 
     public Player(int x, int y, PApplet app) {
-        this.x = x;
-        this.y = y;
+        super(x, y, app);
+
         PImage[] playerGif = new PImage[4];
         playerGif[0] = app.loadImage("src/main/resources/player/player1.png");
         playerGif[1] = app.loadImage("src/main/resources/player/player2.png");
@@ -48,51 +44,9 @@ public class Player {
         sprites.add(playerUpGif);
         sprites.add(playerRightGif);
         sprites.add(playerLeftGif);
-
     }
 
-    public void tick() {
-        //Handles logic
-            if(imageTick < 3){
-                imageTick++;
-            }
-            else{
-                imageTick = 0;
-            }
-        
-    }
-    public void movementLeft(){
-        newX = x-1;
-        newY = y;
-        x = newX;
-        y = newY;
-    }
-
-    public void movementRight(){
-        newX = x+1;
-        x = newX;
-    }
-    public void movementUP(){
-        newX = x;
-        newY = y-1;
-        x = newX;
-        y = newY;
-    }
-
-    public void movementDOWN(){
-        newX = x;
-        newY = y+1;
-        x = newX;
-        y = newY;
-    }
-
-    public int getX(){
-        return this.x;
-    }
-
-    public int getY(){
-        return this.y;
-    }
+    
 
 
 

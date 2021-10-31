@@ -42,12 +42,10 @@ public class App extends PApplet {
         currentBoard = board.makeBoard(boardArrayName.get(boardCounter), this);
         currentTimer =  boardArrayTime.get(boardCounter);
         board.map(currentBoard, this);
-        this.timerIcon = new timer(currentTimer, this);
     }
 
     public void setup() {
         frameRate(FPS);
-
         // Load images during setup
         //Board
         
@@ -58,7 +56,6 @@ public class App extends PApplet {
         this.lives = fileData.getLives();
         pathTimeMap = fileData.getPathTimeHashMap();
         
-        //map(currentBoard);//Need to change this so that it can change boards when the goal tile is hit
 
         for (Map.Entry<String, String> entry : pathTimeMap.entrySet()) {
             String key = entry.getKey();
@@ -115,16 +112,19 @@ public class App extends PApplet {
 
                     boardCounter ++;
                     resetGame();
+                    this.timerIcon = new timer(currentTimer, this);
                 }
             }
             
         }
     }
     public void checkGameState(){
-        if(board.getPlayer().getX() == board.getRedEnemy().getX() && board.getPlayer().getY() == board.getRedEnemy().getY()){
+        if((board.getPlayer().getX() == board.getRedEnemy().getX() && board.getPlayer().getY() == board.getRedEnemy().getY())
+        || (board.getPlayer().getX() == board.getYellowEnemy().getX() && board.getPlayer().getY() == board.getYellowEnemy().getY())){
             resetGame();
             lives--;
         }
+
     }
     public void keyPressed() {
         /*
@@ -136,7 +136,7 @@ public class App extends PApplet {
         if (key == CODED) {
             if (keyCode == DOWN && keyReleased == true) {
                 board.getPlayer().changeOrientation(0);
-                if((currentBoard[board.getPlayer().getY()+1][board.getPlayer().getX()].equals(" ")) || (currentBoard[board.getPlayer().getY()+1][board.getPlayer().getX()].equals(" "))){
+                if((currentBoard[board.getPlayer().getY()+1][board.getPlayer().getX()].matches(" |R|Y")) || (currentBoard[board.getPlayer().getY()+1][board.getPlayer().getX()].equals(" "))){
                     currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = " ";
                     board.getPlayer().movementDOWN();
                     currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = "P";
@@ -144,7 +144,7 @@ public class App extends PApplet {
 
             } else if (keyCode == UP && keyReleased == true) {
                 board.getPlayer().changeOrientation(1);
-                if((currentBoard[board.getPlayer().getY()-1][board.getPlayer().getX()].equals(" ")) || (currentBoard[board.getPlayer().getY()-1][board.getPlayer().getX()].equals("G"))){
+                if((currentBoard[board.getPlayer().getY()-1][board.getPlayer().getX()].matches(" |R|Y")) || (currentBoard[board.getPlayer().getY()-1][board.getPlayer().getX()].equals("G"))){
                     currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = " ";
                     board.getPlayer().movementUP();
                     currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = "P";
@@ -152,7 +152,7 @@ public class App extends PApplet {
 
             } else if (keyCode == RIGHT && keyReleased == true) {
                 board.getPlayer().changeOrientation(2);
-                if((currentBoard[board.getPlayer().getY()][board.getPlayer().getX()+1].matches(" |R")) || (currentBoard[board.getPlayer().getY()][board.getPlayer().getX()+1].equals("G"))){
+                if((currentBoard[board.getPlayer().getY()][board.getPlayer().getX()+1].matches(" |R|Y")) || (currentBoard[board.getPlayer().getY()][board.getPlayer().getX()+1].equals("G"))){
                     currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = " ";
                     board.getPlayer().movementRight();
                     currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = "P";
@@ -160,7 +160,7 @@ public class App extends PApplet {
 
             } else if (keyCode == LEFT && keyReleased == true) {
                 board.getPlayer().changeOrientation(3);
-                if((currentBoard[board.getPlayer().getY()][board.getPlayer().getX()-1].equals(" ")) || (currentBoard[board.getPlayer().getY()][board.getPlayer().getX()-1].equals(" "))){
+                if((currentBoard[board.getPlayer().getY()][board.getPlayer().getX()-1].matches(" |R|Y")) || (currentBoard[board.getPlayer().getY()][board.getPlayer().getX()-1].equals(" "))){
                     currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = " ";
                     board.getPlayer().movementLeft();
                     currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = "P";
@@ -173,6 +173,7 @@ public class App extends PApplet {
     public void keyReleased() {
         this.keyReleased = true;
     }
+    
     public static void main(String[] args) {
         PApplet.main("demolition.App");
     }

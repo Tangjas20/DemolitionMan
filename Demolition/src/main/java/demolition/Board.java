@@ -24,7 +24,6 @@ public class Board {
     public Board(){
     }
 
-
     public String[][] makeBoard(String fileName, PApplet app) {
 
         try{
@@ -123,7 +122,7 @@ public class Board {
         return this.yellowEnemy;
     }
 
-    
+
 
 
 
