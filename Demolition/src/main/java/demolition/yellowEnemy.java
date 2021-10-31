@@ -6,17 +6,13 @@ import processing.core.PImage;
 import processing.core.PApplet;
 
 
-public class yellowEnemy {
+public class yellowEnemy extends PlayerClasses{
 
-    private int x;
-    private int y;
-    private int imageTick = 0;
     private List<PImage[]> enemyYellowSprite = new ArrayList<PImage[]>();
-    int orientation = 0;
 
     public yellowEnemy(int x, int y, PApplet app) {
-        this.x = x;
-        this.y = y;
+        super(x, y, app);
+        
         PImage[] yellowEnemySprite = new PImage[4];
         yellowEnemySprite [0] = app.loadImage("src/main/resources/yellow_enemy/yellow_down1.png");
         yellowEnemySprite [1] = app.loadImage("src/main/resources/yellow_enemy/yellow_down2.png");
@@ -48,28 +44,7 @@ public class yellowEnemy {
         enemyYellowSprite.add(yellowEnemyLeftSprite);
     }
 
-    public void tick() {
-        //Handles logic
-            if(imageTick < 3){
-                imageTick++;
-            }
-            else{
-                imageTick = 0;
-            }
-    }
 
-
-    public void changeOrientation(int orientation){
-        this.orientation = orientation;
-    }
-
-    public int getX() {
-        return this.x;
-    }
-
-    public int getY(){
-        return this.y;
-    }
 
 
     public void draw(PApplet app) {
