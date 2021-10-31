@@ -7,7 +7,7 @@ import processing.core.PApplet;
 
 
 public class yellowEnemy {
-    
+
     private int x;
     private int y;
     private int imageTick = 0;
@@ -62,13 +62,15 @@ public class yellowEnemy {
     public void changeOrientation(int orientation){
         this.orientation = orientation;
     }
-    public int getX(){
+
+    public int getX() {
         return this.x;
     }
 
     public int getY(){
         return this.y;
     }
+
 
     public void draw(PApplet app) {
         //Handling graphics -- Single line or so, no logics

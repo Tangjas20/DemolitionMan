@@ -42,12 +42,10 @@ public class App extends PApplet {
         currentBoard = board.makeBoard(boardArrayName.get(boardCounter), this);
         currentTimer =  boardArrayTime.get(boardCounter);
         board.map(currentBoard, this);
-
     }
 
     public void setup() {
         frameRate(FPS);
-
         // Load images during setup
         //Board
         
@@ -58,7 +56,6 @@ public class App extends PApplet {
         this.lives = fileData.getLives();
         pathTimeMap = fileData.getPathTimeHashMap();
         
-        //map(currentBoard);//Need to change this so that it can change boards when the goal tile is hit
 
         for (Map.Entry<String, String> entry : pathTimeMap.entrySet()) {
             String key = entry.getKey();
@@ -176,6 +173,7 @@ public class App extends PApplet {
     public void keyReleased() {
         this.keyReleased = true;
     }
+    
     public static void main(String[] args) {
         PApplet.main("demolition.App");
     }
