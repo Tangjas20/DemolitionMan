@@ -50,5 +50,9 @@ public abstract class PlayerClasses extends GameObject{
         x = newX;
         y = newY;
     }
+    
+    public void changeOrientation(int orientation){
+        this.orientation = orientation;
+    }
 
 }

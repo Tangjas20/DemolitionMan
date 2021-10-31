@@ -8,9 +8,8 @@ import processing.core.PApplet;
 
 public class Player extends PlayerClasses{
     
-    protected int imageTick = 0;
     protected List<PImage[]> sprites = new ArrayList<PImage[]>();
-    int orientation = 0;
+
 
     public Player(int x, int y, PApplet app) {
         super(x, y, app);
@@ -44,14 +43,6 @@ public class Player extends PlayerClasses{
         sprites.add(playerUpGif);
         sprites.add(playerRightGif);
         sprites.add(playerLeftGif);
-    }
-
-    
-
-
-
-    public void changeOrientation(int orientation){
-        this.orientation = orientation;
     }
 
     public void draw(PApplet app) {

@@ -6,17 +6,12 @@ import processing.core.PImage;
 import processing.core.PApplet;
 
 
-public class redEnemy {
+public class redEnemy extends PlayerClasses{
     
-    private int x;
-    private int y;
-    private int imageTick = 0;
     private List<PImage[]> enemyRedSprite = new ArrayList<PImage[]>();
-    int orientation = 0;
 
     public redEnemy(int x, int y, PApplet app) {
-        this.x = x;
-        this.y = y;
+        super(x, y, app);
                 //Enemy Red Sprite
         PImage[] redEnemySprite = new PImage[4];
         redEnemySprite [0] = app.loadImage("src/main/resources/red_enemy/red_down1.png");
@@ -49,28 +44,7 @@ public class redEnemy {
         enemyRedSprite.add(redEnemyLeftSprite);
     }
 
-    public void tick() {
-        //Handles logic
-            if(imageTick < 3){
-                imageTick++;
-            }
-            else{
-                imageTick = 0;
-            }
-        
-    }
 
-    public int getX(){
-        return this.x;
-    }
-
-    public int getY(){
-        return this.y;
-    }
-
-    public void changeOrientation(int orientation){
-        this.orientation = orientation;
-    }
 
     public void draw(PApplet app) {
         //Handling graphics -- Single line or so, no logics
