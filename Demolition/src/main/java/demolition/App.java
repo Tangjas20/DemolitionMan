@@ -29,6 +29,7 @@ public class App extends PApplet {
     private int lives;
     private timer timerIcon;
     boolean drewPlayer = false;
+    private List<Bomb> bombList = new ArrayList<Bomb>();
 
     public App() {
         //construct objects here
@@ -100,6 +101,10 @@ public class App extends PApplet {
             for(GoalTile goalImage: board.getGoalTileList()){
                 goalImage.draw(this);
             }
+            
+            for(Bomb bomb: bombList){
+                bomb.draw(this);
+            }
 
             
             if(board.redEnemyTF == true){
@@ -140,6 +145,9 @@ public class App extends PApplet {
             }
             
         }
+        for(Bomb i: bombList){
+            i.draw(this);
+        }
     }
 
     public void checkGameState(){
@@ -149,7 +157,7 @@ public class App extends PApplet {
             lives--;
         }
     }
-    
+
     public void keyPressed() {
         /*
             .get(0) corresponds with base player
@@ -158,7 +166,12 @@ public class App extends PApplet {
             .get(3) corresponds with left player
         */
         if (key == CODED) {
-            if (keyCode == DOWN && keyReleased == true) {
+            if (keyCode == TAB && keyReleased == true) {
+                Bomb b = new Bomb(board.getPlayer().getX(), board.getPlayer().getY(), this, currentBoard);
+                bombList.add(b);
+                currentBoard[board.getPlayer().getX()][board.getPlayer().getY()] = "D";
+            }
+            else if(keyCode == DOWN && keyReleased == true) {
                 board.getPlayer().changeOrientation(0);
                 if((currentBoard[board.getPlayer().getY()+1][board.getPlayer().getX()].matches(" |R|Y")) || (currentBoard[board.getPlayer().getY()+1][board.getPlayer().getX()].equals(" "))){
                     currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = " ";
@@ -196,6 +209,10 @@ public class App extends PApplet {
 
     public void keyReleased() {
         this.keyReleased = true;
+    }
+
+    public String[][] getCurrentBoard(){
+        return currentBoard;
     }
     
     public static void main(String[] args) {

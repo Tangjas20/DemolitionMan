@@ -1,0 +1,165 @@
+package demolition;
+
+import processing.core.PImage;
+import processing.core.PApplet;
+import java.util.Arrays;
+
+public class Bomb extends GameObject {
+    private String[][] currentBoard;
+    private PImage[] bombSprite = new PImage[8];
+    private PImage[] explosionSprite = new PImage[7];
+    private int[] explodablePath = {0, 0, 0, 0};
+    boolean leftCloseBroken;
+    boolean rightCloseBroken;
+    boolean topCloseBroken;
+    boolean bottomCloseBroken;
+    private boolean explosionFinished;
+    private int timerSprite;
+    private int currentSprite;
+    private boolean isAlive;
+
+    public Bomb(int x, int y, PApplet app, String[][] currentBoard){
+        super(x, y, app);
+        this.currentBoard = currentBoard;
+
+        this.bombSprite[0] = app.loadImage("src/main/resources/bomb/bomb1.png");
+        this.bombSprite[1] = app.loadImage("src/main/resources/bomb/bomb2.png");
+        this.bombSprite[2] = app.loadImage("src/main/resources/bomb/bomb3.png");
+        this.bombSprite[3] = app.loadImage("src/main/resources/bomb/bomb4.png");
+        this.bombSprite[4] = app.loadImage("src/main/resources/bomb/bomb5.png");
+        this.bombSprite[5] = app.loadImage("src/main/resources/bomb/bomb6.png");
+        this.bombSprite[6] = app.loadImage("src/main/resources/bomb/bomb7.png");
+        this.bombSprite[7] = app.loadImage("src/main/resources/bomb/bomb8.png");
+
+        
+        this.explosionSprite[0] = app.loadImage("src/main/resources/explosion/centre.png");
+        this.explosionSprite[1] = app.loadImage("src/main/resources/explosion/horizontal.png");
+        this.explosionSprite[2] = app.loadImage("src/main/resources/explosion/vertical.png");
+        this.explosionSprite[3] = app.loadImage("src/main/resources/explosion/end_top.png");
+        this.explosionSprite[4] = app.loadImage("src/main/resources/explosion/end_right.png");
+        this.explosionSprite[5] = app.loadImage("src/main/resources/explosion/end_bottom.png");
+        this.explosionSprite[6] = app.loadImage("src/main/resources/explosion/end_left.png");
+
+        this.currentSprite = 0;
+        this.timerSprite = 0;
+        this.isAlive = true;
+        this.explosionFinished = false;
+
+        setCanExplodePath();
+    }
+
+    public void setCanExplodePath(){
+        if(this.currentBoard[y][x+1].equals("W")){
+            ;
+        }
+        else if(this.currentBoard[y][x+1].matches(" |R|Y|P")){
+            explodablePath[0] ++;
+            if(!this.currentBoard[y][x+2].equals("W")){
+                explodablePath[0] ++;
+            }
+        }
+
+        if(this.currentBoard[y][x-1].equals("W")){
+            ;
+        }
+        else if(this.currentBoard[y][x-1].matches(" |R|Y|P")){
+            explodablePath[3] ++;
+            if(!this.currentBoard[y][x-2].equals("W")){
+                explodablePath[3] ++;
+            }
+        }
+
+        if(this.currentBoard[y+1][x].equals("W")){
+            ;
+        }
+        else if(this.currentBoard[y+1][x].matches(" |R|Y|P")){
+            explodablePath[2] ++;
+            if(!this.currentBoard[y+2][x].equals("W")){
+                explodablePath[2] ++;
+            }
+        }
+
+        if(this.currentBoard[y-1][x].equals("W")){
+            ;
+        }
+        else if(this.currentBoard[y-1][x].matches(" |R|Y|P")){
+            explodablePath[1] ++;
+            if(!this.currentBoard[y-2][x].equals("W")){
+                explodablePath[1] ++;
+            }
+        }
+        
+        this.explodablePath = explodablePath;
+
+    }
+    public void drawExplosion(PApplet app) {
+        app.image(explosionSprite[0], this.x*32, this.y*32);
+        if (explodablePath[0] == 1) app.image(explosionSprite[3], this.x*32, this.y*32-32);
+        else if (explodablePath[0] == 2) {
+            app.image(explosionSprite[2], this.x*32, this.y*32-32);
+            app.image(explosionSprite[3], this.x*32, this.y*32-64);
+        }
+        if (explodablePath[1] == 1) app.image(explosionSprite[4], this.x*32+32, this.y*32);
+        else if (explodablePath[1] == 2) {
+            app.image(explosionSprite[1], this.x*32+32, this.y*32);
+            app.image(explosionSprite[4], this.x*32+64, this.y*32);
+        }
+        if (explodablePath[2] == 1) app.image(explosionSprite[5], this.x*32, this.y*32+32);
+        else if (explodablePath[2] == 2) {
+            app.image(explosionSprite[2], this.x*32, this.y*32+32);
+            app.image(explosionSprite[5], this.x*32, this.y*32+64);
+        }
+        if (explodablePath[3] == 1) app.image(explosionSprite[6], this.x*32-32, this.y*32);
+        else if (explodablePath[3] == 2) {
+            app.image(explosionSprite[1], this.x*32-32, this.y*32);
+            app.image(explosionSprite[6], this.x*32-64, this.y*32);
+        }
+        timerSprite += 1;
+        if (timerSprite == 30) {
+            this.explosionFinished = true;
+        }
+    }
+
+    public void draw(PApplet app) {
+        app.image(bombSprite[currentSprite], this.x*32, this.y*32);
+        timerSprite += 1;
+
+        if(timerSprite == 15) {
+            timerSprite = 0;
+            currentSprite += 1;
+            if (currentSprite > 7) {
+                currentSprite = 0;
+                this.isAlive = false;
+                timerSprite = 0;
+            }
+        }
+
+    }
+
+    public void explosion() {
+      if (explode(this.x-1, this.y, currentBoard)) explode(this.x-2, this.y, currentBoard);
+      if (explode(this.x, this.y+1, currentBoard)) explode(this.x, this.y+2, currentBoard);
+      if (explode(this.x+1, this.y, currentBoard)) explode(this.x+2, this.y, currentBoard);
+      if (explode(this.x, this.y-1, currentBoard)) explode(this.x, this.y-2, currentBoard);
+    }
+
+    public boolean explode(int row, int column, String[][] currentBoard) {
+        String tile = currentBoard[column][row];
+
+        if (tile == " ") {
+          return true;
+        } else if (tile == "B") {
+            currentBoard[column][row] = " ";
+            return true;
+        } else if (tile == "P") {
+            return true;
+        } else if (tile == "Y") {
+            return true;
+        } else if (tile == "R") {
+            return true;
+        }
+        return false;
+
+    }
+
+}
