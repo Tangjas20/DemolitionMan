@@ -93,6 +93,29 @@ public class Board {
             }
         }
     }
+    public void explosionBreakBlock(String[][] mapBoard, PApplet app){
+        emptyWalls.clear();
+        brokenWalls.clear();
+
+        for(int j = 0; j < mapBoard[0].length; j++){
+            for(int i = 0; i < mapBoard.length; i++){
+                int x = j;
+                int y = i;
+                String mapTile = mapBoard[i][j];
+                if(mapTile.equals("B")){
+                    //Broken
+                    BrokenWall BrokenImage = new BrokenWall(x, y, app);
+                    brokenWalls.add(BrokenImage);
+                }
+                else if(mapTile.equals(" ") || mapTile.equals("P") || mapTile.equals("R") || mapTile.equals("Y")){
+                    //EmptyTile
+                    EmptyWall EmptyImage = new EmptyWall(x, y, app);
+                    emptyWalls.add(EmptyImage);
+                }
+            }
+        }
+    }
+    
     
     public List<SolidWall> getSolidWallsList(){
         return this.solidWalls;
@@ -122,6 +145,15 @@ public class Board {
         return this.yellowEnemy;
     }
 
+    public void explosionKillRedEnemy(){
+        this.redEnemy = null;
+        redEnemyTF = false;
+    }
+
+    public void explosionKillYellowEnemy(){
+        this.yellowEnemy = null;
+        yellowEnemyTF = false;
+    }
 
 
 

@@ -6,7 +6,7 @@ import processing.core.PImage;
 import processing.core.PApplet;
 
 
-public class redEnemy extends PlayerClasses{
+public class redEnemy extends PlayerClasses implements playerMovement{
     
     private List<PImage[]> enemyRedSprite = new ArrayList<PImage[]>();
 

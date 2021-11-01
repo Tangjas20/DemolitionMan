@@ -11,6 +11,7 @@ public abstract class PlayerClasses extends GameObject{
     protected int imageTick = 0;
     protected List<PImage[]> sprites = new ArrayList<PImage[]>();
     protected int orientation = 0;
+    int timer;
 
     public PlayerClasses(int x, int y, PApplet app){
         super(x, y, app);
@@ -19,12 +20,15 @@ public abstract class PlayerClasses extends GameObject{
 
     public void tick() {
         //Handles logic
-            if(imageTick < 3){
-                imageTick++;
+        timer++;
+        if(timer == 12){
+            imageTick ++;
+            timer = 0;
+            if(imageTick > 3){
+                this.imageTick = 0;
             }
-            else{
-                imageTick = 0;
-            }
+        }
+
     }
     public void movementLeft(){
             newX = x-1;

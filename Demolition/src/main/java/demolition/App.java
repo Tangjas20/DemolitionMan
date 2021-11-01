@@ -12,9 +12,9 @@ public class App extends PApplet {
 
     public static final int WIDTH = 480;
     public static final int HEIGHT = 480;
-
+    int counter = 0;
     public static final int FPS = 60;
-    private String[][] currentBoard = new String[13][15];
+    String[][] currentBoard = new String[13][15];
     private Integer currentTimer = 0;
     List<PImage[]> yellowEnemyImageList = new ArrayList<PImage[]>();
     List<PImage[]> redEnemyImageList = new ArrayList<PImage[]>();
@@ -29,6 +29,7 @@ public class App extends PApplet {
     private int lives;
     private timer timerIcon;
     boolean drewPlayer = false;
+    private List<Bomb> bombList = new ArrayList<Bomb>();
 
     public App() {
         //construct objects here
@@ -75,7 +76,7 @@ public class App extends PApplet {
     public void draw() {
         //Main loop here
         drewPlayer = false;
-        checkGameState();
+        checkGameState();//Checks if player touches enemy
         if(frameCount % 60 == 1){
             background(255, 128, 0);
            this.timerIcon.draw(this);
@@ -83,7 +84,10 @@ public class App extends PApplet {
             text(timerIcon.getTimer(), 350, 40);
             text(lives, 145, 40);
         }
-        if(frameCount % 12 == 1){
+            for(EmptyWall emptyWall: board.getEmptyWallsList()){
+                emptyWall.draw(this);
+            }
+            
 
             for(SolidWall solidWall: board.getSolidWallsList()){
                 solidWall.draw(this);
@@ -93,15 +97,40 @@ public class App extends PApplet {
                 brokenWall.draw(this);
             }
 
-            for(EmptyWall emptyWall: board.getEmptyWallsList()){
-                emptyWall.draw(this);
-            }
+
 
             for(GoalTile goalImage: board.getGoalTileList()){
                 goalImage.draw(this);
             }
 
-            
+            for(Bomb bomb: bombList){
+                
+                if (bomb.getIsAlive()){
+                    bomb.draw(this);
+                    counter = 0;
+                }
+                else if (!bomb.getExplosionFinished()) {
+                    bomb.drawExplosion(this);
+                    bomb.explosion();
+                    if(counter == 0){
+                        currentBoard = bomb.getBoard();
+                        board.explosionBreakBlock(currentBoard, this);
+                        counter++;
+                        if(bomb.killedPlayer){
+                            resetGame();
+                            lives--;
+                        }
+                        else if(bomb.killedRedEnemy){
+                            board.explosionKillRedEnemy();
+                        }
+                        else if(bomb.killedYellowEnemy){
+                            board.explosionKillYellowEnemy();
+                        }
+                    }
+                }
+            }
+            bombList.removeIf(b -> b.getExplosionFinished() == true);
+
             if(board.redEnemyTF == true){
                 if((board.getPlayer().getX() == board.getRedEnemy().getX()) && (board.getPlayer().getY() == (board.getRedEnemy().getY()-1))){
                     board.getPlayer().tick();
@@ -132,24 +161,32 @@ public class App extends PApplet {
 //Change this into a for loop to check or every GoalImage in the GoalTile Array
             for(GoalTile i: board.getGoalTileList()){
                 if(board.getPlayer().getX() == i.getX() && board.getPlayer().getY() == i.getY()){
-
                     boardCounter ++;
                     resetGame();
                     this.timerIcon = new timer(currentTimer, this);
+                    
                 }
             }
             
-        }
+        
     }
 
     public void checkGameState(){
-        if((board.getPlayer().getX() == board.getRedEnemy().getX() && board.getPlayer().getY() == board.getRedEnemy().getY())
-        || (board.getPlayer().getX() == board.getYellowEnemy().getX() && board.getPlayer().getY() == board.getYellowEnemy().getY())){
+        if(board.redEnemyTF){
+            if((board.getPlayer().getX() == board.getRedEnemy().getX()) && (board.getPlayer().getY() == board.getRedEnemy().getY())){
             resetGame();
             lives--;
+            }
+        }   
+        if(board.yellowEnemyTF){
+            if((board.getPlayer().getX() == board.getYellowEnemy().getX()) && (board.getPlayer().getY() == board.getYellowEnemy().getY())){
+                resetGame();
+                lives--;
+            }
+       // if(lives )
         }
     }
-    
+
     public void keyPressed() {
         /*
             .get(0) corresponds with base player
@@ -157,10 +194,16 @@ public class App extends PApplet {
             .get(2) corresponds with right player
             .get(3) corresponds with left player
         */
+        if (key == ' ' && this.keyReleased == true) {
+            System.out.println("Hi");
+            Bomb b = new Bomb(board.getPlayer().getX(), board.getPlayer().getY(), this, currentBoard);
+            bombList.add(b);
+            keyReleased = false;
+        }
         if (key == CODED) {
-            if (keyCode == DOWN && keyReleased == true) {
+            if(keyCode == DOWN && keyReleased == true) {
                 board.getPlayer().changeOrientation(0);
-                if((currentBoard[board.getPlayer().getY()+1][board.getPlayer().getX()].matches(" |R|Y")) || (currentBoard[board.getPlayer().getY()+1][board.getPlayer().getX()].equals(" "))){
+                if((currentBoard[board.getPlayer().getY()+1][board.getPlayer().getX()].matches(" |R|Y|G"))){
                     currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = " ";
                     board.getPlayer().movementDOWN();
                     currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = "P";
@@ -168,7 +211,7 @@ public class App extends PApplet {
 
             } else if (keyCode == UP && keyReleased == true) {
                 board.getPlayer().changeOrientation(1);
-                if((currentBoard[board.getPlayer().getY()-1][board.getPlayer().getX()].matches(" |R|Y")) || (currentBoard[board.getPlayer().getY()-1][board.getPlayer().getX()].equals("G"))){
+                if((currentBoard[board.getPlayer().getY()-1][board.getPlayer().getX()].matches(" |R|Y|G"))){
                     currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = " ";
                     board.getPlayer().movementUP();
                     currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = "P";
@@ -176,7 +219,7 @@ public class App extends PApplet {
 
             } else if (keyCode == RIGHT && keyReleased == true) {
                 board.getPlayer().changeOrientation(2);
-                if((currentBoard[board.getPlayer().getY()][board.getPlayer().getX()+1].matches(" |R|Y")) || (currentBoard[board.getPlayer().getY()][board.getPlayer().getX()+1].equals("G"))){
+                if((currentBoard[board.getPlayer().getY()][board.getPlayer().getX()+1].matches(" |R|Y|G"))){
                     currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = " ";
                     board.getPlayer().movementRight();
                     currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = "P";
@@ -184,7 +227,7 @@ public class App extends PApplet {
 
             } else if (keyCode == LEFT && keyReleased == true) {
                 board.getPlayer().changeOrientation(3);
-                if((currentBoard[board.getPlayer().getY()][board.getPlayer().getX()-1].matches(" |R|Y")) || (currentBoard[board.getPlayer().getY()][board.getPlayer().getX()-1].equals(" "))){
+                if((currentBoard[board.getPlayer().getY()][board.getPlayer().getX()-1].matches(" |R|Y|G"))){
                     currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = " ";
                     board.getPlayer().movementLeft();
                     currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = "P";
@@ -196,6 +239,10 @@ public class App extends PApplet {
 
     public void keyReleased() {
         this.keyReleased = true;
+    }
+
+    public String[][] getCurrentBoard(){
+        return currentBoard;
     }
     
     public static void main(String[] args) {
