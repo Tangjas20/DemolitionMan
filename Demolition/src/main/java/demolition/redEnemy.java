@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import processing.core.PImage;
 import processing.core.PApplet;
-
+import java.util.Random;
 
 public class redEnemy extends PlayerClasses implements playerMovement{
     
+    int movementTimer = 0;
     private List<PImage[]> enemyRedSprite = new ArrayList<PImage[]>();
 
     public redEnemy(int x, int y, PApplet app) {
@@ -43,7 +44,22 @@ public class redEnemy extends PlayerClasses implements playerMovement{
         enemyRedSprite.add(redEnemyRightSprite);
         enemyRedSprite.add(redEnemyLeftSprite);
     }
+    public void tick() {
+        //Handles logic
+        timer++;
+        if(timer == 12){
+            imageTick ++;
+            timer = 0;
+            if(imageTick > 3){
+                this.imageTick = 0;
+            }
+        }
+        movementTimer ++;
+        if(movementTimer = 60){
+            ;
+        }
 
+    }
 
 
     public void draw(PApplet app) {
