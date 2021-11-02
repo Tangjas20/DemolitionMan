@@ -53,8 +53,6 @@ public class App extends PApplet {
 
     public void setup() {
         frameRate(FPS);
-        // Load images during setup
-        
         font = createFont("PressStart2P-regular.ttf", 16);
         textFont(font);
         readJsonObject fileData = new readJsonObject(); 
