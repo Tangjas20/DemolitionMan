@@ -113,10 +113,11 @@ public class App extends PApplet {
                     }
                     else if (!bomb.getExplosionFinished()) {
                         bomb.drawExplosion(this);
-                        bomb.explosion();
+                        
                         currentBoard = bomb.getBoard();
                         if (counter == 0){
                             counter++;
+                            bomb.explosion();
                             board.explosionBreakBlock(currentBoard, this);
                         }
                     if(bomb.killedRedEnemy){
