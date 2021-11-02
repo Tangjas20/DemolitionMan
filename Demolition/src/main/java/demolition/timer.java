@@ -7,7 +7,7 @@ import processing.core.PApplet;
 
 
 public class timer {
-
+    private int counter = 0;
     private PImage timerImage;
     private int timer;
     private PImage playerIcon;
@@ -21,7 +21,12 @@ public class timer {
 
     public void tick() {
         //Handles logic
-        timer -= 1;
+        counter++;
+        if(counter == 60){
+            timer -= 1;
+            counter = 0;
+        }
+
     }
 
     public void draw(PApplet app) {

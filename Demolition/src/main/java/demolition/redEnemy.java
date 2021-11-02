@@ -55,9 +55,9 @@ public class redEnemy extends PlayerClasses implements playerMovement{
             }
         }
         movementTimer ++;
-        if(movementTimer = 60){
-            ;
-        }
+        //if(movementTimer = 60){
+       //     ;
+       // }
 
     }
 

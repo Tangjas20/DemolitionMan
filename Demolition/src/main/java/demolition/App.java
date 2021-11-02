@@ -9,7 +9,7 @@ import java.util.Map;
 import processing.core.PFont;
 
 public class App extends PApplet {
-
+    
     public static final int WIDTH = 480;
     public static final int HEIGHT = 480;
     int counter = 0;
@@ -74,101 +74,107 @@ public class App extends PApplet {
     }
 
     public void draw() {
-        //Main loop here
-        drewPlayer = false;
-        checkGameState();//Checks if player touches enemy
-        if(frameCount % 60 == 1){
-            background(255, 128, 0);
-           this.timerIcon.draw(this);
-            this.timerIcon.tick();
-            text(timerIcon.getTimer(), 350, 40);
-            text(lives, 145, 40);
-        }
-            for(EmptyWall emptyWall: board.getEmptyWallsList()){
-                emptyWall.draw(this);
-            }
-            
-
-            for(SolidWall solidWall: board.getSolidWallsList()){
-                solidWall.draw(this);
-            }
-
-            for(BrokenWall brokenWall: board.getBrokenWallsList()){
-                brokenWall.draw(this);
-            }
-
-
-
-            for(GoalTile goalImage: board.getGoalTileList()){
-                goalImage.draw(this);
-            }
-
-            for(Bomb bomb: bombList){
+        if(lives > 0){
+            drewPlayer = false;
+            checkGameState();//Checks if player touches enemy
+                background(255, 128, 0);
+                this.timerIcon.draw(this);
+                this.timerIcon.tick();
+                text(timerIcon.getTimer(), 350, 40);
                 
-                if (bomb.getIsAlive()){
-                    bomb.draw(this);
-                    counter = 0;
+                text(lives, 145, 40);
+                for(EmptyWall emptyWall: board.getEmptyWallsList()){
+                    emptyWall.draw(this);
                 }
-                else if (!bomb.getExplosionFinished()) {
-                    bomb.drawExplosion(this);
-                    bomb.explosion();
-                    if(counter == 0){
+                for(SolidWall solidWall: board.getSolidWallsList()){
+                    solidWall.draw(this);
+                }
+                for(BrokenWall brokenWall: board.getBrokenWallsList()){
+                    brokenWall.draw(this);
+                }
+                for(GoalTile goalImage: board.getGoalTileList()){
+                    goalImage.draw(this);
+                }
+
+                for(Bomb bomb: bombList){
+                    if (bomb.getIsAlive()){
+                        bomb.draw(this);
+                        counter = 0;
+                    }
+                    else if (!bomb.getExplosionFinished()) {
+                        bomb.drawExplosion(this);
+                        bomb.explosion();
                         currentBoard = bomb.getBoard();
-                        board.explosionBreakBlock(currentBoard, this);
-                        counter++;
-                        if(bomb.killedPlayer){
-                            resetGame();
-                            lives--;
+                        if (counter == 0){
+                            counter++;
+                            board.explosionBreakBlock(currentBoard, this);
                         }
-                        else if(bomb.killedRedEnemy){
-                            board.explosionKillRedEnemy();
+                    if(bomb.killedRedEnemy){
+                        board.explosionKillRedEnemy();
+                    }
+
+                    if(bomb.killedYellowEnemy){
+                        board.explosionKillYellowEnemy();
+                    }
+                    if(bomb.killedPlayer ){
+                        resetGame();
+                        
+                        lives--;
+                        bomb.killedPlayer = false;
+                        bomb.explosionFinished= true;
+                        for(Bomb bombDefuse: bombList){
+                            bombDefuse.explosionFinished = true;
                         }
-                        else if(bomb.killedYellowEnemy){
-                            board.explosionKillYellowEnemy();
-                        }
+                        break;
                     }
                 }
-            }
-            bombList.removeIf(b -> b.getExplosionFinished() == true);
-
-            if(board.redEnemyTF == true){
-                if((board.getPlayer().getX() == board.getRedEnemy().getX()) && (board.getPlayer().getY() == (board.getRedEnemy().getY()-1))){
-                    board.getPlayer().tick();
-                    board.getPlayer().draw(this);
-                    drewPlayer = true;
-                }
-                board.getRedEnemy().tick();
-                board.getRedEnemy().draw(this);
-
-            }
-
-            if(board.yellowEnemyTF == true){
-                if((board.getPlayer().getX() == board.getYellowEnemy().getX()) && (board.getPlayer().getY() == (board.getYellowEnemy().getY()-1))){
-                    board.getPlayer().tick();
-                    board.getPlayer().draw(this);
-                    drewPlayer = true;
-                }
-                board.getYellowEnemy().tick();
-                board.getYellowEnemy().draw(this);
-            }
-
-            if(drewPlayer == false){
-                board.getPlayer().tick();
-                board.getPlayer().draw(this);
-            }
-
-
-//Change this into a for loop to check or every GoalImage in the GoalTile Array
-            for(GoalTile i: board.getGoalTileList()){
-                if(board.getPlayer().getX() == i.getX() && board.getPlayer().getY() == i.getY()){
-                    boardCounter ++;
-                    resetGame();
-                    this.timerIcon = new timer(currentTimer, this);
                     
                 }
-            }
+                bombList.removeIf(b -> b.getExplosionFinished() == true);
+
+                if(board.redEnemyTF == true){
+                    if((board.getPlayer().getX() == board.getRedEnemy().getX()) && (board.getPlayer().getY() == (board.getRedEnemy().getY()-1))){
+                        board.getPlayer().tick();
+                        board.getPlayer().draw(this);
+                        drewPlayer = true;
+                    }
+                    board.getRedEnemy().tick();
+                    board.getRedEnemy().draw(this);
+
+                }
+
+                if(board.yellowEnemyTF == true){
+                    if((board.getPlayer().getX() == board.getYellowEnemy().getX()) && (board.getPlayer().getY() == (board.getYellowEnemy().getY()-1))){
+                        board.getPlayer().tick();
+                        board.getPlayer().draw(this);
+                        drewPlayer = true;
+                    }
+                    board.getYellowEnemy().tick();
+                    board.getYellowEnemy().draw(this);
+                }
+
+                if(drewPlayer == false){
+                    board.getPlayer().tick();
+                    board.getPlayer().draw(this);
+                }
+
+
+    //Change this into a for loop to check or every GoalImage in the GoalTile Array
+                for(GoalTile i: board.getGoalTileList()){
+                    if(board.getPlayer().getX() == i.getX() && board.getPlayer().getY() == i.getY()){
+                        boardCounter ++;
+                        resetGame();
+                        bombList.clear();
+                        this.timerIcon = new timer(currentTimer, this);
+
+                    }
+                }
+        }
+        else {
+            background(255, 128, 0);
+            text("GAME OVER", 300, 300);
+        }
             
-        
     }
 
     public void checkGameState(){
@@ -244,6 +250,7 @@ public class App extends PApplet {
     public String[][] getCurrentBoard(){
         return currentBoard;
     }
+
     
     public static void main(String[] args) {
         PApplet.main("demolition.App");
