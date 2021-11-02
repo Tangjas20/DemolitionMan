@@ -7,7 +7,11 @@
     {
       "path": "level2.txt",
       "time": 180
+    },
+    {
+      "path": "level3.txt",
+      "time": 180
     }
   ],
-  "lives": 3
+  "lives": 5
 }

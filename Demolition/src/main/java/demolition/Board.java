@@ -159,12 +159,6 @@ public class Board {
 
 
     public static void main(String[] args){
-        /*Board board = new Board();
-        board.make1stBoard();
-        board.make2ndBoard();
-        System.out.println(board.firstBoard[1][1]);
-        System.out.println(board.secondBoard[5][1]);
-        */
     }
 
 }

@@ -12,6 +12,7 @@ public abstract class PlayerClasses extends GameObject{
     protected List<PImage[]> sprites = new ArrayList<PImage[]>();
     protected int orientation = 0;
     int timer;
+    protected boolean isEnemyDead;
 
     public PlayerClasses(int x, int y, PApplet app){
         super(x, y, app);
