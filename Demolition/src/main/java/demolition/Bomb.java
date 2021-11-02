@@ -13,7 +13,7 @@ public class Bomb extends GameObject {
     boolean rightCloseBroken;
     boolean topCloseBroken;
     boolean bottomCloseBroken;
-    private boolean explosionFinished;
+    boolean explosionFinished;
     private int timerSprite;
     private int currentSprite;
     private boolean isAlive;
@@ -165,13 +165,19 @@ public class Bomb extends GameObject {
 
     public void explosion() {
         //Left
-      if (explode(this.x-1, this.y, currentBoard)) explode(this.x-2, this.y, currentBoard);
+      if (explode(this.x-1, this.y, currentBoard)) 
+            explode(this.x-2, this.y, currentBoard);
       //Down
-      if (explode(this.x, this.y+1, currentBoard)) explode(this.x, this.y+2, currentBoard);
+      if (explode(this.x, this.y+1, currentBoard))
+            explode(this.x, this.y+2, currentBoard);
       //Right
-      if (explode(this.x+1, this.y, currentBoard)) explode(this.x+2, this.y, currentBoard);
+      if (explode(this.x+1, this.y, currentBoard)) 
+            explode(this.x+2, this.y, currentBoard);
       //Up
-      if (explode(this.x, this.y-1, currentBoard)) explode(this.x, this.y-2, currentBoard);
+      if (explode(this.x, this.y-1, currentBoard)) 
+            explode(this.x, this.y-2, currentBoard);
+            
+      if (explode(this.x, this.y, currentBoard));
     }
 
     public boolean explode(int row, int column, String[][] currentBoard) {
@@ -182,6 +188,7 @@ public class Bomb extends GameObject {
         } else if (tile.equals("B")) {
             this.currentBoard[column][row] = " ";
             return false;
+
         } else if (tile.equals("P")) {
             killedPlayer = true;
             
