@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>App.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Demolition</a> &gt; <a href="index.source.html" class="el_package">demolition</a> &gt; <span class="el_source">App.java</span></div><h1>App.java</h1><pre class="source lang-java linenums">package demolition;
+
+import processing.core.PApplet;
+import processing.core.PImage;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import processing.core.PFont;
+
+public class App extends PApplet {
+    
+    public static final int WIDTH = 480;
+    public static final int HEIGHT = 480;
+<span class="fc" id="L15">    int counter = 0;</span>
+    public static final int FPS = 60;
+<span class="fc" id="L17">    String[][] currentBoard = new String[13][15];</span>
+<span class="fc" id="L18">    private Integer currentTimer = 0;</span>
+<span class="fc" id="L19">    List&lt;PImage[]&gt; yellowEnemyImageList = new ArrayList&lt;PImage[]&gt;();</span>
+<span class="fc" id="L20">    List&lt;PImage[]&gt; redEnemyImageList = new ArrayList&lt;PImage[]&gt;();</span>
+<span class="fc" id="L21">    List&lt;PImage[]&gt; imageList = new ArrayList&lt;PImage[]&gt;();</span>
+<span class="fc" id="L22">    private Map&lt;String, String&gt; pathTimeMap = new HashMap&lt;String, String&gt;();</span>
+<span class="fc" id="L23">    private List&lt;String&gt; boardArrayName = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L24">    private List&lt;Integer&gt; boardArrayTime = new ArrayList&lt;Integer&gt;();</span>
+<span class="fc" id="L25">    private int boardCounter = 0;</span>
+    PFont font;
+<span class="fc" id="L27">    boolean keyReleased = true;</span>
+    Board board;
+    private int lives;
+    private timer timerIcon;
+<span class="fc" id="L31">    boolean drewPlayer = false;</span>
+<span class="fc" id="L32">    private List&lt;Bomb&gt; bombList = new ArrayList&lt;Bomb&gt;();</span>
+
+<span class="fc" id="L34">    public App() {</span>
+        //construct objects here
+<span class="fc" id="L36">        board = new Board();</span>
+<span class="fc" id="L37">    }</span>
+
+    public void settings() {
+<span class="fc" id="L40">        size(WIDTH, HEIGHT);</span>
+<span class="fc" id="L41">    }</span>
+
+    public void resetGame(){
+<span class="nc" id="L44">        currentBoard = board.makeBoard(boardArrayName.get(boardCounter), this);</span>
+<span class="nc" id="L45">        currentTimer =  boardArrayTime.get(boardCounter);</span>
+<span class="nc" id="L46">        board.map(currentBoard, this);</span>
+<span class="nc" id="L47">    }</span>
+
+    public void setup() {
+<span class="fc" id="L50">        frameRate(FPS);</span>
+        // Load images during setup
+        //Board
+        
+<span class="fc" id="L54">        font = createFont(&quot;PressStart2P-regular.ttf&quot;, 16);</span>
+<span class="fc" id="L55">        textFont(font);</span>
+<span class="fc" id="L56">        readJsonObject fileData = new readJsonObject();</span>
+<span class="fc" id="L57">        fileData.readFiles(&quot;config.json&quot;);</span>
+<span class="fc" id="L58">        this.lives = fileData.getLives();</span>
+<span class="fc" id="L59">        pathTimeMap = fileData.getPathTimeHashMap();</span>
+        
+
+<span class="fc bfc" id="L62" title="All 2 branches covered.">        for (Map.Entry&lt;String, String&gt; entry : pathTimeMap.entrySet()) {</span>
+<span class="fc" id="L63">            String key = entry.getKey();</span>
+<span class="fc" id="L64">            Integer value = parseInt(entry.getValue());</span>
+<span class="fc" id="L65">            boardArrayTime.add(value);</span>
+<span class="fc" id="L66">            boardArrayName.add(key);</span>
+<span class="fc" id="L67">        }</span>
+
+<span class="fc" id="L69">        currentBoard = board.makeBoard(boardArrayName.get(boardCounter), this);</span>
+<span class="fc" id="L70">        currentTimer =  boardArrayTime.get(boardCounter);</span>
+
+<span class="fc" id="L72">        board.map(currentBoard, this);</span>
+<span class="fc" id="L73">        this.timerIcon = new timer(currentTimer, this);</span>
+<span class="fc" id="L74">    }</span>
+
+    public void draw() {
+<span class="pc bpc" id="L77" title="2 of 4 branches missed.">        if(lives &gt; 0 &amp;&amp; this.timerIcon.getTimer() &gt; 0){</span>
+<span class="fc" id="L78">            drewPlayer = false;</span>
+<span class="fc" id="L79">            checkGameState();//Checks if player touches enemy</span>
+<span class="fc" id="L80">                background(255, 128, 0);</span>
+<span class="fc" id="L81">                this.timerIcon.draw(this);</span>
+<span class="fc" id="L82">                this.timerIcon.tick();</span>
+<span class="fc" id="L83">                text(timerIcon.getTimer(), 350, 40);</span>
+                
+<span class="fc" id="L85">                text(lives, 145, 40);</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">                for(EmptyWall emptyWall: board.getEmptyWallsList()){</span>
+<span class="fc" id="L87">                    emptyWall.draw(this);</span>
+<span class="fc" id="L88">                }</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">                for(SolidWall solidWall: board.getSolidWallsList()){</span>
+<span class="fc" id="L90">                    solidWall.draw(this);</span>
+<span class="fc" id="L91">                }</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">                for(BrokenWall brokenWall: board.getBrokenWallsList()){</span>
+<span class="fc" id="L93">                    brokenWall.draw(this);</span>
+<span class="fc" id="L94">                }</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">                for(GoalTile goalImage: board.getGoalTileList()){</span>
+<span class="fc" id="L96">                    goalImage.draw(this);</span>
+<span class="fc" id="L97">                }</span>
+
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">                for(Bomb bomb: bombList){</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">                    if (bomb.getIsAlive()){</span>
+<span class="nc" id="L101">                        bomb.draw(this);</span>
+<span class="nc" id="L102">                        counter = 0;</span>
+                    }
+<span class="nc bnc" id="L104" title="All 2 branches missed.">                    else if (!bomb.getExplosionFinished()) {</span>
+<span class="nc" id="L105">                        bomb.drawExplosion(this);</span>
+<span class="nc" id="L106">                        bomb.explosion();</span>
+<span class="nc" id="L107">                        currentBoard = bomb.getBoard();</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">                        if (counter == 0){</span>
+<span class="nc" id="L109">                            counter++;</span>
+<span class="nc" id="L110">                            board.explosionBreakBlock(currentBoard, this);</span>
+                        }
+<span class="nc bnc" id="L112" title="All 2 branches missed.">                    if(bomb.killedRedEnemy){</span>
+<span class="nc" id="L113">                        board.explosionKillRedEnemy();</span>
+                    }
+
+<span class="nc bnc" id="L116" title="All 2 branches missed.">                    if(bomb.killedYellowEnemy){</span>
+<span class="nc" id="L117">                        board.explosionKillYellowEnemy();</span>
+                    }
+<span class="nc bnc" id="L119" title="All 2 branches missed.">                    if(bomb.killedPlayer ){</span>
+<span class="nc" id="L120">                        resetGame();</span>
+                        
+<span class="nc" id="L122">                        lives--;</span>
+<span class="nc" id="L123">                        bomb.killedPlayer = false;</span>
+<span class="nc" id="L124">                        bomb.explosionFinished= true;</span>
+<span class="nc bnc" id="L125" title="All 2 branches missed.">                        for(Bomb bombDefuse: bombList){</span>
+<span class="nc" id="L126">                            bombDefuse.explosionFinished = true;</span>
+<span class="nc" id="L127">                        }</span>
+<span class="nc" id="L128">                        break;</span>
+                    }
+                }
+                    
+<span class="nc" id="L132">                }</span>
+<span class="pc bnc" id="L133" title="All 2 branches missed.">                bombList.removeIf(b -&gt; b.getExplosionFinished() == true);</span>
+
+<span class="pc bpc" id="L135" title="1 of 2 branches missed.">                if(board.redEnemyTF == true){</span>
+<span class="pc bpc" id="L136" title="3 of 4 branches missed.">                    if((board.getPlayer().getX() == board.getRedEnemy().getX()) &amp;&amp; (board.getPlayer().getY() == (board.getRedEnemy().getY()-1))){</span>
+<span class="nc" id="L137">                        board.getPlayer().tick();</span>
+<span class="nc" id="L138">                        board.getPlayer().draw(this);</span>
+<span class="nc" id="L139">                        drewPlayer = true;</span>
+                    }
+<span class="fc" id="L141">                    board.getRedEnemy().tick();</span>
+<span class="fc" id="L142">                    board.getRedEnemy().draw(this);</span>
+
+                }
+
+<span class="pc bpc" id="L146" title="1 of 2 branches missed.">                if(board.yellowEnemyTF == true){</span>
+<span class="pc bpc" id="L147" title="3 of 4 branches missed.">                    if((board.getPlayer().getX() == board.getYellowEnemy().getX()) &amp;&amp; (board.getPlayer().getY() == (board.getYellowEnemy().getY()-1))){</span>
+<span class="nc" id="L148">                        board.getPlayer().tick();</span>
+<span class="nc" id="L149">                        board.getPlayer().draw(this);</span>
+<span class="nc" id="L150">                        drewPlayer = true;</span>
+                    }
+<span class="fc" id="L152">                    board.getYellowEnemy().tick();</span>
+<span class="fc" id="L153">                    board.getYellowEnemy().draw(this);</span>
+                }
+
+<span class="pc bpc" id="L156" title="1 of 2 branches missed.">                if(drewPlayer == false){</span>
+<span class="fc" id="L157">                    board.getPlayer().tick();</span>
+<span class="fc" id="L158">                    board.getPlayer().draw(this);</span>
+                }
+
+
+    //Change this into a for loop to check or every GoalImage in the GoalTile Array
+<span class="fc bfc" id="L163" title="All 2 branches covered.">                for(GoalTile i: board.getGoalTileList()){</span>
+<span class="pc bpc" id="L164" title="3 of 4 branches missed.">                    if(board.getPlayer().getX() == i.getX() &amp;&amp; board.getPlayer().getY() == i.getY()){</span>
+                        try{
+<span class="nc" id="L166">                            boardCounter ++;</span>
+<span class="nc" id="L167">                            resetGame();</span>
+<span class="nc" id="L168">                            bombList.clear();</span>
+<span class="nc" id="L169">                            this.timerIcon = new timer(currentTimer, this);</span>
+                        }
+<span class="nc" id="L171">                        catch(Exception e) {</span>
+<span class="nc" id="L172">                            background(255, 128, 0);</span>
+<span class="nc" id="L173">                            text(&quot;YOU WIN!&quot;, 300, 300);</span>
+<span class="nc" id="L174">                        }</span>
+
+                    }
+<span class="fc" id="L177">                }</span>
+        }
+        else {
+
+        }
+            
+<span class="fc" id="L183">    }</span>
+
+    public void checkGameState(){
+<span class="pc bpc" id="L186" title="1 of 2 branches missed.">        if(board.redEnemyTF){</span>
+<span class="pc bpc" id="L187" title="3 of 4 branches missed.">            if((board.getPlayer().getX() == board.getRedEnemy().getX()) &amp;&amp; (board.getPlayer().getY() == board.getRedEnemy().getY())){</span>
+<span class="nc" id="L188">            resetGame();</span>
+<span class="nc" id="L189">            lives--;</span>
+            }
+        }   
+<span class="pc bpc" id="L192" title="1 of 2 branches missed.">        if(board.yellowEnemyTF){</span>
+<span class="pc bpc" id="L193" title="3 of 4 branches missed.">            if((board.getPlayer().getX() == board.getYellowEnemy().getX()) &amp;&amp; (board.getPlayer().getY() == board.getYellowEnemy().getY())){</span>
+<span class="nc" id="L194">                resetGame();</span>
+<span class="nc" id="L195">                lives--;</span>
+            }
+       // if(lives )
+        }
+<span class="fc" id="L199">    }</span>
+
+    public void keyPressed() {
+        /*
+            .get(0) corresponds with base player
+            .get(1) corresponds with up player
+            .get(2) corresponds with right player
+            .get(3) corresponds with left player
+        */
+<span class="nc bnc" id="L208" title="All 4 branches missed.">        if (key == ' ' &amp;&amp; this.keyReleased == true) {</span>
+<span class="nc" id="L209">            System.out.println(&quot;Hi&quot;);</span>
+<span class="nc" id="L210">            Bomb b = new Bomb(board.getPlayer().getX(), board.getPlayer().getY(), this, currentBoard);</span>
+<span class="nc" id="L211">            bombList.add(b);</span>
+<span class="nc" id="L212">            keyReleased = false;</span>
+        }
+<span class="nc bnc" id="L214" title="All 2 branches missed.">        if (key == CODED) {</span>
+<span class="nc bnc" id="L215" title="All 4 branches missed.">            if(keyCode == DOWN &amp;&amp; keyReleased == true) {</span>
+<span class="nc" id="L216">                board.getPlayer().changeOrientation(0);</span>
+<span class="nc bnc" id="L217" title="All 2 branches missed.">                if((currentBoard[board.getPlayer().getY()+1][board.getPlayer().getX()].matches(&quot; |R|Y|G&quot;))){</span>
+<span class="nc" id="L218">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot; &quot;;</span>
+<span class="nc" id="L219">                    board.getPlayer().movementDOWN();</span>
+<span class="nc" id="L220">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot;P&quot;;</span>
+                }
+
+<span class="nc bnc" id="L223" title="All 4 branches missed.">            } else if (keyCode == UP &amp;&amp; keyReleased == true) {</span>
+<span class="nc" id="L224">                board.getPlayer().changeOrientation(1);</span>
+<span class="nc bnc" id="L225" title="All 2 branches missed.">                if((currentBoard[board.getPlayer().getY()-1][board.getPlayer().getX()].matches(&quot; |R|Y|G&quot;))){</span>
+<span class="nc" id="L226">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot; &quot;;</span>
+<span class="nc" id="L227">                    board.getPlayer().movementUP();</span>
+<span class="nc" id="L228">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot;P&quot;;</span>
+                }
+
+<span class="nc bnc" id="L231" title="All 4 branches missed.">            } else if (keyCode == RIGHT &amp;&amp; keyReleased == true) {</span>
+<span class="nc" id="L232">                board.getPlayer().changeOrientation(2);</span>
+<span class="nc bnc" id="L233" title="All 2 branches missed.">                if((currentBoard[board.getPlayer().getY()][board.getPlayer().getX()+1].matches(&quot; |R|Y|G&quot;))){</span>
+<span class="nc" id="L234">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot; &quot;;</span>
+<span class="nc" id="L235">                    board.getPlayer().movementRight();</span>
+<span class="nc" id="L236">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot;P&quot;;</span>
+                }
+
+<span class="nc bnc" id="L239" title="All 4 branches missed.">            } else if (keyCode == LEFT &amp;&amp; keyReleased == true) {</span>
+<span class="nc" id="L240">                board.getPlayer().changeOrientation(3);</span>
+<span class="nc bnc" id="L241" title="All 2 branches missed.">                if((currentBoard[board.getPlayer().getY()][board.getPlayer().getX()-1].matches(&quot; |R|Y|G&quot;))){</span>
+<span class="nc" id="L242">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot; &quot;;</span>
+<span class="nc" id="L243">                    board.getPlayer().movementLeft();</span>
+<span class="nc" id="L244">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot;P&quot;;</span>
+                }
+            }
+        }
+<span class="nc" id="L248">        keyReleased = false;</span>
+<span class="nc" id="L249">    }</span>
+
+    public void keyReleased() {
+<span class="nc" id="L252">        this.keyReleased = true;</span>
+<span class="nc" id="L253">    }</span>
+
+    public String[][] getCurrentBoard(){
+<span class="nc" id="L256">        return currentBoard;</span>
+    }
+
+    
+    public static void main(String[] args) {
+<span class="nc" id="L261">        PApplet.main(&quot;demolition.App&quot;);</span>
+<span class="nc" id="L262">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

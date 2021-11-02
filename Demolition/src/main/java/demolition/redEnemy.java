@@ -44,6 +44,7 @@ public class redEnemy extends PlayerClasses implements playerMovement{
         enemyRedSprite.add(redEnemyRightSprite);
         enemyRedSprite.add(redEnemyLeftSprite);
     }
+    //The Red Enemy moves in a straight line and turns to a random decision every time its path is blocked by a solid/broken wall
     public void tick() {
         //Handles logic
         timer++;
@@ -54,11 +55,11 @@ public class redEnemy extends PlayerClasses implements playerMovement{
                 this.imageTick = 0;
             }
         }
-        movementTimer ++;
-        //if(movementTimer = 60){
-       //     ;
-       // }
-
+        /*movementTimer ++;
+        if(movementTimer = 60){
+            ;
+        }
+*/
     }
 
 

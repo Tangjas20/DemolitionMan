@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>redEnemy.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Demolition</a> &gt; <a href="index.source.html" class="el_package">demolition</a> &gt; <span class="el_source">redEnemy.java</span></div><h1>redEnemy.java</h1><pre class="source lang-java linenums">package demolition;
+
+import java.util.ArrayList;
+import java.util.List;
+import processing.core.PImage;
+import processing.core.PApplet;
+import java.util.Random;
+
+public class redEnemy extends PlayerClasses implements playerMovement{
+    
+<span class="fc" id="L11">    int movementTimer = 0;</span>
+<span class="fc" id="L12">    private List&lt;PImage[]&gt; enemyRedSprite = new ArrayList&lt;PImage[]&gt;();</span>
+
+    public redEnemy(int x, int y, PApplet app) {
+<span class="fc" id="L15">        super(x, y, app);</span>
+                //Enemy Red Sprite
+<span class="fc" id="L17">        PImage[] redEnemySprite = new PImage[4];</span>
+<span class="fc" id="L18">        redEnemySprite [0] = app.loadImage(&quot;src/main/resources/red_enemy/red_down1.png&quot;);</span>
+<span class="fc" id="L19">        redEnemySprite [1] = app.loadImage(&quot;src/main/resources/red_enemy/red_down2.png&quot;);</span>
+<span class="fc" id="L20">        redEnemySprite [2] = app.loadImage(&quot;src/main/resources/red_enemy/red_down3.png&quot;);</span>
+<span class="fc" id="L21">        redEnemySprite [3] = app.loadImage(&quot;src/main/resources/red_enemy/red_down4.png&quot;);</span>
+
+<span class="fc" id="L23">        PImage[] redEnemyUpSprite = new PImage[4];</span>
+<span class="fc" id="L24">        redEnemyUpSprite[0] = app.loadImage(&quot;src/main/resources/red_enemy/red_up1.png&quot;);</span>
+<span class="fc" id="L25">        redEnemyUpSprite[1] = app.loadImage(&quot;src/main/resources/red_enemy/red_up2.png&quot;);</span>
+<span class="fc" id="L26">        redEnemyUpSprite[2] = app.loadImage(&quot;src/main/resources/red_enemy/red_up3.png&quot;);</span>
+<span class="fc" id="L27">        redEnemyUpSprite[3] = app.loadImage(&quot;src/main/resources/red_enemy/red_up4.png&quot;);</span>
+
+<span class="fc" id="L29">        PImage[] redEnemyRightSprite = new PImage[4];</span>
+<span class="fc" id="L30">        redEnemyRightSprite[0] = app.loadImage(&quot;src/main/resources/red_enemy/red_right1.png&quot;);</span>
+<span class="fc" id="L31">        redEnemyRightSprite[1] = app.loadImage(&quot;src/main/resources/red_enemy/red_right2.png&quot;);</span>
+<span class="fc" id="L32">        redEnemyRightSprite[2] = app.loadImage(&quot;src/main/resources/red_enemy/red_right3.png&quot;);</span>
+<span class="fc" id="L33">        redEnemyRightSprite[3] = app.loadImage(&quot;src/main/resources/red_enemy/red_right4.png&quot;);</span>
+
+<span class="fc" id="L35">        PImage[] redEnemyLeftSprite = new PImage[4];</span>
+<span class="fc" id="L36">        redEnemyLeftSprite[0] = app.loadImage(&quot;src/main/resources/red_enemy/red_left1.png&quot;);</span>
+<span class="fc" id="L37">        redEnemyLeftSprite[1] = app.loadImage(&quot;src/main/resources/red_enemy/red_left2.png&quot;);</span>
+<span class="fc" id="L38">        redEnemyLeftSprite[2] = app.loadImage(&quot;src/main/resources/red_enemy/red_left3.png&quot;);</span>
+<span class="fc" id="L39">        redEnemyLeftSprite[3] = app.loadImage(&quot;src/main/resources/red_enemy/red_left4.png&quot;);</span>
+
+
+<span class="fc" id="L42">        enemyRedSprite.add(redEnemySprite);</span>
+<span class="fc" id="L43">        enemyRedSprite.add(redEnemyUpSprite);</span>
+<span class="fc" id="L44">        enemyRedSprite.add(redEnemyRightSprite);</span>
+<span class="fc" id="L45">        enemyRedSprite.add(redEnemyLeftSprite);</span>
+<span class="fc" id="L46">    }</span>
+    public void tick() {
+        //Handles logic
+<span class="fc" id="L49">        timer++;</span>
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">        if(timer == 12){</span>
+<span class="nc" id="L51">            imageTick ++;</span>
+<span class="nc" id="L52">            timer = 0;</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">            if(imageTick &gt; 3){</span>
+<span class="nc" id="L54">                this.imageTick = 0;</span>
+            }
+        }
+<span class="fc" id="L57">        movementTimer ++;</span>
+        //if(movementTimer = 60){
+       //     ;
+       // }
+
+<span class="fc" id="L62">    }</span>
+
+
+    public void draw(PApplet app) {
+        //Handling graphics -- Single line or so, no logics
+
+<span class="fc" id="L68">        app.image(this.enemyRedSprite.get(orientation)[imageTick], this.x*32, this.y*32+48);</span>
+<span class="fc" id="L69">    }</span>
+
+    
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

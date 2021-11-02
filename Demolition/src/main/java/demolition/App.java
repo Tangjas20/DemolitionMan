@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 import processing.core.PFont;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Random;
 
 public class App extends PApplet {
     
@@ -54,7 +57,7 @@ public class App extends PApplet {
         font = createFont("PressStart2P-regular.ttf", 16);
         textFont(font);
         readJsonObject fileData = new readJsonObject();
-        fileData.readFiles("config.json");
+        fileData.readFiles();
         this.lives = fileData.getLives();
         pathTimeMap = fileData.getPathTimeHashMap();
         
@@ -74,14 +77,21 @@ public class App extends PApplet {
     }
 
     public void draw() {
-        if(lives > 0){
+        if(lives > 0 && this.timerIcon.getTimer() > 0){
             drewPlayer = false;
             checkGameState();//Checks if player touches enemy
                 background(255, 128, 0);
                 this.timerIcon.draw(this);
                 this.timerIcon.tick();
                 text(timerIcon.getTimer(), 350, 40);
-                
+
+                if(frameCount % 60 == 0){
+                    if(board.yellowEnemyTF)
+                        moveYellowEnemy(board.getYellowEnemy());
+                    if(board.redEnemyTF)
+                        moveRedEnemyAI(board.getRedEnemy());
+                }
+
                 text(lives, 145, 40);
                 for(EmptyWall emptyWall: board.getEmptyWallsList()){
                     emptyWall.draw(this);
@@ -162,19 +172,25 @@ public class App extends PApplet {
     //Change this into a for loop to check or every GoalImage in the GoalTile Array
                 for(GoalTile i: board.getGoalTileList()){
                     if(board.getPlayer().getX() == i.getX() && board.getPlayer().getY() == i.getY()){
-                        boardCounter ++;
-                        resetGame();
-                        bombList.clear();
-                        this.timerIcon = new timer(currentTimer, this);
+                        if(boardCounter < pathTimeMap.size()-1){
+                            boardCounter ++;
+                            resetGame();
+                            bombList.clear();
+                            this.timerIcon = new timer(currentTimer, this);
+                        }
+
+                        else{
+                            background(255, 128, 0);
+                            text("YOU WIN!", 300, 300);
+                        }
 
                     }
                 }
         }
-        else {
+        else{
             background(255, 128, 0);
-            text("GAME OVER", 300, 300);
+            text("GAME OVER!", 300, 300);
         }
-            
     }
 
     public void checkGameState(){
@@ -251,6 +267,126 @@ public class App extends PApplet {
         return currentBoard;
     }
 
+        /*
+            .get(0) corresponds with base player
+            .get(1) corresponds with up player
+            .get(2) corresponds with right player
+            .get(3) corresponds with left player
+        */
+    public void moveYellowEnemy(yellowEnemy i){
+        if(i.orientation == 0){
+            if(currentBoard[i.getY()+1][i.getX()].matches(" |R|Y|G|P")){
+                i.movementDOWN();
+                currentBoard[i.getY()][i.getX()] = "Y";
+                currentBoard[i.getY()-1][i.getX()] = " ";
+            }
+            else{i.changeOrientation(3);}
+        }
+
+        else if(i.orientation == 1){
+            if(currentBoard[i.getY()-1][i.getX()].matches(" |R|Y|G|P")){
+                i.movementUP();
+                currentBoard[i.getY()][i.getX()] = "Y";
+                currentBoard[i.getY()+1][i.getX()] = " ";
+            }
+            else{i.changeOrientation(2);}
+        }
+
+        else if(i.orientation == 2){
+            if(currentBoard[i.getY()][i.getX()+1].matches(" |R|Y|G|P")){
+                i.movementRight();
+                currentBoard[i.getY()][i.getX()] = "Y";
+                currentBoard[i.getY()][i.getX()-1] = " ";
+            }
+            else{i.changeOrientation(0);}
+        }
+
+        else if(i.orientation == 3){
+            if(currentBoard[i.getY()][i.getX()-1].matches(" |R|Y|G|P")){
+                i.movementLeft();
+                currentBoard[i.getY()][i.getX()] = "Y";
+                currentBoard[i.getY()][i.getX()+1] = " ";
+            }
+            else{i.changeOrientation(1);}
+        }
+    }
+        /*
+            .get(0) corresponds with base player
+            .get(1) corresponds with up player
+            .get(2) corresponds with right player
+            .get(3) corresponds with left player
+        */
+    public void moveRedEnemyAI(redEnemy i){
+        int[] possiblePath = {0, 0, 0, 0};
+        boolean deadEnd = false;
+         if(i.orientation == 0){
+            if(currentBoard[i.getY()+1][i.getX()].matches(" |R|Y|G|P")){
+                i.movementDOWN();
+                currentBoard[i.getY()][i.getX()] = "R";
+                currentBoard[i.getY()-1][i.getX()] = " ";
+            }
+            else{
+                deadEnd = true;
+            }
+        }
+
+        else if(i.orientation == 1){
+            if(currentBoard[i.getY()-1][i.getX()].matches(" |R|Y|G|P")){
+                i.movementUP();
+                currentBoard[i.getY()][i.getX()] = "R";
+                currentBoard[i.getY()+1][i.getX()] = " ";
+            }
+            else{
+                deadEnd = true;
+            }
+        }
+
+        else if(i.orientation == 2){
+            if(currentBoard[i.getY()][i.getX()+1].matches(" |R|Y|G|P")){
+                i.movementRight();
+                currentBoard[i.getY()][i.getX()] = "R";
+                currentBoard[i.getY()][i.getX()-1] = " ";
+            }
+            else{
+                deadEnd = true;
+            }
+        }
+
+        else if(i.orientation == 3){
+            if(currentBoard[i.getY()][i.getX()-1].matches(" |R|Y|G|P")){
+                i.movementLeft();
+                currentBoard[i.getY()][i.getX()] = "R";
+                currentBoard[i.getY()][i.getX()+1] = " ";
+            }
+            else{
+                deadEnd = true;
+            }
+        }
+// Set<String> hash_Set = new HashSet<String>()
+//List<Integer> arr = new ArrayList<>(a);
+        if(deadEnd == true){
+            List<Integer> positions = new ArrayList<>();
+            if(currentBoard[i.getY()+1][i.getX()].matches(" |R|Y|G|P"))
+                positions.add(0);
+            if(currentBoard[i.getY()-1][i.getX()].matches(" |R|Y|G|P"))
+                positions.add(1);
+            if(currentBoard[i.getY()][i.getX()+1].matches(" |R|Y|G|P"))
+                positions.add(2);
+            if(currentBoard[i.getY()][i.getX()-1].matches(" |R|Y|G|P"))
+                positions.add(3); 
+            
+            
+            Random r = new Random();
+            int randomNumber = r.nextInt(positions.size());
+            i.changeOrientation(positions.get(randomNumber));
+            
+        }
+    }
+/*String[] arr={"1", "2", "3", "4", "5"};
+      	Random r=new Random();        
+      	int randomNumber=r.nextInt(arr.length);
+      	System.out.println(arr[randomNumber]);
+          */
     
     public static void main(String[] args) {
         PApplet.main("demolition.App");

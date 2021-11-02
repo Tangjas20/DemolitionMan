@@ -8,6 +8,7 @@ import processing.core.PApplet;
 
 public class yellowEnemy extends PlayerClasses{
 
+    int moveTimer = 0;
     private List<PImage[]> enemyYellowSprite = new ArrayList<PImage[]>();
 
     public yellowEnemy(int x, int y, PApplet app) {
@@ -43,7 +44,9 @@ public class yellowEnemy extends PlayerClasses{
         enemyYellowSprite.add(yellowEnemyRightSprite);
         enemyYellowSprite.add(yellowEnemyLeftSprite);
     }
-
+//The Yellow Enemy moves in a straight line, but on collision with a wall will attempt to move clockwise 
+//(if it was moving left, it will try to move up, and if unable to, then try right and then left; 
+//similarly if it was moving down, it will try to move left, otherwise up or right).
 
 
 

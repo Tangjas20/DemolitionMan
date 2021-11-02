@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Player.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Demolition</a> &gt; <a href="index.source.html" class="el_package">demolition</a> &gt; <span class="el_source">Player.java</span></div><h1>Player.java</h1><pre class="source lang-java linenums">package demolition;
+
+import java.util.ArrayList;
+import java.util.List;
+import processing.core.PImage;
+import processing.core.PApplet;
+
+
+public class Player extends PlayerClasses{
+    
+<span class="fc" id="L11">    protected List&lt;PImage[]&gt; sprites = new ArrayList&lt;PImage[]&gt;();</span>
+
+
+    public Player(int x, int y, PApplet app) {
+<span class="fc" id="L15">        super(x, y, app);</span>
+
+<span class="fc" id="L17">        PImage[] playerGif = new PImage[4];</span>
+<span class="fc" id="L18">        playerGif[0] = app.loadImage(&quot;src/main/resources/player/player1.png&quot;);</span>
+<span class="fc" id="L19">        playerGif[1] = app.loadImage(&quot;src/main/resources/player/player2.png&quot;);</span>
+<span class="fc" id="L20">        playerGif[2] = app.loadImage(&quot;src/main/resources/player/player3.png&quot;);</span>
+<span class="fc" id="L21">        playerGif[3] = app.loadImage(&quot;src/main/resources/player/player4.png&quot;);</span>
+
+<span class="fc" id="L23">        PImage[] playerUpGif = new PImage[4];</span>
+<span class="fc" id="L24">        playerUpGif[0] = app.loadImage(&quot;src/main/resources/player/player_up1.png&quot;);</span>
+<span class="fc" id="L25">        playerUpGif[1] = app.loadImage(&quot;src/main/resources/player/player_up2.png&quot;);</span>
+<span class="fc" id="L26">        playerUpGif[2] = app.loadImage(&quot;src/main/resources/player/player_up3.png&quot;);</span>
+<span class="fc" id="L27">        playerUpGif[3] = app.loadImage(&quot;src/main/resources/player/player_up4.png&quot;);</span>
+
+<span class="fc" id="L29">        PImage[] playerRightGif = new PImage[4];</span>
+<span class="fc" id="L30">        playerRightGif[0] = app.loadImage(&quot;src/main/resources/player/player_right1.png&quot;);</span>
+<span class="fc" id="L31">        playerRightGif[1] = app.loadImage(&quot;src/main/resources/player/player_right2.png&quot;);</span>
+<span class="fc" id="L32">        playerRightGif[2] = app.loadImage(&quot;src/main/resources/player/player_right3.png&quot;);</span>
+<span class="fc" id="L33">        playerRightGif[3] = app.loadImage(&quot;src/main/resources/player/player_right4.png&quot;);</span>
+
+<span class="fc" id="L35">        PImage[] playerLeftGif = new PImage[4];</span>
+<span class="fc" id="L36">        playerLeftGif[0] = app.loadImage(&quot;src/main/resources/player/player_left1.png&quot;);</span>
+<span class="fc" id="L37">        playerLeftGif[1] = app.loadImage(&quot;src/main/resources/player/player_left2.png&quot;);</span>
+<span class="fc" id="L38">        playerLeftGif[2] = app.loadImage(&quot;src/main/resources/player/player_left3.png&quot;);</span>
+<span class="fc" id="L39">        playerLeftGif[3] = app.loadImage(&quot;src/main/resources/player/player_left4.png&quot;);</span>
+
+
+<span class="fc" id="L42">        sprites.add(playerGif);</span>
+<span class="fc" id="L43">        sprites.add(playerUpGif);</span>
+<span class="fc" id="L44">        sprites.add(playerRightGif);</span>
+<span class="fc" id="L45">        sprites.add(playerLeftGif);</span>
+<span class="fc" id="L46">    }</span>
+
+    public void draw(PApplet app) {
+        //Handling graphics -- Single line or so, no logics
+
+<span class="fc" id="L51">        app.image(this.sprites.get(orientation)[imageTick], this.x*32, this.y*32+48);</span>
+<span class="fc" id="L52">    }</span>
+
+    
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

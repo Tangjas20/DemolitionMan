@@ -14,7 +14,7 @@ public class readJsonObject {
     private int lives;
     private Map<String, String> pathTimeMap = new LinkedHashMap<String, String>();
 
-    public void readFiles(String configFile){
+    public void readFiles(){
         try{
             File f = new File("config.json");
             Scanner scanner = new Scanner(f);

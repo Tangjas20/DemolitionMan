@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>readJsonObject.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Demolition</a> &gt; <a href="index.source.html" class="el_package">demolition</a> &gt; <span class="el_source">readJsonObject.java</span></div><h1>readJsonObject.java</h1><pre class="source lang-java linenums">package demolition;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.LinkedHashMap;
+import java.io.File;
+import processing.data.JSONObject;
+
+<span class="fc" id="L11">public class readJsonObject {</span>
+<span class="fc" id="L12">    String fileRead = &quot;&quot;;</span>
+<span class="fc" id="L13">    int numberOfLevels = 0;</span>
+    private int lives;
+<span class="fc" id="L15">    private Map&lt;String, String&gt; pathTimeMap = new LinkedHashMap&lt;String, String&gt;();</span>
+
+    public void readFiles(String configFile){
+        try{
+<span class="fc" id="L19">            File f = new File(&quot;config.json&quot;);</span>
+<span class="fc" id="L20">            Scanner scanner = new Scanner(f);</span>
+<span class="fc bfc" id="L21" title="All 2 branches covered.">            while (scanner.hasNextLine()){</span>
+                
+<span class="fc" id="L23">                fileRead += scanner.nextLine();</span>
+            }
+<span class="fc" id="L25">            scanner.close();</span>
+            //System.out.println(fileRead);
+<span class="nc" id="L27">        } catch (Exception e) {</span>
+<span class="nc" id="L28">            System.out.println(&quot;Config load failed.&quot;);</span>
+<span class="fc" id="L29">        }</span>
+<span class="fc" id="L30">        JSONObject jsn = JSONObject.parse(fileRead);</span>
+
+
+       //System.out.println(jsn.keys());
+       //System.out.println(jsn.getJSONArray(&quot;levels&quot;).getJSONObject(0));
+        //JSONObject jsn1 = jsn.getJSONArray(&quot;levels&quot;).getJSONObject(0);
+        //System.out.println(jsn1.get(&quot;path&quot;));
+        //numberOfLevels = jsn.getJSONArray(&quot;levels&quot;).size();
+        //System.out.println(numberOfLevels);
+       // System.out.println(jsn1);
+<span class="fc" id="L40">       numberOfLevels = jsn.getJSONArray(&quot;levels&quot;).size();</span>
+       //System.out.println(numberOfLevels);
+        //System.out.println(jsn1);
+        
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        for(int i = 0; i &lt; numberOfLevels; i++){</span>
+<span class="fc" id="L45">            JSONObject jsn1 = jsn.getJSONArray(&quot;levels&quot;).getJSONObject(i);</span>
+<span class="fc" id="L46">            lives = jsn.getInt(&quot;lives&quot;);</span>
+<span class="fc" id="L47">            pathTimeMap.put(jsn1.getString(&quot;path&quot;), jsn1.get(&quot;time&quot;).toString());</span>
+           //System.out.println(jsn1.get(&quot;path&quot;));
+           // System.out.println(jsn1.get(&quot;time&quot;));
+        }
+
+
+       /* System.out.println(pathTimeMap.get(&quot;level1.txt&quot;));
+        for (String key : pathTimeMap.keySet()) {
+            System.out.println(key);
+        }
+        */
+        //System.out.println(jsn1.get(&quot;path&quot;));
+       //System.out.println(jsn.get(&quot;lives&quot;));
+       //JSONObject jsn1 = JSONObject.parse(jsn.get(&quot;levels&quot;));
+
+       //json.getJSONArray(&quot;content&quot;).getJSONObject(0).getString(&quot;article&quot;)
+<span class="fc" id="L63">    }</span>
+
+    public Map&lt;String, String&gt; getPathTimeHashMap() {
+<span class="fc" id="L66">        return this.pathTimeMap;</span>
+    }
+
+    public int getLives() {
+<span class="fc" id="L70">        return this.lives;</span>
+    }
+ 
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

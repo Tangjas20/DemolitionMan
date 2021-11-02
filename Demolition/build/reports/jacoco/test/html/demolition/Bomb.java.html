@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Bomb.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Demolition</a> &gt; <a href="index.source.html" class="el_package">demolition</a> &gt; <span class="el_source">Bomb.java</span></div><h1>Bomb.java</h1><pre class="source lang-java linenums">package demolition;
+
+import processing.core.PImage;
+import processing.core.PApplet;
+import java.util.Arrays;
+
+public class Bomb extends GameObject {
+    private String[][] currentBoard;
+<span class="nc" id="L9">    private PImage[] bombSprite = new PImage[8];</span>
+<span class="nc" id="L10">    private PImage[] explosionSprite = new PImage[7];</span>
+<span class="nc" id="L11">    private int[] explodablePath = {0, 0, 0, 0};</span>
+    boolean leftCloseBroken;
+    boolean rightCloseBroken;
+    boolean topCloseBroken;
+    boolean bottomCloseBroken;
+    boolean explosionFinished;
+    private int timerSprite;
+    private int currentSprite;
+    private boolean isAlive;
+<span class="nc" id="L20">    boolean killedPlayer = false;</span>
+<span class="nc" id="L21">    boolean killedYellowEnemy = false;</span>
+<span class="nc" id="L22">    boolean killedRedEnemy = false;</span>
+
+    public Bomb(int x, int y, PApplet app, String[][] currentBoard){
+<span class="nc" id="L25">        super(x, y, app);</span>
+<span class="nc" id="L26">        this.currentBoard = currentBoard;</span>
+
+<span class="nc" id="L28">        this.bombSprite[0] = app.loadImage(&quot;src/main/resources/bomb/bomb1.png&quot;);</span>
+<span class="nc" id="L29">        this.bombSprite[1] = app.loadImage(&quot;src/main/resources/bomb/bomb2.png&quot;);</span>
+<span class="nc" id="L30">        this.bombSprite[2] = app.loadImage(&quot;src/main/resources/bomb/bomb3.png&quot;);</span>
+<span class="nc" id="L31">        this.bombSprite[3] = app.loadImage(&quot;src/main/resources/bomb/bomb4.png&quot;);</span>
+<span class="nc" id="L32">        this.bombSprite[4] = app.loadImage(&quot;src/main/resources/bomb/bomb5.png&quot;);</span>
+<span class="nc" id="L33">        this.bombSprite[5] = app.loadImage(&quot;src/main/resources/bomb/bomb6.png&quot;);</span>
+<span class="nc" id="L34">        this.bombSprite[6] = app.loadImage(&quot;src/main/resources/bomb/bomb7.png&quot;);</span>
+<span class="nc" id="L35">        this.bombSprite[7] = app.loadImage(&quot;src/main/resources/bomb/bomb8.png&quot;);</span>
+
+        
+<span class="nc" id="L38">        this.explosionSprite[0] = app.loadImage(&quot;src/main/resources/explosion/centre.png&quot;);</span>
+<span class="nc" id="L39">        this.explosionSprite[1] = app.loadImage(&quot;src/main/resources/explosion/horizontal.png&quot;);</span>
+<span class="nc" id="L40">        this.explosionSprite[2] = app.loadImage(&quot;src/main/resources/explosion/vertical.png&quot;);</span>
+<span class="nc" id="L41">        this.explosionSprite[3] = app.loadImage(&quot;src/main/resources/explosion/end_top.png&quot;);</span>
+<span class="nc" id="L42">        this.explosionSprite[4] = app.loadImage(&quot;src/main/resources/explosion/end_right.png&quot;);</span>
+<span class="nc" id="L43">        this.explosionSprite[5] = app.loadImage(&quot;src/main/resources/explosion/end_bottom.png&quot;);</span>
+<span class="nc" id="L44">        this.explosionSprite[6] = app.loadImage(&quot;src/main/resources/explosion/end_left.png&quot;);</span>
+
+<span class="nc" id="L46">        this.currentSprite = 0;</span>
+<span class="nc" id="L47">        this.timerSprite = 0;</span>
+<span class="nc" id="L48">        this.isAlive = true;</span>
+<span class="nc" id="L49">        this.explosionFinished = false;</span>
+
+<span class="nc" id="L51">        setCanExplodePath();</span>
+<span class="nc" id="L52">    }</span>
+
+    public void setCanExplodePath(){
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        if(this.currentBoard[y][x+1].equals(&quot;W&quot;)){</span>
+            ;
+        }//Right
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        else if(this.currentBoard[y][x+1].matches(&quot; |R|Y|P&quot;)){</span>
+<span class="nc" id="L59">            explodablePath[3] ++;</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">            if(this.currentBoard[y][x+2].matches(&quot; |R|Y|P|B&quot;)){</span>
+<span class="nc" id="L61">                explodablePath[3] ++;</span>
+            }
+        }
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        else if(this.currentBoard[y][x+1].equals(&quot;B&quot;)){</span>
+<span class="nc" id="L65">                explodablePath[3] += 3;</span>
+            }
+
+
+        //Left
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        if(this.currentBoard[y][x-1].equals(&quot;W&quot;)){</span>
+            ;
+        }
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        else if(this.currentBoard[y][x-1].matches(&quot; |R|Y|P&quot;)){</span>
+<span class="nc" id="L74">            explodablePath[0] ++;</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">            if(this.currentBoard[y][x-2].matches(&quot; |R|Y|P|B&quot;)){</span>
+<span class="nc" id="L76">                explodablePath[0] ++;</span>
+            }
+        }
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        else if(this.currentBoard[y][x-1].equals(&quot;B&quot;)){</span>
+<span class="nc" id="L80">                explodablePath[0] += 3;</span>
+            }
+        //DOWN
+<span class="nc bnc" id="L83" title="All 2 branches missed.">        if(this.currentBoard[y+1][x].equals(&quot;W&quot;)){</span>
+            ;
+        }
+<span class="nc bnc" id="L86" title="All 2 branches missed.">        else if(this.currentBoard[y+1][x].matches(&quot; |R|Y|P&quot;)){</span>
+<span class="nc" id="L87">            explodablePath[2] ++;</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">            if(this.currentBoard[y+2][x].matches(&quot; |R|Y|P|B&quot;)){</span>
+<span class="nc" id="L89">                explodablePath[2] ++;</span>
+            }
+        }
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        else if(this.currentBoard[y+1][x].equals(&quot;B&quot;)){</span>
+<span class="nc" id="L93">                explodablePath[2] += 3;</span>
+            }
+        //UP
+<span class="nc bnc" id="L96" title="All 2 branches missed.">        if(this.currentBoard[y-1][x].equals(&quot;W&quot;)){</span>
+            ;
+        }
+<span class="nc bnc" id="L99" title="All 2 branches missed.">        else if(this.currentBoard[y-1][x].matches(&quot; |R|Y|P&quot;)){</span>
+<span class="nc" id="L100">            explodablePath[1] ++;</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">            if(this.currentBoard[y-2][x].matches(&quot; |R|Y|P|B&quot;)){</span>
+<span class="nc" id="L102">                explodablePath[1] ++;</span>
+            }
+        }
+<span class="nc bnc" id="L105" title="All 2 branches missed.">        else if(this.currentBoard[y-1][x].equals(&quot;B&quot;)){</span>
+<span class="nc" id="L106">                explodablePath[1] += 3;</span>
+            }
+        
+<span class="nc" id="L109">        this.explodablePath = explodablePath;</span>
+
+<span class="nc" id="L111">    }</span>
+    /*
+        this.explosionSprite[0] = app.loadImage(&quot;src/main/resources/explosion/centre.png&quot;);
+        this.explosionSprite[1] = app.loadImage(&quot;src/main/resources/explosion/horizontal.png&quot;);
+        this.explosionSprite[2] = app.loadImage(&quot;src/main/resources/explosion/vertical.png&quot;);
+        this.explosionSprite[3] = app.loadImage(&quot;src/main/resources/explosion/end_top.png&quot;);
+        this.explosionSprite[4] = app.loadImage(&quot;src/main/resources/explosion/end_right.png&quot;);
+        this.explosionSprite[5] = app.loadImage(&quot;src/main/resources/explosion/end_bottom.png&quot;);
+        this.explosionSprite[6] = app.loadImage(&quot;src/main/resources/explosion/end_left.png&quot;);
+        */
+    public void drawExplosion(PApplet app) {//Left
+<span class="nc" id="L122">        app.image(explosionSprite[0], this.x*32, this.y*32+64);</span>
+<span class="nc bnc" id="L123" title="All 4 branches missed.">        if (explodablePath[0] == 1 || explodablePath[0] == 3) app.image(explosionSprite[6], this.x*32-32, this.y*32+64); //Left Close</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">        else if (explodablePath[0] == 2) {//Left Far</span>
+<span class="nc" id="L125">            app.image(explosionSprite[1], this.x*32-32, this.y*32+64);</span>
+<span class="nc" id="L126">            app.image(explosionSprite[6], this.x*32-64, this.y*32+64);</span>
+        }
+        //UP
+<span class="nc bnc" id="L129" title="All 4 branches missed.">        if (explodablePath[1] == 1 || explodablePath[1] == 3) app.image(explosionSprite[3], this.x*32, this.y*32+64-32);</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">        else if (explodablePath[1] == 2) {</span>
+<span class="nc" id="L131">            app.image(explosionSprite[2], this.x*32, this.y*32+64-32);</span>
+<span class="nc" id="L132">            app.image(explosionSprite[3], this.x*32, this.y*32+64-64);</span>
+        }//DOWN
+<span class="nc bnc" id="L134" title="All 4 branches missed.">        if (explodablePath[2] == 1 || explodablePath[2] == 3) app.image(explosionSprite[5], this.x*32, this.y*32+64+32);</span>
+<span class="nc bnc" id="L135" title="All 2 branches missed.">        else if (explodablePath[2] == 2) {</span>
+<span class="nc" id="L136">            app.image(explosionSprite[2], this.x*32, this.y*32+32+64);</span>
+<span class="nc" id="L137">            app.image(explosionSprite[5], this.x*32, this.y*32+64+64);</span>
+        }//RIGHT
+<span class="nc bnc" id="L139" title="All 4 branches missed.">        if (explodablePath[3] == 1 || explodablePath[3] == 3) app.image(explosionSprite[4], this.x*32+32, this.y*32+64);</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">        else if (explodablePath[3] == 2) {</span>
+<span class="nc" id="L141">            app.image(explosionSprite[1], this.x*32+32, this.y*32+64);</span>
+<span class="nc" id="L142">            app.image(explosionSprite[4], this.x*32+64, this.y*32+64);</span>
+        }
+<span class="nc" id="L144">        timerSprite += 1;</span>
+<span class="nc bnc" id="L145" title="All 2 branches missed.">        if (timerSprite == 30) {</span>
+<span class="nc" id="L146">            this.explosionFinished = true;</span>
+        }
+<span class="nc" id="L148">    }</span>
+
+    public void draw(PApplet app) {
+<span class="nc" id="L151">        app.image(bombSprite[currentSprite], this.x*32, this.y*32+64);</span>
+<span class="nc" id="L152">        timerSprite += 1;</span>
+
+<span class="nc bnc" id="L154" title="All 2 branches missed.">        if(timerSprite == 15) {</span>
+<span class="nc" id="L155">            timerSprite = 0;</span>
+<span class="nc" id="L156">            currentSprite += 1;</span>
+<span class="nc bnc" id="L157" title="All 2 branches missed.">            if (currentSprite &gt; 7) {</span>
+<span class="nc" id="L158">                currentSprite = 0;</span>
+<span class="nc" id="L159">                this.isAlive = false;</span>
+<span class="nc" id="L160">                timerSprite = 0;</span>
+            }
+        }
+
+<span class="nc" id="L164">    }</span>
+
+    public void explosion() {
+        //Left
+<span class="nc bnc" id="L168" title="All 2 branches missed.">      if (explode(this.x-1, this.y, currentBoard)) </span>
+<span class="nc" id="L169">            explode(this.x-2, this.y, currentBoard);</span>
+      //Down
+<span class="nc bnc" id="L171" title="All 2 branches missed.">      if (explode(this.x, this.y+1, currentBoard))</span>
+<span class="nc" id="L172">            explode(this.x, this.y+2, currentBoard);</span>
+      //Right
+<span class="nc bnc" id="L174" title="All 2 branches missed.">      if (explode(this.x+1, this.y, currentBoard)) </span>
+<span class="nc" id="L175">            explode(this.x+2, this.y, currentBoard);</span>
+      //Up
+<span class="nc bnc" id="L177" title="All 2 branches missed.">      if (explode(this.x, this.y-1, currentBoard)) </span>
+<span class="nc" id="L178">            explode(this.x, this.y-2, currentBoard);</span>
+            
+<span class="nc bnc" id="L180" title="All 2 branches missed.">      if (explode(this.x, this.y, currentBoard));</span>
+<span class="nc" id="L181">    }</span>
+
+    public boolean explode(int row, int column, String[][] currentBoard) {
+<span class="nc" id="L184">        String tile = currentBoard[column][row];</span>
+
+<span class="nc bnc" id="L186" title="All 2 branches missed.">        if (tile.equals(&quot; &quot;)) {</span>
+<span class="nc" id="L187">          return true;</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">        } else if (tile.equals(&quot;B&quot;)) {</span>
+<span class="nc" id="L189">            this.currentBoard[column][row] = &quot; &quot;;</span>
+<span class="nc" id="L190">            return false;</span>
+
+<span class="nc bnc" id="L192" title="All 2 branches missed.">        } else if (tile.equals(&quot;P&quot;)) {</span>
+<span class="nc" id="L193">            killedPlayer = true;</span>
+            
+<span class="nc" id="L195">            return true;</span>
+<span class="nc bnc" id="L196" title="All 2 branches missed.">        } else if (tile.equals(&quot;Y&quot;)) {</span>
+<span class="nc" id="L197">            this.currentBoard[column][row] = &quot; &quot;;</span>
+<span class="nc" id="L198">            killedYellowEnemy = true;</span>
+<span class="nc" id="L199">            return true;</span>
+<span class="nc bnc" id="L200" title="All 2 branches missed.">        } else if (tile.equals(&quot;R&quot;)) {</span>
+<span class="nc" id="L201">            this.currentBoard[column][row] = &quot; &quot;;</span>
+<span class="nc" id="L202">            killedRedEnemy = true;</span>
+<span class="nc" id="L203">            return true;</span>
+        }
+<span class="nc" id="L205">        return false;</span>
+
+    }
+
+    public boolean getIsAlive(){
+<span class="nc" id="L210">        return this.isAlive;</span>
+    }
+
+    public boolean getExplosionFinished(){
+<span class="nc" id="L214">        return this.explosionFinished;</span>
+    }
+
+    public String[][] getBoard(){
+<span class="nc" id="L218">        return this.currentBoard;</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
