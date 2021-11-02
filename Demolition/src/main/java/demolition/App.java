@@ -12,19 +12,15 @@ import java.util.Set;
 import java.util.Random;
 
 public class App extends PApplet {
-    
+    public static final int FPS = 60;
     public static final int WIDTH = 480;
     public static final int HEIGHT = 480;
     int counter = 0;
-    public static final int FPS = 60;
-    String[][] currentBoard = new String[13][15];
+    String[][] currentBoard;
     private Integer currentTimer = 0;
-    List<PImage[]> yellowEnemyImageList = new ArrayList<PImage[]>();
-    List<PImage[]> redEnemyImageList = new ArrayList<PImage[]>();
-    List<PImage[]> imageList = new ArrayList<PImage[]>();
-    private Map<String, String> pathTimeMap = new HashMap<String, String>();
-    private List<String> boardArrayName = new ArrayList<String>();
-    private List<Integer> boardArrayTime = new ArrayList<Integer>();
+    private Map<String, String> pathTimeMap;
+    private List<String> boardArrayName;
+    private List<Integer> boardArrayTime;
     private int boardCounter = 0;
     PFont font;
     boolean keyReleased = true;
@@ -32,11 +28,16 @@ public class App extends PApplet {
     private int lives;
     private timer timerIcon;
     boolean drewPlayer = false;
-    private List<Bomb> bombList = new ArrayList<Bomb>();
+    private List<Bomb> bombList;
 
     public App() {
         //construct objects here
         board = new Board();
+        bombList = new ArrayList<Bomb>();
+        boardArrayTime = new ArrayList<Integer>();
+        boardArrayName = new ArrayList<String>();
+        pathTimeMap = new HashMap<String, String>();
+        currentBoard = new String[13][15];
     }
 
     public void settings() {
@@ -47,19 +48,19 @@ public class App extends PApplet {
         currentBoard = board.makeBoard(boardArrayName.get(boardCounter), this);
         currentTimer =  boardArrayTime.get(boardCounter);
         board.map(currentBoard, this);
+        this.timerIcon = new timer(currentTimer, this);
     }
 
     public void setup() {
         frameRate(FPS);
         // Load images during setup
-        //Board
         
         font = createFont("PressStart2P-regular.ttf", 16);
         textFont(font);
-        readJsonObject fileData = new readJsonObject();
-        fileData.readFiles();
+        readJsonObject fileData = new readJsonObject(); 
+        fileData.readFiles();   //Reads config file for level, time and lives info
         this.lives = fileData.getLives();
-        pathTimeMap = fileData.getPathTimeHashMap();
+        pathTimeMap = fileData.getPathTimeHashMap(); //Stores the level name and time
         
 
         for (Map.Entry<String, String> entry : pathTimeMap.entrySet()) {
@@ -168,10 +169,15 @@ public class App extends PApplet {
                 board.getPlayer().tick();
                 board.getPlayer().draw(this);
             }
+
     //Change this into a for loop to check or every GoalImage in the GoalTile Array
             for (GoalTile i: board.getGoalTileList()){
                 if (board.getPlayer().getX() == i.getX() && board.getPlayer().getY() == i.getY()){
-                    if (boardCounter < pathTimeMap.size()-1){
+                    if(boardCounter == 0 && pathTimeMap.size() == 1){
+                        background(255, 128, 0);
+                        text("YOU WIN!", 300, 300);
+                    }
+                    else if (boardCounter < pathTimeMap.size()-1){
                         boardCounter ++;
                         resetGame();
                         bombList.clear();
