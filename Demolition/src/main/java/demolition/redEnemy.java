@@ -48,18 +48,13 @@ public class redEnemy extends PlayerClasses implements playerMovement{
     public void tick() {
         //Handles logic
         timer++;
-        if(timer == 12){
+        if (timer == 12){
             imageTick ++;
             timer = 0;
-            if(imageTick > 3){
+            if (imageTick > 3){
                 this.imageTick = 0;
             }
         }
-        /*movementTimer ++;
-        if(movementTimer = 60){
-            ;
-        }
-*/
     }
 
 

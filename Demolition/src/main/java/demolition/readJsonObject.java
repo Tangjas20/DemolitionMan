@@ -41,7 +41,7 @@ public class readJsonObject {
        //System.out.println(numberOfLevels);
         //System.out.println(jsn1);
         
-        for(int i = 0; i < numberOfLevels; i++){
+        for (int i = 0; i < numberOfLevels; i++){
             JSONObject jsn1 = jsn.getJSONArray("levels").getJSONObject(i);
             lives = jsn.getInt("lives");
             pathTimeMap.put(jsn1.getString("path"), jsn1.get("time").toString());

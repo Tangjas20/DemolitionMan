@@ -77,118 +77,113 @@ public class App extends PApplet {
     }
 
     public void draw() {
-        if(lives > 0 && this.timerIcon.getTimer() > 0){
+        if (lives > 0 && this.timerIcon.getTimer() > 0){
             drewPlayer = false;
             checkGameState();//Checks if player touches enemy
-                background(255, 128, 0);
-                this.timerIcon.draw(this);
-                this.timerIcon.tick();
-                text(timerIcon.getTimer(), 350, 40);
+            background(255, 128, 0);
+            this.timerIcon.draw(this);
+            this.timerIcon.tick();
+            text(timerIcon.getTimer(), 350, 40);
 
-                if(frameCount % 60 == 0){
-                    if(board.yellowEnemyTF)
-                        moveYellowEnemy(board.getYellowEnemy());
-                    if(board.redEnemyTF)
-                        moveRedEnemyAI(board.getRedEnemy());
-                }
+            if (frameCount % 60 == 0){
+                if (board.yellowEnemyTF)
+                    moveYellowEnemy(board.getYellowEnemy());
+                if (board.redEnemyTF)
+                    moveRedEnemyAI(board.getRedEnemy());
+            }
 
-                text(lives, 145, 40);
-                for(EmptyWall emptyWall: board.getEmptyWallsList()){
-                    emptyWall.draw(this);
-                }
-                for(SolidWall solidWall: board.getSolidWallsList()){
-                    solidWall.draw(this);
-                }
-                for(BrokenWall brokenWall: board.getBrokenWallsList()){
-                    brokenWall.draw(this);
-                }
-                for(GoalTile goalImage: board.getGoalTileList()){
-                    goalImage.draw(this);
-                }
+            text(lives, 145, 40);
+            for (EmptyWall emptyWall: board.getEmptyWallsList()){
+                emptyWall.draw(this);
+            }
+            for (SolidWall solidWall: board.getSolidWallsList()){
+                solidWall.draw(this);
+            }
+            for (BrokenWall brokenWall: board.getBrokenWallsList()){
+                brokenWall.draw(this);
+            }
+            for (GoalTile goalImage: board.getGoalTileList()){
+                goalImage.draw(this);
+            }
 
-                for(Bomb bomb: bombList){
-                    if (bomb.getIsAlive()){
-                        bomb.draw(this);
-                        counter = 0;
-                    }
-                    else if (!bomb.getExplosionFinished()) {
-                        bomb.drawExplosion(this);
-                        
-                        currentBoard = bomb.getBoard();
-                        if (counter == 0){
-                            counter++;
-                            bomb.explosion();
-                            board.explosionBreakBlock(currentBoard, this);
-                        }
-                    if(bomb.killedRedEnemy){
-                        board.explosionKillRedEnemy();
-                    }
-
-                    if(bomb.killedYellowEnemy){
-                        board.explosionKillYellowEnemy();
-                    }
-                    if(bomb.killedPlayer ){
-                        resetGame();
-                        
-                        lives--;
-                        bomb.killedPlayer = false;
-                        bomb.explosionFinished= true;
-                        for(Bomb bombDefuse: bombList){
-                            bombDefuse.explosionFinished = true;
-                        }
-                        break;
-                    }
+            for (Bomb bomb: bombList){
+                if (bomb.getIsAlive()){
+                    bomb.draw(this);
+                    counter = 0;
                 }
+                else if (!bomb.getExplosionFinished()) {
+                    bomb.drawExplosion(this);
                     
-                }
-                bombList.removeIf(b -> b.getExplosionFinished() == true);
-
-                if(board.redEnemyTF == true){
-                    if((board.getPlayer().getX() == board.getRedEnemy().getX()) && (board.getPlayer().getY() == (board.getRedEnemy().getY()-1))){
-                        board.getPlayer().tick();
-                        board.getPlayer().draw(this);
-                        drewPlayer = true;
+                    currentBoard = bomb.getBoard();
+                    if (counter == 0){
+                        counter++;
+                        bomb.explosion();
+                        board.explosionBreakBlock(currentBoard, this);
                     }
-                    board.getRedEnemy().tick();
-                    board.getRedEnemy().draw(this);
-
+                if (bomb.killedRedEnemy){
+                    board.explosionKillRedEnemy();
                 }
 
-                if(board.yellowEnemyTF == true){
-                    if((board.getPlayer().getX() == board.getYellowEnemy().getX()) && (board.getPlayer().getY() == (board.getYellowEnemy().getY()-1))){
-                        board.getPlayer().tick();
-                        board.getPlayer().draw(this);
-                        drewPlayer = true;
+                if (bomb.killedYellowEnemy){
+                    board.explosionKillYellowEnemy();
+                }
+                if (bomb.killedPlayer ){
+                    resetGame();
+                    
+                    lives--;
+                    bomb.killedPlayer = false;
+                    bomb.explosionFinished= true;
+                    for (Bomb bombDefuse: bombList){
+                        bombDefuse.explosionFinished = true;
                     }
-                    board.getYellowEnemy().tick();
-                    board.getYellowEnemy().draw(this);
+                    break;
                 }
+            }
+                    
+        }
+            bombList.removeIf(b -> b.getExplosionFinished() == true);
 
-                if(drewPlayer == false){
+            if (board.redEnemyTF == true){
+                if ((board.getPlayer().getX() == board.getRedEnemy().getX()) && (board.getPlayer().getY() == (board.getRedEnemy().getY()-1))){
                     board.getPlayer().tick();
                     board.getPlayer().draw(this);
+                    drewPlayer = true;
                 }
+                board.getRedEnemy().tick();
+                board.getRedEnemy().draw(this);
 
+            }
 
+            if (board.yellowEnemyTF == true){
+                if ((board.getPlayer().getX() == board.getYellowEnemy().getX()) && (board.getPlayer().getY() == (board.getYellowEnemy().getY()-1))){
+                    board.getPlayer().tick();
+                    board.getPlayer().draw(this);
+                    drewPlayer = true;
+                }
+                board.getYellowEnemy().tick();
+                board.getYellowEnemy().draw(this);
+            }
+
+            if (drewPlayer == false){
+                board.getPlayer().tick();
+                board.getPlayer().draw(this);
+            }
     //Change this into a for loop to check or every GoalImage in the GoalTile Array
-                for(GoalTile i: board.getGoalTileList()){
-                    if(board.getPlayer().getX() == i.getX() && board.getPlayer().getY() == i.getY()){
-                        if(boardCounter < pathTimeMap.size()-1){
-                            boardCounter ++;
-                            resetGame();
-                            bombList.clear();
-                            this.timerIcon = new timer(currentTimer, this);
-                        }
-
-                        else{
-                            background(255, 128, 0);
-                            text("YOU WIN!", 300, 300);
-                        }
-
+            for (GoalTile i: board.getGoalTileList()){
+                if (board.getPlayer().getX() == i.getX() && board.getPlayer().getY() == i.getY()){
+                    if (boardCounter < pathTimeMap.size()-1){
+                        boardCounter ++;
+                        resetGame();
+                        bombList.clear();
+                        this.timerIcon = new timer(currentTimer, this);
+                    } else {
+                        background(255, 128, 0);
+                        text("YOU WIN!", 300, 300);
                     }
                 }
-        }
-        else{
+            }
+
+        } else {
             background(255, 128, 0);
             text("GAME OVER!", 300, 300);
         }
@@ -200,13 +195,13 @@ public class App extends PApplet {
             resetGame();
             lives--;
             }
-        }   
+        }
+
         if(board.yellowEnemyTF){
             if((board.getPlayer().getX() == board.getYellowEnemy().getX()) && (board.getPlayer().getY() == board.getYellowEnemy().getY())){
                 resetGame();
                 lives--;
             }
-       // if(lives )
         }
     }
 
@@ -267,13 +262,12 @@ public class App extends PApplet {
     public String[][] getCurrentBoard(){
         return currentBoard;
     }
-
-        /*
-            .get(0) corresponds with base player
-            .get(1) corresponds with up player
-            .get(2) corresponds with right player
-            .get(3) corresponds with left player
-        */
+    /*
+        .get(0) corresponds with base player
+        .get(1) corresponds with up player
+        .get(2) corresponds with right player
+        .get(3) corresponds with left player
+    */
     public void moveYellowEnemy(yellowEnemy i){
         if(i.orientation == 0){
             if(currentBoard[i.getY()+1][i.getX()].matches(" |R|Y|G|P")){
@@ -329,15 +323,13 @@ public class App extends PApplet {
             else{
                 deadEnd = true;
             }
-        }
-
-        else if(i.orientation == 1){
+        } else if (i.orientation == 1){
             if(currentBoard[i.getY()-1][i.getX()].matches(" |R|Y|G|P")){
                 i.movementUP();
                 currentBoard[i.getY()][i.getX()] = "R";
                 currentBoard[i.getY()+1][i.getX()] = " ";
-            }
-            else{
+
+            } else {
                 deadEnd = true;
             }
         }
@@ -363,8 +355,6 @@ public class App extends PApplet {
                 deadEnd = true;
             }
         }
-// Set<String> hash_Set = new HashSet<String>()
-//List<Integer> arr = new ArrayList<>(a);
         if(deadEnd == true){
             List<Integer> positions = new ArrayList<>();
             if(currentBoard[i.getY()+1][i.getX()].matches(" |R|Y|G|P"))
@@ -375,19 +365,12 @@ public class App extends PApplet {
                 positions.add(2);
             if(currentBoard[i.getY()][i.getX()-1].matches(" |R|Y|G|P"))
                 positions.add(3); 
-            
-            
+
             Random r = new Random();
             int randomNumber = r.nextInt(positions.size());
             i.changeOrientation(positions.get(randomNumber));
-            
         }
     }
-/*String[] arr={"1", "2", "3", "4", "5"};
-      	Random r=new Random();        
-      	int randomNumber=r.nextInt(arr.length);
-      	System.out.println(arr[randomNumber]);
-          */
     
     public static void main(String[] args) {
         PApplet.main("demolition.App");
