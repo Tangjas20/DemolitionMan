@@ -29,6 +29,7 @@ public class App extends PApplet {
     private timer timerIcon;
     boolean drewPlayer = false;
     private List<Bomb> bombList;
+    boolean gameOver = false;
 
     public App() {
         //construct objects here
@@ -54,6 +55,7 @@ public class App extends PApplet {
     public void setup() {
         frameRate(FPS);
         font = createFont("PressStart2P-regular.ttf", 16);
+        fill(0);
         textFont(font);
         readJsonObject fileData = new readJsonObject(); 
         fileData.readFiles();   //Reads config file for level, time and lives info
@@ -76,7 +78,7 @@ public class App extends PApplet {
     }
 
     public void draw() {
-        if (lives > 0 && this.timerIcon.getTimer() > 0){
+        if (lives > 0 && this.timerIcon.getTimer() > 0 && gameOver == false){
             drewPlayer = false;
             checkGameState();//Checks if player touches enemy
             background(255, 128, 0);
@@ -173,7 +175,7 @@ public class App extends PApplet {
                 if (board.getPlayer().getX() == i.getX() && board.getPlayer().getY() == i.getY()){
                     if(boardCounter == 0 && pathTimeMap.size() == 1){
                         background(255, 128, 0);
-                        text("YOU WIN!", 300, 300);
+                        text("YOU WIN!", 180, 230);
                     }
                     else if (boardCounter < pathTimeMap.size()-1){
                         boardCounter ++;
@@ -181,15 +183,18 @@ public class App extends PApplet {
                         bombList.clear();
                         this.timerIcon = new timer(currentTimer, this);
                     } else {
-                        background(255, 128, 0);
-                        text("YOU WIN!", 300, 300);
+                        gameOver = true;
                     }
                 }
             }
-
-        } else {
+        } 
+        else if (gameOver == true) {
             background(255, 128, 0);
-            text("GAME OVER!", 300, 300);
+            text("YOU WIN!", 180, 230);
+        }
+        else {
+            background(255, 128, 0);
+            text("GAME OVER!", 180, 230);
         }
     }
 
