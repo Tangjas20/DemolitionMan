@@ -258,8 +258,7 @@ public class App extends PApplet {
             bombList.add(b);
             keyReleased = false;
         }
-        if (key == CODED) {
-            if(keyCode == DOWN && keyReleased == true) {
+            if(keyCode == 40 && keyReleased == true) {
                 board.getPlayer().changeOrientation(0);
                 if((currentBoard[board.getPlayer().getY()+1][board.getPlayer().getX()].matches(" |R|Y|G"))){
                     currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = " ";
@@ -291,7 +290,6 @@ public class App extends PApplet {
                     currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = "P";
                 }
             }
-        }
         keyReleased = false;
     }
 
@@ -416,8 +414,11 @@ public class App extends PApplet {
         PApplet.main("demolition.App");
     }
 
-
     public int getLives(){
         return this.lives;
+    }
+
+    public int getCurrentTimer(){
+        return this.currentTimer;
     }
 }

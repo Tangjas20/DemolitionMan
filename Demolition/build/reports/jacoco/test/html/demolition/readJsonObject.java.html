@@ -14,9 +14,9 @@ import processing.data.JSONObject;
     private int lives;
 <span class="fc" id="L15">    private Map&lt;String, String&gt; pathTimeMap = new LinkedHashMap&lt;String, String&gt;();</span>
 
-    public void readFiles(){
+    public void readFiles(String filePath){
         try{
-<span class="fc" id="L19">            File f = new File(&quot;config.json&quot;);</span>
+<span class="fc" id="L19">            File f = new File(filePath);</span>
 <span class="fc" id="L20">            Scanner scanner = new Scanner(f);</span>
 <span class="fc bfc" id="L21" title="All 2 branches covered.">            while (scanner.hasNextLine()){</span>
                 
@@ -36,33 +36,14 @@ import processing.data.JSONObject;
         }
 <span class="fc" id="L37">    }</span>
 
-    public void readTestFiles(){
-        try{
-<span class="fc" id="L41">            File f = new File(&quot;config1.json&quot;);</span>
-<span class="fc" id="L42">            Scanner scanner = new Scanner(f);</span>
-<span class="fc bfc" id="L43" title="All 2 branches covered.">            while (scanner.hasNextLine()){</span>
-<span class="fc" id="L44">                fileRead += scanner.nextLine();</span>
-            }
-<span class="fc" id="L46">            scanner.close();</span>
-<span class="nc" id="L47">        } catch (Exception e) {</span>
-<span class="nc" id="L48">            System.out.println(&quot;Config load failed.&quot;);</span>
-<span class="fc" id="L49">        }</span>
-<span class="fc" id="L50">        JSONObject jsn = JSONObject.parse(fileRead);</span>
-<span class="fc" id="L51">       numberOfLevels = jsn.getJSONArray(&quot;levels&quot;).size();</span>
-        
-<span class="fc bfc" id="L53" title="All 2 branches covered.">        for (int i = 0; i &lt; numberOfLevels; i++){</span>
-<span class="fc" id="L54">            JSONObject jsn1 = jsn.getJSONArray(&quot;levels&quot;).getJSONObject(i);</span>
-<span class="fc" id="L55">            lives = jsn.getInt(&quot;lives&quot;);</span>
-<span class="fc" id="L56">            pathTimeMap.put(jsn1.getString(&quot;path&quot;), jsn1.get(&quot;time&quot;).toString());</span>
-        }
-<span class="fc" id="L58">    }</span>
+
 
     public Map&lt;String, String&gt; getPathTimeHashMap() {
-<span class="fc" id="L61">        return this.pathTimeMap;</span>
+<span class="fc" id="L42">        return this.pathTimeMap;</span>
     }
 
     public int getLives() {
-<span class="fc" id="L65">        return this.lives;</span>
+<span class="fc" id="L46">        return this.lives;</span>
     }
  
 }

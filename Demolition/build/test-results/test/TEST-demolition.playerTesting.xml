@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.playerTesting" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-11-03T06:35:51" hostname="Jasons-MacBook-Pro.local" time="3.47">
+<testsuite name="demolition.playerTesting" tests="6" skipped="0" failures="0" errors="0" timestamp="2021-11-03T16:06:23" hostname="Jasons-MacBook-Pro.local" time="7.047">
   <properties/>
-  <testcase name="playerLives()" classname="demolition.playerTesting" time="1.138"/>
-  <testcase name="movePlayerObject()" classname="demolition.playerTesting" time="1.156"/>
-  <testcase name="createPlayerObject()" classname="demolition.playerTesting" time="1.17"/>
+  <testcase name="playerWalkIntoGoal()" classname="demolition.playerTesting" time="1.038"/>
+  <testcase name="playerLives()" classname="demolition.playerTesting" time="1.129"/>
+  <testcase name="movePlayerObject()" classname="demolition.playerTesting" time="1.145"/>
+  <testcase name="playerWalkIntoRedEnemy()" classname="demolition.playerTesting" time="1.117"/>
+  <testcase name="resetGameTime()" classname="demolition.playerTesting" time="1.273"/>
+  <testcase name="createPlayerObject()" classname="demolition.playerTesting" time="1.309"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+  <system-err><![CDATA[java.lang.NullPointerException
+	at demolition.App.draw(App.java:121)
+	at processing.core.PApplet.handleDraw(PApplet.java:2426)
+	at processing.awt.PSurfaceAWT$12.callDraw(PSurfaceAWT.java:1557)
+	at processing.core.PSurfaceNone$AnimationThread.run(PSurfaceNone.java:316)
+]]></system-err>
 </testsuite>

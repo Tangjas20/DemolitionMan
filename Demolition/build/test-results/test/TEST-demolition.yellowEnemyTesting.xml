@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="demolition.yellowEnemyTesting" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-03T16:06:31" hostname="Jasons-MacBook-Pro.local" time="1.068">
+  <properties/>
+  <testcase name="moveYellowEnemy()" classname="demolition.yellowEnemyTesting" time="1.068"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
