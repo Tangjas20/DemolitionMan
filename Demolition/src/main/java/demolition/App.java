@@ -32,6 +32,8 @@ public class App extends PApplet {
     boolean gameOver = false;
     boolean isTest = false;
     readJsonObject fileData;
+    boolean gameReset = false;
+
     public App() {
         //construct objects here
         board = new Board();
@@ -47,10 +49,14 @@ public class App extends PApplet {
     }
 
     public void resetGame(){
+        board.redEnemyList.clear();
+        board.yellowEnemyList.clear();
         currentBoard = board.makeBoard(boardArrayName.get(boardCounter), this);
         currentTimer =  boardArrayTime.get(boardCounter);
         board.map(currentBoard, this);
         this.timerIcon = new timer(currentTimer, this);
+        gameReset = false;
+
     }
 
     public void setup() {
@@ -98,10 +104,13 @@ public class App extends PApplet {
             text(timerIcon.getTimer(), 350, 40);
 
             if (frameCount % 60 == 0){
-                if (board.yellowEnemyTF)
-                    moveYellowEnemy(board.getYellowEnemy());
+                if (board.yellowEnemyTF){
+                    for(yellowEnemy i: board.yellowEnemyList)
+                        moveYellowEnemy(i);
+                }
                 if (board.redEnemyTF)
-                    moveRedEnemyAI(board.getRedEnemy());
+                    for(redEnemy i: board.redEnemyList)
+                        moveRedEnemyAI(i);
             }
 
             text(lives, 145, 40);
@@ -129,19 +138,12 @@ public class App extends PApplet {
                     currentBoard = bomb.getBoard();
                     if (counter == 0){
                         counter++;
-                        bomb.explosion();
+                        bomb.explosion(this);
                         board.explosionBreakBlock(currentBoard, this);
                     }
-                if (bomb.killedRedEnemy){
-                    board.explosionKillRedEnemy();
-                }
 
-                if (bomb.killedYellowEnemy){
-                    board.explosionKillYellowEnemy();
-                }
                 if (bomb.killedPlayer ){
                     resetGame();
-                    
                     lives--;
                     bomb.killedPlayer = false;
                     bomb.explosionFinished= true;
@@ -156,24 +158,34 @@ public class App extends PApplet {
             bombList.removeIf(b -> b.getExplosionFinished() == true);
 
             if (board.redEnemyTF == true){
-                if ((board.getPlayer().getX() == board.getRedEnemy().getX()) && (board.getPlayer().getY() == (board.getRedEnemy().getY()-1))){
-                    board.getPlayer().tick();
-                    board.getPlayer().draw(this);
-                    drewPlayer = true;
+                for(redEnemy i: board.redEnemyList){
+                    if ((board.getPlayer().getX() == i.getX()) && (board.getPlayer().getY() == (i.getY()-1)) && drewPlayer == false){
+                        board.getPlayer().tick();
+                        board.getPlayer().draw(this);
+                        drewPlayer = true;
                 }
-                board.getRedEnemy().tick();
-                board.getRedEnemy().draw(this);
+                
+                    if(i.isEnemyDead == false){
+                        i.tick();
+                        i.draw(this);
+                    }
+                }
 
             }
 
             if (board.yellowEnemyTF == true){
-                if ((board.getPlayer().getX() == board.getYellowEnemy().getX()) && (board.getPlayer().getY() == (board.getYellowEnemy().getY()-1))){
-                    board.getPlayer().tick();
-                    board.getPlayer().draw(this);
-                    drewPlayer = true;
+                for(yellowEnemy i: board.yellowEnemyList){
+                    if ((board.getPlayer().getX() == i.getX()) && (board.getPlayer().getY() == (i.getY()-1)) && drewPlayer == false){
+                        board.getPlayer().tick();
+                        board.getPlayer().draw(this);
+                        drewPlayer = true;
+                    }
+                 
+                    if(i.isEnemyDead == false){
+                        i.tick();
+                        i.draw(this);
+                    }
                 }
-                board.getYellowEnemy().tick();
-                board.getYellowEnemy().draw(this);
             }
 
             if (drewPlayer == false){
@@ -212,17 +224,25 @@ public class App extends PApplet {
 
     public void checkGameState(){
         if(board.redEnemyTF){
-            if((board.getPlayer().getX() == board.getRedEnemy().getX()) && (board.getPlayer().getY() == board.getRedEnemy().getY())){
-            resetGame();
-            lives--;
+            for(redEnemy i: board.redEnemyList){
+                if((board.getPlayer().getX() == i.getX()) && (board.getPlayer().getY() == i.getY()) && i.isEnemyDead == false){
+                    gameReset = true;
+                    lives--;
+                }
             }
         }
 
+
         if(board.yellowEnemyTF){
-            if((board.getPlayer().getX() == board.getYellowEnemy().getX()) && (board.getPlayer().getY() == board.getYellowEnemy().getY())){
-                resetGame();
-                lives--;
+            for(yellowEnemy i: board.yellowEnemyList){
+                if((board.getPlayer().getX() == i.getX()) && (board.getPlayer().getY() == i.getY()) && i.isEnemyDead == false){
+                    gameReset = true;
+                    lives--;
             }
+        }
+        }
+        if(gameReset == true){
+            resetGame();
         }
     }
 
@@ -234,7 +254,6 @@ public class App extends PApplet {
             .get(3) corresponds with left player
         */
         if (key == ' ' && this.keyReleased == true) {
-            System.out.println("Hi");
             Bomb b = new Bomb(board.getPlayer().getX(), board.getPlayer().getY(), this, currentBoard);
             bombList.add(b);
             keyReleased = false;

@@ -18,6 +18,8 @@ public class Board {
     private redEnemy redEnemy;
     private yellowEnemy yellowEnemy;
     private Player player;
+    List<redEnemy> redEnemyList = new ArrayList<>();
+    List<yellowEnemy> yellowEnemyList = new ArrayList<>();
 
     String[][] madeBoard = new String[13][15];
 
@@ -63,18 +65,21 @@ public class Board {
                 if(mapTile.equals("Y")){
                     this.yellowEnemy = new yellowEnemy(x, y, app);
                     yellowEnemyTF = true;
+                    yellowEnemyList.add(yellowEnemy);
+                    
                 }
 
                 if(mapTile.equals("R")){
                     this.redEnemy = new redEnemy(x, y, app);
                     redEnemyTF = true;
+                    redEnemyList.add(redEnemy);
                 }
 
                 if(mapTile.equals("W")){
-
                     SolidWall SolidImage = new SolidWall(x, y, app);
                     solidWalls.add(SolidImage);
                 }
+
                 else if(mapTile.equals("B")){
                     //Broken
                     BrokenWall BrokenImage = new BrokenWall(x, y, app);
@@ -93,6 +98,7 @@ public class Board {
             }
         }
     }
+
     public void explosionBreakBlock(String[][] mapBoard, PApplet app){
         emptyWalls.clear();
         brokenWalls.clear();
@@ -115,7 +121,6 @@ public class Board {
             }
         }
     }
-    
     
     public List<SolidWall> getSolidWallsList(){
         return this.solidWalls;
@@ -144,18 +149,6 @@ public class Board {
     public yellowEnemy getYellowEnemy(){
         return this.yellowEnemy;
     }
-
-    public void explosionKillRedEnemy(){
-        this.redEnemy = null;
-        redEnemyTF = false;
-    }
-
-    public void explosionKillYellowEnemy(){
-        this.yellowEnemy = null;
-        yellowEnemyTF = false;
-    }
-
-
 
 
     public static void main(String[] args){

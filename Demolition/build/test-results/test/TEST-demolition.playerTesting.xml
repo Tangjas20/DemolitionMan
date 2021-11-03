@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.playerTesting" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-11-03T04:37:11" hostname="Jasons-MacBook-Pro.local" time="3.504">
+<testsuite name="demolition.playerTesting" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-11-03T06:35:51" hostname="Jasons-MacBook-Pro.local" time="3.47">
   <properties/>
-  <testcase name="playerLives()" classname="demolition.playerTesting" time="1.189"/>
-  <testcase name="movePlayerObject()" classname="demolition.playerTesting" time="1.158"/>
-  <testcase name="createPlayerObject()" classname="demolition.playerTesting" time="1.151"/>
+  <testcase name="playerLives()" classname="demolition.playerTesting" time="1.138"/>
+  <testcase name="movePlayerObject()" classname="demolition.playerTesting" time="1.156"/>
+  <testcase name="createPlayerObject()" classname="demolition.playerTesting" time="1.17"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

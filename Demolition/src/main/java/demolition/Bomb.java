@@ -21,6 +21,7 @@ public class Bomb extends GameObject {
     boolean killedYellowEnemy = false;
     boolean killedRedEnemy = false;
 
+
     public Bomb(int x, int y, PApplet app, String[][] currentBoard){
         super(x, y, app);
         this.currentBoard = currentBoard;
@@ -47,7 +48,6 @@ public class Bomb extends GameObject {
         this.timerSprite = 0;
         this.isAlive = true;
         this.explosionFinished = false;
-
         setCanExplodePath();
     }
 
@@ -64,8 +64,6 @@ public class Bomb extends GameObject {
         else if(this.currentBoard[y][x+1].equals("B")){
                 explodablePath[3] += 3;
             }
-
-
         //Left
         if(this.currentBoard[y][x-1].equals("W")){
             ;
@@ -163,25 +161,25 @@ public class Bomb extends GameObject {
 
     }
 
-    public void explosion() {
+    public void explosion(App app) {
         //Left
-      if (explode(this.x-1, this.y, currentBoard)) 
-            explode(this.x-2, this.y, currentBoard);
+      if (explode(this.x-1, this.y, app)) 
+            explode(this.x-2, this.y, app);
       //Down
-      if (explode(this.x, this.y+1, currentBoard))
-            explode(this.x, this.y+2, currentBoard);
+      if (explode(this.x, this.y+1, app))
+            explode(this.x, this.y+2, app);
       //Right
-      if (explode(this.x+1, this.y, currentBoard)) 
-            explode(this.x+2, this.y, currentBoard);
+      if (explode(this.x+1, this.y, app)) 
+            explode(this.x+2, this.y, app);
       //Up
-      if (explode(this.x, this.y-1, currentBoard)) 
-            explode(this.x, this.y-2, currentBoard);
+      if (explode(this.x, this.y-1, app)) 
+            explode(this.x, this.y-2, app);
             
-      if (explode(this.x, this.y, currentBoard));
+      if (explode(this.x, this.y, app));
     }
 
-    public boolean explode(int row, int column, String[][] currentBoard) {
-        String tile = currentBoard[column][row];
+    public boolean explode(int row, int column, App app) {
+        String tile = app.currentBoard[column][row];
 
         if (tile.equals(" ")) {
           return true;
@@ -191,14 +189,27 @@ public class Bomb extends GameObject {
 
         } else if (tile.equals("P")) {
             killedPlayer = true;
-            
             return true;
+
         } else if (tile.equals("Y")) {
             this.currentBoard[column][row] = " ";
+            for(yellowEnemy i: app.board.yellowEnemyList){
+                if(i.getX() == row && i.getY() == column){
+                    i.isEnemyDead = true;
+                }
+            }
+            app.board.yellowEnemyList.removeIf(b -> b.isEnemyDead == true);
             killedYellowEnemy = true;
             return true;
+
         } else if (tile.equals("R")) {
             this.currentBoard[column][row] = " ";
+            for(redEnemy i: app.board.redEnemyList){
+                if(i.getX() == row && i.getY() == column){
+                    i.isEnemyDead = true;
+                }
+            }
+            app.board.redEnemyList.removeIf(b -> b.isEnemyDead == true);
             killedRedEnemy = true;
             return true;
         }
