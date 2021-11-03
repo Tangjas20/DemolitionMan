@@ -12,52 +12,53 @@ public abstract class PlayerClasses extends GameObject{
 <span class="fc" id="L12">    protected List&lt;PImage[]&gt; sprites = new ArrayList&lt;PImage[]&gt;();</span>
 <span class="fc" id="L13">    protected int orientation = 0;</span>
     int timer;
+    protected boolean isEnemyDead;
 
     public PlayerClasses(int x, int y, PApplet app){
-<span class="fc" id="L17">        super(x, y, app);</span>
+<span class="fc" id="L18">        super(x, y, app);</span>
 
-<span class="fc" id="L19">    }</span>
+<span class="fc" id="L20">    }</span>
 
     public void tick() {
         //Handles logic
-<span class="fc" id="L23">        timer++;</span>
-<span class="pc bpc" id="L24" title="1 of 2 branches missed.">        if(timer == 12){</span>
-<span class="nc" id="L25">            imageTick ++;</span>
-<span class="nc" id="L26">            timer = 0;</span>
-<span class="nc bnc" id="L27" title="All 2 branches missed.">            if(imageTick &gt; 3){</span>
-<span class="nc" id="L28">                this.imageTick = 0;</span>
+<span class="fc" id="L24">        timer++;</span>
+<span class="pc bpc" id="L25" title="1 of 2 branches missed.">        if(timer == 12){</span>
+<span class="nc" id="L26">            imageTick ++;</span>
+<span class="nc" id="L27">            timer = 0;</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">            if(imageTick &gt; 3){</span>
+<span class="nc" id="L29">                this.imageTick = 0;</span>
             }
         }
 
-<span class="fc" id="L32">    }</span>
+<span class="fc" id="L33">    }</span>
     public void movementLeft(){
-<span class="nc" id="L34">            newX = x-1;</span>
-<span class="nc" id="L35">            newY = y;</span>
-<span class="nc" id="L36">            x = newX;</span>
-<span class="nc" id="L37">            y = newY;</span>
-<span class="nc" id="L38">        }</span>
+<span class="nc" id="L35">            newX = x-1;</span>
+<span class="nc" id="L36">            newY = y;</span>
+<span class="nc" id="L37">            x = newX;</span>
+<span class="nc" id="L38">            y = newY;</span>
+<span class="nc" id="L39">        }</span>
 
     public void movementRight(){
-<span class="nc" id="L41">        newX = x+1;</span>
-<span class="nc" id="L42">        x = newX;</span>
-<span class="nc" id="L43">    }</span>
+<span class="nc" id="L42">        newX = x+1;</span>
+<span class="nc" id="L43">        x = newX;</span>
+<span class="nc" id="L44">    }</span>
     public void movementUP(){
-<span class="nc" id="L45">        newX = x;</span>
-<span class="nc" id="L46">        newY = y-1;</span>
-<span class="nc" id="L47">        x = newX;</span>
-<span class="nc" id="L48">        y = newY;</span>
-<span class="nc" id="L49">    }</span>
+<span class="nc" id="L46">        newX = x;</span>
+<span class="nc" id="L47">        newY = y-1;</span>
+<span class="nc" id="L48">        x = newX;</span>
+<span class="nc" id="L49">        y = newY;</span>
+<span class="nc" id="L50">    }</span>
 
     public void movementDOWN(){
-<span class="nc" id="L52">        newX = x;</span>
-<span class="nc" id="L53">        newY = y+1;</span>
-<span class="nc" id="L54">        x = newX;</span>
-<span class="nc" id="L55">        y = newY;</span>
-<span class="nc" id="L56">    }</span>
+<span class="nc" id="L53">        newX = x;</span>
+<span class="nc" id="L54">        newY = y+1;</span>
+<span class="nc" id="L55">        x = newX;</span>
+<span class="nc" id="L56">        y = newY;</span>
+<span class="nc" id="L57">    }</span>
     
     public void changeOrientation(int orientation){
-<span class="nc" id="L59">        this.orientation = orientation;</span>
-<span class="nc" id="L60">    }</span>
+<span class="nc" id="L60">        this.orientation = orientation;</span>
+<span class="nc" id="L61">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -30,7 +30,8 @@ public class App extends PApplet {
     boolean drewPlayer = false;
     private List<Bomb> bombList;
     boolean gameOver = false;
-
+    boolean isTest = false;
+    readJsonObject fileData;
     public App() {
         //construct objects here
         board = new Board();
@@ -57,10 +58,20 @@ public class App extends PApplet {
         font = createFont("PressStart2P-regular.ttf", 16);
         fill(0);
         textFont(font);
-        readJsonObject fileData = new readJsonObject(); 
-        fileData.readFiles();   //Reads config file for level, time and lives info
-        this.lives = fileData.getLives();
-        pathTimeMap = fileData.getPathTimeHashMap(); //Stores the level name and time
+        
+        if(isTest == false){
+            readJsonObject fileData = new readJsonObject(); 
+            fileData.readFiles("config.json");
+            this.lives = fileData.getLives();
+            pathTimeMap = fileData.getPathTimeHashMap(); //Stores the level name and time
+        }
+        else{
+            readJsonObject fileData = new readJsonObject(); 
+            fileData.readFiles("testConfig.json");
+            this.lives = fileData.getLives();
+            pathTimeMap = fileData.getPathTimeHashMap(); //Stores the level name and time
+        }   //Reads config file for level, time and lives info
+       
         
 
         for (Map.Entry<String, String> entry : pathTimeMap.entrySet()) {
@@ -176,6 +187,7 @@ public class App extends PApplet {
                     if(boardCounter == 0 && pathTimeMap.size() == 1){
                         background(255, 128, 0);
                         text("YOU WIN!", 180, 230);
+                        gameOver = true;
                     }
                     else if (boardCounter < pathTimeMap.size()-1){
                         boardCounter ++;
@@ -383,5 +395,10 @@ public class App extends PApplet {
     
     public static void main(String[] args) {
         PApplet.main("demolition.App");
+    }
+
+
+    public int getLives(){
+        return this.lives;
     }
 }

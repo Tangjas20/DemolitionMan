@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.AllWallsTesting" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-11-03T02:52:29" hostname="Jasons-MacBook-Pro.local" time="5.474">
+<testsuite name="demolition.AllWallsTesting" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-11-03T04:37:05" hostname="Jasons-MacBook-Pro.local" time="5.506">
   <properties/>
-  <testcase name="createGoalTile()" classname="demolition.AllWallsTesting" time="1.944"/>
+  <testcase name="createGoalTile()" classname="demolition.AllWallsTesting" time="1.914"/>
   <testcase name="simpleTest()" classname="demolition.AllWallsTesting" time="0.001"/>
-  <testcase name="createBrokenWall()" classname="demolition.AllWallsTesting" time="1.205"/>
-  <testcase name="createEmptyWall()" classname="demolition.AllWallsTesting" time="1.166"/>
-  <testcase name="createSolidWall()" classname="demolition.AllWallsTesting" time="1.154"/>
+  <testcase name="createBrokenWall()" classname="demolition.AllWallsTesting" time="1.232"/>
+  <testcase name="createEmptyWall()" classname="demolition.AllWallsTesting" time="1.203"/>
+  <testcase name="createSolidWall()" classname="demolition.AllWallsTesting" time="1.148"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

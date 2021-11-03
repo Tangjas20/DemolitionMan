@@ -14,9 +14,9 @@ public class readJsonObject {
     private int lives;
     private Map<String, String> pathTimeMap = new LinkedHashMap<String, String>();
 
-    public void readFiles(){
+    public void readFiles(String filePath){
         try{
-            File f = new File("config.json");
+            File f = new File(filePath);
             Scanner scanner = new Scanner(f);
             while (scanner.hasNextLine()){
                 
@@ -27,7 +27,7 @@ public class readJsonObject {
             System.out.println("Config load failed.");
         }
         JSONObject jsn = JSONObject.parse(fileRead);
-       numberOfLevels = jsn.getJSONArray("levels").size();
+        numberOfLevels = jsn.getJSONArray("levels").size();
         
         for (int i = 0; i < numberOfLevels; i++){
             JSONObject jsn1 = jsn.getJSONArray("levels").getJSONObject(i);
@@ -35,6 +35,8 @@ public class readJsonObject {
             pathTimeMap.put(jsn1.getString("path"), jsn1.get("time").toString());
         }
     }
+
+
 
     public Map<String, String> getPathTimeHashMap() {
         return this.pathTimeMap;

@@ -15,6 +15,7 @@ public class AllWallsTesting{
     public void createEmptyWall(){
         App app = new App();
         app.noLoop();
+        app.isTest = true;
         PApplet.runSketch(new String[] {"App"}, app);
         app.setup();
         app.delay(1000);
@@ -28,6 +29,7 @@ public class AllWallsTesting{
     public void createSolidWall(){
         App app = new App();
         app.noLoop();
+        app.isTest = true;
         PApplet.runSketch(new String[] {"App"}, app);
         app.setup();
         app.delay(1000);
@@ -41,18 +43,21 @@ public class AllWallsTesting{
     public void createBrokenWall(){
         App app = new App();
         app.noLoop();
+        app.isTest = true;
         PApplet.runSketch(new String[] {"App"}, app);
         app.setup();
         app.delay(1000);
-        BrokenWall e = new BrokenWall(5, 2, app);
+        BrokenWall e = new BrokenWall(3, 1, app);
         assertNotNull(e);
-        assertEquals(e.getX(), 5);
-        assertEquals(e.getY(), 2);
+        assertEquals(e.getX(), 3);
+        assertEquals(e.getY(), 1);
     }
+
     @Test
     public void createGoalTile(){
         App app = new App();
         app.noLoop();
+        app.isTest = true;
         PApplet.runSketch(new String[] {"App"}, app);
         app.setup();
         app.delay(1000);
@@ -61,6 +66,8 @@ public class AllWallsTesting{
         assertEquals(e.getX(), 1);
         assertEquals(e.getY(), 5);
     }
+
+
 
 
 }

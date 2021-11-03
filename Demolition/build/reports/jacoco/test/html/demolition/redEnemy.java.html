@@ -44,29 +44,25 @@ public class redEnemy extends PlayerClasses implements playerMovement{
 <span class="fc" id="L44">        enemyRedSprite.add(redEnemyRightSprite);</span>
 <span class="fc" id="L45">        enemyRedSprite.add(redEnemyLeftSprite);</span>
 <span class="fc" id="L46">    }</span>
+    //The Red Enemy moves in a straight line and turns to a random decision every time its path is blocked by a solid/broken wall
     public void tick() {
         //Handles logic
-<span class="fc" id="L49">        timer++;</span>
-<span class="pc bpc" id="L50" title="1 of 2 branches missed.">        if(timer == 12){</span>
-<span class="nc" id="L51">            imageTick ++;</span>
-<span class="nc" id="L52">            timer = 0;</span>
-<span class="nc bnc" id="L53" title="All 2 branches missed.">            if(imageTick &gt; 3){</span>
-<span class="nc" id="L54">                this.imageTick = 0;</span>
+<span class="fc" id="L50">        timer++;</span>
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        if (timer == 12){</span>
+<span class="nc" id="L52">            imageTick ++;</span>
+<span class="nc" id="L53">            timer = 0;</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">            if (imageTick &gt; 3){</span>
+<span class="nc" id="L55">                this.imageTick = 0;</span>
             }
         }
-<span class="fc" id="L57">        movementTimer ++;</span>
-        //if(movementTimer = 60){
-       //     ;
-       // }
-
-<span class="fc" id="L62">    }</span>
+<span class="fc" id="L58">    }</span>
 
 
     public void draw(PApplet app) {
         //Handling graphics -- Single line or so, no logics
 
-<span class="fc" id="L68">        app.image(this.enemyRedSprite.get(orientation)[imageTick], this.x*32, this.y*32+48);</span>
-<span class="fc" id="L69">    }</span>
+<span class="fc" id="L64">        app.image(this.enemyRedSprite.get(orientation)[imageTick], this.x*32, this.y*32+48);</span>
+<span class="fc" id="L65">    }</span>
 
     
 
