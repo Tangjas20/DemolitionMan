@@ -9,10 +9,6 @@ public class Bomb extends GameObject {
     private PImage[] bombSprite = new PImage[8];
     private PImage[] explosionSprite = new PImage[7];
     private int[] explodablePath = {0, 0, 0, 0};
-    boolean leftCloseBroken;
-    boolean rightCloseBroken;
-    boolean topCloseBroken;
-    boolean bottomCloseBroken;
     boolean explosionFinished;
     private int timerSprite;
     private int currentSprite;
@@ -105,17 +101,8 @@ public class Bomb extends GameObject {
             }
         
         this.explodablePath = explodablePath;
-
     }
-    /*
-        this.explosionSprite[0] = app.loadImage("src/main/resources/explosion/centre.png");
-        this.explosionSprite[1] = app.loadImage("src/main/resources/explosion/horizontal.png");
-        this.explosionSprite[2] = app.loadImage("src/main/resources/explosion/vertical.png");
-        this.explosionSprite[3] = app.loadImage("src/main/resources/explosion/end_top.png");
-        this.explosionSprite[4] = app.loadImage("src/main/resources/explosion/end_right.png");
-        this.explosionSprite[5] = app.loadImage("src/main/resources/explosion/end_bottom.png");
-        this.explosionSprite[6] = app.loadImage("src/main/resources/explosion/end_left.png");
-        */
+    
     public void drawExplosion(PApplet app) {//Left
         app.image(explosionSprite[0], this.x*32, this.y*32+64);
         if (explodablePath[0] == 1 || explodablePath[0] == 3) app.image(explosionSprite[6], this.x*32-32, this.y*32+64); //Left Close
