@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.TimerTesting" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-04T11:00:25" hostname="DESKTOP-GJIUGBP" time="1.141">
+<testsuite name="demolition.TimerTesting" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-04T11:31:31" hostname="DESKTOP-GJIUGBP" time="1.14">
   <properties/>
-  <testcase name="timerTick()" classname="demolition.TimerTesting" time="1.141"/>
+  <testcase name="timerTick()" classname="demolition.TimerTesting" time="1.14"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+  <system-err><![CDATA[java.util.ConcurrentModificationException
+	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:911)
+	at java.util.ArrayList$Itr.next(ArrayList.java:861)
+	at demolition.App.draw(App.java:118)
+	at processing.core.PApplet.handleDraw(PApplet.java:2426)
+	at processing.awt.PSurfaceAWT$12.callDraw(PSurfaceAWT.java:1557)
+	at processing.core.PSurfaceNone$AnimationThread.run(PSurfaceNone.java:316)
+]]></system-err>
 </testsuite>

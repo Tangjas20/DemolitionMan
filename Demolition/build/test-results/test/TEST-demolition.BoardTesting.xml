@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.BoardTesting" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-11-04T11:00:02" hostname="DESKTOP-GJIUGBP" time="3.063">
+<testsuite name="demolition.BoardTesting" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-11-04T11:31:24" hostname="DESKTOP-GJIUGBP" time="3.071">
   <properties/>
-  <testcase name="boardLoad()" classname="demolition.BoardTesting" time="1.02"/>
-  <testcase name="timerAtZero()" classname="demolition.BoardTesting" time="1.021"/>
-  <testcase name="testFrameCountAndEntities()" classname="demolition.BoardTesting" time="1.022"/>
+  <testcase name="boardLoad()" classname="demolition.BoardTesting" time="1.022"/>
+  <testcase name="timerAtZero()" classname="demolition.BoardTesting" time="1.024"/>
+  <testcase name="testFrameCountAndEntities()" classname="demolition.BoardTesting" time="1.025"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

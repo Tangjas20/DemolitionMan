@@ -157,7 +157,7 @@ public class App extends PApplet {
 
 <span class="pc bpc" id="L158" title="1 of 2 branches missed.">            if (board.redEnemyTF == true){</span>
 <span class="fc bfc" id="L159" title="All 2 branches covered.">                for(redEnemy i: board.redEnemyList){</span>
-<span class="pc bpc" id="L160" title="5 of 6 branches missed.">                    if ((board.getPlayer().getX() == i.getX()) &amp;&amp; (board.getPlayer().getY() == (i.getY()-1)) &amp;&amp; drewPlayer == false){</span>
+<span class="pc bpc" id="L160" title="3 of 6 branches missed.">                    if ((board.getPlayer().getX() == i.getX()) &amp;&amp; (board.getPlayer().getY() == (i.getY()-1)) &amp;&amp; drewPlayer == false){</span>
 <span class="nc" id="L161">                        board.getPlayer().tick();</span>
 <span class="nc" id="L162">                        board.getPlayer().draw(this);</span>
 <span class="nc" id="L163">                        drewPlayer = true;</span>
@@ -423,9 +423,12 @@ public class App extends PApplet {
     public List&lt;Bomb&gt; getBombList(){
 <span class="fc" id="L424">        return this.bombList;</span>
     }
+    public void addBomb(Bomb i){
+<span class="nc" id="L427">        this.bombList.add(i);</span>
+<span class="nc" id="L428">    }</span>
 
     public void changeLives(int lives){
-<span class="fc" id="L428">        this.lives = lives;</span>
-<span class="fc" id="L429">    }</span>
+<span class="fc" id="L431">        this.lives = lives;</span>
+<span class="fc" id="L432">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
