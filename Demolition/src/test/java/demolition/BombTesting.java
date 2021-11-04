@@ -74,6 +74,7 @@ public class BombTesting {
         app.delay(1000);
         Bomb e = new Bomb(9, 1, app, app.currentBoard);
         e.explosion(app);
+        e.drawExplosion(app);
         assertEquals(app.currentBoard[1][8], " ");
         assertEquals(app.currentBoard[1][10], " ");
         int brokenSize = app.board.getBrokenWallsList().size();
@@ -88,7 +89,32 @@ public class BombTesting {
         assertTrue(brokenSizeAfterExplosion < brokenSize);
         assertNotNull(app.board.getEmptyWallsList().size());
 
-    
+        Bomb f = new Bomb(9, 1, app, app.currentBoard);
+        f.setCanExplodePath();
+        f.explosion(app);
+        f.drawExplosion(app);
+        app.draw();
+        assertEquals(app.currentBoard[1][8], " ");
+        assertEquals(app.currentBoard[1][10], " ");
+        assertEquals(app.currentBoard[1][7], " ");
+        assertEquals(app.currentBoard[1][11], " ");
+
+        Bomb g = new Bomb(2, 5, app, app.currentBoard);
+        g.setCanExplodePath();
+        g.explosion(app);
+        g.drawExplosion(app);
+        app.draw();
+        app.board.explosionBreakBlock(app.currentBoard, app);
+        app.draw();
+        assertEquals(app.currentBoard[7][2], " ");
+
+        Bomb h = new Bomb(7, 8, app, app.currentBoard);
+        h.setCanExplodePath();
+        h.explosion(app);
+        h.drawExplosion(app);
+        app.draw();
+        assertEquals(app.currentBoard[9][7], " ");
+
     }
 
     @Test
@@ -109,7 +135,22 @@ public class BombTesting {
         assertTrue(e.killedYellowEnemy);
     }
 
-
-
+    @Test
+    public void playerSpaceDropBomb(){
+        App app = new App();
+        app.noLoop();
+        app.isTest = true;
+        PApplet.runSketch(new String[] {"App"}, app);
+        app.setup();
+        app.delay(1000);
+        app.keyCode = 32;
+        app.keyPressed();
+        app.keyReleased();
+        app.keyPressed();
+        app.keyReleased();
+        for(int i = 0; i < 61 ; i++)
+            app.draw();
+        assertNotNull(app.getBombList());
+    }
     
 }

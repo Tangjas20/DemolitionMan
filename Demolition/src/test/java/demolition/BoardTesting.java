@@ -30,5 +30,19 @@ public class BoardTesting {
         assert(app.gameOver == false); //Game over is only true when the player reaches the goal tile
     }
 
-    
+    @Test
+    public void testFrameCountAndEntities(){
+        App app = new App();
+        app.noLoop();
+        app.isTest = true;
+        PApplet.runSketch(new String[] {"App"}, app);
+        app.delay(1000);
+        app.frameCount = 60;
+        app.draw();
+        app.draw();
+        assert(app.board.yellowEnemyTF == true);
+        assert(app.board.redEnemyTF == true);
+        assertEquals(app.currentBoard[2][1], " ");
+
+    }
 }

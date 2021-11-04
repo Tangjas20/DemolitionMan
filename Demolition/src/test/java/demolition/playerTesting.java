@@ -118,20 +118,30 @@ public class playerTesting {
         assertNotNull(app.getBombList());
     }
     
-    @Test
+    @Test//DDRRRDD
     public void playerWalkIntoGoal(){
         App app = new App();
         app.noLoop();
         app.isTest = true;
         PApplet.runSketch(new String[] {"App"}, app);
         app.delay(1000);
-        app.board.getPlayer().movementDOWN();
-        app.board.getPlayer().movementDOWN();
-        app.board.getPlayer().movementRight();
-        app.board.getPlayer().movementRight();
-        app.board.getPlayer().movementRight();
-        app.board.getPlayer().movementDOWN();
-        app.board.getPlayer().movementDOWN();
+        app.keyCode = 40;
+        app.keyPressed();
+        app.keyReleased();
+        app.keyPressed();
+        app.keyReleased();
+        app.keyCode = 39;
+        app.keyPressed();
+        app.keyReleased();
+        app.keyPressed();
+        app.keyReleased();
+        app.keyPressed();
+        app.keyReleased();
+        app.keyCode = 40;
+        app.keyPressed();
+        app.keyReleased();
+        app.keyPressed();
+        app.keyReleased();
         app.draw();
         assert(app.gameOver == true);
     }

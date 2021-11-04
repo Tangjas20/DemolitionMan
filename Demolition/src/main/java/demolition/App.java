@@ -251,7 +251,7 @@ public class App extends PApplet {
             .get(2) corresponds with right player
             .get(3) corresponds with left player
         */
-        if (key == ' ' && this.keyReleased == true) {
+        if (keyCode == 32 && this.keyReleased == true) {
             Bomb b = new Bomb(board.getPlayer().getX(), board.getPlayer().getY(), this, currentBoard);
             bombList.add(b);
             keyReleased = false;

@@ -101,14 +101,14 @@ public class App extends PApplet {
 <span class="fc" id="L101">            this.timerIcon.tick();</span>
 <span class="fc" id="L102">            text(timerIcon.getTimer(), 350, 40);</span>
 
-<span class="pc bpc" id="L104" title="1 of 2 branches missed.">            if (frameCount % 60 == 0){</span>
-<span class="nc bnc" id="L105" title="All 2 branches missed.">                if (board.yellowEnemyTF){</span>
-<span class="nc bnc" id="L106" title="All 2 branches missed.">                    for(yellowEnemy i: board.yellowEnemyList)</span>
-<span class="nc" id="L107">                        moveYellowEnemy(i);</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">            if (frameCount % 60 == 0){</span>
+<span class="pc bpc" id="L105" title="1 of 2 branches missed.">                if (board.yellowEnemyTF){</span>
+<span class="fc bfc" id="L106" title="All 2 branches covered.">                    for(yellowEnemy i: board.yellowEnemyList)</span>
+<span class="fc" id="L107">                        moveYellowEnemy(i);</span>
                 }
-<span class="nc bnc" id="L109" title="All 2 branches missed.">                if (board.redEnemyTF)</span>
-<span class="nc bnc" id="L110" title="All 2 branches missed.">                    for(redEnemy i: board.redEnemyList)</span>
-<span class="nc" id="L111">                        moveRedEnemyAI(i);</span>
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">                if (board.redEnemyTF)</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">                    for(redEnemy i: board.redEnemyList)</span>
+<span class="fc" id="L111">                        moveRedEnemyAI(i);</span>
             }
 
 <span class="fc" id="L114">            text(lives, 145, 40);</span>
@@ -125,10 +125,10 @@ public class App extends PApplet {
 <span class="fc" id="L125">                goalImage.draw(this);</span>
 <span class="fc" id="L126">            }</span>
 
-<span class="pc bpc" id="L128" title="1 of 2 branches missed.">            for (Bomb bomb: bombList){</span>
-<span class="nc bnc" id="L129" title="All 2 branches missed.">                if (bomb.getIsAlive()){</span>
-<span class="nc" id="L130">                    bomb.draw(this);</span>
-<span class="nc" id="L131">                    counter = 0;</span>
+<span class="fc bfc" id="L128" title="All 2 branches covered.">            for (Bomb bomb: bombList){</span>
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">                if (bomb.getIsAlive()){</span>
+<span class="fc" id="L130">                    bomb.draw(this);</span>
+<span class="fc" id="L131">                    counter = 0;</span>
                 }
 <span class="nc bnc" id="L133" title="All 2 branches missed.">                else if (!bomb.getExplosionFinished()) {</span>
 <span class="nc" id="L134">                    bomb.drawExplosion(this);</span>
@@ -152,8 +152,8 @@ public class App extends PApplet {
                 }
             }
                     
-<span class="nc" id="L155">        }</span>
-<span class="pc bnc" id="L156" title="All 2 branches missed.">            bombList.removeIf(b -&gt; b.getExplosionFinished() == true);</span>
+<span class="fc" id="L155">        }</span>
+<span class="pc bpc" id="L156" title="1 of 2 branches missed.">            bombList.removeIf(b -&gt; b.getExplosionFinished() == true);</span>
 
 <span class="pc bpc" id="L158" title="1 of 2 branches missed.">            if (board.redEnemyTF == true){</span>
 <span class="fc bfc" id="L159" title="All 2 branches covered.">                for(redEnemy i: board.redEnemyList){</span>
@@ -251,10 +251,10 @@ public class App extends PApplet {
             .get(2) corresponds with right player
             .get(3) corresponds with left player
         */
-<span class="pc bpc" id="L254" title="3 of 4 branches missed.">        if (key == ' ' &amp;&amp; this.keyReleased == true) {</span>
-<span class="nc" id="L255">            Bomb b = new Bomb(board.getPlayer().getX(), board.getPlayer().getY(), this, currentBoard);</span>
-<span class="nc" id="L256">            bombList.add(b);</span>
-<span class="nc" id="L257">            keyReleased = false;</span>
+<span class="pc bpc" id="L254" title="1 of 4 branches missed.">        if (keyCode == 32 &amp;&amp; this.keyReleased == true) {</span>
+<span class="fc" id="L255">            Bomb b = new Bomb(board.getPlayer().getX(), board.getPlayer().getY(), this, currentBoard);</span>
+<span class="fc" id="L256">            bombList.add(b);</span>
+<span class="fc" id="L257">            keyReleased = false;</span>
         }
 <span class="pc bpc" id="L259" title="1 of 4 branches missed.">            if(keyCode == 40 &amp;&amp; keyReleased == true) {</span>
 <span class="fc" id="L260">                board.getPlayer().changeOrientation(0);</span>
@@ -351,13 +351,13 @@ public class App extends PApplet {
 <span class="fc" id="L351">        int[] possiblePath = {0, 0, 0, 0};</span>
 <span class="fc" id="L352">        boolean deadEnd = false;</span>
 <span class="fc bfc" id="L353" title="All 2 branches covered.">         if(i.orientation == 0){</span>
-<span class="pc bpc" id="L354" title="1 of 2 branches missed.">            if(currentBoard[i.getY()+1][i.getX()].matches(&quot; |R|Y|G|P&quot;)){</span>
+<span class="fc bfc" id="L354" title="All 2 branches covered.">            if(currentBoard[i.getY()+1][i.getX()].matches(&quot; |R|Y|G|P&quot;)){</span>
 <span class="fc" id="L355">                i.movementDOWN();</span>
 <span class="fc" id="L356">                currentBoard[i.getY()][i.getX()] = &quot;R&quot;;</span>
 <span class="fc" id="L357">                currentBoard[i.getY()-1][i.getX()] = &quot; &quot;;</span>
             }
             else{
-<span class="nc" id="L360">                deadEnd = true;</span>
+<span class="fc" id="L360">                deadEnd = true;</span>
             }
 <span class="fc bfc" id="L362" title="All 2 branches covered.">        } else if (i.orientation == 1){</span>
 <span class="fc bfc" id="L363" title="All 2 branches covered.">            if(currentBoard[i.getY()-1][i.getX()].matches(&quot; |R|Y|G|P&quot;)){</span>
@@ -393,14 +393,14 @@ public class App extends PApplet {
         }
 <span class="fc bfc" id="L394" title="All 2 branches covered.">        if(deadEnd == true){</span>
 <span class="fc" id="L395">            List&lt;Integer&gt; positions = new ArrayList&lt;&gt;();</span>
-<span class="pc bpc" id="L396" title="1 of 2 branches missed.">            if(currentBoard[i.getY()+1][i.getX()].matches(&quot; |R|Y|G|P&quot;))</span>
+<span class="fc bfc" id="L396" title="All 2 branches covered.">            if(currentBoard[i.getY()+1][i.getX()].matches(&quot; |R|Y|G|P&quot;))</span>
 <span class="fc" id="L397">                positions.add(0);</span>
-<span class="pc bpc" id="L398" title="1 of 2 branches missed.">            if(currentBoard[i.getY()-1][i.getX()].matches(&quot; |R|Y|G|P&quot;))</span>
-<span class="nc" id="L399">                positions.add(1);</span>
-<span class="pc bpc" id="L400" title="1 of 2 branches missed.">            if(currentBoard[i.getY()][i.getX()+1].matches(&quot; |R|Y|G|P&quot;))</span>
-<span class="nc" id="L401">                positions.add(2);</span>
-<span class="pc bpc" id="L402" title="1 of 2 branches missed.">            if(currentBoard[i.getY()][i.getX()-1].matches(&quot; |R|Y|G|P&quot;))</span>
-<span class="nc" id="L403">                positions.add(3); </span>
+<span class="fc bfc" id="L398" title="All 2 branches covered.">            if(currentBoard[i.getY()-1][i.getX()].matches(&quot; |R|Y|G|P&quot;))</span>
+<span class="fc" id="L399">                positions.add(1);</span>
+<span class="fc bfc" id="L400" title="All 2 branches covered.">            if(currentBoard[i.getY()][i.getX()+1].matches(&quot; |R|Y|G|P&quot;))</span>
+<span class="fc" id="L401">                positions.add(2);</span>
+<span class="fc bfc" id="L402" title="All 2 branches covered.">            if(currentBoard[i.getY()][i.getX()-1].matches(&quot; |R|Y|G|P&quot;))</span>
+<span class="fc" id="L403">                positions.add(3); </span>
 
 <span class="fc" id="L405">            Random r = new Random();</span>
 <span class="fc" id="L406">            int randomNumber = r.nextInt(positions.size());</span>

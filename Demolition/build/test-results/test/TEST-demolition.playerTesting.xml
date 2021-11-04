@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.playerTesting" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-11-04T07:04:57" hostname="DESKTOP-GJIUGBP" time="8.893">
+<testsuite name="demolition.playerTesting" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-11-04T11:00:12" hostname="DESKTOP-GJIUGBP" time="8.865">
   <properties/>
   <testcase name="playerWalkIntoGoal()" classname="demolition.playerTesting" time="1.022"/>
-  <testcase name="playerLives()" classname="demolition.playerTesting" time="1.14"/>
-  <testcase name="movePlayerObject()" classname="demolition.playerTesting" time="1.142"/>
-  <testcase name="playerWalkIntoRedEnemy()" classname="demolition.playerTesting" time="1.12"/>
-  <testcase name="resetGameTime()" classname="demolition.playerTesting" time="1.239"/>
-  <testcase name="createPlayerObject()" classname="demolition.playerTesting" time="1.158"/>
-  <testcase name="keyPressing()" classname="demolition.playerTesting" time="1.044"/>
-  <testcase name="playerTick()" classname="demolition.playerTesting" time="1.026"/>
+  <testcase name="playerLives()" classname="demolition.playerTesting" time="1.121"/>
+  <testcase name="movePlayerObject()" classname="demolition.playerTesting" time="1.128"/>
+  <testcase name="playerWalkIntoRedEnemy()" classname="demolition.playerTesting" time="1.11"/>
+  <testcase name="resetGameTime()" classname="demolition.playerTesting" time="1.212"/>
+  <testcase name="createPlayerObject()" classname="demolition.playerTesting" time="1.216"/>
+  <testcase name="keyPressing()" classname="demolition.playerTesting" time="1.031"/>
+  <testcase name="playerTick()" classname="demolition.playerTesting" time="1.024"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

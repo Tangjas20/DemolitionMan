@@ -49,7 +49,7 @@ public class Bomb extends GameObject {
 <span class="fc" id="L49">    }</span>
 
     public void setCanExplodePath(){
-<span class="pc bpc" id="L52" title="1 of 2 branches missed.">        if(this.currentBoard[y][x+1].equals(&quot;W&quot;)){</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        if(this.currentBoard[y][x+1].equals(&quot;W&quot;)){</span>
             ;
         }//Right
 <span class="fc bfc" id="L55" title="All 2 branches covered.">        else if(this.currentBoard[y][x+1].matches(&quot; |R|Y|P&quot;)){</span>
@@ -62,7 +62,7 @@ public class Bomb extends GameObject {
 <span class="fc" id="L62">                explodablePath[3] += 3;</span>
             }
         //Left
-<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        if(this.currentBoard[y][x-1].equals(&quot;W&quot;)){</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">        if(this.currentBoard[y][x-1].equals(&quot;W&quot;)){</span>
             ;
         }
 <span class="fc bfc" id="L68" title="All 2 branches covered.">        else if(this.currentBoard[y][x-1].matches(&quot; |R|Y|P&quot;)){</span>
@@ -75,17 +75,17 @@ public class Bomb extends GameObject {
 <span class="fc" id="L75">                explodablePath[0] += 3;</span>
             }
         //DOWN
-<span class="pc bpc" id="L78" title="1 of 2 branches missed.">        if(this.currentBoard[y+1][x].equals(&quot;W&quot;)){</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        if(this.currentBoard[y+1][x].equals(&quot;W&quot;)){</span>
             ;
         }
-<span class="pc bpc" id="L81" title="1 of 2 branches missed.">        else if(this.currentBoard[y+1][x].matches(&quot; |R|Y|P&quot;)){</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">        else if(this.currentBoard[y+1][x].matches(&quot; |R|Y|P&quot;)){</span>
 <span class="fc" id="L82">            explodablePath[2] ++;</span>
 <span class="fc bfc" id="L83" title="All 2 branches covered.">            if(this.currentBoard[y+2][x].matches(&quot; |R|Y|P|B&quot;)){</span>
 <span class="fc" id="L84">                explodablePath[2] ++;</span>
             }
         }
-<span class="nc bnc" id="L87" title="All 2 branches missed.">        else if(this.currentBoard[y+1][x].equals(&quot;B&quot;)){</span>
-<span class="nc" id="L88">                explodablePath[2] += 3;</span>
+<span class="pc bpc" id="L87" title="1 of 2 branches missed.">        else if(this.currentBoard[y+1][x].equals(&quot;B&quot;)){</span>
+<span class="fc" id="L88">                explodablePath[2] += 3;</span>
             }
         //UP
 <span class="fc bfc" id="L91" title="All 2 branches covered.">        if(this.currentBoard[y-1][x].equals(&quot;W&quot;)){</span>
@@ -106,7 +106,7 @@ public class Bomb extends GameObject {
     
     public void drawExplosion(PApplet app) {//Left
 <span class="fc" id="L108">        app.image(explosionSprite[0], this.x*32, this.y*32+64);</span>
-<span class="pc bpc" id="L109" title="2 of 4 branches missed.">        if (explodablePath[0] == 1 || explodablePath[0] == 3) app.image(explosionSprite[6], this.x*32-32, this.y*32+64); //Left Close</span>
+<span class="pc bpc" id="L109" title="1 of 4 branches missed.">        if (explodablePath[0] == 1 || explodablePath[0] == 3) app.image(explosionSprite[6], this.x*32-32, this.y*32+64); //Left Close</span>
 <span class="fc bfc" id="L110" title="All 2 branches covered.">        else if (explodablePath[0] == 2) {//Left Far</span>
 <span class="fc" id="L111">            app.image(explosionSprite[1], this.x*32-32, this.y*32+64);</span>
 <span class="fc" id="L112">            app.image(explosionSprite[6], this.x*32-64, this.y*32+64);</span>
@@ -118,12 +118,12 @@ public class Bomb extends GameObject {
 <span class="fc" id="L118">            app.image(explosionSprite[3], this.x*32, this.y*32+64-64);</span>
         }//DOWN
 <span class="pc bpc" id="L120" title="2 of 4 branches missed.">        if (explodablePath[2] == 1 || explodablePath[2] == 3) app.image(explosionSprite[5], this.x*32, this.y*32+64+32);</span>
-<span class="pc bpc" id="L121" title="1 of 2 branches missed.">        else if (explodablePath[2] == 2) {</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">        else if (explodablePath[2] == 2) {</span>
 <span class="fc" id="L122">            app.image(explosionSprite[2], this.x*32, this.y*32+32+64);</span>
 <span class="fc" id="L123">            app.image(explosionSprite[5], this.x*32, this.y*32+64+64);</span>
         }//RIGHT
-<span class="pc bpc" id="L125" title="2 of 4 branches missed.">        if (explodablePath[3] == 1 || explodablePath[3] == 3) app.image(explosionSprite[4], this.x*32+32, this.y*32+64);</span>
-<span class="pc bpc" id="L126" title="1 of 2 branches missed.">        else if (explodablePath[3] == 2) {</span>
+<span class="pc bpc" id="L125" title="1 of 4 branches missed.">        if (explodablePath[3] == 1 || explodablePath[3] == 3) app.image(explosionSprite[4], this.x*32+32, this.y*32+64);</span>
+<span class="fc bfc" id="L126" title="All 2 branches covered.">        else if (explodablePath[3] == 2) {</span>
 <span class="fc" id="L127">            app.image(explosionSprite[1], this.x*32+32, this.y*32+64);</span>
 <span class="fc" id="L128">            app.image(explosionSprite[4], this.x*32+64, this.y*32+64);</span>
         }
@@ -154,7 +154,7 @@ public class Bomb extends GameObject {
 <span class="fc bfc" id="L154" title="All 2 branches covered.">      if (explode(this.x-1, this.y, app)) </span>
 <span class="fc" id="L155">            explode(this.x-2, this.y, app);</span>
       //Down
-<span class="pc bpc" id="L157" title="1 of 2 branches missed.">      if (explode(this.x, this.y+1, app))</span>
+<span class="fc bfc" id="L157" title="All 2 branches covered.">      if (explode(this.x, this.y+1, app))</span>
 <span class="fc" id="L158">            explode(this.x, this.y+2, app);</span>
       //Right
 <span class="fc bfc" id="L160" title="All 2 branches covered.">      if (explode(this.x+1, this.y, app)) </span>
