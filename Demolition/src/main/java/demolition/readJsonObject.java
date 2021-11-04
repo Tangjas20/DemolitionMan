@@ -19,7 +19,6 @@ public class readJsonObject {
             File f = new File(filePath);
             Scanner scanner = new Scanner(f);
             while (scanner.hasNextLine()){
-                
                 fileRead += scanner.nextLine();
             }
             scanner.close();

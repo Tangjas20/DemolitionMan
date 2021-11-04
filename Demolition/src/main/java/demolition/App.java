@@ -56,7 +56,6 @@ public class App extends PApplet {
         board.map(currentBoard, this);
         this.timerIcon = new timer(currentTimer, this);
         gameReset = false;
-
     }
 
     public void setup() {
@@ -89,7 +88,6 @@ public class App extends PApplet {
 
         currentBoard = board.makeBoard(boardArrayName.get(boardCounter), this);
         currentTimer =  boardArrayTime.get(boardCounter);
-
         board.map(currentBoard, this);
         this.timerIcon = new timer(currentTimer, this);
     }

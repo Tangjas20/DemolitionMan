@@ -12,7 +12,7 @@ public class AllWallsTesting{
     }
 
     @Test
-    public void createEmptyWall(){
+    public void createEmptyWall(){//Creates new Empty Wall object and tests its location
         App app = new App();
         app.noLoop();
         app.isTest = true;
@@ -26,7 +26,7 @@ public class AllWallsTesting{
     }
 
     @Test
-    public void createSolidWall(){
+    public void createSolidWall(){//Creates new Solid Wall object and tests its location
         App app = new App();
         app.noLoop();
         app.isTest = true;
@@ -40,7 +40,7 @@ public class AllWallsTesting{
     }
 
     @Test
-    public void createBrokenWall(){
+    public void createBrokenWall(){//Creates new Broken Wall object and tests its location
         App app = new App();
         app.noLoop();
         app.isTest = true;
@@ -54,7 +54,7 @@ public class AllWallsTesting{
     }
 
     @Test
-    public void createGoalTile(){
+    public void createGoalTile(){//Creates Goal Tile object and tests its location
         App app = new App();
         app.noLoop();
         app.isTest = true;

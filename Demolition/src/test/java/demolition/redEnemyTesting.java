@@ -19,6 +19,10 @@ public class redEnemyTesting{
         app.moveRedEnemyAI(r);
         app.draw();
         assertTrue(!app.currentBoard[2][3].equals("R"));
+        r.changeOrientation(1);
+        app.moveRedEnemyAI(r);
+        app.draw();
+        assertTrue(!app.currentBoard[3][3].equals("R"));
     }
 
     

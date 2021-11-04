@@ -78,7 +78,7 @@ public class playerTesting {
         app.draw();
         assertEquals(app.getLives(), 1);
     }
-/*
+
     @Test
     public void keyPressing(){
         App app = new App();
@@ -86,14 +86,13 @@ public class playerTesting {
         app.isTest = true;
         PApplet.runSketch(new String[] {"App"}, app);
         app.delay(1000);
-
-        int keyCode = 40;
+        app.keyCode = 40;
         app.keyReleased();
         app.keyPressed();
         app.keyReleased();
         assertTrue(app.currentBoard[1][1].equals(" "));
     }
-    */
+    
     @Test
     public void playerWalkIntoGoal(){
         App app = new App();

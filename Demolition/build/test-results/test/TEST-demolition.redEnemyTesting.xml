@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.redEnemyTesting" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-03T16:06:30" hostname="Jasons-MacBook-Pro.local" time="1.098">
+<testsuite name="demolition.redEnemyTesting" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-04T03:05:11" hostname="Jasons-MacBook-Pro.local" time="1.076">
   <properties/>
-  <testcase name="moveRedEnemy()" classname="demolition.redEnemyTesting" time="1.098"/>
+  <testcase name="moveRedEnemy()" classname="demolition.redEnemyTesting" time="1.076"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

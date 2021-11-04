@@ -253,17 +253,17 @@ public class App extends PApplet {
             .get(2) corresponds with right player
             .get(3) corresponds with left player
         */
-<span class="nc bnc" id="L256" title="All 4 branches missed.">        if (key == ' ' &amp;&amp; this.keyReleased == true) {</span>
+<span class="pc bpc" id="L256" title="3 of 4 branches missed.">        if (key == ' ' &amp;&amp; this.keyReleased == true) {</span>
 <span class="nc" id="L257">            Bomb b = new Bomb(board.getPlayer().getX(), board.getPlayer().getY(), this, currentBoard);</span>
 <span class="nc" id="L258">            bombList.add(b);</span>
 <span class="nc" id="L259">            keyReleased = false;</span>
         }
-<span class="nc bnc" id="L261" title="All 4 branches missed.">            if(keyCode == 40 &amp;&amp; keyReleased == true) {</span>
-<span class="nc" id="L262">                board.getPlayer().changeOrientation(0);</span>
-<span class="nc bnc" id="L263" title="All 2 branches missed.">                if((currentBoard[board.getPlayer().getY()+1][board.getPlayer().getX()].matches(&quot; |R|Y|G&quot;))){</span>
-<span class="nc" id="L264">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot; &quot;;</span>
-<span class="nc" id="L265">                    board.getPlayer().movementDOWN();</span>
-<span class="nc" id="L266">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot;P&quot;;</span>
+<span class="pc bpc" id="L261" title="2 of 4 branches missed.">            if(keyCode == 40 &amp;&amp; keyReleased == true) {</span>
+<span class="fc" id="L262">                board.getPlayer().changeOrientation(0);</span>
+<span class="pc bpc" id="L263" title="1 of 2 branches missed.">                if((currentBoard[board.getPlayer().getY()+1][board.getPlayer().getX()].matches(&quot; |R|Y|G&quot;))){</span>
+<span class="fc" id="L264">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot; &quot;;</span>
+<span class="fc" id="L265">                    board.getPlayer().movementDOWN();</span>
+<span class="fc" id="L266">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot;P&quot;;</span>
                 }
 
 <span class="nc bnc" id="L269" title="All 4 branches missed.">            } else if (keyCode == UP &amp;&amp; keyReleased == true) {</span>
@@ -290,12 +290,12 @@ public class App extends PApplet {
 <span class="nc" id="L290">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot;P&quot;;</span>
                 }
             }
-<span class="nc" id="L293">        keyReleased = false;</span>
-<span class="nc" id="L294">    }</span>
+<span class="fc" id="L293">        keyReleased = false;</span>
+<span class="fc" id="L294">    }</span>
 
     public void keyReleased() {
-<span class="nc" id="L297">        this.keyReleased = true;</span>
-<span class="nc" id="L298">    }</span>
+<span class="fc" id="L297">        this.keyReleased = true;</span>
+<span class="fc" id="L298">    }</span>
 
     public String[][] getCurrentBoard(){
 <span class="nc" id="L301">        return currentBoard;</span>

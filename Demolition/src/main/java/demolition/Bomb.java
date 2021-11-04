@@ -16,6 +16,7 @@ public class Bomb extends GameObject {
     boolean killedPlayer = false;
     boolean killedYellowEnemy = false;
     boolean killedRedEnemy = false;
+    boolean brokenWallTF = false;
 
 
     public Bomb(int x, int y, PApplet app, String[][] currentBoard){
