@@ -1,28 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.playerTesting" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-11-04T06:20:05" hostname="DESKTOP-GJIUGBP" time="9.298">
+<testsuite name="demolition.playerTesting" tests="8" skipped="0" failures="0" errors="0" timestamp="2021-11-04T07:04:57" hostname="DESKTOP-GJIUGBP" time="8.893">
   <properties/>
-  <testcase name="playerWalkIntoGoal()" classname="demolition.playerTesting" time="1.394"/>
-  <testcase name="playerLives()" classname="demolition.playerTesting" time="1.16"/>
-  <testcase name="movePlayerObject()" classname="demolition.playerTesting" time="1.148"/>
-  <testcase name="playerWalkIntoRedEnemy()" classname="demolition.playerTesting" time="1.108"/>
-  <testcase name="resetGameTime()" classname="demolition.playerTesting" time="1.245"/>
-  <testcase name="createPlayerObject()" classname="demolition.playerTesting" time="1.204"/>
-  <testcase name="keyPressing()" classname="demolition.playerTesting" time="1.018"/>
-  <testcase name="playerTick()" classname="demolition.playerTesting" time="1.02"/>
+  <testcase name="playerWalkIntoGoal()" classname="demolition.playerTesting" time="1.022"/>
+  <testcase name="playerLives()" classname="demolition.playerTesting" time="1.14"/>
+  <testcase name="movePlayerObject()" classname="demolition.playerTesting" time="1.142"/>
+  <testcase name="playerWalkIntoRedEnemy()" classname="demolition.playerTesting" time="1.12"/>
+  <testcase name="resetGameTime()" classname="demolition.playerTesting" time="1.239"/>
+  <testcase name="createPlayerObject()" classname="demolition.playerTesting" time="1.158"/>
+  <testcase name="keyPressing()" classname="demolition.playerTesting" time="1.044"/>
+  <testcase name="playerTick()" classname="demolition.playerTesting" time="1.026"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[java.util.ConcurrentModificationException
-	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:911)
-	at java.util.ArrayList$Itr.next(ArrayList.java:861)
-	at demolition.App.draw(App.java:115)
-	at processing.core.PApplet.handleDraw(PApplet.java:2426)
-	at processing.awt.PSurfaceAWT$12.callDraw(PSurfaceAWT.java:1557)
-	at processing.core.PSurfaceNone$AnimationThread.run(PSurfaceNone.java:316)
-java.util.ConcurrentModificationException
-	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:911)
-	at java.util.ArrayList$Itr.next(ArrayList.java:861)
-	at demolition.App.draw(App.java:118)
-	at processing.core.PApplet.handleDraw(PApplet.java:2426)
-	at processing.awt.PSurfaceAWT$12.callDraw(PSurfaceAWT.java:1557)
-	at processing.core.PSurfaceNone$AnimationThread.run(PSurfaceNone.java:316)
-]]></system-err>
+  <system-err><![CDATA[]]></system-err>
 </testsuite>

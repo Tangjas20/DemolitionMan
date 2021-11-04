@@ -9,7 +9,7 @@ import processing.core.PApplet;
 public class timer {
     private int counter = 0;
     private PImage timerImage;
-    private int timer;
+    int timer;
     private PImage playerIcon;
 
 

@@ -26,7 +26,7 @@ public class App extends PApplet {
     boolean keyReleased = true;
     Board board;
     private int lives;
-    private timer timerIcon;
+    timer timerIcon;
     boolean drewPlayer = false;
     private List<Bomb> bombList;
     boolean gameOver = false;

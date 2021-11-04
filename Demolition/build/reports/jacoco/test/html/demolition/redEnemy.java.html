@@ -48,11 +48,11 @@ public class redEnemy extends PlayerClasses implements playerMovement{
     public void tick() {
         //Handles logic
 <span class="fc" id="L50">        timer++;</span>
-<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        if (timer == 12){</span>
-<span class="nc" id="L52">            imageTick ++;</span>
-<span class="nc" id="L53">            timer = 0;</span>
-<span class="nc bnc" id="L54" title="All 2 branches missed.">            if (imageTick &gt; 3){</span>
-<span class="nc" id="L55">                this.imageTick = 0;</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        if (timer == 12){</span>
+<span class="fc" id="L52">            imageTick ++;</span>
+<span class="fc" id="L53">            timer = 0;</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">            if (imageTick &gt; 3){</span>
+<span class="fc" id="L55">                this.imageTick = 0;</span>
             }
         }
 <span class="fc" id="L58">    }</span>

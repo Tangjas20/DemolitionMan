@@ -60,5 +60,17 @@ public class redEnemyTesting{
 
     }
 
+    @Test 
+    public void tickRedEnemy(){
+        App app = new App();
+        app.noLoop();
+        app.isTest = true;
+        PApplet.runSketch(new String[] {"App"}, app);
+        app.delay(1000);
+        redEnemy r = new redEnemy(13, 2, app);
+        for(int i = 0; i < 60; i++)
+            r.tick();
+        assert(r.imageTick != 0);
+    }
     
 }

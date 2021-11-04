@@ -9,7 +9,7 @@ import processing.core.PApplet;
 public class timer {
 <span class="fc" id="L10">    private int counter = 0;</span>
     private PImage timerImage;
-    private int timer;
+    int timer;
     private PImage playerIcon;
 
 
@@ -22,9 +22,9 @@ public class timer {
     public void tick() {
         //Handles logic
 <span class="fc" id="L24">        counter++;</span>
-<span class="pc bpc" id="L25" title="1 of 2 branches missed.">        if(counter == 60){</span>
-<span class="nc" id="L26">            timer -= 1;</span>
-<span class="nc" id="L27">            counter = 0;</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        if(counter == 60){</span>
+<span class="fc" id="L26">            timer -= 1;</span>
+<span class="fc" id="L27">            counter = 0;</span>
         }
 
 <span class="fc" id="L30">    }</span>
