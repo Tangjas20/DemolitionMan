@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.AllWallsTesting" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-11-04T03:04:52" hostname="Jasons-MacBook-Pro.local" time="5.266">
+<testsuite name="demolition.AllWallsTesting" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-11-04T06:20:15" hostname="DESKTOP-GJIUGBP" time="4.642">
   <properties/>
-  <testcase name="createGoalTile()" classname="demolition.AllWallsTesting" time="1.757"/>
-  <testcase name="simpleTest()" classname="demolition.AllWallsTesting" time="0.002"/>
-  <testcase name="createBrokenWall()" classname="demolition.AllWallsTesting" time="1.2"/>
-  <testcase name="createEmptyWall()" classname="demolition.AllWallsTesting" time="1.151"/>
-  <testcase name="createSolidWall()" classname="demolition.AllWallsTesting" time="1.147"/>
+  <testcase name="createGoalTile()" classname="demolition.AllWallsTesting" time="1.131"/>
+  <testcase name="simpleTest()" classname="demolition.AllWallsTesting" time="0.0"/>
+  <testcase name="createBrokenWall()" classname="demolition.AllWallsTesting" time="1.149"/>
+  <testcase name="createEmptyWall()" classname="demolition.AllWallsTesting" time="1.139"/>
+  <testcase name="createSolidWall()" classname="demolition.AllWallsTesting" time="1.221"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+  <system-err><![CDATA[java.util.ConcurrentModificationException
+	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:911)
+	at java.util.ArrayList$Itr.next(ArrayList.java:861)
+	at demolition.App.draw(App.java:118)
+	at processing.core.PApplet.handleDraw(PApplet.java:2426)
+	at processing.awt.PSurfaceAWT$12.callDraw(PSurfaceAWT.java:1557)
+	at processing.core.PSurfaceNone$AnimationThread.run(PSurfaceNone.java:316)
+java.util.ConcurrentModificationException
+	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:911)
+	at java.util.ArrayList$Itr.next(ArrayList.java:861)
+	at demolition.App.draw(App.java:118)
+	at processing.core.PApplet.handleDraw(PApplet.java:2426)
+	at processing.awt.PSurfaceAWT$12.callDraw(PSurfaceAWT.java:1557)
+	at processing.core.PSurfaceNone$AnimationThread.run(PSurfaceNone.java:316)
+java.util.ConcurrentModificationException
+	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:911)
+	at java.util.ArrayList$Itr.next(ArrayList.java:861)
+	at demolition.App.draw(App.java:115)
+	at processing.core.PApplet.handleDraw(PApplet.java:2426)
+	at processing.awt.PSurfaceAWT$12.callDraw(PSurfaceAWT.java:1557)
+	at processing.core.PSurfaceNone$AnimationThread.run(PSurfaceNone.java:316)
+]]></system-err>
 </testsuite>

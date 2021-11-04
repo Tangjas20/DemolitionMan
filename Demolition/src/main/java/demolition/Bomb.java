@@ -10,7 +10,7 @@ public class Bomb extends GameObject {
     private PImage[] explosionSprite = new PImage[7];
     private int[] explodablePath = {0, 0, 0, 0};
     boolean explosionFinished;
-    private int timerSprite;
+    int timerSprite;
     private int currentSprite;
     private boolean isAlive;
     boolean killedPlayer = false;
@@ -217,5 +217,7 @@ public class Bomb extends GameObject {
         return this.currentBoard;
     }
 
-
+    public int getCurrentSprite(){
+        return this.currentSprite;
+    }
 }

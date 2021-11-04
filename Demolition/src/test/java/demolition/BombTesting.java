@@ -24,6 +24,14 @@ public class BombTesting {
         assertEquals(6, d.getX());
         assertEquals(6, d.getY());
         assertTrue(!d.explosionFinished);
+        
+        Bomb f = new Bomb(3, 1, app, app.currentBoard);
+        f.explosion(app);
+        f.drawExplosion(app);
+        for(int i = 0; i < 160 ; i++)
+            f.draw(app);
+        assert(f.timerSprite != 0);
+        assert(f.getCurrentSprite() != 0);
     }
 
     @Test
@@ -79,6 +87,8 @@ public class BombTesting {
         assertEquals(app.currentBoard[7][9], " ");
         assertTrue(brokenSizeAfterExplosion < brokenSize);
         assertNotNull(app.board.getEmptyWallsList().size());
+
+    
     }
 
     @Test

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class redEnemyTesting{
 
     @Test
-    public void moveRedEnemy(){
+    public void moveRedEnemyUpDown(){
         App app = new App();
         app.noLoop();
         app.isTest = true;
@@ -23,6 +23,41 @@ public class redEnemyTesting{
         app.moveRedEnemyAI(r);
         app.draw();
         assertTrue(!app.currentBoard[3][3].equals("R"));
+    }
+
+    @Test
+    public void moveRedEnemyLeftRight(){
+        App app = new App();
+        app.noLoop();
+        app.isTest = true;
+        PApplet.runSketch(new String[] {"App"}, app);
+        app.delay(1000);
+        redEnemy r = new redEnemy(3, 3, app);
+        app.draw();
+        r.changeOrientation(2);
+        app.moveRedEnemyAI(r);
+        app.draw();
+        assertTrue(!app.currentBoard[3][3].equals("R"));
+        r.changeOrientation(3);
+        app.moveRedEnemyAI(r);
+        app.draw();
+        assertTrue(app.currentBoard[3][3].equals("R"));
+    }
+
+    @Test//x=13, y=2
+    public void redEnemyDeadEnd(){
+        App app = new App();
+        app.noLoop();
+        app.isTest = true;
+        PApplet.runSketch(new String[] {"App"}, app);
+        app.delay(1000);
+        redEnemy r = new redEnemy(13, 2, app);
+        app.draw();
+        r.changeOrientation(1);
+        app.moveRedEnemyAI(r);
+        app.moveRedEnemyAI(r);
+        assertTrue(!app.currentBoard[2][13].equals("R"));
+
     }
 
     

@@ -17,7 +17,7 @@ public class App extends PApplet {
     public static final int HEIGHT = 480;
     int counter = 0;
     String[][] currentBoard;
-    private Integer currentTimer = 0;
+    Integer currentTimer = 0;
     private Map<String, String> pathTimeMap;
     private List<String> boardArrayName;
     private List<Integer> boardArrayTime;
@@ -418,5 +418,13 @@ public class App extends PApplet {
 
     public int getCurrentTimer(){
         return this.currentTimer;
+    }
+
+    public List<Bomb> getBombList(){
+        return this.bombList;
+    }
+
+    public void changeLives(int lives){
+        this.lives = lives;
     }
 }

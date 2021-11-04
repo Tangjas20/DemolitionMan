@@ -22,11 +22,11 @@ public abstract class PlayerClasses extends GameObject{
     public void tick() {
         //Handles logic
 <span class="fc" id="L24">        timer++;</span>
-<span class="pc bpc" id="L25" title="1 of 2 branches missed.">        if(timer == 12){</span>
-<span class="nc" id="L26">            imageTick ++;</span>
-<span class="nc" id="L27">            timer = 0;</span>
-<span class="nc bnc" id="L28" title="All 2 branches missed.">            if(imageTick &gt; 3){</span>
-<span class="nc" id="L29">                this.imageTick = 0;</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        if(timer == 12){</span>
+<span class="fc" id="L26">            imageTick ++;</span>
+<span class="fc" id="L27">            timer = 0;</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">            if(imageTick &gt; 3){</span>
+<span class="fc" id="L29">                this.imageTick = 0;</span>
             }
         }
 

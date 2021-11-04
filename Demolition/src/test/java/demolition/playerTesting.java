@@ -87,10 +87,35 @@ public class playerTesting {
         PApplet.runSketch(new String[] {"App"}, app);
         app.delay(1000);
         app.keyCode = 40;
-        app.keyReleased();
+
         app.keyPressed();
         app.keyReleased();
         assertTrue(app.currentBoard[1][1].equals(" "));
+        assertTrue(app.currentBoard[2][1].equals("P"));
+        app.keyCode = 38;
+
+        app.keyPressed();
+        app.keyReleased();
+        assertTrue(app.currentBoard[1][1].equals("P"));
+        assertTrue(app.currentBoard[2][1].equals(" "));
+        app.keyCode = 40;
+        app.keyPressed();
+        app.keyReleased();
+        app.keyPressed();
+        app.keyReleased();
+        app.keyCode = 39;
+        app.keyPressed();
+        app.keyReleased();
+        assertTrue(app.currentBoard[3][2].equals("P"));
+        app.keyCode = 37;
+        app.keyPressed();
+        app.keyReleased();
+        assertTrue(app.currentBoard[3][1].equals("P"));
+        app.keyCode = 32;
+        app.keyPressed();
+        app.keyReleased();
+        app.draw();
+        assertNotNull(app.getBombList());
     }
     
     @Test
@@ -109,6 +134,21 @@ public class playerTesting {
         app.board.getPlayer().movementDOWN();
         app.draw();
         assert(app.gameOver == true);
+    }
 
+    @Test
+    public void playerTick(){
+        App app = new App();
+        app.noLoop();
+        app.isTest = true;
+        PApplet.runSketch(new String[] {"App"}, app);
+        app.delay(1000);
+        for(int i = 0; i < 13; i++)
+            app.board.getPlayer().tick();
+        app.draw();
+        assertTrue(app.board.getPlayer().imageTick != 0);
+        for(int i = 0; i < 40; i++)
+            app.board.getPlayer().tick();
+        assertTrue(app.board.getPlayer().imageTick == 0);
     }
 }

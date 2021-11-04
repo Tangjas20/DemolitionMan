@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.BombTesting" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-11-04T03:04:57" hostname="Jasons-MacBook-Pro.local" time="5.808">
+<testsuite name="demolition.BombTesting" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-11-04T06:20:21" hostname="DESKTOP-GJIUGBP" time="5.943">
   <properties/>
-  <testcase name="testMultipleBombLocation()" classname="demolition.BombTesting" time="1.154"/>
-  <testcase name="testBombExplode()" classname="demolition.BombTesting" time="1.151"/>
-  <testcase name="bombKillPlayerKillEnemy()" classname="demolition.BombTesting" time="1.148"/>
-  <testcase name="bombBreakBlock()" classname="demolition.BombTesting" time="1.148"/>
-  <testcase name="bombBreakMultipleBlock()" classname="demolition.BombTesting" time="1.181"/>
+  <testcase name="testMultipleBombLocation()" classname="demolition.BombTesting" time="1.174"/>
+  <testcase name="testBombExplode()" classname="demolition.BombTesting" time="1.17"/>
+  <testcase name="bombKillPlayerKillEnemy()" classname="demolition.BombTesting" time="1.156"/>
+  <testcase name="bombBreakBlock()" classname="demolition.BombTesting" time="1.162"/>
+  <testcase name="bombBreakMultipleBlock()" classname="demolition.BombTesting" time="1.28"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+  <system-err><![CDATA[java.util.ConcurrentModificationException
+	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:911)
+	at java.util.ArrayList$Itr.next(ArrayList.java:861)
+	at demolition.App.draw(App.java:118)
+	at processing.core.PApplet.handleDraw(PApplet.java:2426)
+	at processing.awt.PSurfaceAWT$12.callDraw(PSurfaceAWT.java:1557)
+	at processing.core.PSurfaceNone$AnimationThread.run(PSurfaceNone.java:316)
+java.util.ConcurrentModificationException
+	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:911)
+	at java.util.ArrayList$Itr.next(ArrayList.java:861)
+	at demolition.App.draw(App.java:118)
+	at processing.core.PApplet.handleDraw(PApplet.java:2426)
+	at processing.awt.PSurfaceAWT$12.callDraw(PSurfaceAWT.java:1557)
+	at processing.core.PSurfaceNone$AnimationThread.run(PSurfaceNone.java:316)
+]]></system-err>
 </testsuite>
