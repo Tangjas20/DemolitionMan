@@ -6,61 +6,72 @@ import processing.core.PImage;
 import processing.core.PApplet;
 import java.util.Random;
 
+/**
+* Creates the redEnemy object which extends the PlayerClasses and implements the playerMovement interface. 
+*/
 public class redEnemy extends PlayerClasses implements playerMovement{
     
-<span class="fc" id="L11">    private List&lt;PImage[]&gt; enemyRedSprite = new ArrayList&lt;PImage[]&gt;();</span>
-
+<span class="fc" id="L14">    private List&lt;PImage[]&gt; enemyRedSprite = new ArrayList&lt;PImage[]&gt;();</span>
+/**
+* Takes in X and Y and PApplet app to create a redEnemy object which inherits methods from PlayerClasses.
+*/
     public redEnemy(int x, int y, PApplet app) {
-<span class="fc" id="L14">        super(x, y, app);</span>
+<span class="fc" id="L19">        super(x, y, app);</span>
                 //Enemy Red Sprite
-<span class="fc" id="L16">        PImage[] redEnemySprite = new PImage[4];</span>
-<span class="fc" id="L17">        redEnemySprite [0] = app.loadImage(&quot;src/main/resources/red_enemy/red_down1.png&quot;);</span>
-<span class="fc" id="L18">        redEnemySprite [1] = app.loadImage(&quot;src/main/resources/red_enemy/red_down2.png&quot;);</span>
-<span class="fc" id="L19">        redEnemySprite [2] = app.loadImage(&quot;src/main/resources/red_enemy/red_down3.png&quot;);</span>
-<span class="fc" id="L20">        redEnemySprite [3] = app.loadImage(&quot;src/main/resources/red_enemy/red_down4.png&quot;);</span>
+<span class="fc" id="L21">        PImage[] redEnemySprite = new PImage[4];</span>
+<span class="fc" id="L22">        redEnemySprite [0] = app.loadImage(&quot;src/main/resources/red_enemy/red_down1.png&quot;);</span>
+<span class="fc" id="L23">        redEnemySprite [1] = app.loadImage(&quot;src/main/resources/red_enemy/red_down2.png&quot;);</span>
+<span class="fc" id="L24">        redEnemySprite [2] = app.loadImage(&quot;src/main/resources/red_enemy/red_down3.png&quot;);</span>
+<span class="fc" id="L25">        redEnemySprite [3] = app.loadImage(&quot;src/main/resources/red_enemy/red_down4.png&quot;);</span>
 
-<span class="fc" id="L22">        PImage[] redEnemyUpSprite = new PImage[4];</span>
-<span class="fc" id="L23">        redEnemyUpSprite[0] = app.loadImage(&quot;src/main/resources/red_enemy/red_up1.png&quot;);</span>
-<span class="fc" id="L24">        redEnemyUpSprite[1] = app.loadImage(&quot;src/main/resources/red_enemy/red_up2.png&quot;);</span>
-<span class="fc" id="L25">        redEnemyUpSprite[2] = app.loadImage(&quot;src/main/resources/red_enemy/red_up3.png&quot;);</span>
-<span class="fc" id="L26">        redEnemyUpSprite[3] = app.loadImage(&quot;src/main/resources/red_enemy/red_up4.png&quot;);</span>
+<span class="fc" id="L27">        PImage[] redEnemyUpSprite = new PImage[4];</span>
+<span class="fc" id="L28">        redEnemyUpSprite[0] = app.loadImage(&quot;src/main/resources/red_enemy/red_up1.png&quot;);</span>
+<span class="fc" id="L29">        redEnemyUpSprite[1] = app.loadImage(&quot;src/main/resources/red_enemy/red_up2.png&quot;);</span>
+<span class="fc" id="L30">        redEnemyUpSprite[2] = app.loadImage(&quot;src/main/resources/red_enemy/red_up3.png&quot;);</span>
+<span class="fc" id="L31">        redEnemyUpSprite[3] = app.loadImage(&quot;src/main/resources/red_enemy/red_up4.png&quot;);</span>
 
-<span class="fc" id="L28">        PImage[] redEnemyRightSprite = new PImage[4];</span>
-<span class="fc" id="L29">        redEnemyRightSprite[0] = app.loadImage(&quot;src/main/resources/red_enemy/red_right1.png&quot;);</span>
-<span class="fc" id="L30">        redEnemyRightSprite[1] = app.loadImage(&quot;src/main/resources/red_enemy/red_right2.png&quot;);</span>
-<span class="fc" id="L31">        redEnemyRightSprite[2] = app.loadImage(&quot;src/main/resources/red_enemy/red_right3.png&quot;);</span>
-<span class="fc" id="L32">        redEnemyRightSprite[3] = app.loadImage(&quot;src/main/resources/red_enemy/red_right4.png&quot;);</span>
+<span class="fc" id="L33">        PImage[] redEnemyRightSprite = new PImage[4];</span>
+<span class="fc" id="L34">        redEnemyRightSprite[0] = app.loadImage(&quot;src/main/resources/red_enemy/red_right1.png&quot;);</span>
+<span class="fc" id="L35">        redEnemyRightSprite[1] = app.loadImage(&quot;src/main/resources/red_enemy/red_right2.png&quot;);</span>
+<span class="fc" id="L36">        redEnemyRightSprite[2] = app.loadImage(&quot;src/main/resources/red_enemy/red_right3.png&quot;);</span>
+<span class="fc" id="L37">        redEnemyRightSprite[3] = app.loadImage(&quot;src/main/resources/red_enemy/red_right4.png&quot;);</span>
 
-<span class="fc" id="L34">        PImage[] redEnemyLeftSprite = new PImage[4];</span>
-<span class="fc" id="L35">        redEnemyLeftSprite[0] = app.loadImage(&quot;src/main/resources/red_enemy/red_left1.png&quot;);</span>
-<span class="fc" id="L36">        redEnemyLeftSprite[1] = app.loadImage(&quot;src/main/resources/red_enemy/red_left2.png&quot;);</span>
-<span class="fc" id="L37">        redEnemyLeftSprite[2] = app.loadImage(&quot;src/main/resources/red_enemy/red_left3.png&quot;);</span>
-<span class="fc" id="L38">        redEnemyLeftSprite[3] = app.loadImage(&quot;src/main/resources/red_enemy/red_left4.png&quot;);</span>
+<span class="fc" id="L39">        PImage[] redEnemyLeftSprite = new PImage[4];</span>
+<span class="fc" id="L40">        redEnemyLeftSprite[0] = app.loadImage(&quot;src/main/resources/red_enemy/red_left1.png&quot;);</span>
+<span class="fc" id="L41">        redEnemyLeftSprite[1] = app.loadImage(&quot;src/main/resources/red_enemy/red_left2.png&quot;);</span>
+<span class="fc" id="L42">        redEnemyLeftSprite[2] = app.loadImage(&quot;src/main/resources/red_enemy/red_left3.png&quot;);</span>
+<span class="fc" id="L43">        redEnemyLeftSprite[3] = app.loadImage(&quot;src/main/resources/red_enemy/red_left4.png&quot;);</span>
 
 
-<span class="fc" id="L41">        enemyRedSprite.add(redEnemySprite);</span>
-<span class="fc" id="L42">        enemyRedSprite.add(redEnemyUpSprite);</span>
-<span class="fc" id="L43">        enemyRedSprite.add(redEnemyRightSprite);</span>
-<span class="fc" id="L44">        enemyRedSprite.add(redEnemyLeftSprite);</span>
-<span class="fc" id="L45">    }</span>
+<span class="fc" id="L46">        enemyRedSprite.add(redEnemySprite);</span>
+<span class="fc" id="L47">        enemyRedSprite.add(redEnemyUpSprite);</span>
+<span class="fc" id="L48">        enemyRedSprite.add(redEnemyRightSprite);</span>
+<span class="fc" id="L49">        enemyRedSprite.add(redEnemyLeftSprite);</span>
+<span class="fc" id="L50">    }</span>
+
     //The Red Enemy moves in a straight line and turns to a random decision every time its path is blocked by a solid/broken wall
+    /**
+    * Has a timer which ticks up every time tick is called which resets at 12 and adds 1 to the imageTick to change the redEnemy animation.
+    */
     public void tick() {
         //Handles logic
-<span class="fc" id="L49">        timer++;</span>
-<span class="fc bfc" id="L50" title="All 2 branches covered.">        if (timer == 12){</span>
-<span class="fc" id="L51">            imageTick ++;</span>
-<span class="fc" id="L52">            timer = 0;</span>
-<span class="fc bfc" id="L53" title="All 2 branches covered.">            if (imageTick &gt; 3){</span>
-<span class="fc" id="L54">                this.imageTick = 0;</span>
+<span class="fc" id="L58">        timer++;</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        if (timer == 12){</span>
+<span class="fc" id="L60">            imageTick ++;</span>
+<span class="fc" id="L61">            timer = 0;</span>
+<span class="fc bfc" id="L62" title="All 2 branches covered.">            if (imageTick &gt; 3){</span>
+<span class="fc" id="L63">                this.imageTick = 0;</span>
             }
         }
-<span class="fc" id="L57">    }</span>
+<span class="fc" id="L66">    }</span>
 
-
+/**
+* Draws the image in the Sprite list given the orientation and imagetick as well as the X and Y coordinates.
+*/
     public void draw(PApplet app) {
         //Handling graphics -- Single line or so, no logics
-<span class="fc" id="L62">        app.image(this.enemyRedSprite.get(orientation)[imageTick], this.x*32, this.y*32+48);</span>
-<span class="fc" id="L63">    }</span>
+<span class="fc" id="L73">        app.image(this.enemyRedSprite.get(orientation)[imageTick], this.x*32, this.y*32+48);</span>
+<span class="fc" id="L74">    }</span>
 
     
 

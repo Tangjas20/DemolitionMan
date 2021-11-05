@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.playerTesting" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-11-05T09:36:23" hostname="DESKTOP-GJIUGBP" time="9.83">
+<testsuite name="demolition.playerTesting" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-11-05T09:44:24" hostname="DESKTOP-GJIUGBP" time="9.923">
   <properties/>
-  <testcase name="playerWalkIntoGoal()" classname="demolition.playerTesting" time="1.022"/>
-  <testcase name="playerLives()" classname="demolition.playerTesting" time="1.139"/>
-  <testcase name="playerOnTop()" classname="demolition.playerTesting" time="1.021"/>
-  <testcase name="movePlayerObject()" classname="demolition.playerTesting" time="1.145"/>
-  <testcase name="playerWalkIntoRedEnemy()" classname="demolition.playerTesting" time="1.107"/>
-  <testcase name="resetGameTime()" classname="demolition.playerTesting" time="1.223"/>
-  <testcase name="createPlayerObject()" classname="demolition.playerTesting" time="1.13"/>
-  <testcase name="keyPressing()" classname="demolition.playerTesting" time="1.024"/>
-  <testcase name="playerTick()" classname="demolition.playerTesting" time="1.019"/>
+  <testcase name="playerWalkIntoGoal()" classname="demolition.playerTesting" time="1.023"/>
+  <testcase name="playerLives()" classname="demolition.playerTesting" time="1.148"/>
+  <testcase name="playerOnTop()" classname="demolition.playerTesting" time="1.038"/>
+  <testcase name="movePlayerObject()" classname="demolition.playerTesting" time="1.142"/>
+  <testcase name="playerWalkIntoRedEnemy()" classname="demolition.playerTesting" time="1.121"/>
+  <testcase name="resetGameTime()" classname="demolition.playerTesting" time="1.228"/>
+  <testcase name="createPlayerObject()" classname="demolition.playerTesting" time="1.138"/>
+  <testcase name="keyPressing()" classname="demolition.playerTesting" time="1.048"/>
+  <testcase name="playerTick()" classname="demolition.playerTesting" time="1.034"/>
   <system-out><![CDATA[No such file.
 No such file.
 ]]></system-out>

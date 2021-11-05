@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import processing.core.PImage;
 import processing.core.PApplet;
-
+/**
+* Creates the SolidWall class which is used to create SolidWall objects that can be stored in an ArrayList for populating the board.
+*/
 public class SolidWall extends allTilesClass {
-
+    /**
+    * Constructs the object given the x and y coordinates as well as loading the image from the resources folder.
+     */
     public SolidWall(int x, int y, PApplet app) {
-<span class="fc" id="L11">        super(x, y, app);</span>
-<span class="fc" id="L12">        this.block = app.loadImage(&quot;src/main/resources/wall/solid.png&quot;);</span>
-<span class="fc" id="L13">    }</span>
+<span class="fc" id="L15">        super(x, y, app);</span>
+<span class="fc" id="L16">        this.block = app.loadImage(&quot;src/main/resources/wall/solid.png&quot;);</span>
+<span class="fc" id="L17">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

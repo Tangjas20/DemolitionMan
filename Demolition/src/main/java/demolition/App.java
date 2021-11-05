@@ -327,6 +327,7 @@ public class App extends PApplet {
     /**
     * Moves yellow enemy in a set pattern that is clockwise. 
     * The yellow enemy will change orientation when a wall has been hit.
+    * @param i is the yellowEnemy object which is to be moved.
     */
     public void moveYellowEnemy(yellowEnemy i){
         if(i.orientation == 0){
@@ -371,7 +372,12 @@ public class App extends PApplet {
             .get(2) corresponds with right player
             .get(3) corresponds with left player
         */
-    public void moveRedEnemyAI(redEnemy i){//Moves with the random library, but will first calculate the possible unblocked paths
+        //Moves with the random library, but will first calculate the possible unblocked paths
+    /**
+    *Moves the @param i redEnemy based on the possible paths it can take. The method will first check each block in each direction and assign a value to the possiblePath int array. If it is non 0,
+    * the random library is used to find a path based on those values.
+     */
+    public void moveRedEnemyAI(redEnemy i){
         int[] possiblePath = {0, 0, 0, 0};
         boolean deadEnd = false;
          if(i.orientation == 0){

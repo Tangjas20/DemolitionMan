@@ -33,6 +33,7 @@ public class Board {
     /**
     * Reads the file taken from the config.json and converts it to a String[][] which will be used to store the current board. 
     * Returns a String[13][15] from the inputted txt file
+    * @param fileName is the name of the levels file which is found in the config.json in the root directory.
     */
     public String[][] makeBoard(String fileName, PApplet app) {//Returns a String[][] given a Json object
 
@@ -55,6 +56,7 @@ public class Board {
 
     /**
     * A makeBoard method which is used for testing purposes. Takes files from the src/test/resources folder and returns a String[13][15]
+    * @param fileName is the name of the levels file which is the test config.json.
      */
     public String[][] testMakeBoard(String fileName, PApplet app) {
 
@@ -77,6 +79,7 @@ public class Board {
 
     /**
     * Creates Player, redEnemy, yellowEnemy, and tile blocks based on the String[][] board created in the makeBoard method and adds them to their respective Lists in the board attributes.
+    * @param mapBoard is the currentBoard state which is passed through so that the object class Lists can be updated accordingly.
     */
     public void map(String[][] mapBoard, PApplet app){//Creates map based on the String[][]
         redEnemyTF = false;
@@ -134,6 +137,7 @@ public class Board {
 
     /**
     * Breaks the necessary blocks when an explosion occurs by clearing all objects in the emptyWalls and brokenWalls lists and re-adding them after scanning through the newly formed current board
+    * @param mapBoard is the currentBoard state of the App and is passed through so the lists containing the objects can be updated by clearing then re-adding.
     */
     public void explosionBreakBlock(String[][] mapBoard, PApplet app){//After explosion this resets empty and broken walls so that it can be redrawn
         emptyWalls.clear();

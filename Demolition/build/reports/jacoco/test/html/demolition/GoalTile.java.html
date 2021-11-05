@@ -5,13 +5,18 @@ import java.util.List;
 import processing.core.PImage;
 import processing.core.PApplet;
 
+/**
+* Creates the GoalTile class which is used to create GoalTile objects that can be stored in an ArrayList for populating the board.
+*/
 public class GoalTile extends allTilesClass {
 
-
+    /**
+    * Constructs the object given the x and y coordinates as well as loading the image from the resources folder.
+     */
     public GoalTile(int x, int y, PApplet app) {
-<span class="fc" id="L12">        super(x, y, app);</span>
-<span class="fc" id="L13">        this.block = app.loadImage(&quot;src/main/resources/goal/goal.png&quot;);</span>
-<span class="fc" id="L14">    }</span>
+<span class="fc" id="L17">        super(x, y, app);</span>
+<span class="fc" id="L18">        this.block = app.loadImage(&quot;src/main/resources/goal/goal.png&quot;);</span>
+<span class="fc" id="L19">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

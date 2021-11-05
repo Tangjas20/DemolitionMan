@@ -4,23 +4,29 @@ import java.util.List;
 import processing.core.PImage;
 import processing.core.PApplet;
 
+/**
+* The GameObject class is the main abstract class which will be inherited from by the PlayerClasses and the allTilesClass for the X and Y coordinates as well as universal getter methods for X and Y 
+*/
 public abstract class GameObject {
 
     protected int x;
     protected int y;
 
-<span class="fc" id="L12">    public GameObject(int x, int y, PApplet app){</span>
-<span class="fc" id="L13">        this.x =x;</span>
-<span class="fc" id="L14">        this.y = y;</span>
+    /**
+    * Takes in the x and y coordinates and stores it in protected variables in the class attributes
+     */
+<span class="fc" id="L18">    public GameObject(int x, int y, PApplet app){</span>
+<span class="fc" id="L19">        this.x =x;</span>
+<span class="fc" id="L20">        this.y = y;</span>
         
-<span class="fc" id="L16">    }</span>
+<span class="fc" id="L22">    }</span>
 
     public int getX(){
-<span class="fc" id="L19">        return this.x;</span>
+<span class="fc" id="L25">        return this.x;</span>
     }
 
     public int getY(){
-<span class="fc" id="L23">        return this.y;</span>
+<span class="fc" id="L29">        return this.y;</span>
     }
 
 

@@ -323,12 +323,12 @@ public class App extends PApplet {
         .get(2) corresponds with right player
         .get(3) corresponds with left player
     */
-
+    //Yellow enemy simply moves based on their orientation and whether there is a wall or not in front
     /**
     * Moves yellow enemy in a set pattern that is clockwise. 
     * The yellow enemy will change orientation when a wall has been hit.
     */
-    public void moveYellowEnemy(yellowEnemy i){//Yellow enemy simply moves based on their orientation and whether there is a wall or not in front
+    public void moveYellowEnemy(yellowEnemy i){
 <span class="fc bfc" id="L332" title="All 2 branches covered.">        if(i.orientation == 0){</span>
 <span class="pc bpc" id="L333" title="1 of 2 branches missed.">            if(currentBoard[i.getY()+1][i.getX()].matches(&quot; |R|Y|G|P&quot;)){</span>
 <span class="fc" id="L334">                i.movementDOWN();</span>
@@ -438,7 +438,7 @@ public class App extends PApplet {
     public void keyReleased() {
 <span class="fc" id="L439">        this.keyReleased = true;</span>
 <span class="fc" id="L440">    }</span>
-    
+
     public int getLives(){
 <span class="fc" id="L443">        return this.lives;</span>
     }

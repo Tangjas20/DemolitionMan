@@ -5,12 +5,18 @@ import java.util.List;
 import processing.core.PImage;
 import processing.core.PApplet;
 
+/**
+* Creates the BrokenWall class which is used to create brokenWall objects that can be stored in an ArrayList for populating the board.
+*/
 public class BrokenWall extends allTilesClass {
 
+    /**
+    * Constructs the object given the x and y coordinates as well as loading the image from the resources folder.
+     */
     public BrokenWall(int x, int y, PApplet app) {
-<span class="fc" id="L11">        super(x, y, app);</span>
-<span class="fc" id="L12">        this.block = app.loadImage(&quot;src/main/resources/broken/broken.png&quot;);</span>
-<span class="fc" id="L13">    }</span>
+<span class="fc" id="L17">        super(x, y, app);</span>
+<span class="fc" id="L18">        this.block = app.loadImage(&quot;src/main/resources/broken/broken.png&quot;);</span>
+<span class="fc" id="L19">    }</span>
 
 
 

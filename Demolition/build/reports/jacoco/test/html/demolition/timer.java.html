@@ -5,38 +5,46 @@ import processing.core.PImage;
 import processing.core.PApplet;
 
 
-
+/**
+* Creates the timer class which loads the images as well as keeps track of the game time. App ticks at a rate of 60 FPS and the timer is reduced every 60 ticks
+*/
 public class timer {
-<span class="fc" id="L10">    private int counter = 0;</span>
+<span class="fc" id="L12">    private int counter = 0;</span>
     private PImage timerImage;
     int timer;
     private PImage playerIcon;
 
-
-<span class="fc" id="L16">    public timer(int timer, PApplet app) {</span>
-<span class="fc" id="L17">        this.timer = timer;</span>
-<span class="fc" id="L18">        this.timerImage = app.loadImage(&quot;src/main/resources/icons/clock.png&quot;);</span>
-<span class="fc" id="L19">        this.playerIcon = app.loadImage(&quot;src/main/resources/icons/player.png&quot;);</span>
-<span class="fc" id="L20">    }</span>
-
+    /**
+    * Takes in an int for timer which is loaded from the config.kson and the PApplet app. Timer icons and player graphics are loaded
+    */
+<span class="fc" id="L20">    public timer(int timer, PApplet app) {</span>
+<span class="fc" id="L21">        this.timer = timer;</span>
+<span class="fc" id="L22">        this.timerImage = app.loadImage(&quot;src/main/resources/icons/clock.png&quot;);</span>
+<span class="fc" id="L23">        this.playerIcon = app.loadImage(&quot;src/main/resources/icons/player.png&quot;);</span>
+<span class="fc" id="L24">    }</span>
+    /**
+    * Every 60 ticks leads to the time -1 as there is 60FPS. 
+    */
     public void tick() {
         //Handles logic
-<span class="fc" id="L24">        counter++;</span>
-<span class="fc bfc" id="L25" title="All 2 branches covered.">        if(counter == 60){</span>
-<span class="fc" id="L26">            timer -= 1;</span>
-<span class="fc" id="L27">            counter = 0;</span>
+<span class="fc" id="L30">        counter++;</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        if(counter == 60){</span>
+<span class="fc" id="L32">            timer -= 1;</span>
+<span class="fc" id="L33">            counter = 0;</span>
         }
 
-<span class="fc" id="L30">    }</span>
-
+<span class="fc" id="L36">    }</span>
+    /**
+    * Draws the timerIcon as well as the playerIcon which is at the top of the game window.
+    */
     public void draw(PApplet app) {
         //Handling graphics -- Single line or so, no logics
-<span class="fc" id="L34">        app.image(this.timerImage, 300, 16);</span>
-<span class="fc" id="L35">        app.image(this.playerIcon, 96, 16);</span>
-<span class="fc" id="L36">    }</span>
+<span class="fc" id="L42">        app.image(this.timerImage, 300, 16);</span>
+<span class="fc" id="L43">        app.image(this.playerIcon, 96, 16);</span>
+<span class="fc" id="L44">    }</span>
 
     public int getTimer() {
-<span class="fc" id="L39">        return this.timer;</span>
+<span class="fc" id="L47">        return this.timer;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

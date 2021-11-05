@@ -6,6 +6,8 @@ import processing.core.PImage;
 
 /**
 * Inherits from the GameObject class and is used as a class to be inherited from for each respect tile. This is abstract as it will not be instantiated directly.
+* @param x is the x position of the tile in the currentboard
+* @param y is the y position of the tile in the currentboard
  */
 public abstract class allTilesClass extends GameObject {
 
@@ -17,7 +19,9 @@ public abstract class allTilesClass extends GameObject {
         super(x, y, app);
     }
 
-
+    /**
+    *Handles graphics of the block as well as draw its x and y coordinates on the game window.
+     */
     public void draw(PApplet app) {
         //Handling graphics -- Single line or so, no logics
 

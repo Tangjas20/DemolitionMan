@@ -6,50 +6,55 @@ import processing.core.PImage;
 import processing.core.PApplet;
 
 
+/**
+* Contains attributes which stores the images for each animation in each direction.
+ */
 public class Player extends PlayerClasses{
     
-<span class="fc" id="L11">    protected List&lt;PImage[]&gt; sprites = new ArrayList&lt;PImage[]&gt;();</span>
+<span class="fc" id="L14">    protected List&lt;PImage[]&gt; sprites = new ArrayList&lt;PImage[]&gt;();</span>
 
-
+    /**
+    * Takes in the x and y coordinates of the object and loads in the respective images for each direction.
+     */
     public Player(int x, int y, PApplet app) {
-<span class="fc" id="L15">        super(x, y, app);</span>
+<span class="fc" id="L20">        super(x, y, app);</span>
 
-<span class="fc" id="L17">        PImage[] playerGif = new PImage[4];</span>
-<span class="fc" id="L18">        playerGif[0] = app.loadImage(&quot;src/main/resources/player/player1.png&quot;);</span>
-<span class="fc" id="L19">        playerGif[1] = app.loadImage(&quot;src/main/resources/player/player2.png&quot;);</span>
-<span class="fc" id="L20">        playerGif[2] = app.loadImage(&quot;src/main/resources/player/player3.png&quot;);</span>
-<span class="fc" id="L21">        playerGif[3] = app.loadImage(&quot;src/main/resources/player/player4.png&quot;);</span>
+<span class="fc" id="L22">        PImage[] playerGif = new PImage[4];</span>
+<span class="fc" id="L23">        playerGif[0] = app.loadImage(&quot;src/main/resources/player/player1.png&quot;);</span>
+<span class="fc" id="L24">        playerGif[1] = app.loadImage(&quot;src/main/resources/player/player2.png&quot;);</span>
+<span class="fc" id="L25">        playerGif[2] = app.loadImage(&quot;src/main/resources/player/player3.png&quot;);</span>
+<span class="fc" id="L26">        playerGif[3] = app.loadImage(&quot;src/main/resources/player/player4.png&quot;);</span>
 
-<span class="fc" id="L23">        PImage[] playerUpGif = new PImage[4];</span>
-<span class="fc" id="L24">        playerUpGif[0] = app.loadImage(&quot;src/main/resources/player/player_up1.png&quot;);</span>
-<span class="fc" id="L25">        playerUpGif[1] = app.loadImage(&quot;src/main/resources/player/player_up2.png&quot;);</span>
-<span class="fc" id="L26">        playerUpGif[2] = app.loadImage(&quot;src/main/resources/player/player_up3.png&quot;);</span>
-<span class="fc" id="L27">        playerUpGif[3] = app.loadImage(&quot;src/main/resources/player/player_up4.png&quot;);</span>
+<span class="fc" id="L28">        PImage[] playerUpGif = new PImage[4];</span>
+<span class="fc" id="L29">        playerUpGif[0] = app.loadImage(&quot;src/main/resources/player/player_up1.png&quot;);</span>
+<span class="fc" id="L30">        playerUpGif[1] = app.loadImage(&quot;src/main/resources/player/player_up2.png&quot;);</span>
+<span class="fc" id="L31">        playerUpGif[2] = app.loadImage(&quot;src/main/resources/player/player_up3.png&quot;);</span>
+<span class="fc" id="L32">        playerUpGif[3] = app.loadImage(&quot;src/main/resources/player/player_up4.png&quot;);</span>
 
-<span class="fc" id="L29">        PImage[] playerRightGif = new PImage[4];</span>
-<span class="fc" id="L30">        playerRightGif[0] = app.loadImage(&quot;src/main/resources/player/player_right1.png&quot;);</span>
-<span class="fc" id="L31">        playerRightGif[1] = app.loadImage(&quot;src/main/resources/player/player_right2.png&quot;);</span>
-<span class="fc" id="L32">        playerRightGif[2] = app.loadImage(&quot;src/main/resources/player/player_right3.png&quot;);</span>
-<span class="fc" id="L33">        playerRightGif[3] = app.loadImage(&quot;src/main/resources/player/player_right4.png&quot;);</span>
+<span class="fc" id="L34">        PImage[] playerRightGif = new PImage[4];</span>
+<span class="fc" id="L35">        playerRightGif[0] = app.loadImage(&quot;src/main/resources/player/player_right1.png&quot;);</span>
+<span class="fc" id="L36">        playerRightGif[1] = app.loadImage(&quot;src/main/resources/player/player_right2.png&quot;);</span>
+<span class="fc" id="L37">        playerRightGif[2] = app.loadImage(&quot;src/main/resources/player/player_right3.png&quot;);</span>
+<span class="fc" id="L38">        playerRightGif[3] = app.loadImage(&quot;src/main/resources/player/player_right4.png&quot;);</span>
 
-<span class="fc" id="L35">        PImage[] playerLeftGif = new PImage[4];</span>
-<span class="fc" id="L36">        playerLeftGif[0] = app.loadImage(&quot;src/main/resources/player/player_left1.png&quot;);</span>
-<span class="fc" id="L37">        playerLeftGif[1] = app.loadImage(&quot;src/main/resources/player/player_left2.png&quot;);</span>
-<span class="fc" id="L38">        playerLeftGif[2] = app.loadImage(&quot;src/main/resources/player/player_left3.png&quot;);</span>
-<span class="fc" id="L39">        playerLeftGif[3] = app.loadImage(&quot;src/main/resources/player/player_left4.png&quot;);</span>
+<span class="fc" id="L40">        PImage[] playerLeftGif = new PImage[4];</span>
+<span class="fc" id="L41">        playerLeftGif[0] = app.loadImage(&quot;src/main/resources/player/player_left1.png&quot;);</span>
+<span class="fc" id="L42">        playerLeftGif[1] = app.loadImage(&quot;src/main/resources/player/player_left2.png&quot;);</span>
+<span class="fc" id="L43">        playerLeftGif[2] = app.loadImage(&quot;src/main/resources/player/player_left3.png&quot;);</span>
+<span class="fc" id="L44">        playerLeftGif[3] = app.loadImage(&quot;src/main/resources/player/player_left4.png&quot;);</span>
 
 
-<span class="fc" id="L42">        sprites.add(playerGif);</span>
-<span class="fc" id="L43">        sprites.add(playerUpGif);</span>
-<span class="fc" id="L44">        sprites.add(playerRightGif);</span>
-<span class="fc" id="L45">        sprites.add(playerLeftGif);</span>
-<span class="fc" id="L46">    }</span>
+<span class="fc" id="L47">        sprites.add(playerGif);</span>
+<span class="fc" id="L48">        sprites.add(playerUpGif);</span>
+<span class="fc" id="L49">        sprites.add(playerRightGif);</span>
+<span class="fc" id="L50">        sprites.add(playerLeftGif);</span>
+<span class="fc" id="L51">    }</span>
 
     public void draw(PApplet app) {
         //Handling graphics -- Single line or so, no logics
 
-<span class="fc" id="L51">        app.image(this.sprites.get(orientation)[imageTick], this.x*32, this.y*32+48);</span>
-<span class="fc" id="L52">    }</span>
+<span class="fc" id="L56">        app.image(this.sprites.get(orientation)[imageTick], this.x*32, this.y*32+48);</span>
+<span class="fc" id="L57">    }</span>
 
     
 

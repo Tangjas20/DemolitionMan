@@ -15,6 +15,8 @@ public class Player extends PlayerClasses{
 
     /**
     * Takes in the x and y coordinates of the object and loads in the respective images for each direction.
+    * @param x corresponds to the x coordinate of the player created
+    * @param y corresponds to the y coordinate of the player created
      */
     public Player(int x, int y, PApplet app) {
         super(x, y, app);

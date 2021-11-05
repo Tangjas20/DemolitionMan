@@ -11,7 +11,11 @@ import processing.core.PApplet;
 public class yellowEnemy extends PlayerClasses{
 
     private List<PImage[]> enemyYellowSprite = new ArrayList<PImage[]>();
-
+    /**
+    *Creates the yellow enemy object at the specified coordinates. It will load the sprite pngs and store it in enemyYellowSprite List<PImage>
+    * @param x corresponds to the x coordinate of the tile where the object is placed
+    * @param y corresponds to the y coordinate of the tile where the object is placed
+    */
     public yellowEnemy(int x, int y, PApplet app) {
         super(x, y, app);
         

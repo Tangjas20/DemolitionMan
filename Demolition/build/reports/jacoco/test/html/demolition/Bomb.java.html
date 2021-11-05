@@ -163,9 +163,9 @@ public class Bomb extends GameObject {
         }
 
 <span class="fc" id="L165">    }</span>
-    
+
     /**
-    *
+    * Calls the explode function for each tile. Starts by exploding the closest block in each direction and if they are not solid walls or broken walls, the next block in the respective direction will be exploded
     */
     public void explosion(App app) {//Calls upon explode method to change the currentBoard terrain and enemies
         //Left
@@ -184,63 +184,66 @@ public class Bomb extends GameObject {
 <span class="pc bpc" id="L184" title="1 of 2 branches missed.">      if (explode(this.x, this.y, app));</span>
 <span class="fc" id="L185">    }</span>
 
+    /**
+    * Checks the given coordinates and depending on the tile will either change to &quot; &quot;, do nothing or change booleans isEnemyDead or killedPlayer to true. The returned value of these will be used in the explosion method to extend the explosion to further blocks
+    */
     public boolean explode(int row, int column, App app) {
-<span class="fc" id="L188">        String tile = app.currentBoard[column][row];</span>
+<span class="fc" id="L191">        String tile = app.currentBoard[column][row];</span>
 
-<span class="fc bfc" id="L190" title="All 2 branches covered.">        if (tile.equals(&quot; &quot;)) {</span>
-<span class="fc" id="L191">          return true;</span>
-<span class="fc bfc" id="L192" title="All 2 branches covered.">        } else if (tile.equals(&quot;B&quot;)) {</span>
-<span class="fc" id="L193">            this.currentBoard[column][row] = &quot; &quot;;</span>
-<span class="fc" id="L194">            return false;</span>
+<span class="fc bfc" id="L193" title="All 2 branches covered.">        if (tile.equals(&quot; &quot;)) {</span>
+<span class="fc" id="L194">          return true;</span>
+<span class="fc bfc" id="L195" title="All 2 branches covered.">        } else if (tile.equals(&quot;B&quot;)) {</span>
+<span class="fc" id="L196">            this.currentBoard[column][row] = &quot; &quot;;</span>
+<span class="fc" id="L197">            return false;</span>
 
-<span class="fc bfc" id="L196" title="All 2 branches covered.">        } else if (tile.equals(&quot;P&quot;)) {</span>
-<span class="fc" id="L197">            killedPlayer = true;</span>
-<span class="fc" id="L198">            return true;</span>
+<span class="fc bfc" id="L199" title="All 2 branches covered.">        } else if (tile.equals(&quot;P&quot;)) {</span>
+<span class="fc" id="L200">            killedPlayer = true;</span>
+<span class="fc" id="L201">            return true;</span>
 
-<span class="fc bfc" id="L200" title="All 2 branches covered.">        } else if (tile.equals(&quot;Y&quot;)) {</span>
-<span class="fc" id="L201">            this.currentBoard[column][row] = &quot; &quot;;</span>
-<span class="fc bfc" id="L202" title="All 2 branches covered.">            for(yellowEnemy i: app.board.yellowEnemyList){</span>
-<span class="pc bpc" id="L203" title="3 of 4 branches missed.">                if(i.getX() == row &amp;&amp; i.getY() == column){</span>
-<span class="nc" id="L204">                    i.isEnemyDead = true;</span>
+<span class="fc bfc" id="L203" title="All 2 branches covered.">        } else if (tile.equals(&quot;Y&quot;)) {</span>
+<span class="fc" id="L204">            this.currentBoard[column][row] = &quot; &quot;;</span>
+<span class="fc bfc" id="L205" title="All 2 branches covered.">            for(yellowEnemy i: app.board.yellowEnemyList){</span>
+<span class="pc bpc" id="L206" title="3 of 4 branches missed.">                if(i.getX() == row &amp;&amp; i.getY() == column){</span>
+<span class="nc" id="L207">                    i.isEnemyDead = true;</span>
                 }
-<span class="fc" id="L206">            }</span>
-<span class="pc bpc" id="L207" title="1 of 2 branches missed.">            app.board.yellowEnemyList.removeIf(b -&gt; b.isEnemyDead == true);</span>
-<span class="fc" id="L208">            killedYellowEnemy = true;</span>
-<span class="fc" id="L209">            return true;</span>
+<span class="fc" id="L209">            }</span>
+<span class="pc bpc" id="L210" title="1 of 2 branches missed.">            app.board.yellowEnemyList.removeIf(b -&gt; b.isEnemyDead == true);</span>
+<span class="fc" id="L211">            killedYellowEnemy = true;</span>
+<span class="fc" id="L212">            return true;</span>
 
-<span class="fc bfc" id="L211" title="All 2 branches covered.">        } else if (tile.equals(&quot;R&quot;)) {</span>
-<span class="fc" id="L212">            this.currentBoard[column][row] = &quot; &quot;;</span>
-<span class="fc bfc" id="L213" title="All 2 branches covered.">            for(redEnemy i: app.board.redEnemyList){</span>
-<span class="pc bpc" id="L214" title="1 of 4 branches missed.">                if(i.getX() == row &amp;&amp; i.getY() == column){</span>
-<span class="fc" id="L215">                    i.isEnemyDead = true;</span>
+<span class="fc bfc" id="L214" title="All 2 branches covered.">        } else if (tile.equals(&quot;R&quot;)) {</span>
+<span class="fc" id="L215">            this.currentBoard[column][row] = &quot; &quot;;</span>
+<span class="fc bfc" id="L216" title="All 2 branches covered.">            for(redEnemy i: app.board.redEnemyList){</span>
+<span class="pc bpc" id="L217" title="1 of 4 branches missed.">                if(i.getX() == row &amp;&amp; i.getY() == column){</span>
+<span class="fc" id="L218">                    i.isEnemyDead = true;</span>
                 }
-<span class="fc" id="L217">            }</span>
-<span class="fc bfc" id="L218" title="All 2 branches covered.">            app.board.redEnemyList.removeIf(b -&gt; b.isEnemyDead == true);</span>
-<span class="fc" id="L219">            killedRedEnemy = true;</span>
-<span class="fc" id="L220">            return true;</span>
+<span class="fc" id="L220">            }</span>
+<span class="fc bfc" id="L221" title="All 2 branches covered.">            app.board.redEnemyList.removeIf(b -&gt; b.isEnemyDead == true);</span>
+<span class="fc" id="L222">            killedRedEnemy = true;</span>
+<span class="fc" id="L223">            return true;</span>
         }
-<span class="fc" id="L222">        return false;</span>
+<span class="fc" id="L225">        return false;</span>
 
     }
 
     public boolean getIsAlive(){
-<span class="fc" id="L227">        return this.isAlive;</span>
+<span class="fc" id="L230">        return this.isAlive;</span>
     }
     
     public void notAlive(){
-<span class="fc" id="L231">        this.isAlive = false;</span>
-<span class="fc" id="L232">    }</span>
+<span class="fc" id="L234">        this.isAlive = false;</span>
+<span class="fc" id="L235">    }</span>
 
     public boolean getExplosionFinished(){
-<span class="fc" id="L235">        return this.explosionFinished;</span>
+<span class="fc" id="L238">        return this.explosionFinished;</span>
     }
 
     public String[][] getBoard(){
-<span class="fc" id="L239">        return this.currentBoard;</span>
+<span class="fc" id="L242">        return this.currentBoard;</span>
     }
 
     public int getCurrentSprite(){
-<span class="fc" id="L243">        return this.currentSprite;</span>
+<span class="fc" id="L246">        return this.currentSprite;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

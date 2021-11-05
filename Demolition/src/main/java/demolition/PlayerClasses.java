@@ -72,6 +72,7 @@ public abstract class PlayerClasses extends GameObject{
     }
     /**
     * Forcelly change the character orientation (used for testing purposes) 
+    * @param orientation is the orientation that the player/enemy will be changed to. It is the direction they are facing
     */
     public void changeOrientation(int orientation){
         this.orientation = orientation;

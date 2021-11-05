@@ -16,6 +16,7 @@ public class timer {
 
     /**
     * Takes in an int for timer which is loaded from the config.kson and the PApplet app. Timer icons and player graphics are loaded
+    * @param timer is the time allowed for the level to be cleared which is declared in the config files.
     */
     public timer(int timer, PApplet app) {
         this.timer = timer;

@@ -20,6 +20,7 @@ public class readJsonObject {
     /**
     * Takes in a filePath String parameter and uses a scanner to append each Line to the fileRead variable. If filepath is invalid an exception of Config Load failed error will be printed. 
     * Extracts all info relating to lives, path and time and stores it in variables to be used in the app.
+    * @param filePath is the path of the config.json located in the root directory.
     */
     public void readFiles(String filePath){
         try{

@@ -5,45 +5,46 @@ import java.util.List;
 import processing.core.PImage;
 import processing.core.PApplet;
 
-
+/**
+* Creates the yellowEnemy object which inherits attributes from the playerClasses class for tick(). Contains a moveTimer
+*/
 public class yellowEnemy extends PlayerClasses{
 
-<span class="fc" id="L11">    int moveTimer = 0;</span>
-<span class="fc" id="L12">    private List&lt;PImage[]&gt; enemyYellowSprite = new ArrayList&lt;PImage[]&gt;();</span>
+<span class="fc" id="L13">    private List&lt;PImage[]&gt; enemyYellowSprite = new ArrayList&lt;PImage[]&gt;();</span>
 
     public yellowEnemy(int x, int y, PApplet app) {
-<span class="fc" id="L15">        super(x, y, app);</span>
+<span class="fc" id="L16">        super(x, y, app);</span>
         
-<span class="fc" id="L17">        PImage[] yellowEnemySprite = new PImage[4];</span>
-<span class="fc" id="L18">        yellowEnemySprite [0] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_down1.png&quot;);</span>
-<span class="fc" id="L19">        yellowEnemySprite [1] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_down2.png&quot;);</span>
-<span class="fc" id="L20">        yellowEnemySprite [2] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_down3.png&quot;);</span>
-<span class="fc" id="L21">        yellowEnemySprite [3] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_down4.png&quot;);</span>
+<span class="fc" id="L18">        PImage[] yellowEnemySprite = new PImage[4];</span>
+<span class="fc" id="L19">        yellowEnemySprite [0] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_down1.png&quot;);</span>
+<span class="fc" id="L20">        yellowEnemySprite [1] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_down2.png&quot;);</span>
+<span class="fc" id="L21">        yellowEnemySprite [2] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_down3.png&quot;);</span>
+<span class="fc" id="L22">        yellowEnemySprite [3] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_down4.png&quot;);</span>
 
-<span class="fc" id="L23">        PImage[] yellowEnemyUpSprite = new PImage[4];</span>
-<span class="fc" id="L24">        yellowEnemyUpSprite[0] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_up1.png&quot;);</span>
-<span class="fc" id="L25">        yellowEnemyUpSprite[1] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_up2.png&quot;);</span>
-<span class="fc" id="L26">        yellowEnemyUpSprite[2] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_up3.png&quot;);</span>
-<span class="fc" id="L27">        yellowEnemyUpSprite[3] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_up4.png&quot;);</span>
+<span class="fc" id="L24">        PImage[] yellowEnemyUpSprite = new PImage[4];</span>
+<span class="fc" id="L25">        yellowEnemyUpSprite[0] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_up1.png&quot;);</span>
+<span class="fc" id="L26">        yellowEnemyUpSprite[1] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_up2.png&quot;);</span>
+<span class="fc" id="L27">        yellowEnemyUpSprite[2] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_up3.png&quot;);</span>
+<span class="fc" id="L28">        yellowEnemyUpSprite[3] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_up4.png&quot;);</span>
 
-<span class="fc" id="L29">        PImage[]yellowEnemyRightSprite = new PImage[4];</span>
-<span class="fc" id="L30">        yellowEnemyRightSprite[0] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_right1.png&quot;);</span>
-<span class="fc" id="L31">        yellowEnemyRightSprite[1] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_right2.png&quot;);</span>
-<span class="fc" id="L32">        yellowEnemyRightSprite[2] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_right3.png&quot;);</span>
-<span class="fc" id="L33">        yellowEnemyRightSprite[3] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_right4.png&quot;);</span>
+<span class="fc" id="L30">        PImage[]yellowEnemyRightSprite = new PImage[4];</span>
+<span class="fc" id="L31">        yellowEnemyRightSprite[0] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_right1.png&quot;);</span>
+<span class="fc" id="L32">        yellowEnemyRightSprite[1] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_right2.png&quot;);</span>
+<span class="fc" id="L33">        yellowEnemyRightSprite[2] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_right3.png&quot;);</span>
+<span class="fc" id="L34">        yellowEnemyRightSprite[3] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_right4.png&quot;);</span>
 
-<span class="fc" id="L35">        PImage[] yellowEnemyLeftSprite = new PImage[4];</span>
-<span class="fc" id="L36">        yellowEnemyLeftSprite[0] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_left1.png&quot;);</span>
-<span class="fc" id="L37">        yellowEnemyLeftSprite[1] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_left2.png&quot;);</span>
-<span class="fc" id="L38">        yellowEnemyLeftSprite[2] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_left3.png&quot;);</span>
-<span class="fc" id="L39">        yellowEnemyLeftSprite[3] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_left4.png&quot;);</span>
+<span class="fc" id="L36">        PImage[] yellowEnemyLeftSprite = new PImage[4];</span>
+<span class="fc" id="L37">        yellowEnemyLeftSprite[0] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_left1.png&quot;);</span>
+<span class="fc" id="L38">        yellowEnemyLeftSprite[1] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_left2.png&quot;);</span>
+<span class="fc" id="L39">        yellowEnemyLeftSprite[2] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_left3.png&quot;);</span>
+<span class="fc" id="L40">        yellowEnemyLeftSprite[3] = app.loadImage(&quot;src/main/resources/yellow_enemy/yellow_left4.png&quot;);</span>
 
 
-<span class="fc" id="L42">        enemyYellowSprite.add(yellowEnemySprite);</span>
-<span class="fc" id="L43">        enemyYellowSprite.add(yellowEnemyUpSprite);</span>
-<span class="fc" id="L44">        enemyYellowSprite.add(yellowEnemyRightSprite);</span>
-<span class="fc" id="L45">        enemyYellowSprite.add(yellowEnemyLeftSprite);</span>
-<span class="fc" id="L46">    }</span>
+<span class="fc" id="L43">        enemyYellowSprite.add(yellowEnemySprite);</span>
+<span class="fc" id="L44">        enemyYellowSprite.add(yellowEnemyUpSprite);</span>
+<span class="fc" id="L45">        enemyYellowSprite.add(yellowEnemyRightSprite);</span>
+<span class="fc" id="L46">        enemyYellowSprite.add(yellowEnemyLeftSprite);</span>
+<span class="fc" id="L47">    }</span>
 //The Yellow Enemy moves in a straight line, but on collision with a wall will attempt to move clockwise 
 //(if it was moving left, it will try to move up, and if unable to, then try right and then left; 
 //similarly if it was moving down, it will try to move left, otherwise up or right).
@@ -53,8 +54,8 @@ public class yellowEnemy extends PlayerClasses{
     public void draw(PApplet app) {
         //Handling graphics -- Single line or so, no logics
 
-<span class="fc" id="L56">        app.image(this.enemyYellowSprite.get(orientation)[imageTick], this.x*32, this.y*32+48);</span>
-<span class="fc" id="L57">    }</span>
+<span class="fc" id="L57">        app.image(this.enemyYellowSprite.get(orientation)[imageTick], this.x*32, this.y*32+48);</span>
+<span class="fc" id="L58">    }</span>
 
     
 

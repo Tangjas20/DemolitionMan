@@ -5,60 +5,77 @@ import processing.core.PApplet;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+* This abstract class will be inherited from for each entity that is either a player or an enemy. Contains attributes which stores newX, newY, imageTick, sprites, orientation, timer and isEnemyDead values.
+ */
 public abstract class PlayerClasses extends GameObject{
     protected int newX;
     protected int newY;
-<span class="fc" id="L11">    protected int imageTick = 0;</span>
-<span class="fc" id="L12">    protected List&lt;PImage[]&gt; sprites = new ArrayList&lt;PImage[]&gt;();</span>
-<span class="fc" id="L13">    protected int orientation = 0;</span>
+<span class="fc" id="L14">    protected int imageTick = 0;</span>
+<span class="fc" id="L15">    protected List&lt;PImage[]&gt; sprites = new ArrayList&lt;PImage[]&gt;();</span>
+<span class="fc" id="L16">    protected int orientation = 0;</span>
     int timer;
     protected boolean isEnemyDead;
 
     public PlayerClasses(int x, int y, PApplet app){
-<span class="fc" id="L18">        super(x, y, app);</span>
+<span class="fc" id="L21">        super(x, y, app);</span>
+<span class="fc" id="L22">    }</span>
 
-<span class="fc" id="L20">    }</span>
-
+    /**
+    * Predominantly used for cycling through player and enemy animations. Every tick increases the timer value wherein at the count of 12, will increase the imageTick and reset the timer back to 0. 
+    */
     public void tick() {
         //Handles logic
-<span class="fc" id="L24">        timer++;</span>
-<span class="fc bfc" id="L25" title="All 2 branches covered.">        if(timer == 12){</span>
-<span class="fc" id="L26">            imageTick ++;</span>
-<span class="fc" id="L27">            timer = 0;</span>
-<span class="fc bfc" id="L28" title="All 2 branches covered.">            if(imageTick &gt; 3){</span>
-<span class="fc" id="L29">                this.imageTick = 0;</span>
+<span class="fc" id="L29">        timer++;</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        if(timer == 12){</span>
+<span class="fc" id="L31">            imageTick ++;</span>
+<span class="fc" id="L32">            timer = 0;</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">            if(imageTick &gt; 3){</span>
+<span class="fc" id="L34">                this.imageTick = 0;</span>
             }
         }
+<span class="fc" id="L37">    }</span>
 
-<span class="fc" id="L33">    }</span>
+    /**
+    * Shifts the character location to the left 
+    */
     public void movementLeft(){
-<span class="fc" id="L35">            newX = x-1;</span>
-<span class="fc" id="L36">            newY = y;</span>
-<span class="fc" id="L37">            x = newX;</span>
-<span class="fc" id="L38">            y = newY;</span>
-<span class="fc" id="L39">        }</span>
-
+<span class="fc" id="L43">            newX = x-1;</span>
+<span class="fc" id="L44">            newY = y;</span>
+<span class="fc" id="L45">            x = newX;</span>
+<span class="fc" id="L46">            y = newY;</span>
+<span class="fc" id="L47">        }</span>
+    /**
+    * Shifts character location to the right
+    */
     public void movementRight(){
-<span class="fc" id="L42">        newX = x+1;</span>
-<span class="fc" id="L43">        x = newX;</span>
-<span class="fc" id="L44">    }</span>
+<span class="fc" id="L52">        newX = x+1;</span>
+<span class="fc" id="L53">        x = newX;</span>
+<span class="fc" id="L54">    }</span>
+    /**
+    * Shifts character location up 
+    */
     public void movementUP(){
-<span class="fc" id="L46">        newX = x;</span>
-<span class="fc" id="L47">        newY = y-1;</span>
-<span class="fc" id="L48">        x = newX;</span>
-<span class="fc" id="L49">        y = newY;</span>
-<span class="fc" id="L50">    }</span>
-
+<span class="fc" id="L59">        newX = x;</span>
+<span class="fc" id="L60">        newY = y-1;</span>
+<span class="fc" id="L61">        x = newX;</span>
+<span class="fc" id="L62">        y = newY;</span>
+<span class="fc" id="L63">    }</span>
+    /**
+    * Shifts character location Down
+    */
     public void movementDOWN(){
-<span class="fc" id="L53">        newX = x;</span>
-<span class="fc" id="L54">        newY = y+1;</span>
-<span class="fc" id="L55">        x = newX;</span>
-<span class="fc" id="L56">        y = newY;</span>
-<span class="fc" id="L57">    }</span>
-    
+<span class="fc" id="L68">        newX = x;</span>
+<span class="fc" id="L69">        newY = y+1;</span>
+<span class="fc" id="L70">        x = newX;</span>
+<span class="fc" id="L71">        y = newY;</span>
+<span class="fc" id="L72">    }</span>
+    /**
+    * Forcelly change the character orientation (used for testing purposes) 
+    */
     public void changeOrientation(int orientation){
-<span class="fc" id="L60">        this.orientation = orientation;</span>
-<span class="fc" id="L61">    }</span>
+<span class="fc" id="L77">        this.orientation = orientation;</span>
+<span class="fc" id="L78">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

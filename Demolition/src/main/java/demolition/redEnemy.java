@@ -12,9 +12,11 @@ import java.util.Random;
 public class redEnemy extends PlayerClasses implements playerMovement{
     
     private List<PImage[]> enemyRedSprite = new ArrayList<PImage[]>();
-/**
-* Takes in X and Y and PApplet app to create a redEnemy object which inherits methods from PlayerClasses.
-*/
+    /**
+    * Takes in X and Y and PApplet app to create a redEnemy object which inherits methods from PlayerClasses.
+    * @param x corresponds to the x coordinate of the tile where the enemy is created.
+    * @param y corresponds to the y coordinate of the tile where the enemy is created
+    */
     public redEnemy(int x, int y, PApplet app) {
         super(x, y, app);
                 //Enemy Red Sprite

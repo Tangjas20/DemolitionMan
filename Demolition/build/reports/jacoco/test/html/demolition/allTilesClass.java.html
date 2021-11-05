@@ -4,20 +4,27 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 
-
+/**
+* Inherits from the GameObject class and is used as a class to be inherited from for each respect tile. This is abstract as it will not be instantiated directly.
+ */
 public abstract class allTilesClass extends GameObject {
 
     protected PImage block;
+    /**
+    * Passes parameters of X and Y and PApplet app to the parent GameObject variable to create an object
+     */
     public allTilesClass(int x, int y, PApplet app){
-<span class="fc" id="L12">        super(x, y, app);</span>
-<span class="fc" id="L13">    }</span>
+<span class="fc" id="L17">        super(x, y, app);</span>
+<span class="fc" id="L18">    }</span>
 
-
+    /**
+    *Handles graphics of the block as well as draw its x and y coordinates on the game window.
+     */
     public void draw(PApplet app) {
         //Handling graphics -- Single line or so, no logics
 
-<span class="fc" id="L19">        app.image(this.block, this.x*32, this.y*32+64);</span>
-<span class="fc" id="L20">    }</span>
+<span class="fc" id="L26">        app.image(this.block, this.x*32, this.y*32+64);</span>
+<span class="fc" id="L27">    }</span>
 }
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

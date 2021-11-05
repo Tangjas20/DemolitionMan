@@ -14,6 +14,8 @@ public abstract class GameObject {
 
     /**
     * Takes in the x and y coordinates and stores it in protected variables in the class attributes
+    * @param x corresponds to the x coordinate of the tile where the object is placed
+    * @param y corresponds to the y coordinate of the tile where the object is placed
      */
     public GameObject(int x, int y, PApplet app){
         this.x =x;
