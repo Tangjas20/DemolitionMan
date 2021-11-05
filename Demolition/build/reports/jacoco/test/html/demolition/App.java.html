@@ -327,144 +327,150 @@ public class App extends PApplet {
     /**
     * Moves yellow enemy in a set pattern that is clockwise. 
     * The yellow enemy will change orientation when a wall has been hit.
+    * @param i is the yellowEnemy object which is to be moved.
     */
     public void moveYellowEnemy(yellowEnemy i){
-<span class="fc bfc" id="L332" title="All 2 branches covered.">        if(i.orientation == 0){</span>
-<span class="pc bpc" id="L333" title="1 of 2 branches missed.">            if(currentBoard[i.getY()+1][i.getX()].matches(&quot; |R|Y|G|P&quot;)){</span>
-<span class="fc" id="L334">                i.movementDOWN();</span>
-<span class="fc" id="L335">                currentBoard[i.getY()][i.getX()] = &quot;Y&quot;;</span>
-<span class="fc" id="L336">                currentBoard[i.getY()-1][i.getX()] = &quot; &quot;;</span>
+<span class="fc bfc" id="L333" title="All 2 branches covered.">        if(i.orientation == 0){</span>
+<span class="pc bpc" id="L334" title="1 of 2 branches missed.">            if(currentBoard[i.getY()+1][i.getX()].matches(&quot; |R|Y|G|P&quot;)){</span>
+<span class="fc" id="L335">                i.movementDOWN();</span>
+<span class="fc" id="L336">                currentBoard[i.getY()][i.getX()] = &quot;Y&quot;;</span>
+<span class="fc" id="L337">                currentBoard[i.getY()-1][i.getX()] = &quot; &quot;;</span>
             }
-<span class="nc" id="L338">            else{i.changeOrientation(3);}</span>
+<span class="nc" id="L339">            else{i.changeOrientation(3);}</span>
         }
 
-<span class="fc bfc" id="L341" title="All 2 branches covered.">        else if(i.orientation == 1){</span>
-<span class="pc bpc" id="L342" title="1 of 2 branches missed.">            if(currentBoard[i.getY()-1][i.getX()].matches(&quot; |R|Y|G|P&quot;)){</span>
-<span class="fc" id="L343">                i.movementUP();</span>
-<span class="fc" id="L344">                currentBoard[i.getY()][i.getX()] = &quot;Y&quot;;</span>
-<span class="fc" id="L345">                currentBoard[i.getY()+1][i.getX()] = &quot; &quot;;</span>
+<span class="fc bfc" id="L342" title="All 2 branches covered.">        else if(i.orientation == 1){</span>
+<span class="pc bpc" id="L343" title="1 of 2 branches missed.">            if(currentBoard[i.getY()-1][i.getX()].matches(&quot; |R|Y|G|P&quot;)){</span>
+<span class="fc" id="L344">                i.movementUP();</span>
+<span class="fc" id="L345">                currentBoard[i.getY()][i.getX()] = &quot;Y&quot;;</span>
+<span class="fc" id="L346">                currentBoard[i.getY()+1][i.getX()] = &quot; &quot;;</span>
             }
-<span class="nc" id="L347">            else{i.changeOrientation(2);}</span>
+<span class="nc" id="L348">            else{i.changeOrientation(2);}</span>
         }
 
-<span class="fc bfc" id="L350" title="All 2 branches covered.">        else if(i.orientation == 2){</span>
-<span class="pc bpc" id="L351" title="1 of 2 branches missed.">            if(currentBoard[i.getY()][i.getX()+1].matches(&quot; |R|Y|G|P&quot;)){</span>
-<span class="fc" id="L352">                i.movementRight();</span>
-<span class="fc" id="L353">                currentBoard[i.getY()][i.getX()] = &quot;Y&quot;;</span>
-<span class="fc" id="L354">                currentBoard[i.getY()][i.getX()-1] = &quot; &quot;;</span>
+<span class="fc bfc" id="L351" title="All 2 branches covered.">        else if(i.orientation == 2){</span>
+<span class="pc bpc" id="L352" title="1 of 2 branches missed.">            if(currentBoard[i.getY()][i.getX()+1].matches(&quot; |R|Y|G|P&quot;)){</span>
+<span class="fc" id="L353">                i.movementRight();</span>
+<span class="fc" id="L354">                currentBoard[i.getY()][i.getX()] = &quot;Y&quot;;</span>
+<span class="fc" id="L355">                currentBoard[i.getY()][i.getX()-1] = &quot; &quot;;</span>
             }
-<span class="nc" id="L356">            else{i.changeOrientation(0);}</span>
+<span class="nc" id="L357">            else{i.changeOrientation(0);}</span>
         }
 
-<span class="pc bpc" id="L359" title="1 of 2 branches missed.">        else if(i.orientation == 3){</span>
-<span class="pc bpc" id="L360" title="1 of 2 branches missed.">            if(currentBoard[i.getY()][i.getX()-1].matches(&quot; |R|Y|G|P&quot;)){</span>
-<span class="fc" id="L361">                i.movementLeft();</span>
-<span class="fc" id="L362">                currentBoard[i.getY()][i.getX()] = &quot;Y&quot;;</span>
-<span class="fc" id="L363">                currentBoard[i.getY()][i.getX()+1] = &quot; &quot;;</span>
+<span class="pc bpc" id="L360" title="1 of 2 branches missed.">        else if(i.orientation == 3){</span>
+<span class="pc bpc" id="L361" title="1 of 2 branches missed.">            if(currentBoard[i.getY()][i.getX()-1].matches(&quot; |R|Y|G|P&quot;)){</span>
+<span class="fc" id="L362">                i.movementLeft();</span>
+<span class="fc" id="L363">                currentBoard[i.getY()][i.getX()] = &quot;Y&quot;;</span>
+<span class="fc" id="L364">                currentBoard[i.getY()][i.getX()+1] = &quot; &quot;;</span>
             }
-<span class="nc" id="L365">            else{i.changeOrientation(1);}</span>
+<span class="nc" id="L366">            else{i.changeOrientation(1);}</span>
         }
-<span class="fc" id="L367">    }</span>
+<span class="fc" id="L368">    }</span>
         /*
             .get(0) corresponds with base player
             .get(1) corresponds with up player
             .get(2) corresponds with right player
             .get(3) corresponds with left player
         */
-    public void moveRedEnemyAI(redEnemy i){//Moves with the random library, but will first calculate the possible unblocked paths
-<span class="fc" id="L375">        int[] possiblePath = {0, 0, 0, 0};</span>
-<span class="fc" id="L376">        boolean deadEnd = false;</span>
-<span class="fc bfc" id="L377" title="All 2 branches covered.">         if(i.orientation == 0){</span>
-<span class="fc bfc" id="L378" title="All 2 branches covered.">            if(currentBoard[i.getY()+1][i.getX()].matches(&quot; |R|Y|G|P&quot;)){</span>
-<span class="fc" id="L379">                i.movementDOWN();</span>
-<span class="fc" id="L380">                currentBoard[i.getY()][i.getX()] = &quot;R&quot;;</span>
-<span class="fc" id="L381">                currentBoard[i.getY()-1][i.getX()] = &quot; &quot;;</span>
+        //Moves with the random library, but will first calculate the possible unblocked paths
+    /**
+    *Moves the @param i redEnemy based on the possible paths it can take. The method will first check each block in each direction and assign a value to the possiblePath int array. If it is non 0,
+    * the random library is used to find a path based on those values.
+     */
+    public void moveRedEnemyAI(redEnemy i){
+<span class="fc" id="L381">        int[] possiblePath = {0, 0, 0, 0};</span>
+<span class="fc" id="L382">        boolean deadEnd = false;</span>
+<span class="fc bfc" id="L383" title="All 2 branches covered.">         if(i.orientation == 0){</span>
+<span class="fc bfc" id="L384" title="All 2 branches covered.">            if(currentBoard[i.getY()+1][i.getX()].matches(&quot; |R|Y|G|P&quot;)){</span>
+<span class="fc" id="L385">                i.movementDOWN();</span>
+<span class="fc" id="L386">                currentBoard[i.getY()][i.getX()] = &quot;R&quot;;</span>
+<span class="fc" id="L387">                currentBoard[i.getY()-1][i.getX()] = &quot; &quot;;</span>
             }
             else{
-<span class="fc" id="L384">                deadEnd = true;</span>
+<span class="fc" id="L390">                deadEnd = true;</span>
             }
-<span class="fc bfc" id="L386" title="All 2 branches covered.">        } else if (i.orientation == 1){</span>
-<span class="fc bfc" id="L387" title="All 2 branches covered.">            if(currentBoard[i.getY()-1][i.getX()].matches(&quot; |R|Y|G|P&quot;)){</span>
-<span class="fc" id="L388">                i.movementUP();</span>
-<span class="fc" id="L389">                currentBoard[i.getY()][i.getX()] = &quot;R&quot;;</span>
-<span class="fc" id="L390">                currentBoard[i.getY()+1][i.getX()] = &quot; &quot;;</span>
+<span class="fc bfc" id="L392" title="All 2 branches covered.">        } else if (i.orientation == 1){</span>
+<span class="fc bfc" id="L393" title="All 2 branches covered.">            if(currentBoard[i.getY()-1][i.getX()].matches(&quot; |R|Y|G|P&quot;)){</span>
+<span class="fc" id="L394">                i.movementUP();</span>
+<span class="fc" id="L395">                currentBoard[i.getY()][i.getX()] = &quot;R&quot;;</span>
+<span class="fc" id="L396">                currentBoard[i.getY()+1][i.getX()] = &quot; &quot;;</span>
 
             } else {
-<span class="fc" id="L393">                deadEnd = true;</span>
+<span class="fc" id="L399">                deadEnd = true;</span>
             }
         }
 
-<span class="fc bfc" id="L397" title="All 2 branches covered.">        else if(i.orientation == 2){</span>
-<span class="pc bpc" id="L398" title="1 of 2 branches missed.">            if(currentBoard[i.getY()][i.getX()+1].matches(&quot; |R|Y|G|P&quot;)){</span>
-<span class="fc" id="L399">                i.movementRight();</span>
-<span class="fc" id="L400">                currentBoard[i.getY()][i.getX()] = &quot;R&quot;;</span>
-<span class="fc" id="L401">                currentBoard[i.getY()][i.getX()-1] = &quot; &quot;;</span>
+<span class="fc bfc" id="L403" title="All 2 branches covered.">        else if(i.orientation == 2){</span>
+<span class="pc bpc" id="L404" title="1 of 2 branches missed.">            if(currentBoard[i.getY()][i.getX()+1].matches(&quot; |R|Y|G|P&quot;)){</span>
+<span class="fc" id="L405">                i.movementRight();</span>
+<span class="fc" id="L406">                currentBoard[i.getY()][i.getX()] = &quot;R&quot;;</span>
+<span class="fc" id="L407">                currentBoard[i.getY()][i.getX()-1] = &quot; &quot;;</span>
             }
             else{
-<span class="nc" id="L404">                deadEnd = true;</span>
+<span class="nc" id="L410">                deadEnd = true;</span>
             }
         }
 
-<span class="pc bpc" id="L408" title="1 of 2 branches missed.">        else if(i.orientation == 3){</span>
-<span class="pc bpc" id="L409" title="1 of 2 branches missed.">            if(currentBoard[i.getY()][i.getX()-1].matches(&quot; |R|Y|G|P&quot;)){</span>
-<span class="fc" id="L410">                i.movementLeft();</span>
-<span class="fc" id="L411">                currentBoard[i.getY()][i.getX()] = &quot;R&quot;;</span>
-<span class="fc" id="L412">                currentBoard[i.getY()][i.getX()+1] = &quot; &quot;;</span>
+<span class="pc bpc" id="L414" title="1 of 2 branches missed.">        else if(i.orientation == 3){</span>
+<span class="pc bpc" id="L415" title="1 of 2 branches missed.">            if(currentBoard[i.getY()][i.getX()-1].matches(&quot; |R|Y|G|P&quot;)){</span>
+<span class="fc" id="L416">                i.movementLeft();</span>
+<span class="fc" id="L417">                currentBoard[i.getY()][i.getX()] = &quot;R&quot;;</span>
+<span class="fc" id="L418">                currentBoard[i.getY()][i.getX()+1] = &quot; &quot;;</span>
             }
             else{
-<span class="nc" id="L415">                deadEnd = true;</span>
+<span class="nc" id="L421">                deadEnd = true;</span>
             }
         }
-<span class="fc bfc" id="L418" title="All 2 branches covered.">        if(deadEnd == true){</span>
-<span class="fc" id="L419">            List&lt;Integer&gt; positions = new ArrayList&lt;&gt;();</span>
-<span class="fc bfc" id="L420" title="All 2 branches covered.">            if(currentBoard[i.getY()+1][i.getX()].matches(&quot; |R|Y|G|P&quot;))</span>
-<span class="fc" id="L421">                positions.add(0);</span>
-<span class="fc bfc" id="L422" title="All 2 branches covered.">            if(currentBoard[i.getY()-1][i.getX()].matches(&quot; |R|Y|G|P&quot;))</span>
-<span class="fc" id="L423">                positions.add(1);</span>
-<span class="fc bfc" id="L424" title="All 2 branches covered.">            if(currentBoard[i.getY()][i.getX()+1].matches(&quot; |R|Y|G|P&quot;))</span>
-<span class="fc" id="L425">                positions.add(2);</span>
-<span class="fc bfc" id="L426" title="All 2 branches covered.">            if(currentBoard[i.getY()][i.getX()-1].matches(&quot; |R|Y|G|P&quot;))</span>
-<span class="fc" id="L427">                positions.add(3); </span>
+<span class="fc bfc" id="L424" title="All 2 branches covered.">        if(deadEnd == true){</span>
+<span class="fc" id="L425">            List&lt;Integer&gt; positions = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L426" title="All 2 branches covered.">            if(currentBoard[i.getY()+1][i.getX()].matches(&quot; |R|Y|G|P&quot;))</span>
+<span class="fc" id="L427">                positions.add(0);</span>
+<span class="fc bfc" id="L428" title="All 2 branches covered.">            if(currentBoard[i.getY()-1][i.getX()].matches(&quot; |R|Y|G|P&quot;))</span>
+<span class="fc" id="L429">                positions.add(1);</span>
+<span class="fc bfc" id="L430" title="All 2 branches covered.">            if(currentBoard[i.getY()][i.getX()+1].matches(&quot; |R|Y|G|P&quot;))</span>
+<span class="fc" id="L431">                positions.add(2);</span>
+<span class="fc bfc" id="L432" title="All 2 branches covered.">            if(currentBoard[i.getY()][i.getX()-1].matches(&quot; |R|Y|G|P&quot;))</span>
+<span class="fc" id="L433">                positions.add(3); </span>
 
-<span class="fc" id="L429">            Random r = new Random();</span>
-<span class="fc" id="L430">            int randomNumber = r.nextInt(positions.size());</span>
-<span class="fc" id="L431">            i.changeOrientation(positions.get(randomNumber));</span>
+<span class="fc" id="L435">            Random r = new Random();</span>
+<span class="fc" id="L436">            int randomNumber = r.nextInt(positions.size());</span>
+<span class="fc" id="L437">            i.changeOrientation(positions.get(randomNumber));</span>
         }
-<span class="fc" id="L433">    }</span>
+<span class="fc" id="L439">    }</span>
 
     /**
     * Changes the value of boolean keyReleased to true once a key has been let go.
     */
     public void keyReleased() {
-<span class="fc" id="L439">        this.keyReleased = true;</span>
-<span class="fc" id="L440">    }</span>
+<span class="fc" id="L445">        this.keyReleased = true;</span>
+<span class="fc" id="L446">    }</span>
 
     public int getLives(){
-<span class="fc" id="L443">        return this.lives;</span>
+<span class="fc" id="L449">        return this.lives;</span>
     }
 
     public int getCurrentTimer(){
-<span class="fc" id="L447">        return this.currentTimer;</span>
+<span class="fc" id="L453">        return this.currentTimer;</span>
     }
 
     public List&lt;Bomb&gt; getBombList(){
-<span class="fc" id="L451">        return this.bombList;</span>
+<span class="fc" id="L457">        return this.bombList;</span>
     }
 
     public void changeLives(int lives){
-<span class="fc" id="L455">        this.lives = lives;</span>
-<span class="fc" id="L456">    }</span>
+<span class="fc" id="L461">        this.lives = lives;</span>
+<span class="fc" id="L462">    }</span>
 
     public int getBoardCount(){
-<span class="nc" id="L459">        return this.boardCounter;</span>
+<span class="nc" id="L465">        return this.boardCounter;</span>
     }
 
     public String[][] getCurrentBoard(){
-<span class="fc" id="L463">        return this.currentBoard;</span>
+<span class="fc" id="L469">        return this.currentBoard;</span>
     }
 
     public static void main(String[] args) {
-<span class="nc" id="L467">        PApplet.main(&quot;demolition.App&quot;);</span>
-<span class="nc" id="L468">    }</span>
+<span class="nc" id="L473">        PApplet.main(&quot;demolition.App&quot;);</span>
+<span class="nc" id="L474">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

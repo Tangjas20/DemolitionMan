@@ -12,10 +12,12 @@ public abstract class allTilesClass extends GameObject {
     protected PImage block;
     /**
     * Passes parameters of X and Y and PApplet app to the parent GameObject variable to create an object
-     */
+    * @param x is the x position of the tile in the currentboard
+    * @param y is the y position of the tile in the currentboard
+    */
     public allTilesClass(int x, int y, PApplet app){
-<span class="fc" id="L17">        super(x, y, app);</span>
-<span class="fc" id="L18">    }</span>
+<span class="fc" id="L19">        super(x, y, app);</span>
+<span class="fc" id="L20">    }</span>
 
     /**
     *Handles graphics of the block as well as draw its x and y coordinates on the game window.
@@ -23,8 +25,8 @@ public abstract class allTilesClass extends GameObject {
     public void draw(PApplet app) {
         //Handling graphics -- Single line or so, no logics
 
-<span class="fc" id="L26">        app.image(this.block, this.x*32, this.y*32+64);</span>
-<span class="fc" id="L27">    }</span>
+<span class="fc" id="L28">        app.image(this.block, this.x*32, this.y*32+64);</span>
+<span class="fc" id="L29">    }</span>
 }
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

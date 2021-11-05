@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.playerTesting" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-11-05T09:44:24" hostname="DESKTOP-GJIUGBP" time="9.923">
+<testsuite name="demolition.playerTesting" tests="9" skipped="0" failures="0" errors="0" timestamp="2021-11-05T10:23:55" hostname="DESKTOP-GJIUGBP" time="9.918">
   <properties/>
-  <testcase name="playerWalkIntoGoal()" classname="demolition.playerTesting" time="1.023"/>
-  <testcase name="playerLives()" classname="demolition.playerTesting" time="1.148"/>
-  <testcase name="playerOnTop()" classname="demolition.playerTesting" time="1.038"/>
-  <testcase name="movePlayerObject()" classname="demolition.playerTesting" time="1.142"/>
-  <testcase name="playerWalkIntoRedEnemy()" classname="demolition.playerTesting" time="1.121"/>
-  <testcase name="resetGameTime()" classname="demolition.playerTesting" time="1.228"/>
-  <testcase name="createPlayerObject()" classname="demolition.playerTesting" time="1.138"/>
-  <testcase name="keyPressing()" classname="demolition.playerTesting" time="1.048"/>
-  <testcase name="playerTick()" classname="demolition.playerTesting" time="1.034"/>
+  <testcase name="playerWalkIntoGoal()" classname="demolition.playerTesting" time="1.02"/>
+  <testcase name="playerLives()" classname="demolition.playerTesting" time="1.175"/>
+  <testcase name="playerOnTop()" classname="demolition.playerTesting" time="1.021"/>
+  <testcase name="movePlayerObject()" classname="demolition.playerTesting" time="1.149"/>
+  <testcase name="playerWalkIntoRedEnemy()" classname="demolition.playerTesting" time="1.106"/>
+  <testcase name="resetGameTime()" classname="demolition.playerTesting" time="1.224"/>
+  <testcase name="createPlayerObject()" classname="demolition.playerTesting" time="1.155"/>
+  <testcase name="keyPressing()" classname="demolition.playerTesting" time="1.045"/>
+  <testcase name="playerTick()" classname="demolition.playerTesting" time="1.021"/>
   <system-out><![CDATA[No such file.
 No such file.
 ]]></system-out>
   <system-err><![CDATA[java.util.ConcurrentModificationException
-	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:911)
-	at java.util.ArrayList$Itr.next(ArrayList.java:861)
-	at demolition.App.draw(App.java:138)
-	at processing.core.PApplet.handleDraw(PApplet.java:2426)
-	at processing.awt.PSurfaceAWT$12.callDraw(PSurfaceAWT.java:1557)
-	at processing.core.PSurfaceNone$AnimationThread.run(PSurfaceNone.java:316)
-java.util.ConcurrentModificationException
 	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:911)
 	at java.util.ArrayList$Itr.next(ArrayList.java:861)
 	at demolition.App.draw(App.java:141)

@@ -190,7 +190,8 @@ public class Bomb extends GameObject {
     /**
     * Checks the given coordinates and depending on the tile will either change to " ", do nothing or change booleans isEnemyDead or killedPlayer to true. The returned value of these will be used in the explosion method to extend the explosion to further blocks
     * @param row is an integer which corresponds to the x coordinate of the tile which is to be exploded
-    * @param clumn is an integer which corresponds to the y coordinate of the tile which is to be exploded
+    * @param column is an integer which corresponds to the y coordinate of the tile which is to be exploded
+    * @return returns true or false depending on the block on the tile coordinates.
     */
     public boolean explode(int row, int column, App app) {
         String tile = app.currentBoard[column][row];

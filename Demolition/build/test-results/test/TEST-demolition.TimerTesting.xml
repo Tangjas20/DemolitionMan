@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.TimerTesting" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-05T09:44:38" hostname="DESKTOP-GJIUGBP" time="1.149">
+<testsuite name="demolition.TimerTesting" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-11-05T10:24:09" hostname="DESKTOP-GJIUGBP" time="1.154">
   <properties/>
-  <testcase name="timerTick()" classname="demolition.TimerTesting" time="1.149"/>
+  <testcase name="timerTick()" classname="demolition.TimerTesting" time="1.154"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

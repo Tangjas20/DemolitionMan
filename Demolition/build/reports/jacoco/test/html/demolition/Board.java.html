@@ -33,157 +33,161 @@ public class Board {
     /**
     * Reads the file taken from the config.json and converts it to a String[][] which will be used to store the current board. 
     * Returns a String[13][15] from the inputted txt file
+    * @param fileName is the name of the levels file which is found in the config.json in the root directory.
     */
     public String[][] makeBoard(String fileName, PApplet app) {//Returns a String[][] given a Json object
 
         try{
-<span class="fc" id="L40">            File firstFile = new File(fileName);</span>
-<span class="fc" id="L41">            Scanner scanner = new Scanner(firstFile);</span>
-<span class="fc" id="L42">            int i = 0;</span>
+<span class="fc" id="L41">            File firstFile = new File(fileName);</span>
+<span class="fc" id="L42">            Scanner scanner = new Scanner(firstFile);</span>
+<span class="fc" id="L43">            int i = 0;</span>
 
-<span class="fc bfc" id="L44" title="All 2 branches covered.">            while(scanner.hasNextLine()){</span>
-<span class="fc" id="L45">                String data = scanner.nextLine();</span>
-<span class="fc" id="L46">                madeBoard[i] = data.split(&quot;(?!^)&quot;);</span>
-<span class="fc" id="L47">                i++;</span>
-<span class="fc" id="L48">            }</span>
-<span class="fc" id="L49">            scanner.close();</span>
-<span class="fc" id="L50">        } catch(FileNotFoundException e) {</span>
-<span class="fc" id="L51">            System.out.println(&quot;No such file.&quot;);</span>
-<span class="fc" id="L52">        }</span>
-<span class="fc" id="L53">        return madeBoard;</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">            while(scanner.hasNextLine()){</span>
+<span class="fc" id="L46">                String data = scanner.nextLine();</span>
+<span class="fc" id="L47">                madeBoard[i] = data.split(&quot;(?!^)&quot;);</span>
+<span class="fc" id="L48">                i++;</span>
+<span class="fc" id="L49">            }</span>
+<span class="fc" id="L50">            scanner.close();</span>
+<span class="fc" id="L51">        } catch(FileNotFoundException e) {</span>
+<span class="fc" id="L52">            System.out.println(&quot;No such file.&quot;);</span>
+<span class="fc" id="L53">        }</span>
+<span class="fc" id="L54">        return madeBoard;</span>
     }
 
     /**
     * A makeBoard method which is used for testing purposes. Takes files from the src/test/resources folder and returns a String[13][15]
+    * @param fileName is the name of the levels file which is the test config.json.
      */
     public String[][] testMakeBoard(String fileName, PApplet app) {
 
         try{
-<span class="fc" id="L62">            File firstFile = new File(&quot;src/test/resources/&quot; + fileName);</span>
-<span class="fc" id="L63">            Scanner scanner = new Scanner(firstFile);</span>
-<span class="fc" id="L64">            int i = 0;</span>
+<span class="fc" id="L64">            File firstFile = new File(&quot;src/test/resources/&quot; + fileName);</span>
+<span class="fc" id="L65">            Scanner scanner = new Scanner(firstFile);</span>
+<span class="fc" id="L66">            int i = 0;</span>
 
-<span class="fc bfc" id="L66" title="All 2 branches covered.">            while(scanner.hasNextLine()){</span>
-<span class="fc" id="L67">                String data = scanner.nextLine();</span>
-<span class="fc" id="L68">                madeBoard[i] = data.split(&quot;(?!^)&quot;);</span>
-<span class="fc" id="L69">                i++;</span>
-<span class="fc" id="L70">            }</span>
-<span class="fc" id="L71">            scanner.close();</span>
-<span class="nc" id="L72">        } catch(FileNotFoundException e) {</span>
-<span class="nc" id="L73">            System.out.println(&quot;No such file.&quot;);</span>
-<span class="fc" id="L74">        }</span>
-<span class="fc" id="L75">        return madeBoard;</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">            while(scanner.hasNextLine()){</span>
+<span class="fc" id="L69">                String data = scanner.nextLine();</span>
+<span class="fc" id="L70">                madeBoard[i] = data.split(&quot;(?!^)&quot;);</span>
+<span class="fc" id="L71">                i++;</span>
+<span class="fc" id="L72">            }</span>
+<span class="fc" id="L73">            scanner.close();</span>
+<span class="nc" id="L74">        } catch(FileNotFoundException e) {</span>
+<span class="nc" id="L75">            System.out.println(&quot;No such file.&quot;);</span>
+<span class="fc" id="L76">        }</span>
+<span class="fc" id="L77">        return madeBoard;</span>
     }
 
     /**
     * Creates Player, redEnemy, yellowEnemy, and tile blocks based on the String[][] board created in the makeBoard method and adds them to their respective Lists in the board attributes.
+    * @param mapBoard is the currentBoard state which is passed through so that the object class Lists can be updated accordingly.
     */
     public void map(String[][] mapBoard, PApplet app){//Creates map based on the String[][]
-<span class="fc" id="L82">        redEnemyTF = false;</span>
-<span class="fc" id="L83">        yellowEnemyTF = false;</span>
-<span class="fc" id="L84">        solidWalls.clear();</span>
-<span class="fc" id="L85">        emptyWalls.clear();</span>
-<span class="fc" id="L86">        brokenWalls.clear();</span>
-<span class="fc" id="L87">        goalTile.clear();</span>
+<span class="fc" id="L85">        redEnemyTF = false;</span>
+<span class="fc" id="L86">        yellowEnemyTF = false;</span>
+<span class="fc" id="L87">        solidWalls.clear();</span>
+<span class="fc" id="L88">        emptyWalls.clear();</span>
+<span class="fc" id="L89">        brokenWalls.clear();</span>
+<span class="fc" id="L90">        goalTile.clear();</span>
 
-<span class="fc bfc" id="L89" title="All 2 branches covered.">        for(int j = 0; j &lt; mapBoard[0].length; j++){</span>
-<span class="fc bfc" id="L90" title="All 2 branches covered.">            for(int i = 0; i &lt; mapBoard.length; i++){</span>
-<span class="fc" id="L91">                int x = j;</span>
-<span class="fc" id="L92">                int y = i;</span>
-<span class="fc" id="L93">                String mapTile = mapBoard[i][j];</span>
-<span class="fc bfc" id="L94" title="All 2 branches covered.">                if(mapTile.equals(&quot;P&quot;)){</span>
-<span class="fc" id="L95">                    this.player = new Player(x, y, app);</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">        for(int j = 0; j &lt; mapBoard[0].length; j++){</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">            for(int i = 0; i &lt; mapBoard.length; i++){</span>
+<span class="fc" id="L94">                int x = j;</span>
+<span class="fc" id="L95">                int y = i;</span>
+<span class="fc" id="L96">                String mapTile = mapBoard[i][j];</span>
+<span class="fc bfc" id="L97" title="All 2 branches covered.">                if(mapTile.equals(&quot;P&quot;)){</span>
+<span class="fc" id="L98">                    this.player = new Player(x, y, app);</span>
                 }
 
-<span class="fc bfc" id="L98" title="All 2 branches covered.">                if(mapTile.equals(&quot;Y&quot;)){</span>
-<span class="fc" id="L99">                    this.yellowEnemy = new yellowEnemy(x, y, app);</span>
-<span class="fc" id="L100">                    yellowEnemyTF = true;</span>
-<span class="fc" id="L101">                    yellowEnemyList.add(yellowEnemy);</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">                if(mapTile.equals(&quot;Y&quot;)){</span>
+<span class="fc" id="L102">                    this.yellowEnemy = new yellowEnemy(x, y, app);</span>
+<span class="fc" id="L103">                    yellowEnemyTF = true;</span>
+<span class="fc" id="L104">                    yellowEnemyList.add(yellowEnemy);</span>
                     
                 }
 
-<span class="fc bfc" id="L105" title="All 2 branches covered.">                if(mapTile.equals(&quot;R&quot;)){</span>
-<span class="fc" id="L106">                    this.redEnemy = new redEnemy(x, y, app);</span>
-<span class="fc" id="L107">                    redEnemyTF = true;</span>
-<span class="fc" id="L108">                    redEnemyList.add(redEnemy);</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">                if(mapTile.equals(&quot;R&quot;)){</span>
+<span class="fc" id="L109">                    this.redEnemy = new redEnemy(x, y, app);</span>
+<span class="fc" id="L110">                    redEnemyTF = true;</span>
+<span class="fc" id="L111">                    redEnemyList.add(redEnemy);</span>
                 }
 
-<span class="fc bfc" id="L111" title="All 2 branches covered.">                if(mapTile.equals(&quot;W&quot;)){</span>
-<span class="fc" id="L112">                    SolidWall SolidImage = new SolidWall(x, y, app);</span>
-<span class="fc" id="L113">                    solidWalls.add(SolidImage);</span>
-<span class="fc" id="L114">                }</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">                if(mapTile.equals(&quot;W&quot;)){</span>
+<span class="fc" id="L115">                    SolidWall SolidImage = new SolidWall(x, y, app);</span>
+<span class="fc" id="L116">                    solidWalls.add(SolidImage);</span>
+<span class="fc" id="L117">                }</span>
 
-<span class="fc bfc" id="L116" title="All 2 branches covered.">                else if(mapTile.equals(&quot;B&quot;)){</span>
+<span class="fc bfc" id="L119" title="All 2 branches covered.">                else if(mapTile.equals(&quot;B&quot;)){</span>
                     //Broken
-<span class="fc" id="L118">                    BrokenWall BrokenImage = new BrokenWall(x, y, app);</span>
-<span class="fc" id="L119">                    brokenWalls.add(BrokenImage);</span>
-<span class="fc" id="L120">                }</span>
-<span class="fc bfc" id="L121" title="All 8 branches covered.">                else if(mapTile.equals(&quot; &quot;) || mapTile.equals(&quot;P&quot;) || mapTile.equals(&quot;R&quot;) || mapTile.equals(&quot;Y&quot;)){</span>
+<span class="fc" id="L121">                    BrokenWall BrokenImage = new BrokenWall(x, y, app);</span>
+<span class="fc" id="L122">                    brokenWalls.add(BrokenImage);</span>
+<span class="fc" id="L123">                }</span>
+<span class="fc bfc" id="L124" title="All 8 branches covered.">                else if(mapTile.equals(&quot; &quot;) || mapTile.equals(&quot;P&quot;) || mapTile.equals(&quot;R&quot;) || mapTile.equals(&quot;Y&quot;)){</span>
                     //EmptyTile
-<span class="fc" id="L123">                    EmptyWall EmptyImage = new EmptyWall(x, y, app);</span>
-<span class="fc" id="L124">                    emptyWalls.add(EmptyImage);</span>
-<span class="fc" id="L125">                }</span>
-<span class="pc bpc" id="L126" title="1 of 2 branches missed.">                else if(mapTile.equals(&quot;G&quot;)){</span>
+<span class="fc" id="L126">                    EmptyWall EmptyImage = new EmptyWall(x, y, app);</span>
+<span class="fc" id="L127">                    emptyWalls.add(EmptyImage);</span>
+<span class="fc" id="L128">                }</span>
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">                else if(mapTile.equals(&quot;G&quot;)){</span>
                     //GoalTile
-<span class="fc" id="L128">                    GoalTile GoalImage = new GoalTile(x, y, app);</span>
-<span class="fc" id="L129">                    goalTile.add(GoalImage);</span>
+<span class="fc" id="L131">                    GoalTile GoalImage = new GoalTile(x, y, app);</span>
+<span class="fc" id="L132">                    goalTile.add(GoalImage);</span>
                 }
             }
         }
-<span class="fc" id="L133">    }</span>
+<span class="fc" id="L136">    }</span>
 
     /**
     * Breaks the necessary blocks when an explosion occurs by clearing all objects in the emptyWalls and brokenWalls lists and re-adding them after scanning through the newly formed current board
+    * @param mapBoard is the currentBoard state of the App and is passed through so the lists containing the objects can be updated by clearing then re-adding.
     */
     public void explosionBreakBlock(String[][] mapBoard, PApplet app){//After explosion this resets empty and broken walls so that it can be redrawn
-<span class="fc" id="L139">        emptyWalls.clear();</span>
-<span class="fc" id="L140">        brokenWalls.clear();</span>
+<span class="fc" id="L143">        emptyWalls.clear();</span>
+<span class="fc" id="L144">        brokenWalls.clear();</span>
 
-<span class="fc bfc" id="L142" title="All 2 branches covered.">        for(int j = 0; j &lt; mapBoard[0].length; j++){</span>
-<span class="fc bfc" id="L143" title="All 2 branches covered.">            for(int i = 0; i &lt; mapBoard.length; i++){</span>
-<span class="fc" id="L144">                int x = j;</span>
-<span class="fc" id="L145">                int y = i;</span>
-<span class="fc" id="L146">                String mapTile = mapBoard[i][j];</span>
-<span class="fc bfc" id="L147" title="All 2 branches covered.">                if(mapTile.equals(&quot;B&quot;)){</span>
+<span class="fc bfc" id="L146" title="All 2 branches covered.">        for(int j = 0; j &lt; mapBoard[0].length; j++){</span>
+<span class="fc bfc" id="L147" title="All 2 branches covered.">            for(int i = 0; i &lt; mapBoard.length; i++){</span>
+<span class="fc" id="L148">                int x = j;</span>
+<span class="fc" id="L149">                int y = i;</span>
+<span class="fc" id="L150">                String mapTile = mapBoard[i][j];</span>
+<span class="fc bfc" id="L151" title="All 2 branches covered.">                if(mapTile.equals(&quot;B&quot;)){</span>
                     //Broken
-<span class="fc" id="L149">                    BrokenWall BrokenImage = new BrokenWall(x, y, app);</span>
-<span class="fc" id="L150">                    brokenWalls.add(BrokenImage);</span>
-<span class="fc" id="L151">                }</span>
-<span class="fc bfc" id="L152" title="All 8 branches covered.">                else if(mapTile.equals(&quot; &quot;) || mapTile.equals(&quot;P&quot;) || mapTile.equals(&quot;R&quot;) || mapTile.equals(&quot;Y&quot;)){</span>
+<span class="fc" id="L153">                    BrokenWall BrokenImage = new BrokenWall(x, y, app);</span>
+<span class="fc" id="L154">                    brokenWalls.add(BrokenImage);</span>
+<span class="fc" id="L155">                }</span>
+<span class="fc bfc" id="L156" title="All 8 branches covered.">                else if(mapTile.equals(&quot; &quot;) || mapTile.equals(&quot;P&quot;) || mapTile.equals(&quot;R&quot;) || mapTile.equals(&quot;Y&quot;)){</span>
                     //EmptyTile
-<span class="fc" id="L154">                    EmptyWall EmptyImage = new EmptyWall(x, y, app);</span>
-<span class="fc" id="L155">                    emptyWalls.add(EmptyImage);</span>
+<span class="fc" id="L158">                    EmptyWall EmptyImage = new EmptyWall(x, y, app);</span>
+<span class="fc" id="L159">                    emptyWalls.add(EmptyImage);</span>
                 }
             }
         }
-<span class="fc" id="L159">    }</span>
+<span class="fc" id="L163">    }</span>
     
     public List&lt;SolidWall&gt; getSolidWallsList(){
-<span class="fc" id="L162">        return this.solidWalls;</span>
+<span class="fc" id="L166">        return this.solidWalls;</span>
     }
 
     public List&lt;BrokenWall&gt; getBrokenWallsList(){
-<span class="fc" id="L166">        return this.brokenWalls;</span>
+<span class="fc" id="L170">        return this.brokenWalls;</span>
     }
 
     public List&lt;EmptyWall&gt; getEmptyWallsList(){
-<span class="fc" id="L170">        return this.emptyWalls;</span>
+<span class="fc" id="L174">        return this.emptyWalls;</span>
     }
 
     public List&lt;GoalTile&gt; getGoalTileList(){
-<span class="fc" id="L174">        return this.goalTile;</span>
+<span class="fc" id="L178">        return this.goalTile;</span>
     }
 
     public Player getPlayer(){
-<span class="fc" id="L178">        return this.player;</span>
+<span class="fc" id="L182">        return this.player;</span>
     }
 
     public redEnemy getRedEnemy(){
-<span class="nc" id="L182">        return this.redEnemy;</span>
+<span class="nc" id="L186">        return this.redEnemy;</span>
     }
 
     public yellowEnemy getYellowEnemy(){
-<span class="nc" id="L186">        return this.yellowEnemy;</span>
+<span class="nc" id="L190">        return this.yellowEnemy;</span>
     }
 
 

@@ -24,226 +24,232 @@ public class Bomb extends GameObject {
 
     /**
     * Takes in the x and y coordinates of the player and currentBoard as well as PApplet app which will be used to find the positioning of the bomb on the map and determine its explosion.
+    * @param x corresponds to the x coordinate of the bomb which is placed by the player
+    * @param y corresponds to the y coordinate of the bomb which is placed by the player
+    * @param currentBoard is the current state of the board String array in app and is passed through as it will be changed after the bomb explosion.
     */
     public Bomb(int x, int y, PApplet app, String[][] currentBoard){
-<span class="fc" id="L29">        super(x, y, app);</span>
-<span class="fc" id="L30">        this.currentBoard = currentBoard;</span>
+<span class="fc" id="L32">        super(x, y, app);</span>
+<span class="fc" id="L33">        this.currentBoard = currentBoard;</span>
 
-<span class="fc" id="L32">        this.bombSprite[0] = app.loadImage(&quot;src/main/resources/bomb/bomb1.png&quot;);</span>
-<span class="fc" id="L33">        this.bombSprite[1] = app.loadImage(&quot;src/main/resources/bomb/bomb2.png&quot;);</span>
-<span class="fc" id="L34">        this.bombSprite[2] = app.loadImage(&quot;src/main/resources/bomb/bomb3.png&quot;);</span>
-<span class="fc" id="L35">        this.bombSprite[3] = app.loadImage(&quot;src/main/resources/bomb/bomb4.png&quot;);</span>
-<span class="fc" id="L36">        this.bombSprite[4] = app.loadImage(&quot;src/main/resources/bomb/bomb5.png&quot;);</span>
-<span class="fc" id="L37">        this.bombSprite[5] = app.loadImage(&quot;src/main/resources/bomb/bomb6.png&quot;);</span>
-<span class="fc" id="L38">        this.bombSprite[6] = app.loadImage(&quot;src/main/resources/bomb/bomb7.png&quot;);</span>
-<span class="fc" id="L39">        this.bombSprite[7] = app.loadImage(&quot;src/main/resources/bomb/bomb8.png&quot;);</span>
+<span class="fc" id="L35">        this.bombSprite[0] = app.loadImage(&quot;src/main/resources/bomb/bomb1.png&quot;);</span>
+<span class="fc" id="L36">        this.bombSprite[1] = app.loadImage(&quot;src/main/resources/bomb/bomb2.png&quot;);</span>
+<span class="fc" id="L37">        this.bombSprite[2] = app.loadImage(&quot;src/main/resources/bomb/bomb3.png&quot;);</span>
+<span class="fc" id="L38">        this.bombSprite[3] = app.loadImage(&quot;src/main/resources/bomb/bomb4.png&quot;);</span>
+<span class="fc" id="L39">        this.bombSprite[4] = app.loadImage(&quot;src/main/resources/bomb/bomb5.png&quot;);</span>
+<span class="fc" id="L40">        this.bombSprite[5] = app.loadImage(&quot;src/main/resources/bomb/bomb6.png&quot;);</span>
+<span class="fc" id="L41">        this.bombSprite[6] = app.loadImage(&quot;src/main/resources/bomb/bomb7.png&quot;);</span>
+<span class="fc" id="L42">        this.bombSprite[7] = app.loadImage(&quot;src/main/resources/bomb/bomb8.png&quot;);</span>
 
         
-<span class="fc" id="L42">        this.explosionSprite[0] = app.loadImage(&quot;src/main/resources/explosion/centre.png&quot;);</span>
-<span class="fc" id="L43">        this.explosionSprite[1] = app.loadImage(&quot;src/main/resources/explosion/horizontal.png&quot;);</span>
-<span class="fc" id="L44">        this.explosionSprite[2] = app.loadImage(&quot;src/main/resources/explosion/vertical.png&quot;);</span>
-<span class="fc" id="L45">        this.explosionSprite[3] = app.loadImage(&quot;src/main/resources/explosion/end_top.png&quot;);</span>
-<span class="fc" id="L46">        this.explosionSprite[4] = app.loadImage(&quot;src/main/resources/explosion/end_right.png&quot;);</span>
-<span class="fc" id="L47">        this.explosionSprite[5] = app.loadImage(&quot;src/main/resources/explosion/end_bottom.png&quot;);</span>
-<span class="fc" id="L48">        this.explosionSprite[6] = app.loadImage(&quot;src/main/resources/explosion/end_left.png&quot;);</span>
+<span class="fc" id="L45">        this.explosionSprite[0] = app.loadImage(&quot;src/main/resources/explosion/centre.png&quot;);</span>
+<span class="fc" id="L46">        this.explosionSprite[1] = app.loadImage(&quot;src/main/resources/explosion/horizontal.png&quot;);</span>
+<span class="fc" id="L47">        this.explosionSprite[2] = app.loadImage(&quot;src/main/resources/explosion/vertical.png&quot;);</span>
+<span class="fc" id="L48">        this.explosionSprite[3] = app.loadImage(&quot;src/main/resources/explosion/end_top.png&quot;);</span>
+<span class="fc" id="L49">        this.explosionSprite[4] = app.loadImage(&quot;src/main/resources/explosion/end_right.png&quot;);</span>
+<span class="fc" id="L50">        this.explosionSprite[5] = app.loadImage(&quot;src/main/resources/explosion/end_bottom.png&quot;);</span>
+<span class="fc" id="L51">        this.explosionSprite[6] = app.loadImage(&quot;src/main/resources/explosion/end_left.png&quot;);</span>
 
-<span class="fc" id="L50">        this.currentSprite = 0;</span>
-<span class="fc" id="L51">        this.timerSprite = 0;</span>
-<span class="fc" id="L52">        this.isAlive = true;</span>
-<span class="fc" id="L53">        this.explosionFinished = false;</span>
-<span class="fc" id="L54">        setCanExplodePath();</span>
-<span class="fc" id="L55">    }</span>
+<span class="fc" id="L53">        this.currentSprite = 0;</span>
+<span class="fc" id="L54">        this.timerSprite = 0;</span>
+<span class="fc" id="L55">        this.isAlive = true;</span>
+<span class="fc" id="L56">        this.explosionFinished = false;</span>
+<span class="fc" id="L57">        setCanExplodePath();</span>
+<span class="fc" id="L58">    }</span>
 
     /**
     * Checks 2 blocks in each direction N, E, S, W and determines how far the explosion should occur in. Changes the explodablePath attribute to an int array which stores values to be used in the explosion
     */
     public void setCanExplodePath(){//Creates an int array to be used to record how far explosion goes
-<span class="fc bfc" id="L61" title="All 2 branches covered.">        if(this.currentBoard[y][x+1].equals(&quot;W&quot;)){</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        if(this.currentBoard[y][x+1].equals(&quot;W&quot;)){</span>
             ;
         }//Right
-<span class="fc bfc" id="L64" title="All 2 branches covered.">        else if(this.currentBoard[y][x+1].matches(&quot; |R|Y|P&quot;)){</span>
-<span class="fc" id="L65">            explodablePath[3] ++;</span>
-<span class="fc bfc" id="L66" title="All 2 branches covered.">            if(this.currentBoard[y][x+2].matches(&quot; |R|Y|P|B&quot;)){</span>
-<span class="fc" id="L67">                explodablePath[3] ++;</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        else if(this.currentBoard[y][x+1].matches(&quot; |R|Y|P&quot;)){</span>
+<span class="fc" id="L68">            explodablePath[3] ++;</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">            if(this.currentBoard[y][x+2].matches(&quot; |R|Y|P|B&quot;)){</span>
+<span class="fc" id="L70">                explodablePath[3] ++;</span>
             }
         }
-<span class="pc bpc" id="L70" title="1 of 2 branches missed.">        else if(this.currentBoard[y][x+1].equals(&quot;B&quot;)){</span>
-<span class="fc" id="L71">                explodablePath[3] += 3;</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">        else if(this.currentBoard[y][x+1].equals(&quot;B&quot;)){</span>
+<span class="fc" id="L74">                explodablePath[3] += 3;</span>
             }
         //Left
-<span class="fc bfc" id="L74" title="All 2 branches covered.">        if(this.currentBoard[y][x-1].equals(&quot;W&quot;)){</span>
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        if(this.currentBoard[y][x-1].equals(&quot;W&quot;)){</span>
             ;
         }
-<span class="fc bfc" id="L77" title="All 2 branches covered.">        else if(this.currentBoard[y][x-1].matches(&quot; |R|Y|P&quot;)){</span>
-<span class="fc" id="L78">            explodablePath[0] ++;</span>
-<span class="fc bfc" id="L79" title="All 2 branches covered.">            if(this.currentBoard[y][x-2].matches(&quot; |R|Y|P|B&quot;)){</span>
-<span class="fc" id="L80">                explodablePath[0] ++;</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        else if(this.currentBoard[y][x-1].matches(&quot; |R|Y|P&quot;)){</span>
+<span class="fc" id="L81">            explodablePath[0] ++;</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">            if(this.currentBoard[y][x-2].matches(&quot; |R|Y|P|B&quot;)){</span>
+<span class="fc" id="L83">                explodablePath[0] ++;</span>
             }
         }
-<span class="fc bfc" id="L83" title="All 2 branches covered.">        else if(this.currentBoard[y][x-1].equals(&quot;B&quot;)){</span>
-<span class="fc" id="L84">                explodablePath[0] += 3;</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        else if(this.currentBoard[y][x-1].equals(&quot;B&quot;)){</span>
+<span class="fc" id="L87">                explodablePath[0] += 3;</span>
             }
         //DOWN
-<span class="fc bfc" id="L87" title="All 2 branches covered.">        if(this.currentBoard[y+1][x].equals(&quot;W&quot;)){</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">        if(this.currentBoard[y+1][x].equals(&quot;W&quot;)){</span>
             ;
         }
-<span class="fc bfc" id="L90" title="All 2 branches covered.">        else if(this.currentBoard[y+1][x].matches(&quot; |R|Y|P&quot;)){</span>
-<span class="fc" id="L91">            explodablePath[2] ++;</span>
-<span class="fc bfc" id="L92" title="All 2 branches covered.">            if(this.currentBoard[y+2][x].matches(&quot; |R|Y|P|B&quot;)){</span>
-<span class="fc" id="L93">                explodablePath[2] ++;</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        else if(this.currentBoard[y+1][x].matches(&quot; |R|Y|P&quot;)){</span>
+<span class="fc" id="L94">            explodablePath[2] ++;</span>
+<span class="fc bfc" id="L95" title="All 2 branches covered.">            if(this.currentBoard[y+2][x].matches(&quot; |R|Y|P|B&quot;)){</span>
+<span class="fc" id="L96">                explodablePath[2] ++;</span>
             }
         }
-<span class="pc bpc" id="L96" title="1 of 2 branches missed.">        else if(this.currentBoard[y+1][x].equals(&quot;B&quot;)){</span>
-<span class="fc" id="L97">                explodablePath[2] += 3;</span>
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">        else if(this.currentBoard[y+1][x].equals(&quot;B&quot;)){</span>
+<span class="fc" id="L100">                explodablePath[2] += 3;</span>
             }
         //UP
-<span class="fc bfc" id="L100" title="All 2 branches covered.">        if(this.currentBoard[y-1][x].equals(&quot;W&quot;)){</span>
+<span class="fc bfc" id="L103" title="All 2 branches covered.">        if(this.currentBoard[y-1][x].equals(&quot;W&quot;)){</span>
             ;
         }
-<span class="pc bpc" id="L103" title="1 of 2 branches missed.">        else if(this.currentBoard[y-1][x].matches(&quot; |R|Y|P&quot;)){</span>
-<span class="fc" id="L104">            explodablePath[1] ++;</span>
-<span class="fc bfc" id="L105" title="All 2 branches covered.">            if(this.currentBoard[y-2][x].matches(&quot; |R|Y|P|B&quot;)){</span>
-<span class="fc" id="L106">                explodablePath[1] ++;</span>
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">        else if(this.currentBoard[y-1][x].matches(&quot; |R|Y|P&quot;)){</span>
+<span class="fc" id="L107">            explodablePath[1] ++;</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">            if(this.currentBoard[y-2][x].matches(&quot; |R|Y|P|B&quot;)){</span>
+<span class="fc" id="L109">                explodablePath[1] ++;</span>
             }
         }
-<span class="nc bnc" id="L109" title="All 2 branches missed.">        else if(this.currentBoard[y-1][x].equals(&quot;B&quot;)){</span>
-<span class="nc" id="L110">                explodablePath[1] += 3;</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        else if(this.currentBoard[y-1][x].equals(&quot;B&quot;)){</span>
+<span class="nc" id="L113">                explodablePath[1] += 3;</span>
             }
         
-<span class="fc" id="L113">        this.explodablePath = explodablePath;</span>
-<span class="fc" id="L114">    }</span>
+<span class="fc" id="L116">        this.explodablePath = explodablePath;</span>
+<span class="fc" id="L117">    }</span>
     
     /**
     * Draws the explosion sprites depending on the value in the int array from the setCanExplodePath method. This ensures that the correct animations are delivered when the explosion occurs. I.e If there is a broken wall closest to the bomb, that direction will only show explosion for one block.
     */
     public void drawExplosion(PApplet app) {//Left
-<span class="fc" id="L120">        app.image(explosionSprite[0], this.x*32, this.y*32+64);</span>
-<span class="pc bpc" id="L121" title="1 of 4 branches missed.">        if (explodablePath[0] == 1 || explodablePath[0] == 3) app.image(explosionSprite[6], this.x*32-32, this.y*32+64); //Left Close</span>
-<span class="fc bfc" id="L122" title="All 2 branches covered.">        else if (explodablePath[0] == 2) {//Left Far</span>
-<span class="fc" id="L123">            app.image(explosionSprite[1], this.x*32-32, this.y*32+64);</span>
-<span class="fc" id="L124">            app.image(explosionSprite[6], this.x*32-64, this.y*32+64);</span>
+<span class="fc" id="L123">        app.image(explosionSprite[0], this.x*32, this.y*32+64);</span>
+<span class="pc bpc" id="L124" title="1 of 4 branches missed.">        if (explodablePath[0] == 1 || explodablePath[0] == 3) app.image(explosionSprite[6], this.x*32-32, this.y*32+64); //Left Close</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">        else if (explodablePath[0] == 2) {//Left Far</span>
+<span class="fc" id="L126">            app.image(explosionSprite[1], this.x*32-32, this.y*32+64);</span>
+<span class="fc" id="L127">            app.image(explosionSprite[6], this.x*32-64, this.y*32+64);</span>
         }
         //UP
-<span class="pc bpc" id="L127" title="2 of 4 branches missed.">        if (explodablePath[1] == 1 || explodablePath[1] == 3) app.image(explosionSprite[3], this.x*32, this.y*32+64-32);</span>
-<span class="fc bfc" id="L128" title="All 2 branches covered.">        else if (explodablePath[1] == 2) {</span>
-<span class="fc" id="L129">            app.image(explosionSprite[2], this.x*32, this.y*32+64-32);</span>
-<span class="fc" id="L130">            app.image(explosionSprite[3], this.x*32, this.y*32+64-64);</span>
+<span class="pc bpc" id="L130" title="2 of 4 branches missed.">        if (explodablePath[1] == 1 || explodablePath[1] == 3) app.image(explosionSprite[3], this.x*32, this.y*32+64-32);</span>
+<span class="fc bfc" id="L131" title="All 2 branches covered.">        else if (explodablePath[1] == 2) {</span>
+<span class="fc" id="L132">            app.image(explosionSprite[2], this.x*32, this.y*32+64-32);</span>
+<span class="fc" id="L133">            app.image(explosionSprite[3], this.x*32, this.y*32+64-64);</span>
         }//DOWN
-<span class="pc bpc" id="L132" title="2 of 4 branches missed.">        if (explodablePath[2] == 1 || explodablePath[2] == 3) app.image(explosionSprite[5], this.x*32, this.y*32+64+32);</span>
-<span class="fc bfc" id="L133" title="All 2 branches covered.">        else if (explodablePath[2] == 2) {</span>
-<span class="fc" id="L134">            app.image(explosionSprite[2], this.x*32, this.y*32+32+64);</span>
-<span class="fc" id="L135">            app.image(explosionSprite[5], this.x*32, this.y*32+64+64);</span>
+<span class="pc bpc" id="L135" title="2 of 4 branches missed.">        if (explodablePath[2] == 1 || explodablePath[2] == 3) app.image(explosionSprite[5], this.x*32, this.y*32+64+32);</span>
+<span class="fc bfc" id="L136" title="All 2 branches covered.">        else if (explodablePath[2] == 2) {</span>
+<span class="fc" id="L137">            app.image(explosionSprite[2], this.x*32, this.y*32+32+64);</span>
+<span class="fc" id="L138">            app.image(explosionSprite[5], this.x*32, this.y*32+64+64);</span>
         }//RIGHT
-<span class="pc bpc" id="L137" title="1 of 4 branches missed.">        if (explodablePath[3] == 1 || explodablePath[3] == 3) app.image(explosionSprite[4], this.x*32+32, this.y*32+64);</span>
-<span class="fc bfc" id="L138" title="All 2 branches covered.">        else if (explodablePath[3] == 2) {</span>
-<span class="fc" id="L139">            app.image(explosionSprite[1], this.x*32+32, this.y*32+64);</span>
-<span class="fc" id="L140">            app.image(explosionSprite[4], this.x*32+64, this.y*32+64);</span>
+<span class="pc bpc" id="L140" title="1 of 4 branches missed.">        if (explodablePath[3] == 1 || explodablePath[3] == 3) app.image(explosionSprite[4], this.x*32+32, this.y*32+64);</span>
+<span class="fc bfc" id="L141" title="All 2 branches covered.">        else if (explodablePath[3] == 2) {</span>
+<span class="fc" id="L142">            app.image(explosionSprite[1], this.x*32+32, this.y*32+64);</span>
+<span class="fc" id="L143">            app.image(explosionSprite[4], this.x*32+64, this.y*32+64);</span>
         }
-<span class="fc" id="L142">        timerSprite += 1;</span>
-<span class="fc bfc" id="L143" title="All 2 branches covered.">        if (timerSprite == 30) {</span>
-<span class="fc" id="L144">            this.explosionFinished = true;</span>
+<span class="fc" id="L145">        timerSprite += 1;</span>
+<span class="fc bfc" id="L146" title="All 2 branches covered.">        if (timerSprite == 30) {</span>
+<span class="fc" id="L147">            this.explosionFinished = true;</span>
         }
-<span class="fc" id="L146">    }</span>
+<span class="fc" id="L149">    }</span>
 
     /**
     *Draws the bomb sprite and changes the sprite based on the time elapsed. Will change the boolean isAlive 
     */
     public void draw(PApplet app) {//draws bomb sprite
-<span class="fc" id="L152">        app.image(bombSprite[currentSprite], this.x*32, this.y*32+64);</span>
-<span class="fc" id="L153">        timerSprite += 1;</span>
+<span class="fc" id="L155">        app.image(bombSprite[currentSprite], this.x*32, this.y*32+64);</span>
+<span class="fc" id="L156">        timerSprite += 1;</span>
 
-<span class="fc bfc" id="L155" title="All 2 branches covered.">        if(timerSprite == 15) {</span>
-<span class="fc" id="L156">            timerSprite = 0;</span>
-<span class="fc" id="L157">            currentSprite += 1;</span>
-<span class="fc bfc" id="L158" title="All 2 branches covered.">            if (currentSprite &gt; 7) {</span>
-<span class="fc" id="L159">                currentSprite = 0;</span>
-<span class="fc" id="L160">                this.isAlive = false;</span>
-<span class="fc" id="L161">                timerSprite = 0;</span>
+<span class="fc bfc" id="L158" title="All 2 branches covered.">        if(timerSprite == 15) {</span>
+<span class="fc" id="L159">            timerSprite = 0;</span>
+<span class="fc" id="L160">            currentSprite += 1;</span>
+<span class="fc bfc" id="L161" title="All 2 branches covered.">            if (currentSprite &gt; 7) {</span>
+<span class="fc" id="L162">                currentSprite = 0;</span>
+<span class="fc" id="L163">                this.isAlive = false;</span>
+<span class="fc" id="L164">                timerSprite = 0;</span>
             }
         }
 
-<span class="fc" id="L165">    }</span>
+<span class="fc" id="L168">    }</span>
 
     /**
     * Calls the explode function for each tile. Starts by exploding the closest block in each direction and if they are not solid walls or broken walls, the next block in the respective direction will be exploded
     */
     public void explosion(App app) {//Calls upon explode method to change the currentBoard terrain and enemies
         //Left
-<span class="fc bfc" id="L172" title="All 2 branches covered.">      if (explode(this.x-1, this.y, app)) </span>
-<span class="fc" id="L173">            explode(this.x-2, this.y, app);</span>
+<span class="fc bfc" id="L175" title="All 2 branches covered.">      if (explode(this.x-1, this.y, app)) </span>
+<span class="fc" id="L176">            explode(this.x-2, this.y, app);</span>
       //Down
-<span class="fc bfc" id="L175" title="All 2 branches covered.">      if (explode(this.x, this.y+1, app))</span>
-<span class="fc" id="L176">            explode(this.x, this.y+2, app);</span>
+<span class="fc bfc" id="L178" title="All 2 branches covered.">      if (explode(this.x, this.y+1, app))</span>
+<span class="fc" id="L179">            explode(this.x, this.y+2, app);</span>
       //Right
-<span class="fc bfc" id="L178" title="All 2 branches covered.">      if (explode(this.x+1, this.y, app)) </span>
-<span class="fc" id="L179">            explode(this.x+2, this.y, app);</span>
+<span class="fc bfc" id="L181" title="All 2 branches covered.">      if (explode(this.x+1, this.y, app)) </span>
+<span class="fc" id="L182">            explode(this.x+2, this.y, app);</span>
       //Up
-<span class="fc bfc" id="L181" title="All 2 branches covered.">      if (explode(this.x, this.y-1, app)) </span>
-<span class="fc" id="L182">            explode(this.x, this.y-2, app);</span>
+<span class="fc bfc" id="L184" title="All 2 branches covered.">      if (explode(this.x, this.y-1, app)) </span>
+<span class="fc" id="L185">            explode(this.x, this.y-2, app);</span>
             
-<span class="pc bpc" id="L184" title="1 of 2 branches missed.">      if (explode(this.x, this.y, app));</span>
-<span class="fc" id="L185">    }</span>
+<span class="pc bpc" id="L187" title="1 of 2 branches missed.">      if (explode(this.x, this.y, app));</span>
+<span class="fc" id="L188">    }</span>
 
     /**
     * Checks the given coordinates and depending on the tile will either change to &quot; &quot;, do nothing or change booleans isEnemyDead or killedPlayer to true. The returned value of these will be used in the explosion method to extend the explosion to further blocks
+    * @param row is an integer which corresponds to the x coordinate of the tile which is to be exploded
+    * @param column is an integer which corresponds to the y coordinate of the tile which is to be exploded
+    * @return returns true or false depending on the block on the tile coordinates.
     */
     public boolean explode(int row, int column, App app) {
-<span class="fc" id="L191">        String tile = app.currentBoard[column][row];</span>
+<span class="fc" id="L197">        String tile = app.currentBoard[column][row];</span>
 
-<span class="fc bfc" id="L193" title="All 2 branches covered.">        if (tile.equals(&quot; &quot;)) {</span>
-<span class="fc" id="L194">          return true;</span>
-<span class="fc bfc" id="L195" title="All 2 branches covered.">        } else if (tile.equals(&quot;B&quot;)) {</span>
-<span class="fc" id="L196">            this.currentBoard[column][row] = &quot; &quot;;</span>
-<span class="fc" id="L197">            return false;</span>
+<span class="fc bfc" id="L199" title="All 2 branches covered.">        if (tile.equals(&quot; &quot;)) {</span>
+<span class="fc" id="L200">          return true;</span>
+<span class="fc bfc" id="L201" title="All 2 branches covered.">        } else if (tile.equals(&quot;B&quot;)) {</span>
+<span class="fc" id="L202">            this.currentBoard[column][row] = &quot; &quot;;</span>
+<span class="fc" id="L203">            return false;</span>
 
-<span class="fc bfc" id="L199" title="All 2 branches covered.">        } else if (tile.equals(&quot;P&quot;)) {</span>
-<span class="fc" id="L200">            killedPlayer = true;</span>
-<span class="fc" id="L201">            return true;</span>
+<span class="fc bfc" id="L205" title="All 2 branches covered.">        } else if (tile.equals(&quot;P&quot;)) {</span>
+<span class="fc" id="L206">            killedPlayer = true;</span>
+<span class="fc" id="L207">            return true;</span>
 
-<span class="fc bfc" id="L203" title="All 2 branches covered.">        } else if (tile.equals(&quot;Y&quot;)) {</span>
-<span class="fc" id="L204">            this.currentBoard[column][row] = &quot; &quot;;</span>
-<span class="fc bfc" id="L205" title="All 2 branches covered.">            for(yellowEnemy i: app.board.yellowEnemyList){</span>
-<span class="pc bpc" id="L206" title="3 of 4 branches missed.">                if(i.getX() == row &amp;&amp; i.getY() == column){</span>
-<span class="nc" id="L207">                    i.isEnemyDead = true;</span>
+<span class="fc bfc" id="L209" title="All 2 branches covered.">        } else if (tile.equals(&quot;Y&quot;)) {</span>
+<span class="fc" id="L210">            this.currentBoard[column][row] = &quot; &quot;;</span>
+<span class="fc bfc" id="L211" title="All 2 branches covered.">            for(yellowEnemy i: app.board.yellowEnemyList){</span>
+<span class="pc bpc" id="L212" title="3 of 4 branches missed.">                if(i.getX() == row &amp;&amp; i.getY() == column){</span>
+<span class="nc" id="L213">                    i.isEnemyDead = true;</span>
                 }
-<span class="fc" id="L209">            }</span>
-<span class="pc bpc" id="L210" title="1 of 2 branches missed.">            app.board.yellowEnemyList.removeIf(b -&gt; b.isEnemyDead == true);</span>
-<span class="fc" id="L211">            killedYellowEnemy = true;</span>
-<span class="fc" id="L212">            return true;</span>
+<span class="fc" id="L215">            }</span>
+<span class="pc bpc" id="L216" title="1 of 2 branches missed.">            app.board.yellowEnemyList.removeIf(b -&gt; b.isEnemyDead == true);</span>
+<span class="fc" id="L217">            killedYellowEnemy = true;</span>
+<span class="fc" id="L218">            return true;</span>
 
-<span class="fc bfc" id="L214" title="All 2 branches covered.">        } else if (tile.equals(&quot;R&quot;)) {</span>
-<span class="fc" id="L215">            this.currentBoard[column][row] = &quot; &quot;;</span>
-<span class="fc bfc" id="L216" title="All 2 branches covered.">            for(redEnemy i: app.board.redEnemyList){</span>
-<span class="pc bpc" id="L217" title="1 of 4 branches missed.">                if(i.getX() == row &amp;&amp; i.getY() == column){</span>
-<span class="fc" id="L218">                    i.isEnemyDead = true;</span>
+<span class="fc bfc" id="L220" title="All 2 branches covered.">        } else if (tile.equals(&quot;R&quot;)) {</span>
+<span class="fc" id="L221">            this.currentBoard[column][row] = &quot; &quot;;</span>
+<span class="fc bfc" id="L222" title="All 2 branches covered.">            for(redEnemy i: app.board.redEnemyList){</span>
+<span class="pc bpc" id="L223" title="1 of 4 branches missed.">                if(i.getX() == row &amp;&amp; i.getY() == column){</span>
+<span class="fc" id="L224">                    i.isEnemyDead = true;</span>
                 }
-<span class="fc" id="L220">            }</span>
-<span class="fc bfc" id="L221" title="All 2 branches covered.">            app.board.redEnemyList.removeIf(b -&gt; b.isEnemyDead == true);</span>
-<span class="fc" id="L222">            killedRedEnemy = true;</span>
-<span class="fc" id="L223">            return true;</span>
+<span class="fc" id="L226">            }</span>
+<span class="fc bfc" id="L227" title="All 2 branches covered.">            app.board.redEnemyList.removeIf(b -&gt; b.isEnemyDead == true);</span>
+<span class="fc" id="L228">            killedRedEnemy = true;</span>
+<span class="fc" id="L229">            return true;</span>
         }
-<span class="fc" id="L225">        return false;</span>
+<span class="fc" id="L231">        return false;</span>
 
     }
 
     public boolean getIsAlive(){
-<span class="fc" id="L230">        return this.isAlive;</span>
+<span class="fc" id="L236">        return this.isAlive;</span>
     }
     
     public void notAlive(){
-<span class="fc" id="L234">        this.isAlive = false;</span>
-<span class="fc" id="L235">    }</span>
+<span class="fc" id="L240">        this.isAlive = false;</span>
+<span class="fc" id="L241">    }</span>
 
     public boolean getExplosionFinished(){
-<span class="fc" id="L238">        return this.explosionFinished;</span>
+<span class="fc" id="L244">        return this.explosionFinished;</span>
     }
 
     public String[][] getBoard(){
-<span class="fc" id="L242">        return this.currentBoard;</span>
+<span class="fc" id="L248">        return this.currentBoard;</span>
     }
 
     public int getCurrentSprite(){
-<span class="fc" id="L246">        return this.currentSprite;</span>
+<span class="fc" id="L252">        return this.currentSprite;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

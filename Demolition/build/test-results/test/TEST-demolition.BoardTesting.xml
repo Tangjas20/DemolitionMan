@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.BoardTesting" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-11-05T09:44:11" hostname="DESKTOP-GJIUGBP" time="5.092">
+<testsuite name="demolition.BoardTesting" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-11-05T10:23:42" hostname="DESKTOP-GJIUGBP" time="5.093">
   <properties/>
-  <testcase name="boardLoad()" classname="demolition.BoardTesting" time="1.015"/>
-  <testcase name="gameOverTesting()" classname="demolition.BoardTesting" time="1.015"/>
+  <testcase name="boardLoad()" classname="demolition.BoardTesting" time="1.016"/>
+  <testcase name="gameOverTesting()" classname="demolition.BoardTesting" time="1.018"/>
   <testcase name="timerAtZero()" classname="demolition.BoardTesting" time="1.022"/>
-  <testcase name="loadNonTestConfig()" classname="demolition.BoardTesting" time="1.021"/>
-  <testcase name="testFrameCountAndEntities()" classname="demolition.BoardTesting" time="1.018"/>
+  <testcase name="loadNonTestConfig()" classname="demolition.BoardTesting" time="1.017"/>
+  <testcase name="testFrameCountAndEntities()" classname="demolition.BoardTesting" time="1.02"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

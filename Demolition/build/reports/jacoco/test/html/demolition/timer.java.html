@@ -16,35 +16,36 @@ public class timer {
 
     /**
     * Takes in an int for timer which is loaded from the config.kson and the PApplet app. Timer icons and player graphics are loaded
+    * @param timer is the time allowed for the level to be cleared which is declared in the config files.
     */
-<span class="fc" id="L20">    public timer(int timer, PApplet app) {</span>
-<span class="fc" id="L21">        this.timer = timer;</span>
-<span class="fc" id="L22">        this.timerImage = app.loadImage(&quot;src/main/resources/icons/clock.png&quot;);</span>
-<span class="fc" id="L23">        this.playerIcon = app.loadImage(&quot;src/main/resources/icons/player.png&quot;);</span>
-<span class="fc" id="L24">    }</span>
+<span class="fc" id="L21">    public timer(int timer, PApplet app) {</span>
+<span class="fc" id="L22">        this.timer = timer;</span>
+<span class="fc" id="L23">        this.timerImage = app.loadImage(&quot;src/main/resources/icons/clock.png&quot;);</span>
+<span class="fc" id="L24">        this.playerIcon = app.loadImage(&quot;src/main/resources/icons/player.png&quot;);</span>
+<span class="fc" id="L25">    }</span>
     /**
     * Every 60 ticks leads to the time -1 as there is 60FPS. 
     */
     public void tick() {
         //Handles logic
-<span class="fc" id="L30">        counter++;</span>
-<span class="fc bfc" id="L31" title="All 2 branches covered.">        if(counter == 60){</span>
-<span class="fc" id="L32">            timer -= 1;</span>
-<span class="fc" id="L33">            counter = 0;</span>
+<span class="fc" id="L31">        counter++;</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        if(counter == 60){</span>
+<span class="fc" id="L33">            timer -= 1;</span>
+<span class="fc" id="L34">            counter = 0;</span>
         }
 
-<span class="fc" id="L36">    }</span>
+<span class="fc" id="L37">    }</span>
     /**
     * Draws the timerIcon as well as the playerIcon which is at the top of the game window.
     */
     public void draw(PApplet app) {
         //Handling graphics -- Single line or so, no logics
-<span class="fc" id="L42">        app.image(this.timerImage, 300, 16);</span>
-<span class="fc" id="L43">        app.image(this.playerIcon, 96, 16);</span>
-<span class="fc" id="L44">    }</span>
+<span class="fc" id="L43">        app.image(this.timerImage, 300, 16);</span>
+<span class="fc" id="L44">        app.image(this.playerIcon, 96, 16);</span>
+<span class="fc" id="L45">    }</span>
 
     public int getTimer() {
-<span class="fc" id="L47">        return this.timer;</span>
+<span class="fc" id="L48">        return this.timer;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

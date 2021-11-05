@@ -20,34 +20,35 @@ import processing.data.JSONObject;
     /**
     * Takes in a filePath String parameter and uses a scanner to append each Line to the fileRead variable. If filepath is invalid an exception of Config Load failed error will be printed. 
     * Extracts all info relating to lives, path and time and stores it in variables to be used in the app.
+    * @param filePath is the path of the config.json located in the root directory.
     */
     public void readFiles(String filePath){
         try{
-<span class="fc" id="L26">            File f = new File(filePath);</span>
-<span class="fc" id="L27">            Scanner scanner = new Scanner(f);</span>
-<span class="fc bfc" id="L28" title="All 2 branches covered.">            while (scanner.hasNextLine()){</span>
-<span class="fc" id="L29">                fileRead += scanner.nextLine();</span>
+<span class="fc" id="L27">            File f = new File(filePath);</span>
+<span class="fc" id="L28">            Scanner scanner = new Scanner(f);</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">            while (scanner.hasNextLine()){</span>
+<span class="fc" id="L30">                fileRead += scanner.nextLine();</span>
             }
-<span class="fc" id="L31">            scanner.close();</span>
-<span class="nc" id="L32">        } catch (Exception e) {</span>
-<span class="nc" id="L33">            System.out.println(&quot;Config load failed.&quot;);</span>
-<span class="fc" id="L34">        }</span>
-<span class="fc" id="L35">        JSONObject jsn = JSONObject.parse(fileRead);</span>
-<span class="fc" id="L36">        numberOfLevels = jsn.getJSONArray(&quot;levels&quot;).size();</span>
+<span class="fc" id="L32">            scanner.close();</span>
+<span class="nc" id="L33">        } catch (Exception e) {</span>
+<span class="nc" id="L34">            System.out.println(&quot;Config load failed.&quot;);</span>
+<span class="fc" id="L35">        }</span>
+<span class="fc" id="L36">        JSONObject jsn = JSONObject.parse(fileRead);</span>
+<span class="fc" id="L37">        numberOfLevels = jsn.getJSONArray(&quot;levels&quot;).size();</span>
         
-<span class="fc bfc" id="L38" title="All 2 branches covered.">        for (int i = 0; i &lt; numberOfLevels; i++){</span>
-<span class="fc" id="L39">            JSONObject jsn1 = jsn.getJSONArray(&quot;levels&quot;).getJSONObject(i);</span>
-<span class="fc" id="L40">            lives = jsn.getInt(&quot;lives&quot;);</span>
-<span class="fc" id="L41">            pathTimeMap.put(jsn1.getString(&quot;path&quot;), jsn1.get(&quot;time&quot;).toString());</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        for (int i = 0; i &lt; numberOfLevels; i++){</span>
+<span class="fc" id="L40">            JSONObject jsn1 = jsn.getJSONArray(&quot;levels&quot;).getJSONObject(i);</span>
+<span class="fc" id="L41">            lives = jsn.getInt(&quot;lives&quot;);</span>
+<span class="fc" id="L42">            pathTimeMap.put(jsn1.getString(&quot;path&quot;), jsn1.get(&quot;time&quot;).toString());</span>
         }
-<span class="fc" id="L43">    }</span>
+<span class="fc" id="L44">    }</span>
 
     public Map&lt;String, String&gt; getPathTimeHashMap() {
-<span class="fc" id="L46">        return this.pathTimeMap;</span>
+<span class="fc" id="L47">        return this.pathTimeMap;</span>
     }
 
     public int getLives() {
-<span class="fc" id="L50">        return this.lives;</span>
+<span class="fc" id="L51">        return this.lives;</span>
     }
  
 }
