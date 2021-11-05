@@ -5,10 +5,11 @@ import java.util.List;
 import processing.core.PImage;
 import processing.core.PApplet;
 
-
+/**
+* Creates the yellowEnemy object which inherits attributes from the playerClasses class for tick(). Contains a moveTimer
+*/
 public class yellowEnemy extends PlayerClasses{
 
-    int moveTimer = 0;
     private List<PImage[]> enemyYellowSprite = new ArrayList<PImage[]>();
 
     public yellowEnemy(int x, int y, PApplet app) {

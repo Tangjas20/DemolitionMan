@@ -11,6 +11,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Random;
 
+/**
+* This serves as the core manager for the game and functionality which calls upon other classes and extends PApplet.
+*/
 public class App extends PApplet {
     public static final int FPS = 60;
     public static final int WIDTH = 480;
@@ -34,6 +37,9 @@ public class App extends PApplet {
     readJsonObject fileData;
     boolean gameReset = false;
 
+    /**
+    *Constructor which will initialise the board, bombList, boardArrayTime, boardArrayName, pathTimeMap, and currentBoard which are used in the game.
+     */
     public App() {
         //construct objects here
         board = new Board();
@@ -43,12 +49,16 @@ public class App extends PApplet {
         pathTimeMap = new HashMap<String, String>();
         currentBoard = new String[13][15];
     }
-
+    /**
+    *Sets the size of the game window
+     */
     public void settings() {
         size(WIDTH, HEIGHT);
     }
-
-    public void resetGame(){
+    /**
+    * Resets the game to the original board by clearing out red and yellow enemy lists, as well as redrawing board from text file and resetting timer.
+     */
+    public void resetGame(){//Method to reset game to original board.
         board.redEnemyList.clear();
         board.yellowEnemyList.clear();
         currentBoard = board.makeBoard(boardArrayName.get(boardCounter), this);
@@ -57,7 +67,10 @@ public class App extends PApplet {
         this.timerIcon = new timer(currentTimer, this);
         gameReset = false;
     }
-
+    /**
+    * Calls upon the readJsonObject class to read text input from a JSONObject, extracting the lives data and time data. The data is stored in a HashMap named pathTimeMap. 
+    * If isTest is true, then the program will read the config file from the src/test/resources/ folder
+     */
     public void setup() {
         frameRate(FPS);
         font = createFont("PressStart2P-regular.ttf", 16);
@@ -78,7 +91,6 @@ public class App extends PApplet {
         }   //Reads config file for level, time and lives info
        
         
-
         for (Map.Entry<String, String> entry : pathTimeMap.entrySet()) {
             String key = entry.getKey();
             Integer value = parseInt(entry.getValue());
@@ -86,22 +98,25 @@ public class App extends PApplet {
             boardArrayName.add(key);
         }
 
-        if(isTest == false){
+        if(isTest == false){//Calls upon config file in the root directory if false
             currentBoard = board.makeBoard(boardArrayName.get(boardCounter), this);
             currentTimer =  boardArrayTime.get(boardCounter);
             board.map(currentBoard, this);
             this.timerIcon = new timer(currentTimer, this);
         }
-        else if(isTest == true){
+        else if(isTest == true){//This is used for testing purposes
             currentBoard = board.testMakeBoard(boardArrayName.get(boardCounter), this);
             currentTimer =  boardArrayTime.get(boardCounter);
             board.map(currentBoard, this);
             this.timerIcon = new timer(currentTimer, this);   
         }
     }
-
+    /**
+    * Combines the methods and logic from the other classes to build the core game as well as render in graphics. This method repeats at 60 FPS and will check the game state, draw background, players, enemies and other entties.
+    * It will check for certain conditions to be met and act accordingly. These include checking if bomb explosions have finished and removing them from the bombList, checking if the player has been killed etc.
+    */
     public void draw() {
-        if (lives > 0 && this.timerIcon.getTimer() > 0 && gameOver == false){
+        if (lives > 0 && this.timerIcon.getTimer() > 0 && gameOver == false){//Tests to see if conditions are met for game to continue
             drewPlayer = false;
             checkGameState();//Checks if player touches enemy
             background(255, 128, 0);
@@ -109,7 +124,7 @@ public class App extends PApplet {
             this.timerIcon.tick();
             text(timerIcon.getTimer(), 350, 40);
 
-            if (frameCount % 60 == 0){
+            if (frameCount % 60 == 0){//Every 60frames/every second calls the enemies to move
                 if (board.yellowEnemyTF){
                     for(yellowEnemy i: board.yellowEnemyList)
                         moveYellowEnemy(i);
@@ -133,7 +148,7 @@ public class App extends PApplet {
                 goalImage.draw(this);
             }
 
-            for (Bomb bomb: bombList){
+            for (Bomb bomb: bombList){//Checks all the bombs and their states, and explodes 
                 if (bomb.getIsAlive()){
                     bomb.draw(this);
                     counter = 0;
@@ -161,16 +176,15 @@ public class App extends PApplet {
             }
                     
         }
-            bombList.removeIf(b -> b.getExplosionFinished() == true);
+            bombList.removeIf(b -> b.getExplosionFinished() == true);//Redundant bombs will be removed from bombsList
 
-            if (board.redEnemyTF == true){
-                for(redEnemy i: board.redEnemyList){
+            if (board.redEnemyTF == true){//If enemy exists
+                for(redEnemy i: board.redEnemyList){//If enemy is below player, they will be drawn last
                     if ((board.getPlayer().getX() == i.getX()) && (board.getPlayer().getY() == (i.getY()-1)) && drewPlayer == false){
                         board.getPlayer().tick();
                         board.getPlayer().draw(this);
                         drewPlayer = true;
                 }
-                
                     if(i.isEnemyDead == false){
                         i.tick();
                         i.draw(this);
@@ -179,7 +193,7 @@ public class App extends PApplet {
 
             }
 
-            if (board.yellowEnemyTF == true){
+            if (board.yellowEnemyTF == true){//Same logic as above
                 for(yellowEnemy i: board.yellowEnemyList){
                     if ((board.getPlayer().getX() == i.getX()) && (board.getPlayer().getY() == (i.getY()-1)) && drewPlayer == false){
                         board.getPlayer().tick();
@@ -194,7 +208,7 @@ public class App extends PApplet {
                 }
             }
 
-            if (drewPlayer == false){
+            if (drewPlayer == false){//If player still hasn't been drawn
                 board.getPlayer().tick();
                 board.getPlayer().draw(this);
             }
@@ -218,17 +232,19 @@ public class App extends PApplet {
                 }
             }
         } 
-        else if (gameOver == true) {
+        else if (gameOver == true) {//If the final goal tile has been passed
             background(255, 128, 0);
             text("YOU WIN!", 180, 230);
         }
-        else {
+        else {//If losing conditions are met, print game over sreen
             background(255, 128, 0);
             text("GAME OVER!", 180, 230);
         }
     }
-
-    public void checkGameState(){
+    /**
+    * Checks whether the red or yellow enemies are on the same tile as the player. If true, the game will reset and the player will lose 1 life.
+    */
+    public void checkGameState(){//Checks if enemy and player is on the same tile, if so, reset
         if(board.redEnemyTF){
             for(redEnemy i: board.redEnemyList){
                 if((board.getPlayer().getX() == i.getX()) && (board.getPlayer().getY() == i.getY()) && i.isEnemyDead == false){
@@ -237,7 +253,6 @@ public class App extends PApplet {
                 }
             }
         }
-
 
         if(board.yellowEnemyTF){
             for(yellowEnemy i: board.yellowEnemyList){
@@ -251,8 +266,11 @@ public class App extends PApplet {
             resetGame();
         }
     }
-
-    public void keyPressed() {
+    /**
+    * Determines if a significant key has been pressed and will allow the player to act accordingly. 
+    * The significant keys are space, left, right, up and down.
+    */
+    public void keyPressed() {//Checks if any keystrokes are pressed and moves characters accordingly.
         /*
             .get(0) corresponds with base player
             .get(1) corresponds with up player
@@ -298,19 +316,17 @@ public class App extends PApplet {
             }
         keyReleased = false;
     }
-
-    public void keyReleased() {
-        this.keyReleased = true;
-    }
-
-    public String[][] getCurrentBoard(){
-        return currentBoard;
-    }
+   
     /*
         .get(0) corresponds with base player
         .get(1) corresponds with up player
         .get(2) corresponds with right player
         .get(3) corresponds with left player
+    */
+    //Yellow enemy simply moves based on their orientation and whether there is a wall or not in front
+    /**
+    * Moves yellow enemy in a set pattern that is clockwise. 
+    * The yellow enemy will change orientation when a wall has been hit.
     */
     public void moveYellowEnemy(yellowEnemy i){
         if(i.orientation == 0){
@@ -355,7 +371,7 @@ public class App extends PApplet {
             .get(2) corresponds with right player
             .get(3) corresponds with left player
         */
-    public void moveRedEnemyAI(redEnemy i){
+    public void moveRedEnemyAI(redEnemy i){//Moves with the random library, but will first calculate the possible unblocked paths
         int[] possiblePath = {0, 0, 0, 0};
         boolean deadEnd = false;
          if(i.orientation == 0){
@@ -415,9 +431,12 @@ public class App extends PApplet {
             i.changeOrientation(positions.get(randomNumber));
         }
     }
-    
-    public static void main(String[] args) {
-        PApplet.main("demolition.App");
+
+    /**
+    * Changes the value of boolean keyReleased to true once a key has been let go.
+    */
+    public void keyReleased() {
+        this.keyReleased = true;
     }
 
     public int getLives(){
@@ -440,4 +459,11 @@ public class App extends PApplet {
         return this.boardCounter;
     }
 
+    public String[][] getCurrentBoard(){
+        return this.currentBoard;
+    }
+
+    public static void main(String[] args) {
+        PApplet.main("demolition.App");
+    }
 }

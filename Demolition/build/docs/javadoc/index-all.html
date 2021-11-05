@@ -76,9 +76,13 @@
 <dt><span class="memberNameLink"><a href="demolition/allTilesClass.html#allTilesClass-int-int-processing.core.PApplet-">allTilesClass(int, int, PApplet)</a></span> - Constructor for class demolition.<a href="demolition/allTilesClass.html" title="class in demolition">allTilesClass</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="demolition/App.html" title="class in demolition"><span class="typeNameLink">App</span></a> - Class in <a href="demolition/package-summary.html">demolition</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">This serves as the core manager for the game and functionality which calls upon other classes and extends PApplet.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/App.html#App--">App()</a></span> - Constructor for class demolition.<a href="demolition/App.html" title="class in demolition">App</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructor which will initialise the board, bombList, boardArrayTime, boardArrayName, pathTimeMap, and currentBoard which are used in the game.</div>
+</dd>
 </dl>
 <a name="I:B">
 <!--   -->
@@ -88,17 +92,27 @@
 <dt><span class="memberNameLink"><a href="demolition/allTilesClass.html#block">block</a></span> - Variable in class demolition.<a href="demolition/allTilesClass.html" title="class in demolition">allTilesClass</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="demolition/Board.html" title="class in demolition"><span class="typeNameLink">Board</span></a> - Class in <a href="demolition/package-summary.html">demolition</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sets up the backend of the board in a String[][] format which stores the location of all tiles and enemies.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/Board.html#Board--">Board()</a></span> - Constructor for class demolition.<a href="demolition/Board.html" title="class in demolition">Board</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="demolition/Bomb.html" title="class in demolition"><span class="typeNameLink">Bomb</span></a> - Class in <a href="demolition/package-summary.html">demolition</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Extends from GameObject class to create a bomb which will tick for 2 seconds before exploding.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/Bomb.html#Bomb-int-int-processing.core.PApplet-java.lang.String:A:A-">Bomb(int, int, PApplet, String[][])</a></span> - Constructor for class demolition.<a href="demolition/Bomb.html" title="class in demolition">Bomb</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Takes in the x and y coordinates of the player and currentBoard as well as PApplet app which will be used to find the positioning of the bomb on the map and determine its explosion.</div>
+</dd>
 <dt><a href="demolition/BrokenWall.html" title="class in demolition"><span class="typeNameLink">BrokenWall</span></a> - Class in <a href="demolition/package-summary.html">demolition</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates the BrokenWall class which is used to create brokenWall objects that can be stored in an ArrayList for populating the board.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/BrokenWall.html#BrokenWall-int-int-processing.core.PApplet-">BrokenWall(int, int, PApplet)</a></span> - Constructor for class demolition.<a href="demolition/BrokenWall.html" title="class in demolition">BrokenWall</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructs the object given the x and y coordinates as well as loading the image from the resources folder.</div>
+</dd>
 </dl>
 <a name="I:C">
 <!--   -->
@@ -108,9 +122,13 @@
 <dt><span class="memberNameLink"><a href="demolition/App.html#changeLives-int-">changeLives(int)</a></span> - Method in class demolition.<a href="demolition/App.html" title="class in demolition">App</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="demolition/PlayerClasses.html#changeOrientation-int-">changeOrientation(int)</a></span> - Method in class demolition.<a href="demolition/PlayerClasses.html" title="class in demolition">PlayerClasses</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Forcelly change the character orientation (used for testing purposes)</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/App.html#checkGameState--">checkGameState()</a></span> - Method in class demolition.<a href="demolition/App.html" title="class in demolition">App</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Checks whether the red or yellow enemies are on the same tile as the player.</div>
+</dd>
 </dl>
 <a name="I:D">
 <!--   -->
@@ -122,19 +140,29 @@
 <dt><span class="memberNameLink"><a href="demolition/allTilesClass.html#draw-processing.core.PApplet-">draw(PApplet)</a></span> - Method in class demolition.<a href="demolition/allTilesClass.html" title="class in demolition">allTilesClass</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="demolition/App.html#draw--">draw()</a></span> - Method in class demolition.<a href="demolition/App.html" title="class in demolition">App</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Combines the methods and logic from the other classes to build the core game as well as render in graphics.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/Bomb.html#draw-processing.core.PApplet-">draw(PApplet)</a></span> - Method in class demolition.<a href="demolition/Bomb.html" title="class in demolition">Bomb</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Draws the bomb sprite and changes the sprite based on the time elapsed.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/Player.html#draw-processing.core.PApplet-">draw(PApplet)</a></span> - Method in class demolition.<a href="demolition/Player.html" title="class in demolition">Player</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="demolition/redEnemy.html#draw-processing.core.PApplet-">draw(PApplet)</a></span> - Method in class demolition.<a href="demolition/redEnemy.html" title="class in demolition">redEnemy</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Draws the image in the Sprite list given the orientation and imagetick as well as the X and Y coordinates.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/timer.html#draw-processing.core.PApplet-">draw(PApplet)</a></span> - Method in class demolition.<a href="demolition/timer.html" title="class in demolition">timer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Draws the timerIcon as well as the playerIcon which is at the top of the game window.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/yellowEnemy.html#draw-processing.core.PApplet-">draw(PApplet)</a></span> - Method in class demolition.<a href="demolition/yellowEnemy.html" title="class in demolition">yellowEnemy</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="demolition/Bomb.html#drawExplosion-processing.core.PApplet-">drawExplosion(PApplet)</a></span> - Method in class demolition.<a href="demolition/Bomb.html" title="class in demolition">Bomb</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Draws the explosion sprites depending on the value in the int array from the setCanExplodePath method.</div>
+</dd>
 </dl>
 <a name="I:E">
 <!--   -->
@@ -142,15 +170,25 @@
 <h2 class="title">E</h2>
 <dl>
 <dt><a href="demolition/EmptyWall.html" title="class in demolition"><span class="typeNameLink">EmptyWall</span></a> - Class in <a href="demolition/package-summary.html">demolition</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates the EmptyWall class which is used to create emptyWall objects that can be stored in an ArrayList for populating the board.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/EmptyWall.html#EmptyWall-int-int-processing.core.PApplet-">EmptyWall(int, int, PApplet)</a></span> - Constructor for class demolition.<a href="demolition/EmptyWall.html" title="class in demolition">EmptyWall</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructs the object given the x and y coordinates as well as loading the image from the resources folder.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/Bomb.html#explode-int-int-demolition.App-">explode(int, int, App)</a></span> - Method in class demolition.<a href="demolition/Bomb.html" title="class in demolition">Bomb</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Checks the given coordinates and depending on the tile will either change to " ", do nothing or change booleans isEnemyDead or killedPlayer to true.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/Bomb.html#explosion-demolition.App-">explosion(App)</a></span> - Method in class demolition.<a href="demolition/Bomb.html" title="class in demolition">Bomb</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Calls the explode function for each tile.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/Board.html#explosionBreakBlock-java.lang.String:A:A-processing.core.PApplet-">explosionBreakBlock(String[][], PApplet)</a></span> - Method in class demolition.<a href="demolition/Board.html" title="class in demolition">Board</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Breaks the necessary blocks when an explosion occurs by clearing all objects in the emptyWalls and brokenWalls lists and re-adding them after scanning through the newly formed current board</div>
+</dd>
 </dl>
 <a name="I:F">
 <!--   -->
@@ -166,10 +204,16 @@
 <h2 class="title">G</h2>
 <dl>
 <dt><a href="demolition/GameObject.html" title="class in demolition"><span class="typeNameLink">GameObject</span></a> - Class in <a href="demolition/package-summary.html">demolition</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">The GameObject class is the main abstract class which will be inherited from by the PlayerClasses and the allTilesClass for the X and Y coordinates as well as universal getter methods for X and Y</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/GameObject.html#GameObject-int-int-processing.core.PApplet-">GameObject(int, int, PApplet)</a></span> - Constructor for class demolition.<a href="demolition/GameObject.html" title="class in demolition">GameObject</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Takes in the x and y coordinates and stores it in protected variables in the class attributes</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/Bomb.html#getBoard--">getBoard()</a></span> - Method in class demolition.<a href="demolition/Bomb.html" title="class in demolition">Bomb</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="demolition/App.html#getBoardCount--">getBoardCount()</a></span> - Method in class demolition.<a href="demolition/App.html" title="class in demolition">App</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="demolition/App.html#getBombList--">getBombList()</a></span> - Method in class demolition.<a href="demolition/App.html" title="class in demolition">App</a></dt>
 <dd>&nbsp;</dd>
@@ -210,9 +254,13 @@
 <dt><span class="memberNameLink"><a href="demolition/Board.html#getYellowEnemy--">getYellowEnemy()</a></span> - Method in class demolition.<a href="demolition/Board.html" title="class in demolition">Board</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="demolition/GoalTile.html" title="class in demolition"><span class="typeNameLink">GoalTile</span></a> - Class in <a href="demolition/package-summary.html">demolition</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates the GoalTile class which is used to create GoalTile objects that can be stored in an ArrayList for populating the board.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/GoalTile.html#GoalTile-int-int-processing.core.PApplet-">GoalTile(int, int, PApplet)</a></span> - Constructor for class demolition.<a href="demolition/GoalTile.html" title="class in demolition">GoalTile</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructs the object given the x and y coordinates as well as loading the image from the resources folder.</div>
+</dd>
 </dl>
 <a name="I:H">
 <!--   -->
@@ -238,9 +286,13 @@
 <h2 class="title">K</h2>
 <dl>
 <dt><span class="memberNameLink"><a href="demolition/App.html#keyPressed--">keyPressed()</a></span> - Method in class demolition.<a href="demolition/App.html" title="class in demolition">App</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Determines if a significant key has been pressed and will allow the player to act accordingly.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/App.html#keyReleased--">keyReleased()</a></span> - Method in class demolition.<a href="demolition/App.html" title="class in demolition">App</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Changes the value of boolean keyReleased to true once a key has been let go.</div>
+</dd>
 </dl>
 <a name="I:M">
 <!--   -->
@@ -250,21 +302,35 @@
 <dt><span class="memberNameLink"><a href="demolition/App.html#main-java.lang.String:A-">main(String[])</a></span> - Static method in class demolition.<a href="demolition/App.html" title="class in demolition">App</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="demolition/Board.html#makeBoard-java.lang.String-processing.core.PApplet-">makeBoard(String, PApplet)</a></span> - Method in class demolition.<a href="demolition/Board.html" title="class in demolition">Board</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Reads the file taken from the config.json and converts it to a String[][] which will be used to store the current board.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/Board.html#map-java.lang.String:A:A-processing.core.PApplet-">map(String[][], PApplet)</a></span> - Method in class demolition.<a href="demolition/Board.html" title="class in demolition">Board</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates Player, redEnemy, yellowEnemy, and tile blocks based on the String[][] board created in the makeBoard method and adds them to their respective Lists in the board attributes.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/PlayerClasses.html#movementDOWN--">movementDOWN()</a></span> - Method in class demolition.<a href="demolition/PlayerClasses.html" title="class in demolition">PlayerClasses</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Shifts character location Down</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/PlayerClasses.html#movementLeft--">movementLeft()</a></span> - Method in class demolition.<a href="demolition/PlayerClasses.html" title="class in demolition">PlayerClasses</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Shifts the character location to the left</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/PlayerClasses.html#movementRight--">movementRight()</a></span> - Method in class demolition.<a href="demolition/PlayerClasses.html" title="class in demolition">PlayerClasses</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Shifts character location to the right</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/PlayerClasses.html#movementUP--">movementUP()</a></span> - Method in class demolition.<a href="demolition/PlayerClasses.html" title="class in demolition">PlayerClasses</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Shifts character location up</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/App.html#moveRedEnemyAI-demolition.redEnemy-">moveRedEnemyAI(redEnemy)</a></span> - Method in class demolition.<a href="demolition/App.html" title="class in demolition">App</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="demolition/App.html#moveYellowEnemy-demolition.yellowEnemy-">moveYellowEnemy(yellowEnemy)</a></span> - Method in class demolition.<a href="demolition/App.html" title="class in demolition">App</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Moves yellow enemy in a set pattern that is clockwise.</div>
+</dd>
 </dl>
 <a name="I:N">
 <!--   -->
@@ -274,8 +340,6 @@
 <dt><span class="memberNameLink"><a href="demolition/PlayerClasses.html#newX">newX</a></span> - Variable in class demolition.<a href="demolition/PlayerClasses.html" title="class in demolition">PlayerClasses</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="demolition/PlayerClasses.html#newY">newY</a></span> - Variable in class demolition.<a href="demolition/PlayerClasses.html" title="class in demolition">PlayerClasses</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="demolition/App.html#nextMap--">nextMap()</a></span> - Method in class demolition.<a href="demolition/App.html" title="class in demolition">App</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="demolition/Bomb.html#notAlive--">notAlive()</a></span> - Method in class demolition.<a href="demolition/Bomb.html" title="class in demolition">Bomb</a></dt>
 <dd>&nbsp;</dd>
@@ -294,11 +358,17 @@
 <h2 class="title">P</h2>
 <dl>
 <dt><a href="demolition/Player.html" title="class in demolition"><span class="typeNameLink">Player</span></a> - Class in <a href="demolition/package-summary.html">demolition</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Contains attributes which stores the images for each animation in each direction.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/Player.html#Player-int-int-processing.core.PApplet-">Player(int, int, PApplet)</a></span> - Constructor for class demolition.<a href="demolition/Player.html" title="class in demolition">Player</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Takes in the x and y coordinates of the object and loads in the respective images for each direction.</div>
+</dd>
 <dt><a href="demolition/PlayerClasses.html" title="class in demolition"><span class="typeNameLink">PlayerClasses</span></a> - Class in <a href="demolition/package-summary.html">demolition</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">This abstract class will be inherited from for each entity that is either a player or an enemy.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/PlayerClasses.html#PlayerClasses-int-int-processing.core.PApplet-">PlayerClasses(int, int, PApplet)</a></span> - Constructor for class demolition.<a href="demolition/PlayerClasses.html" title="class in demolition">PlayerClasses</a></dt>
 <dd>&nbsp;</dd>
 </dl>
@@ -308,17 +378,27 @@
 <h2 class="title">R</h2>
 <dl>
 <dt><span class="memberNameLink"><a href="demolition/readJsonObject.html#readFiles-java.lang.String-">readFiles(String)</a></span> - Method in class demolition.<a href="demolition/readJsonObject.html" title="class in demolition">readJsonObject</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Takes in a filePath String parameter and uses a scanner to append each Line to the fileRead variable.</div>
+</dd>
 <dt><a href="demolition/readJsonObject.html" title="class in demolition"><span class="typeNameLink">readJsonObject</span></a> - Class in <a href="demolition/package-summary.html">demolition</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Class which will read from a JSON file and extract information based on levels, lives and time and put values into a HashMap which will be used for map loading.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/readJsonObject.html#readJsonObject--">readJsonObject()</a></span> - Constructor for class demolition.<a href="demolition/readJsonObject.html" title="class in demolition">readJsonObject</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="demolition/redEnemy.html" title="class in demolition"><span class="typeNameLink">redEnemy</span></a> - Class in <a href="demolition/package-summary.html">demolition</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates the redEnemy object which extends the PlayerClasses and implements the playerMovement interface.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/redEnemy.html#redEnemy-int-int-processing.core.PApplet-">redEnemy(int, int, PApplet)</a></span> - Constructor for class demolition.<a href="demolition/redEnemy.html" title="class in demolition">redEnemy</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Takes in X and Y and PApplet app to create a redEnemy object which inherits methods from PlayerClasses.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/App.html#resetGame--">resetGame()</a></span> - Method in class demolition.<a href="demolition/App.html" title="class in demolition">App</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Resets the game to the original board by clearing out red and yellow enemy lists, as well as redrawing board from text file and resetting timer.</div>
+</dd>
 </dl>
 <a name="I:S">
 <!--   -->
@@ -326,15 +406,25 @@
 <h2 class="title">S</h2>
 <dl>
 <dt><span class="memberNameLink"><a href="demolition/Bomb.html#setCanExplodePath--">setCanExplodePath()</a></span> - Method in class demolition.<a href="demolition/Bomb.html" title="class in demolition">Bomb</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Checks 2 blocks in each direction N, E, S, W and determines how far the explosion should occur in.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/App.html#settings--">settings()</a></span> - Method in class demolition.<a href="demolition/App.html" title="class in demolition">App</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Sets the size of the game window</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/App.html#setup--">setup()</a></span> - Method in class demolition.<a href="demolition/App.html" title="class in demolition">App</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Calls upon the readJsonObject class to read text input from a JSONObject, extracting the lives data and time data.</div>
+</dd>
 <dt><a href="demolition/SolidWall.html" title="class in demolition"><span class="typeNameLink">SolidWall</span></a> - Class in <a href="demolition/package-summary.html">demolition</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates the SolidWall class which is used to create SolidWall objects that can be stored in an ArrayList for populating the board.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/SolidWall.html#SolidWall-int-int-processing.core.PApplet-">SolidWall(int, int, PApplet)</a></span> - Constructor for class demolition.<a href="demolition/SolidWall.html" title="class in demolition">SolidWall</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Constructs the object given the x and y coordinates as well as loading the image from the resources folder.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/Player.html#sprites">sprites</a></span> - Variable in class demolition.<a href="demolition/Player.html" title="class in demolition">Player</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="demolition/PlayerClasses.html#sprites">sprites</a></span> - Variable in class demolition.<a href="demolition/PlayerClasses.html" title="class in demolition">PlayerClasses</a></dt>
@@ -346,17 +436,29 @@
 <h2 class="title">T</h2>
 <dl>
 <dt><span class="memberNameLink"><a href="demolition/Board.html#testMakeBoard-java.lang.String-processing.core.PApplet-">testMakeBoard(String, PApplet)</a></span> - Method in class demolition.<a href="demolition/Board.html" title="class in demolition">Board</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">A makeBoard method which is used for testing purposes.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/PlayerClasses.html#tick--">tick()</a></span> - Method in class demolition.<a href="demolition/PlayerClasses.html" title="class in demolition">PlayerClasses</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Predominantly used for cycling through player and enemy animations.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/redEnemy.html#tick--">tick()</a></span> - Method in class demolition.<a href="demolition/redEnemy.html" title="class in demolition">redEnemy</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Has a timer which ticks up every time tick is called which resets at 12 and adds 1 to the imageTick to change the redEnemy animation.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/timer.html#tick--">tick()</a></span> - Method in class demolition.<a href="demolition/timer.html" title="class in demolition">timer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Every 60 ticks leads to the time -1 as there is 60FPS.</div>
+</dd>
 <dt><a href="demolition/timer.html" title="class in demolition"><span class="typeNameLink">timer</span></a> - Class in <a href="demolition/package-summary.html">demolition</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates the timer class which loads the images as well as keeps track of the game time.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/timer.html#timer-int-processing.core.PApplet-">timer(int, PApplet)</a></span> - Constructor for class demolition.<a href="demolition/timer.html" title="class in demolition">timer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Takes in an int for timer which is loaded from the config.kson and the PApplet app.</div>
+</dd>
 </dl>
 <a name="I:W">
 <!--   -->
@@ -382,7 +484,9 @@
 <dt><span class="memberNameLink"><a href="demolition/GameObject.html#y">y</a></span> - Variable in class demolition.<a href="demolition/GameObject.html" title="class in demolition">GameObject</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="demolition/yellowEnemy.html" title="class in demolition"><span class="typeNameLink">yellowEnemy</span></a> - Class in <a href="demolition/package-summary.html">demolition</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates the yellowEnemy object which inherits attributes from the playerClasses class for tick().</div>
+</dd>
 <dt><span class="memberNameLink"><a href="demolition/yellowEnemy.html#yellowEnemy-int-int-processing.core.PApplet-">yellowEnemy(int, int, PApplet)</a></span> - Constructor for class demolition.<a href="demolition/yellowEnemy.html" title="class in demolition">yellowEnemy</a></dt>
 <dd>&nbsp;</dd>
 </dl>

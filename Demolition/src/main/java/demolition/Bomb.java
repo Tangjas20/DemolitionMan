@@ -4,6 +4,10 @@ import processing.core.PImage;
 import processing.core.PApplet;
 import java.util.Arrays;
 
+/**
+*Extends from GameObject class to create a bomb which will tick for 2 seconds before exploding. This class will implement the core logic as well as loading the sprites and creating a path for explosions to occur
+ */
+
 public class Bomb extends GameObject {
     private String[][] currentBoard;
     private PImage[] bombSprite = new PImage[8];
@@ -18,7 +22,9 @@ public class Bomb extends GameObject {
     boolean killedRedEnemy = false;
     boolean brokenWallTF = false;
 
-
+    /**
+    * Takes in the x and y coordinates of the player and currentBoard as well as PApplet app which will be used to find the positioning of the bomb on the map and determine its explosion.
+    */
     public Bomb(int x, int y, PApplet app, String[][] currentBoard){
         super(x, y, app);
         this.currentBoard = currentBoard;
@@ -48,7 +54,10 @@ public class Bomb extends GameObject {
         setCanExplodePath();
     }
 
-    public void setCanExplodePath(){
+    /**
+    * Checks 2 blocks in each direction N, E, S, W and determines how far the explosion should occur in. Changes the explodablePath attribute to an int array which stores values to be used in the explosion
+    */
+    public void setCanExplodePath(){//Creates an int array to be used to record how far explosion goes
         if(this.currentBoard[y][x+1].equals("W")){
             ;
         }//Right
@@ -104,6 +113,9 @@ public class Bomb extends GameObject {
         this.explodablePath = explodablePath;
     }
     
+    /**
+    * Draws the explosion sprites depending on the value in the int array from the setCanExplodePath method. This ensures that the correct animations are delivered when the explosion occurs. I.e If there is a broken wall closest to the bomb, that direction will only show explosion for one block.
+    */
     public void drawExplosion(PApplet app) {//Left
         app.image(explosionSprite[0], this.x*32, this.y*32+64);
         if (explodablePath[0] == 1 || explodablePath[0] == 3) app.image(explosionSprite[6], this.x*32-32, this.y*32+64); //Left Close
@@ -133,7 +145,10 @@ public class Bomb extends GameObject {
         }
     }
 
-    public void draw(PApplet app) {
+    /**
+    *Draws the bomb sprite and changes the sprite based on the time elapsed. Will change the boolean isAlive 
+    */
+    public void draw(PApplet app) {//draws bomb sprite
         app.image(bombSprite[currentSprite], this.x*32, this.y*32+64);
         timerSprite += 1;
 
@@ -149,7 +164,10 @@ public class Bomb extends GameObject {
 
     }
 
-    public void explosion(App app) {
+    /**
+    * Calls the explode function for each tile. Starts by exploding the closest block in each direction and if they are not solid walls or broken walls, the next block in the respective direction will be exploded
+    */
+    public void explosion(App app) {//Calls upon explode method to change the currentBoard terrain and enemies
         //Left
       if (explode(this.x-1, this.y, app)) 
             explode(this.x-2, this.y, app);
@@ -166,6 +184,9 @@ public class Bomb extends GameObject {
       if (explode(this.x, this.y, app));
     }
 
+    /**
+    * Checks the given coordinates and depending on the tile will either change to " ", do nothing or change booleans isEnemyDead or killedPlayer to true. The returned value of these will be used in the explosion method to extend the explosion to further blocks
+    */
     public boolean explode(int row, int column, App app) {
         String tile = app.currentBoard[column][row];
 

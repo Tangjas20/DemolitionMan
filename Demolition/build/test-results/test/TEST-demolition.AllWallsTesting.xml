@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.AllWallsTesting" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-11-05T07:31:13" hostname="DESKTOP-GJIUGBP" time="4.584">
+<testsuite name="demolition.AllWallsTesting" tests="5" skipped="0" failures="0" errors="0" timestamp="2021-11-05T09:36:05" hostname="DESKTOP-GJIUGBP" time="5.023">
   <properties/>
-  <testcase name="createGoalTile()" classname="demolition.AllWallsTesting" time="1.133"/>
-  <testcase name="simpleTest()" classname="demolition.AllWallsTesting" time="0.0"/>
-  <testcase name="createBrokenWall()" classname="demolition.AllWallsTesting" time="1.127"/>
-  <testcase name="createEmptyWall()" classname="demolition.AllWallsTesting" time="1.121"/>
-  <testcase name="createSolidWall()" classname="demolition.AllWallsTesting" time="1.201"/>
+  <testcase name="createGoalTile()" classname="demolition.AllWallsTesting" time="1.609"/>
+  <testcase name="simpleTest()" classname="demolition.AllWallsTesting" time="0.001"/>
+  <testcase name="createBrokenWall()" classname="demolition.AllWallsTesting" time="1.141"/>
+  <testcase name="createEmptyWall()" classname="demolition.AllWallsTesting" time="1.134"/>
+  <testcase name="createSolidWall()" classname="demolition.AllWallsTesting" time="1.137"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[java.util.ConcurrentModificationException
 	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:911)
 	at java.util.ArrayList$Itr.next(ArrayList.java:861)
-	at demolition.App.draw(App.java:126)
+	at demolition.App.draw(App.java:141)
 	at processing.core.PApplet.handleDraw(PApplet.java:2426)
 	at processing.awt.PSurfaceAWT$12.callDraw(PSurfaceAWT.java:1557)
 	at processing.core.PSurfaceNone$AnimationThread.run(PSurfaceNone.java:316)

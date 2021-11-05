@@ -11,434 +11,460 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Random;
 
+/**
+* This serves as the core manager for the game and functionality which calls upon other classes and extends PApplet.
+*/
 public class App extends PApplet {
     public static final int FPS = 60;
     public static final int WIDTH = 480;
     public static final int HEIGHT = 480;
-<span class="fc" id="L18">    int counter = 0;</span>
+<span class="fc" id="L21">    int counter = 0;</span>
     String[][] currentBoard;
-<span class="fc" id="L20">    Integer currentTimer = 0;</span>
+<span class="fc" id="L23">    Integer currentTimer = 0;</span>
     private Map&lt;String, String&gt; pathTimeMap;
     private List&lt;String&gt; boardArrayName;
     private List&lt;Integer&gt; boardArrayTime;
-<span class="fc" id="L24">    private int boardCounter = 0;</span>
+<span class="fc" id="L27">    private int boardCounter = 0;</span>
     PFont font;
-<span class="fc" id="L26">    boolean keyReleased = true;</span>
+<span class="fc" id="L29">    boolean keyReleased = true;</span>
     Board board;
     private int lives;
     timer timerIcon;
-<span class="fc" id="L30">    boolean drewPlayer = false;</span>
+<span class="fc" id="L33">    boolean drewPlayer = false;</span>
     List&lt;Bomb&gt; bombList;
-<span class="fc" id="L32">    boolean gameOver = false;</span>
-<span class="fc" id="L33">    boolean isTest = false;</span>
+<span class="fc" id="L35">    boolean gameOver = false;</span>
+<span class="fc" id="L36">    boolean isTest = false;</span>
     readJsonObject fileData;
-<span class="fc" id="L35">    boolean gameReset = false;</span>
+<span class="fc" id="L38">    boolean gameReset = false;</span>
 
-<span class="fc" id="L37">    public App() {</span>
+    /**
+    *Constructor which will initialise the board, bombList, boardArrayTime, boardArrayName, pathTimeMap, and currentBoard which are used in the game.
+     */
+<span class="fc" id="L43">    public App() {</span>
         //construct objects here
-<span class="fc" id="L39">        board = new Board();</span>
-<span class="fc" id="L40">        bombList = new ArrayList&lt;Bomb&gt;();</span>
-<span class="fc" id="L41">        boardArrayTime = new ArrayList&lt;Integer&gt;();</span>
-<span class="fc" id="L42">        boardArrayName = new ArrayList&lt;String&gt;();</span>
-<span class="fc" id="L43">        pathTimeMap = new HashMap&lt;String, String&gt;();</span>
-<span class="fc" id="L44">        currentBoard = new String[13][15];</span>
-<span class="fc" id="L45">    }</span>
-
+<span class="fc" id="L45">        board = new Board();</span>
+<span class="fc" id="L46">        bombList = new ArrayList&lt;Bomb&gt;();</span>
+<span class="fc" id="L47">        boardArrayTime = new ArrayList&lt;Integer&gt;();</span>
+<span class="fc" id="L48">        boardArrayName = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L49">        pathTimeMap = new HashMap&lt;String, String&gt;();</span>
+<span class="fc" id="L50">        currentBoard = new String[13][15];</span>
+<span class="fc" id="L51">    }</span>
+    /**
+    *Sets the size of the game window
+     */
     public void settings() {
-<span class="fc" id="L48">        size(WIDTH, HEIGHT);</span>
-<span class="fc" id="L49">    }</span>
-
-    public void resetGame(){
-<span class="fc" id="L52">        board.redEnemyList.clear();</span>
-<span class="fc" id="L53">        board.yellowEnemyList.clear();</span>
-<span class="fc" id="L54">        currentBoard = board.makeBoard(boardArrayName.get(boardCounter), this);</span>
-<span class="fc" id="L55">        currentTimer =  boardArrayTime.get(boardCounter);</span>
-<span class="fc" id="L56">        board.map(currentBoard, this);</span>
-<span class="fc" id="L57">        this.timerIcon = new timer(currentTimer, this);</span>
-<span class="fc" id="L58">        gameReset = false;</span>
-<span class="fc" id="L59">    }</span>
-
+<span class="fc" id="L56">        size(WIDTH, HEIGHT);</span>
+<span class="fc" id="L57">    }</span>
+    /**
+    * Resets the game to the original board by clearing out red and yellow enemy lists, as well as redrawing board from text file and resetting timer.
+     */
+    public void resetGame(){//Method to reset game to original board.
+<span class="fc" id="L62">        board.redEnemyList.clear();</span>
+<span class="fc" id="L63">        board.yellowEnemyList.clear();</span>
+<span class="fc" id="L64">        currentBoard = board.makeBoard(boardArrayName.get(boardCounter), this);</span>
+<span class="fc" id="L65">        currentTimer =  boardArrayTime.get(boardCounter);</span>
+<span class="fc" id="L66">        board.map(currentBoard, this);</span>
+<span class="fc" id="L67">        this.timerIcon = new timer(currentTimer, this);</span>
+<span class="fc" id="L68">        gameReset = false;</span>
+<span class="fc" id="L69">    }</span>
+    /**
+    * Calls upon the readJsonObject class to read text input from a JSONObject, extracting the lives data and time data. The data is stored in a HashMap named pathTimeMap. 
+    * If isTest is true, then the program will read the config file from the src/test/resources/ folder
+     */
     public void setup() {
-<span class="fc" id="L62">        frameRate(FPS);</span>
-<span class="fc" id="L63">        font = createFont(&quot;PressStart2P-regular.ttf&quot;, 16);</span>
-<span class="fc" id="L64">        fill(0);</span>
-<span class="fc" id="L65">        textFont(font);</span>
+<span class="fc" id="L75">        frameRate(FPS);</span>
+<span class="fc" id="L76">        font = createFont(&quot;PressStart2P-regular.ttf&quot;, 16);</span>
+<span class="fc" id="L77">        fill(0);</span>
+<span class="fc" id="L78">        textFont(font);</span>
         
-<span class="fc bfc" id="L67" title="All 2 branches covered.">        if(isTest == false){</span>
-<span class="fc" id="L68">            readJsonObject fileData = new readJsonObject(); </span>
-<span class="fc" id="L69">            fileData.readFiles(&quot;config.json&quot;);</span>
-<span class="fc" id="L70">            this.lives = fileData.getLives();</span>
-<span class="fc" id="L71">            pathTimeMap = fileData.getPathTimeHashMap(); //Stores the level name and time</span>
-<span class="fc" id="L72">        }</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        if(isTest == false){</span>
+<span class="fc" id="L81">            readJsonObject fileData = new readJsonObject(); </span>
+<span class="fc" id="L82">            fileData.readFiles(&quot;config.json&quot;);</span>
+<span class="fc" id="L83">            this.lives = fileData.getLives();</span>
+<span class="fc" id="L84">            pathTimeMap = fileData.getPathTimeHashMap(); //Stores the level name and time</span>
+<span class="fc" id="L85">        }</span>
         else{
-<span class="fc" id="L74">            readJsonObject fileData = new readJsonObject(); </span>
-<span class="fc" id="L75">            fileData.readFiles(&quot;src/test/resources/testConfig.json&quot;);</span>
-<span class="fc" id="L76">            this.lives = fileData.getLives();</span>
-<span class="fc" id="L77">            pathTimeMap = fileData.getPathTimeHashMap(); //Stores the level name and time</span>
+<span class="fc" id="L87">            readJsonObject fileData = new readJsonObject(); </span>
+<span class="fc" id="L88">            fileData.readFiles(&quot;src/test/resources/testConfig.json&quot;);</span>
+<span class="fc" id="L89">            this.lives = fileData.getLives();</span>
+<span class="fc" id="L90">            pathTimeMap = fileData.getPathTimeHashMap(); //Stores the level name and time</span>
         }   //Reads config file for level, time and lives info
        
         
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        for (Map.Entry&lt;String, String&gt; entry : pathTimeMap.entrySet()) {</span>
+<span class="fc" id="L95">            String key = entry.getKey();</span>
+<span class="fc" id="L96">            Integer value = parseInt(entry.getValue());</span>
+<span class="fc" id="L97">            boardArrayTime.add(value);</span>
+<span class="fc" id="L98">            boardArrayName.add(key);</span>
+<span class="fc" id="L99">        }</span>
 
-<span class="fc bfc" id="L82" title="All 2 branches covered.">        for (Map.Entry&lt;String, String&gt; entry : pathTimeMap.entrySet()) {</span>
-<span class="fc" id="L83">            String key = entry.getKey();</span>
-<span class="fc" id="L84">            Integer value = parseInt(entry.getValue());</span>
-<span class="fc" id="L85">            boardArrayTime.add(value);</span>
-<span class="fc" id="L86">            boardArrayName.add(key);</span>
-<span class="fc" id="L87">        }</span>
-
-<span class="fc bfc" id="L89" title="All 2 branches covered.">        if(isTest == false){</span>
-<span class="fc" id="L90">            currentBoard = board.makeBoard(boardArrayName.get(boardCounter), this);</span>
-<span class="fc" id="L91">            currentTimer =  boardArrayTime.get(boardCounter);</span>
-<span class="fc" id="L92">            board.map(currentBoard, this);</span>
-<span class="fc" id="L93">            this.timerIcon = new timer(currentTimer, this);</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">        if(isTest == false){//Calls upon config file in the root directory if false</span>
+<span class="fc" id="L102">            currentBoard = board.makeBoard(boardArrayName.get(boardCounter), this);</span>
+<span class="fc" id="L103">            currentTimer =  boardArrayTime.get(boardCounter);</span>
+<span class="fc" id="L104">            board.map(currentBoard, this);</span>
+<span class="fc" id="L105">            this.timerIcon = new timer(currentTimer, this);</span>
         }
-<span class="pc bpc" id="L95" title="1 of 2 branches missed.">        else if(isTest == true){</span>
-<span class="fc" id="L96">            currentBoard = board.testMakeBoard(boardArrayName.get(boardCounter), this);</span>
-<span class="fc" id="L97">            currentTimer =  boardArrayTime.get(boardCounter);</span>
-<span class="fc" id="L98">            board.map(currentBoard, this);</span>
-<span class="fc" id="L99">            this.timerIcon = new timer(currentTimer, this);   </span>
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">        else if(isTest == true){//This is used for testing purposes</span>
+<span class="fc" id="L108">            currentBoard = board.testMakeBoard(boardArrayName.get(boardCounter), this);</span>
+<span class="fc" id="L109">            currentTimer =  boardArrayTime.get(boardCounter);</span>
+<span class="fc" id="L110">            board.map(currentBoard, this);</span>
+<span class="fc" id="L111">            this.timerIcon = new timer(currentTimer, this);   </span>
         }
-<span class="fc" id="L101">    }</span>
-
+<span class="fc" id="L113">    }</span>
+    /**
+    * Combines the methods and logic from the other classes to build the core game as well as render in graphics. This method repeats at 60 FPS and will check the game state, draw background, players, enemies and other entties.
+    * It will check for certain conditions to be met and act accordingly. These include checking if bomb explosions have finished and removing them from the bombList, checking if the player has been killed etc.
+    */
     public void draw() {
-<span class="pc bpc" id="L104" title="2 of 6 branches missed.">        if (lives &gt; 0 &amp;&amp; this.timerIcon.getTimer() &gt; 0 &amp;&amp; gameOver == false){</span>
-<span class="fc" id="L105">            drewPlayer = false;</span>
-<span class="fc" id="L106">            checkGameState();//Checks if player touches enemy</span>
-<span class="fc" id="L107">            background(255, 128, 0);</span>
-<span class="fc" id="L108">            this.timerIcon.draw(this);</span>
-<span class="fc" id="L109">            this.timerIcon.tick();</span>
-<span class="fc" id="L110">            text(timerIcon.getTimer(), 350, 40);</span>
+<span class="pc bpc" id="L119" title="2 of 6 branches missed.">        if (lives &gt; 0 &amp;&amp; this.timerIcon.getTimer() &gt; 0 &amp;&amp; gameOver == false){//Tests to see if conditions are met for game to continue</span>
+<span class="fc" id="L120">            drewPlayer = false;</span>
+<span class="fc" id="L121">            checkGameState();//Checks if player touches enemy</span>
+<span class="fc" id="L122">            background(255, 128, 0);</span>
+<span class="fc" id="L123">            this.timerIcon.draw(this);</span>
+<span class="fc" id="L124">            this.timerIcon.tick();</span>
+<span class="fc" id="L125">            text(timerIcon.getTimer(), 350, 40);</span>
 
-<span class="fc bfc" id="L112" title="All 2 branches covered.">            if (frameCount % 60 == 0){</span>
-<span class="pc bpc" id="L113" title="1 of 2 branches missed.">                if (board.yellowEnemyTF){</span>
-<span class="fc bfc" id="L114" title="All 2 branches covered.">                    for(yellowEnemy i: board.yellowEnemyList)</span>
-<span class="fc" id="L115">                        moveYellowEnemy(i);</span>
+<span class="fc bfc" id="L127" title="All 2 branches covered.">            if (frameCount % 60 == 0){//Every 60frames/every second calls the enemies to move</span>
+<span class="pc bpc" id="L128" title="1 of 2 branches missed.">                if (board.yellowEnemyTF){</span>
+<span class="fc bfc" id="L129" title="All 2 branches covered.">                    for(yellowEnemy i: board.yellowEnemyList)</span>
+<span class="fc" id="L130">                        moveYellowEnemy(i);</span>
                 }
-<span class="pc bpc" id="L117" title="1 of 2 branches missed.">                if (board.redEnemyTF)</span>
-<span class="fc bfc" id="L118" title="All 2 branches covered.">                    for(redEnemy i: board.redEnemyList)</span>
-<span class="fc" id="L119">                        moveRedEnemyAI(i);</span>
+<span class="pc bpc" id="L132" title="1 of 2 branches missed.">                if (board.redEnemyTF)</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">                    for(redEnemy i: board.redEnemyList)</span>
+<span class="fc" id="L134">                        moveRedEnemyAI(i);</span>
             }
 
-<span class="fc" id="L122">            text(lives, 145, 40);</span>
-<span class="fc bfc" id="L123" title="All 2 branches covered.">            for (EmptyWall emptyWall: board.getEmptyWallsList()){</span>
-<span class="fc" id="L124">                emptyWall.draw(this);</span>
-<span class="fc" id="L125">            }</span>
-<span class="fc bfc" id="L126" title="All 2 branches covered.">            for (SolidWall solidWall: board.getSolidWallsList()){</span>
-<span class="fc" id="L127">                solidWall.draw(this);</span>
-<span class="fc" id="L128">            }</span>
-<span class="fc bfc" id="L129" title="All 2 branches covered.">            for (BrokenWall brokenWall: board.getBrokenWallsList()){</span>
-<span class="fc" id="L130">                brokenWall.draw(this);</span>
-<span class="fc" id="L131">            }</span>
-<span class="fc bfc" id="L132" title="All 2 branches covered.">            for (GoalTile goalImage: board.getGoalTileList()){</span>
-<span class="fc" id="L133">                goalImage.draw(this);</span>
-<span class="fc" id="L134">            }</span>
+<span class="fc" id="L137">            text(lives, 145, 40);</span>
+<span class="fc bfc" id="L138" title="All 2 branches covered.">            for (EmptyWall emptyWall: board.getEmptyWallsList()){</span>
+<span class="fc" id="L139">                emptyWall.draw(this);</span>
+<span class="fc" id="L140">            }</span>
+<span class="fc bfc" id="L141" title="All 2 branches covered.">            for (SolidWall solidWall: board.getSolidWallsList()){</span>
+<span class="fc" id="L142">                solidWall.draw(this);</span>
+<span class="fc" id="L143">            }</span>
+<span class="fc bfc" id="L144" title="All 2 branches covered.">            for (BrokenWall brokenWall: board.getBrokenWallsList()){</span>
+<span class="fc" id="L145">                brokenWall.draw(this);</span>
+<span class="fc" id="L146">            }</span>
+<span class="fc bfc" id="L147" title="All 2 branches covered.">            for (GoalTile goalImage: board.getGoalTileList()){</span>
+<span class="fc" id="L148">                goalImage.draw(this);</span>
+<span class="fc" id="L149">            }</span>
 
-<span class="fc bfc" id="L136" title="All 2 branches covered.">            for (Bomb bomb: bombList){</span>
-<span class="fc bfc" id="L137" title="All 2 branches covered.">                if (bomb.getIsAlive()){</span>
-<span class="fc" id="L138">                    bomb.draw(this);</span>
-<span class="fc" id="L139">                    counter = 0;</span>
+<span class="fc bfc" id="L151" title="All 2 branches covered.">            for (Bomb bomb: bombList){//Checks all the bombs and their states, and explodes </span>
+<span class="fc bfc" id="L152" title="All 2 branches covered.">                if (bomb.getIsAlive()){</span>
+<span class="fc" id="L153">                    bomb.draw(this);</span>
+<span class="fc" id="L154">                    counter = 0;</span>
                 }
-<span class="pc bpc" id="L141" title="1 of 2 branches missed.">                else if (!bomb.getExplosionFinished()) {</span>
-<span class="fc" id="L142">                    bomb.drawExplosion(this);</span>
+<span class="pc bpc" id="L156" title="1 of 2 branches missed.">                else if (!bomb.getExplosionFinished()) {</span>
+<span class="fc" id="L157">                    bomb.drawExplosion(this);</span>
                     
-<span class="fc" id="L144">                    currentBoard = bomb.getBoard();</span>
-<span class="fc bfc" id="L145" title="All 2 branches covered.">                    if (counter == 0){</span>
-<span class="fc" id="L146">                        counter++;</span>
-<span class="fc" id="L147">                        bomb.explosion(this);</span>
-<span class="fc" id="L148">                        board.explosionBreakBlock(currentBoard, this);</span>
+<span class="fc" id="L159">                    currentBoard = bomb.getBoard();</span>
+<span class="fc bfc" id="L160" title="All 2 branches covered.">                    if (counter == 0){</span>
+<span class="fc" id="L161">                        counter++;</span>
+<span class="fc" id="L162">                        bomb.explosion(this);</span>
+<span class="fc" id="L163">                        board.explosionBreakBlock(currentBoard, this);</span>
                     }
 
-<span class="fc bfc" id="L151" title="All 2 branches covered.">                if (bomb.killedPlayer ){</span>
-<span class="fc" id="L152">                    resetGame();</span>
-<span class="fc" id="L153">                    lives--;</span>
-<span class="fc" id="L154">                    bomb.killedPlayer = false;</span>
-<span class="fc" id="L155">                    bomb.explosionFinished= true;</span>
-<span class="fc bfc" id="L156" title="All 2 branches covered.">                    for (Bomb bombDefuse: bombList){</span>
-<span class="fc" id="L157">                        bombDefuse.explosionFinished = true;</span>
-<span class="fc" id="L158">                    }</span>
-<span class="fc" id="L159">                    break;</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">                if (bomb.killedPlayer ){</span>
+<span class="fc" id="L167">                    resetGame();</span>
+<span class="fc" id="L168">                    lives--;</span>
+<span class="fc" id="L169">                    bomb.killedPlayer = false;</span>
+<span class="fc" id="L170">                    bomb.explosionFinished= true;</span>
+<span class="fc bfc" id="L171" title="All 2 branches covered.">                    for (Bomb bombDefuse: bombList){</span>
+<span class="fc" id="L172">                        bombDefuse.explosionFinished = true;</span>
+<span class="fc" id="L173">                    }</span>
+<span class="fc" id="L174">                    break;</span>
                 }
             }
                     
-<span class="fc" id="L163">        }</span>
-<span class="fc bfc" id="L164" title="All 2 branches covered.">            bombList.removeIf(b -&gt; b.getExplosionFinished() == true);</span>
+<span class="fc" id="L178">        }</span>
+<span class="fc bfc" id="L179" title="All 2 branches covered.">            bombList.removeIf(b -&gt; b.getExplosionFinished() == true);//Redundant bombs will be removed from bombsList</span>
 
-<span class="pc bpc" id="L166" title="1 of 2 branches missed.">            if (board.redEnemyTF == true){</span>
-<span class="fc bfc" id="L167" title="All 2 branches covered.">                for(redEnemy i: board.redEnemyList){</span>
-<span class="fc bfc" id="L168" title="All 6 branches covered.">                    if ((board.getPlayer().getX() == i.getX()) &amp;&amp; (board.getPlayer().getY() == (i.getY()-1)) &amp;&amp; drewPlayer == false){</span>
-<span class="fc" id="L169">                        board.getPlayer().tick();</span>
-<span class="fc" id="L170">                        board.getPlayer().draw(this);</span>
-<span class="fc" id="L171">                        drewPlayer = true;</span>
+<span class="pc bpc" id="L181" title="1 of 2 branches missed.">            if (board.redEnemyTF == true){//If enemy exists</span>
+<span class="fc bfc" id="L182" title="All 2 branches covered.">                for(redEnemy i: board.redEnemyList){//If enemy is below player, they will be drawn last</span>
+<span class="fc bfc" id="L183" title="All 6 branches covered.">                    if ((board.getPlayer().getX() == i.getX()) &amp;&amp; (board.getPlayer().getY() == (i.getY()-1)) &amp;&amp; drewPlayer == false){</span>
+<span class="fc" id="L184">                        board.getPlayer().tick();</span>
+<span class="fc" id="L185">                        board.getPlayer().draw(this);</span>
+<span class="fc" id="L186">                        drewPlayer = true;</span>
                 }
-                
-<span class="pc bpc" id="L174" title="1 of 2 branches missed.">                    if(i.isEnemyDead == false){</span>
-<span class="fc" id="L175">                        i.tick();</span>
-<span class="fc" id="L176">                        i.draw(this);</span>
+<span class="pc bpc" id="L188" title="1 of 2 branches missed.">                    if(i.isEnemyDead == false){</span>
+<span class="fc" id="L189">                        i.tick();</span>
+<span class="fc" id="L190">                        i.draw(this);</span>
                     }
-<span class="fc" id="L178">                }</span>
+<span class="fc" id="L192">                }</span>
 
             }
 
-<span class="pc bpc" id="L182" title="1 of 2 branches missed.">            if (board.yellowEnemyTF == true){</span>
-<span class="fc bfc" id="L183" title="All 2 branches covered.">                for(yellowEnemy i: board.yellowEnemyList){</span>
-<span class="pc bpc" id="L184" title="5 of 6 branches missed.">                    if ((board.getPlayer().getX() == i.getX()) &amp;&amp; (board.getPlayer().getY() == (i.getY()-1)) &amp;&amp; drewPlayer == false){</span>
-<span class="nc" id="L185">                        board.getPlayer().tick();</span>
-<span class="nc" id="L186">                        board.getPlayer().draw(this);</span>
-<span class="nc" id="L187">                        drewPlayer = true;</span>
+<span class="pc bpc" id="L196" title="1 of 2 branches missed.">            if (board.yellowEnemyTF == true){//Same logic as above</span>
+<span class="fc bfc" id="L197" title="All 2 branches covered.">                for(yellowEnemy i: board.yellowEnemyList){</span>
+<span class="pc bpc" id="L198" title="5 of 6 branches missed.">                    if ((board.getPlayer().getX() == i.getX()) &amp;&amp; (board.getPlayer().getY() == (i.getY()-1)) &amp;&amp; drewPlayer == false){</span>
+<span class="nc" id="L199">                        board.getPlayer().tick();</span>
+<span class="nc" id="L200">                        board.getPlayer().draw(this);</span>
+<span class="nc" id="L201">                        drewPlayer = true;</span>
                     }
                  
-<span class="pc bpc" id="L190" title="1 of 2 branches missed.">                    if(i.isEnemyDead == false){</span>
-<span class="fc" id="L191">                        i.tick();</span>
-<span class="fc" id="L192">                        i.draw(this);</span>
+<span class="pc bpc" id="L204" title="1 of 2 branches missed.">                    if(i.isEnemyDead == false){</span>
+<span class="fc" id="L205">                        i.tick();</span>
+<span class="fc" id="L206">                        i.draw(this);</span>
                     }
-<span class="fc" id="L194">                }</span>
+<span class="fc" id="L208">                }</span>
             }
 
-<span class="fc bfc" id="L197" title="All 2 branches covered.">            if (drewPlayer == false){</span>
-<span class="fc" id="L198">                board.getPlayer().tick();</span>
-<span class="fc" id="L199">                board.getPlayer().draw(this);</span>
+<span class="fc bfc" id="L211" title="All 2 branches covered.">            if (drewPlayer == false){//If player still hasn't been drawn</span>
+<span class="fc" id="L212">                board.getPlayer().tick();</span>
+<span class="fc" id="L213">                board.getPlayer().draw(this);</span>
             }
 
     //Change this into a for loop to check or every GoalImage in the GoalTile Array
-<span class="fc bfc" id="L203" title="All 2 branches covered.">            for (GoalTile i: board.getGoalTileList()){</span>
-<span class="pc bpc" id="L204" title="1 of 4 branches missed.">                if (board.getPlayer().getX() == i.getX() &amp;&amp; board.getPlayer().getY() == i.getY()){</span>
-<span class="nc bnc" id="L205" title="All 4 branches missed.">                    if(boardCounter == 0 &amp;&amp; pathTimeMap.size() == 1){</span>
-<span class="nc" id="L206">                        background(255, 128, 0);</span>
-<span class="nc" id="L207">                        text(&quot;YOU WIN!&quot;, 180, 230);</span>
-<span class="nc" id="L208">                        gameOver = true;</span>
+<span class="fc bfc" id="L217" title="All 2 branches covered.">            for (GoalTile i: board.getGoalTileList()){</span>
+<span class="pc bpc" id="L218" title="1 of 4 branches missed.">                if (board.getPlayer().getX() == i.getX() &amp;&amp; board.getPlayer().getY() == i.getY()){</span>
+<span class="nc bnc" id="L219" title="All 4 branches missed.">                    if(boardCounter == 0 &amp;&amp; pathTimeMap.size() == 1){</span>
+<span class="nc" id="L220">                        background(255, 128, 0);</span>
+<span class="nc" id="L221">                        text(&quot;YOU WIN!&quot;, 180, 230);</span>
+<span class="nc" id="L222">                        gameOver = true;</span>
                     }
-<span class="nc bnc" id="L210" title="All 2 branches missed.">                    else if (boardCounter &lt; pathTimeMap.size()-1){</span>
-<span class="nc" id="L211">                        boardCounter ++;</span>
-<span class="nc" id="L212">                        resetGame();</span>
-<span class="nc" id="L213">                        bombList.clear();</span>
-<span class="nc" id="L214">                        this.timerIcon = new timer(currentTimer, this);</span>
+<span class="nc bnc" id="L224" title="All 2 branches missed.">                    else if (boardCounter &lt; pathTimeMap.size()-1){</span>
+<span class="nc" id="L225">                        boardCounter ++;</span>
+<span class="nc" id="L226">                        resetGame();</span>
+<span class="nc" id="L227">                        bombList.clear();</span>
+<span class="nc" id="L228">                        this.timerIcon = new timer(currentTimer, this);</span>
                     } else {
-<span class="nc" id="L216">                        gameOver = true;</span>
+<span class="nc" id="L230">                        gameOver = true;</span>
                     }
                 }
-<span class="fc" id="L219">            }</span>
+<span class="fc" id="L233">            }</span>
         } 
-<span class="pc bpc" id="L221" title="1 of 2 branches missed.">        else if (gameOver == true) {</span>
-<span class="fc" id="L222">            background(255, 128, 0);</span>
-<span class="fc" id="L223">            text(&quot;YOU WIN!&quot;, 180, 230);</span>
+<span class="pc bpc" id="L235" title="1 of 2 branches missed.">        else if (gameOver == true) {//If the final goal tile has been passed</span>
+<span class="fc" id="L236">            background(255, 128, 0);</span>
+<span class="fc" id="L237">            text(&quot;YOU WIN!&quot;, 180, 230);</span>
         }
-        else {
-<span class="nc" id="L226">            background(255, 128, 0);</span>
-<span class="nc" id="L227">            text(&quot;GAME OVER!&quot;, 180, 230);</span>
+        else {//If losing conditions are met, print game over sreen
+<span class="nc" id="L240">            background(255, 128, 0);</span>
+<span class="nc" id="L241">            text(&quot;GAME OVER!&quot;, 180, 230);</span>
         }
-<span class="fc" id="L229">    }</span>
-
-    public void checkGameState(){
-<span class="pc bpc" id="L232" title="1 of 2 branches missed.">        if(board.redEnemyTF){</span>
-<span class="fc bfc" id="L233" title="All 2 branches covered.">            for(redEnemy i: board.redEnemyList){</span>
-<span class="pc bpc" id="L234" title="1 of 6 branches missed.">                if((board.getPlayer().getX() == i.getX()) &amp;&amp; (board.getPlayer().getY() == i.getY()) &amp;&amp; i.isEnemyDead == false){</span>
-<span class="fc" id="L235">                    gameReset = true;</span>
-<span class="fc" id="L236">                    lives--;</span>
+<span class="fc" id="L243">    }</span>
+    /**
+    * Checks whether the red or yellow enemies are on the same tile as the player. If true, the game will reset and the player will lose 1 life.
+    */
+    public void checkGameState(){//Checks if enemy and player is on the same tile, if so, reset
+<span class="pc bpc" id="L248" title="1 of 2 branches missed.">        if(board.redEnemyTF){</span>
+<span class="fc bfc" id="L249" title="All 2 branches covered.">            for(redEnemy i: board.redEnemyList){</span>
+<span class="pc bpc" id="L250" title="1 of 6 branches missed.">                if((board.getPlayer().getX() == i.getX()) &amp;&amp; (board.getPlayer().getY() == i.getY()) &amp;&amp; i.isEnemyDead == false){</span>
+<span class="fc" id="L251">                    gameReset = true;</span>
+<span class="fc" id="L252">                    lives--;</span>
                 }
-<span class="fc" id="L238">            }</span>
+<span class="fc" id="L254">            }</span>
         }
 
-
-<span class="pc bpc" id="L242" title="1 of 2 branches missed.">        if(board.yellowEnemyTF){</span>
-<span class="fc bfc" id="L243" title="All 2 branches covered.">            for(yellowEnemy i: board.yellowEnemyList){</span>
-<span class="pc bpc" id="L244" title="5 of 6 branches missed.">                if((board.getPlayer().getX() == i.getX()) &amp;&amp; (board.getPlayer().getY() == i.getY()) &amp;&amp; i.isEnemyDead == false){</span>
-<span class="nc" id="L245">                    gameReset = true;</span>
-<span class="nc" id="L246">                    lives--;</span>
+<span class="pc bpc" id="L257" title="1 of 2 branches missed.">        if(board.yellowEnemyTF){</span>
+<span class="fc bfc" id="L258" title="All 2 branches covered.">            for(yellowEnemy i: board.yellowEnemyList){</span>
+<span class="pc bpc" id="L259" title="5 of 6 branches missed.">                if((board.getPlayer().getX() == i.getX()) &amp;&amp; (board.getPlayer().getY() == i.getY()) &amp;&amp; i.isEnemyDead == false){</span>
+<span class="nc" id="L260">                    gameReset = true;</span>
+<span class="nc" id="L261">                    lives--;</span>
             }
-<span class="fc" id="L248">        }</span>
+<span class="fc" id="L263">        }</span>
         }
-<span class="fc bfc" id="L250" title="All 2 branches covered.">        if(gameReset == true){</span>
-<span class="fc" id="L251">            resetGame();</span>
+<span class="fc bfc" id="L265" title="All 2 branches covered.">        if(gameReset == true){</span>
+<span class="fc" id="L266">            resetGame();</span>
         }
-<span class="fc" id="L253">    }</span>
-
-    public void keyPressed() {
+<span class="fc" id="L268">    }</span>
+    /**
+    * Determines if a significant key has been pressed and will allow the player to act accordingly. 
+    * The significant keys are space, left, right, up and down.
+    */
+    public void keyPressed() {//Checks if any keystrokes are pressed and moves characters accordingly.
         /*
             .get(0) corresponds with base player
             .get(1) corresponds with up player
             .get(2) corresponds with right player
             .get(3) corresponds with left player
         */
-<span class="pc bpc" id="L262" title="1 of 4 branches missed.">        if (keyCode == 32 &amp;&amp; this.keyReleased == true) {</span>
-<span class="fc" id="L263">            Bomb b = new Bomb(board.getPlayer().getX(), board.getPlayer().getY(), this, currentBoard);</span>
-<span class="fc" id="L264">            bombList.add(b);</span>
-<span class="fc" id="L265">            keyReleased = false;</span>
+<span class="pc bpc" id="L280" title="1 of 4 branches missed.">        if (keyCode == 32 &amp;&amp; this.keyReleased == true) {</span>
+<span class="fc" id="L281">            Bomb b = new Bomb(board.getPlayer().getX(), board.getPlayer().getY(), this, currentBoard);</span>
+<span class="fc" id="L282">            bombList.add(b);</span>
+<span class="fc" id="L283">            keyReleased = false;</span>
         }
-<span class="pc bpc" id="L267" title="1 of 4 branches missed.">            if(keyCode == 40 &amp;&amp; keyReleased == true) {</span>
-<span class="fc" id="L268">                board.getPlayer().changeOrientation(0);</span>
-<span class="pc bpc" id="L269" title="1 of 2 branches missed.">                if((currentBoard[board.getPlayer().getY()+1][board.getPlayer().getX()].matches(&quot; |R|Y|G&quot;))){</span>
-<span class="fc" id="L270">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot; &quot;;</span>
-<span class="fc" id="L271">                    board.getPlayer().movementDOWN();</span>
-<span class="fc" id="L272">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot;P&quot;;</span>
+<span class="pc bpc" id="L285" title="1 of 4 branches missed.">            if(keyCode == 40 &amp;&amp; keyReleased == true) {</span>
+<span class="fc" id="L286">                board.getPlayer().changeOrientation(0);</span>
+<span class="pc bpc" id="L287" title="1 of 2 branches missed.">                if((currentBoard[board.getPlayer().getY()+1][board.getPlayer().getX()].matches(&quot; |R|Y|G&quot;))){</span>
+<span class="fc" id="L288">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot; &quot;;</span>
+<span class="fc" id="L289">                    board.getPlayer().movementDOWN();</span>
+<span class="fc" id="L290">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot;P&quot;;</span>
                 }
 
-<span class="pc bpc" id="L275" title="1 of 4 branches missed.">            } else if (keyCode == UP &amp;&amp; keyReleased == true) {</span>
-<span class="fc" id="L276">                board.getPlayer().changeOrientation(1);</span>
-<span class="pc bpc" id="L277" title="1 of 2 branches missed.">                if((currentBoard[board.getPlayer().getY()-1][board.getPlayer().getX()].matches(&quot; |R|Y|G&quot;))){</span>
-<span class="fc" id="L278">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot; &quot;;</span>
-<span class="fc" id="L279">                    board.getPlayer().movementUP();</span>
-<span class="fc" id="L280">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot;P&quot;;</span>
+<span class="pc bpc" id="L293" title="1 of 4 branches missed.">            } else if (keyCode == UP &amp;&amp; keyReleased == true) {</span>
+<span class="fc" id="L294">                board.getPlayer().changeOrientation(1);</span>
+<span class="pc bpc" id="L295" title="1 of 2 branches missed.">                if((currentBoard[board.getPlayer().getY()-1][board.getPlayer().getX()].matches(&quot; |R|Y|G&quot;))){</span>
+<span class="fc" id="L296">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot; &quot;;</span>
+<span class="fc" id="L297">                    board.getPlayer().movementUP();</span>
+<span class="fc" id="L298">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot;P&quot;;</span>
                 }
 
-<span class="pc bpc" id="L283" title="1 of 4 branches missed.">            } else if (keyCode == RIGHT &amp;&amp; keyReleased == true) {</span>
-<span class="fc" id="L284">                board.getPlayer().changeOrientation(2);</span>
-<span class="pc bpc" id="L285" title="1 of 2 branches missed.">                if((currentBoard[board.getPlayer().getY()][board.getPlayer().getX()+1].matches(&quot; |R|Y|G&quot;))){</span>
-<span class="fc" id="L286">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot; &quot;;</span>
-<span class="fc" id="L287">                    board.getPlayer().movementRight();</span>
-<span class="fc" id="L288">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot;P&quot;;</span>
+<span class="pc bpc" id="L301" title="1 of 4 branches missed.">            } else if (keyCode == RIGHT &amp;&amp; keyReleased == true) {</span>
+<span class="fc" id="L302">                board.getPlayer().changeOrientation(2);</span>
+<span class="pc bpc" id="L303" title="1 of 2 branches missed.">                if((currentBoard[board.getPlayer().getY()][board.getPlayer().getX()+1].matches(&quot; |R|Y|G&quot;))){</span>
+<span class="fc" id="L304">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot; &quot;;</span>
+<span class="fc" id="L305">                    board.getPlayer().movementRight();</span>
+<span class="fc" id="L306">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot;P&quot;;</span>
                 }
 
-<span class="pc bpc" id="L291" title="1 of 4 branches missed.">            } else if (keyCode == LEFT &amp;&amp; keyReleased == true) {</span>
-<span class="fc" id="L292">                board.getPlayer().changeOrientation(3);</span>
-<span class="pc bpc" id="L293" title="1 of 2 branches missed.">                if((currentBoard[board.getPlayer().getY()][board.getPlayer().getX()-1].matches(&quot; |R|Y|G&quot;))){</span>
-<span class="fc" id="L294">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot; &quot;;</span>
-<span class="fc" id="L295">                    board.getPlayer().movementLeft();</span>
-<span class="fc" id="L296">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot;P&quot;;</span>
+<span class="pc bpc" id="L309" title="1 of 4 branches missed.">            } else if (keyCode == LEFT &amp;&amp; keyReleased == true) {</span>
+<span class="fc" id="L310">                board.getPlayer().changeOrientation(3);</span>
+<span class="pc bpc" id="L311" title="1 of 2 branches missed.">                if((currentBoard[board.getPlayer().getY()][board.getPlayer().getX()-1].matches(&quot; |R|Y|G&quot;))){</span>
+<span class="fc" id="L312">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot; &quot;;</span>
+<span class="fc" id="L313">                    board.getPlayer().movementLeft();</span>
+<span class="fc" id="L314">                    currentBoard[board.getPlayer().getY()][board.getPlayer().getX()] = &quot;P&quot;;</span>
                 }
             }
-<span class="fc" id="L299">        keyReleased = false;</span>
-<span class="fc" id="L300">    }</span>
-
-    public void keyReleased() {
-<span class="fc" id="L303">        this.keyReleased = true;</span>
-<span class="fc" id="L304">    }</span>
-
-    public String[][] getCurrentBoard(){
-<span class="fc" id="L307">        return currentBoard;</span>
-    }
+<span class="fc" id="L317">        keyReleased = false;</span>
+<span class="fc" id="L318">    }</span>
+   
     /*
         .get(0) corresponds with base player
         .get(1) corresponds with up player
         .get(2) corresponds with right player
         .get(3) corresponds with left player
     */
-    public void moveYellowEnemy(yellowEnemy i){
-<span class="fc bfc" id="L316" title="All 2 branches covered.">        if(i.orientation == 0){</span>
-<span class="pc bpc" id="L317" title="1 of 2 branches missed.">            if(currentBoard[i.getY()+1][i.getX()].matches(&quot; |R|Y|G|P&quot;)){</span>
-<span class="fc" id="L318">                i.movementDOWN();</span>
-<span class="fc" id="L319">                currentBoard[i.getY()][i.getX()] = &quot;Y&quot;;</span>
-<span class="fc" id="L320">                currentBoard[i.getY()-1][i.getX()] = &quot; &quot;;</span>
+
+    /**
+    * Moves yellow enemy in a set pattern that is clockwise. 
+    * The yellow enemy will change orientation when a wall has been hit.
+    */
+    public void moveYellowEnemy(yellowEnemy i){//Yellow enemy simply moves based on their orientation and whether there is a wall or not in front
+<span class="fc bfc" id="L332" title="All 2 branches covered.">        if(i.orientation == 0){</span>
+<span class="pc bpc" id="L333" title="1 of 2 branches missed.">            if(currentBoard[i.getY()+1][i.getX()].matches(&quot; |R|Y|G|P&quot;)){</span>
+<span class="fc" id="L334">                i.movementDOWN();</span>
+<span class="fc" id="L335">                currentBoard[i.getY()][i.getX()] = &quot;Y&quot;;</span>
+<span class="fc" id="L336">                currentBoard[i.getY()-1][i.getX()] = &quot; &quot;;</span>
             }
-<span class="nc" id="L322">            else{i.changeOrientation(3);}</span>
+<span class="nc" id="L338">            else{i.changeOrientation(3);}</span>
         }
 
-<span class="fc bfc" id="L325" title="All 2 branches covered.">        else if(i.orientation == 1){</span>
-<span class="pc bpc" id="L326" title="1 of 2 branches missed.">            if(currentBoard[i.getY()-1][i.getX()].matches(&quot; |R|Y|G|P&quot;)){</span>
-<span class="fc" id="L327">                i.movementUP();</span>
-<span class="fc" id="L328">                currentBoard[i.getY()][i.getX()] = &quot;Y&quot;;</span>
-<span class="fc" id="L329">                currentBoard[i.getY()+1][i.getX()] = &quot; &quot;;</span>
+<span class="fc bfc" id="L341" title="All 2 branches covered.">        else if(i.orientation == 1){</span>
+<span class="pc bpc" id="L342" title="1 of 2 branches missed.">            if(currentBoard[i.getY()-1][i.getX()].matches(&quot; |R|Y|G|P&quot;)){</span>
+<span class="fc" id="L343">                i.movementUP();</span>
+<span class="fc" id="L344">                currentBoard[i.getY()][i.getX()] = &quot;Y&quot;;</span>
+<span class="fc" id="L345">                currentBoard[i.getY()+1][i.getX()] = &quot; &quot;;</span>
             }
-<span class="nc" id="L331">            else{i.changeOrientation(2);}</span>
+<span class="nc" id="L347">            else{i.changeOrientation(2);}</span>
         }
 
-<span class="fc bfc" id="L334" title="All 2 branches covered.">        else if(i.orientation == 2){</span>
-<span class="pc bpc" id="L335" title="1 of 2 branches missed.">            if(currentBoard[i.getY()][i.getX()+1].matches(&quot; |R|Y|G|P&quot;)){</span>
-<span class="fc" id="L336">                i.movementRight();</span>
-<span class="fc" id="L337">                currentBoard[i.getY()][i.getX()] = &quot;Y&quot;;</span>
-<span class="fc" id="L338">                currentBoard[i.getY()][i.getX()-1] = &quot; &quot;;</span>
+<span class="fc bfc" id="L350" title="All 2 branches covered.">        else if(i.orientation == 2){</span>
+<span class="pc bpc" id="L351" title="1 of 2 branches missed.">            if(currentBoard[i.getY()][i.getX()+1].matches(&quot; |R|Y|G|P&quot;)){</span>
+<span class="fc" id="L352">                i.movementRight();</span>
+<span class="fc" id="L353">                currentBoard[i.getY()][i.getX()] = &quot;Y&quot;;</span>
+<span class="fc" id="L354">                currentBoard[i.getY()][i.getX()-1] = &quot; &quot;;</span>
             }
-<span class="nc" id="L340">            else{i.changeOrientation(0);}</span>
+<span class="nc" id="L356">            else{i.changeOrientation(0);}</span>
         }
 
-<span class="pc bpc" id="L343" title="1 of 2 branches missed.">        else if(i.orientation == 3){</span>
-<span class="pc bpc" id="L344" title="1 of 2 branches missed.">            if(currentBoard[i.getY()][i.getX()-1].matches(&quot; |R|Y|G|P&quot;)){</span>
-<span class="fc" id="L345">                i.movementLeft();</span>
-<span class="fc" id="L346">                currentBoard[i.getY()][i.getX()] = &quot;Y&quot;;</span>
-<span class="fc" id="L347">                currentBoard[i.getY()][i.getX()+1] = &quot; &quot;;</span>
+<span class="pc bpc" id="L359" title="1 of 2 branches missed.">        else if(i.orientation == 3){</span>
+<span class="pc bpc" id="L360" title="1 of 2 branches missed.">            if(currentBoard[i.getY()][i.getX()-1].matches(&quot; |R|Y|G|P&quot;)){</span>
+<span class="fc" id="L361">                i.movementLeft();</span>
+<span class="fc" id="L362">                currentBoard[i.getY()][i.getX()] = &quot;Y&quot;;</span>
+<span class="fc" id="L363">                currentBoard[i.getY()][i.getX()+1] = &quot; &quot;;</span>
             }
-<span class="nc" id="L349">            else{i.changeOrientation(1);}</span>
+<span class="nc" id="L365">            else{i.changeOrientation(1);}</span>
         }
-<span class="fc" id="L351">    }</span>
+<span class="fc" id="L367">    }</span>
         /*
             .get(0) corresponds with base player
             .get(1) corresponds with up player
             .get(2) corresponds with right player
             .get(3) corresponds with left player
         */
-    public void moveRedEnemyAI(redEnemy i){
-<span class="fc" id="L359">        int[] possiblePath = {0, 0, 0, 0};</span>
-<span class="fc" id="L360">        boolean deadEnd = false;</span>
-<span class="fc bfc" id="L361" title="All 2 branches covered.">         if(i.orientation == 0){</span>
-<span class="fc bfc" id="L362" title="All 2 branches covered.">            if(currentBoard[i.getY()+1][i.getX()].matches(&quot; |R|Y|G|P&quot;)){</span>
-<span class="fc" id="L363">                i.movementDOWN();</span>
-<span class="fc" id="L364">                currentBoard[i.getY()][i.getX()] = &quot;R&quot;;</span>
-<span class="fc" id="L365">                currentBoard[i.getY()-1][i.getX()] = &quot; &quot;;</span>
+    public void moveRedEnemyAI(redEnemy i){//Moves with the random library, but will first calculate the possible unblocked paths
+<span class="fc" id="L375">        int[] possiblePath = {0, 0, 0, 0};</span>
+<span class="fc" id="L376">        boolean deadEnd = false;</span>
+<span class="fc bfc" id="L377" title="All 2 branches covered.">         if(i.orientation == 0){</span>
+<span class="fc bfc" id="L378" title="All 2 branches covered.">            if(currentBoard[i.getY()+1][i.getX()].matches(&quot; |R|Y|G|P&quot;)){</span>
+<span class="fc" id="L379">                i.movementDOWN();</span>
+<span class="fc" id="L380">                currentBoard[i.getY()][i.getX()] = &quot;R&quot;;</span>
+<span class="fc" id="L381">                currentBoard[i.getY()-1][i.getX()] = &quot; &quot;;</span>
             }
             else{
-<span class="fc" id="L368">                deadEnd = true;</span>
+<span class="fc" id="L384">                deadEnd = true;</span>
             }
-<span class="fc bfc" id="L370" title="All 2 branches covered.">        } else if (i.orientation == 1){</span>
-<span class="fc bfc" id="L371" title="All 2 branches covered.">            if(currentBoard[i.getY()-1][i.getX()].matches(&quot; |R|Y|G|P&quot;)){</span>
-<span class="fc" id="L372">                i.movementUP();</span>
-<span class="fc" id="L373">                currentBoard[i.getY()][i.getX()] = &quot;R&quot;;</span>
-<span class="fc" id="L374">                currentBoard[i.getY()+1][i.getX()] = &quot; &quot;;</span>
+<span class="fc bfc" id="L386" title="All 2 branches covered.">        } else if (i.orientation == 1){</span>
+<span class="fc bfc" id="L387" title="All 2 branches covered.">            if(currentBoard[i.getY()-1][i.getX()].matches(&quot; |R|Y|G|P&quot;)){</span>
+<span class="fc" id="L388">                i.movementUP();</span>
+<span class="fc" id="L389">                currentBoard[i.getY()][i.getX()] = &quot;R&quot;;</span>
+<span class="fc" id="L390">                currentBoard[i.getY()+1][i.getX()] = &quot; &quot;;</span>
 
             } else {
-<span class="fc" id="L377">                deadEnd = true;</span>
+<span class="fc" id="L393">                deadEnd = true;</span>
             }
         }
 
-<span class="fc bfc" id="L381" title="All 2 branches covered.">        else if(i.orientation == 2){</span>
-<span class="pc bpc" id="L382" title="1 of 2 branches missed.">            if(currentBoard[i.getY()][i.getX()+1].matches(&quot; |R|Y|G|P&quot;)){</span>
-<span class="fc" id="L383">                i.movementRight();</span>
-<span class="fc" id="L384">                currentBoard[i.getY()][i.getX()] = &quot;R&quot;;</span>
-<span class="fc" id="L385">                currentBoard[i.getY()][i.getX()-1] = &quot; &quot;;</span>
+<span class="fc bfc" id="L397" title="All 2 branches covered.">        else if(i.orientation == 2){</span>
+<span class="pc bpc" id="L398" title="1 of 2 branches missed.">            if(currentBoard[i.getY()][i.getX()+1].matches(&quot; |R|Y|G|P&quot;)){</span>
+<span class="fc" id="L399">                i.movementRight();</span>
+<span class="fc" id="L400">                currentBoard[i.getY()][i.getX()] = &quot;R&quot;;</span>
+<span class="fc" id="L401">                currentBoard[i.getY()][i.getX()-1] = &quot; &quot;;</span>
             }
             else{
-<span class="nc" id="L388">                deadEnd = true;</span>
+<span class="nc" id="L404">                deadEnd = true;</span>
             }
         }
 
-<span class="pc bpc" id="L392" title="1 of 2 branches missed.">        else if(i.orientation == 3){</span>
-<span class="pc bpc" id="L393" title="1 of 2 branches missed.">            if(currentBoard[i.getY()][i.getX()-1].matches(&quot; |R|Y|G|P&quot;)){</span>
-<span class="fc" id="L394">                i.movementLeft();</span>
-<span class="fc" id="L395">                currentBoard[i.getY()][i.getX()] = &quot;R&quot;;</span>
-<span class="fc" id="L396">                currentBoard[i.getY()][i.getX()+1] = &quot; &quot;;</span>
+<span class="pc bpc" id="L408" title="1 of 2 branches missed.">        else if(i.orientation == 3){</span>
+<span class="pc bpc" id="L409" title="1 of 2 branches missed.">            if(currentBoard[i.getY()][i.getX()-1].matches(&quot; |R|Y|G|P&quot;)){</span>
+<span class="fc" id="L410">                i.movementLeft();</span>
+<span class="fc" id="L411">                currentBoard[i.getY()][i.getX()] = &quot;R&quot;;</span>
+<span class="fc" id="L412">                currentBoard[i.getY()][i.getX()+1] = &quot; &quot;;</span>
             }
             else{
-<span class="nc" id="L399">                deadEnd = true;</span>
+<span class="nc" id="L415">                deadEnd = true;</span>
             }
         }
-<span class="fc bfc" id="L402" title="All 2 branches covered.">        if(deadEnd == true){</span>
-<span class="fc" id="L403">            List&lt;Integer&gt; positions = new ArrayList&lt;&gt;();</span>
-<span class="fc bfc" id="L404" title="All 2 branches covered.">            if(currentBoard[i.getY()+1][i.getX()].matches(&quot; |R|Y|G|P&quot;))</span>
-<span class="fc" id="L405">                positions.add(0);</span>
-<span class="fc bfc" id="L406" title="All 2 branches covered.">            if(currentBoard[i.getY()-1][i.getX()].matches(&quot; |R|Y|G|P&quot;))</span>
-<span class="fc" id="L407">                positions.add(1);</span>
-<span class="fc bfc" id="L408" title="All 2 branches covered.">            if(currentBoard[i.getY()][i.getX()+1].matches(&quot; |R|Y|G|P&quot;))</span>
-<span class="fc" id="L409">                positions.add(2);</span>
-<span class="fc bfc" id="L410" title="All 2 branches covered.">            if(currentBoard[i.getY()][i.getX()-1].matches(&quot; |R|Y|G|P&quot;))</span>
-<span class="fc" id="L411">                positions.add(3); </span>
+<span class="fc bfc" id="L418" title="All 2 branches covered.">        if(deadEnd == true){</span>
+<span class="fc" id="L419">            List&lt;Integer&gt; positions = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L420" title="All 2 branches covered.">            if(currentBoard[i.getY()+1][i.getX()].matches(&quot; |R|Y|G|P&quot;))</span>
+<span class="fc" id="L421">                positions.add(0);</span>
+<span class="fc bfc" id="L422" title="All 2 branches covered.">            if(currentBoard[i.getY()-1][i.getX()].matches(&quot; |R|Y|G|P&quot;))</span>
+<span class="fc" id="L423">                positions.add(1);</span>
+<span class="fc bfc" id="L424" title="All 2 branches covered.">            if(currentBoard[i.getY()][i.getX()+1].matches(&quot; |R|Y|G|P&quot;))</span>
+<span class="fc" id="L425">                positions.add(2);</span>
+<span class="fc bfc" id="L426" title="All 2 branches covered.">            if(currentBoard[i.getY()][i.getX()-1].matches(&quot; |R|Y|G|P&quot;))</span>
+<span class="fc" id="L427">                positions.add(3); </span>
 
-<span class="fc" id="L413">            Random r = new Random();</span>
-<span class="fc" id="L414">            int randomNumber = r.nextInt(positions.size());</span>
-<span class="fc" id="L415">            i.changeOrientation(positions.get(randomNumber));</span>
+<span class="fc" id="L429">            Random r = new Random();</span>
+<span class="fc" id="L430">            int randomNumber = r.nextInt(positions.size());</span>
+<span class="fc" id="L431">            i.changeOrientation(positions.get(randomNumber));</span>
         }
-<span class="fc" id="L417">    }</span>
+<span class="fc" id="L433">    }</span>
+
+    /**
+    * Changes the value of boolean keyReleased to true once a key has been let go.
+    */
+    public void keyReleased() {
+<span class="fc" id="L439">        this.keyReleased = true;</span>
+<span class="fc" id="L440">    }</span>
     
-    public static void main(String[] args) {
-<span class="nc" id="L420">        PApplet.main(&quot;demolition.App&quot;);</span>
-<span class="nc" id="L421">    }</span>
-
     public int getLives(){
-<span class="fc" id="L424">        return this.lives;</span>
+<span class="fc" id="L443">        return this.lives;</span>
     }
 
     public int getCurrentTimer(){
-<span class="fc" id="L428">        return this.currentTimer;</span>
+<span class="fc" id="L447">        return this.currentTimer;</span>
     }
 
     public List&lt;Bomb&gt; getBombList(){
-<span class="fc" id="L432">        return this.bombList;</span>
+<span class="fc" id="L451">        return this.bombList;</span>
     }
 
     public void changeLives(int lives){
-<span class="fc" id="L436">        this.lives = lives;</span>
-<span class="fc" id="L437">    }</span>
+<span class="fc" id="L455">        this.lives = lives;</span>
+<span class="fc" id="L456">    }</span>
 
-    public void nextMap(){
-<span class="nc" id="L440">        this.boardCounter ++;</span>
-<span class="nc" id="L441">    }</span>
+    public int getBoardCount(){
+<span class="nc" id="L459">        return this.boardCounter;</span>
+    }
 
+    public String[][] getCurrentBoard(){
+<span class="fc" id="L463">        return this.currentBoard;</span>
+    }
+
+    public static void main(String[] args) {
+<span class="nc" id="L467">        PApplet.main(&quot;demolition.App&quot;);</span>
+<span class="nc" id="L468">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

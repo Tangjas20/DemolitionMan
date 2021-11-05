@@ -108,6 +108,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">timer</span>
 extends java.lang.Object</pre>
+<div class="block">Creates the timer class which loads the images as well as keeps track of the game time. App ticks at a rate of 60 FPS and the timer is reduced every 60 ticks</div>
 </li>
 </ul>
 </div>
@@ -127,7 +128,9 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <td class="colOne"><code><span class="memberNameLink"><a href="../demolition/timer.html#timer-int-processing.core.PApplet-">timer</a></span>(int&nbsp;timer,
-     processing.core.PApplet&nbsp;app)</code>&nbsp;</td>
+     processing.core.PApplet&nbsp;app)</code>
+<div class="block">Takes in an int for timer which is loaded from the config.kson and the PApplet app.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -146,7 +149,9 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/timer.html#draw-processing.core.PApplet-">draw</a></span>(processing.core.PApplet&nbsp;app)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/timer.html#draw-processing.core.PApplet-">draw</a></span>(processing.core.PApplet&nbsp;app)</code>
+<div class="block">Draws the timerIcon as well as the playerIcon which is at the top of the game window.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>int</code></td>
@@ -154,7 +159,9 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/timer.html#tick--">tick</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/timer.html#tick--">tick</a></span>()</code>
+<div class="block">Every 60 ticks leads to the time -1 as there is 60FPS.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -186,6 +193,7 @@ extends java.lang.Object</pre>
 <h4>timer</h4>
 <pre>public&nbsp;timer(int&nbsp;timer,
              processing.core.PApplet&nbsp;app)</pre>
+<div class="block">Takes in an int for timer which is loaded from the config.kson and the PApplet app. Timer icons and player graphics are loaded</div>
 </li>
 </ul>
 </li>
@@ -203,6 +211,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>tick</h4>
 <pre>public&nbsp;void&nbsp;tick()</pre>
+<div class="block">Every 60 ticks leads to the time -1 as there is 60FPS.</div>
 </li>
 </ul>
 <a name="draw-processing.core.PApplet-">
@@ -212,6 +221,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>draw</h4>
 <pre>public&nbsp;void&nbsp;draw(processing.core.PApplet&nbsp;app)</pre>
+<div class="block">Draws the timerIcon as well as the playerIcon which is at the top of the game window.</div>
 </li>
 </ul>
 <a name="getTimer--">

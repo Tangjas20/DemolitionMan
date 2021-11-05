@@ -7,6 +7,10 @@ import java.util.Scanner;
 import java.util.List;
 import processing.core.PApplet;
 
+/**
+* Sets up the backend of the board in a String[][] format which stores the location of all tiles and enemies.
+* Contains the methods which can set up the board, clear board and add entities to String[][].
+ */
 public class Board {
     
     private List<SolidWall> solidWalls = new ArrayList<SolidWall>();
@@ -26,7 +30,11 @@ public class Board {
     public Board(){
     }
 
-    public String[][] makeBoard(String fileName, PApplet app) {
+    /**
+    * Reads the file taken from the config.json and converts it to a String[][] which will be used to store the current board. 
+    * Returns a String[13][15] from the inputted txt file
+    */
+    public String[][] makeBoard(String fileName, PApplet app) {//Returns a String[][] given a Json object
 
         try{
             File firstFile = new File(fileName);
@@ -45,6 +53,9 @@ public class Board {
         return madeBoard;
     }
 
+    /**
+    * A makeBoard method which is used for testing purposes. Takes files from the src/test/resources folder and returns a String[13][15]
+     */
     public String[][] testMakeBoard(String fileName, PApplet app) {
 
         try{
@@ -64,7 +75,10 @@ public class Board {
         return madeBoard;
     }
 
-    public void map(String[][] mapBoard, PApplet app){
+    /**
+    * Creates Player, redEnemy, yellowEnemy, and tile blocks based on the String[][] board created in the makeBoard method and adds them to their respective Lists in the board attributes.
+    */
+    public void map(String[][] mapBoard, PApplet app){//Creates map based on the String[][]
         redEnemyTF = false;
         yellowEnemyTF = false;
         solidWalls.clear();
@@ -118,7 +132,10 @@ public class Board {
         }
     }
 
-    public void explosionBreakBlock(String[][] mapBoard, PApplet app){
+    /**
+    * Breaks the necessary blocks when an explosion occurs by clearing all objects in the emptyWalls and brokenWalls lists and re-adding them after scanning through the newly formed current board
+    */
+    public void explosionBreakBlock(String[][] mapBoard, PApplet app){//After explosion this resets empty and broken walls so that it can be redrawn
         emptyWalls.clear();
         brokenWalls.clear();
 

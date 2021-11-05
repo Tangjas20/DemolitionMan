@@ -117,6 +117,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public abstract class <span class="typeNameLabel">PlayerClasses</span>
 extends <a href="../demolition/GameObject.html" title="class in demolition">GameObject</a></pre>
+<div class="block">This abstract class will be inherited from for each entity that is either a player or an enemy. Contains attributes which stores newX, newY, imageTick, sprites, orientation, timer and isEnemyDead values.</div>
 </li>
 </ul>
 </div>
@@ -202,27 +203,39 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/PlayerClasses.html#changeOrientation-int-">changeOrientation</a></span>(int&nbsp;orientation)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/PlayerClasses.html#changeOrientation-int-">changeOrientation</a></span>(int&nbsp;orientation)</code>
+<div class="block">Forcelly change the character orientation (used for testing purposes)</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/PlayerClasses.html#movementDOWN--">movementDOWN</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/PlayerClasses.html#movementDOWN--">movementDOWN</a></span>()</code>
+<div class="block">Shifts character location Down</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/PlayerClasses.html#movementLeft--">movementLeft</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/PlayerClasses.html#movementLeft--">movementLeft</a></span>()</code>
+<div class="block">Shifts the character location to the left</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/PlayerClasses.html#movementRight--">movementRight</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/PlayerClasses.html#movementRight--">movementRight</a></span>()</code>
+<div class="block">Shifts character location to the right</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/PlayerClasses.html#movementUP--">movementUP</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/PlayerClasses.html#movementUP--">movementUP</a></span>()</code>
+<div class="block">Shifts character location up</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/PlayerClasses.html#tick--">tick</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/PlayerClasses.html#tick--">tick</a></span>()</code>
+<div class="block">Predominantly used for cycling through player and enemy animations.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -341,6 +354,7 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
 <li class="blockList">
 <h4>tick</h4>
 <pre>public&nbsp;void&nbsp;tick()</pre>
+<div class="block">Predominantly used for cycling through player and enemy animations. Every tick increases the timer value wherein at the count of 12, will increase the imageTick and reset the timer back to 0.</div>
 </li>
 </ul>
 <a name="movementLeft--">
@@ -350,6 +364,7 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
 <li class="blockList">
 <h4>movementLeft</h4>
 <pre>public&nbsp;void&nbsp;movementLeft()</pre>
+<div class="block">Shifts the character location to the left</div>
 </li>
 </ul>
 <a name="movementRight--">
@@ -359,6 +374,7 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
 <li class="blockList">
 <h4>movementRight</h4>
 <pre>public&nbsp;void&nbsp;movementRight()</pre>
+<div class="block">Shifts character location to the right</div>
 </li>
 </ul>
 <a name="movementUP--">
@@ -368,6 +384,7 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
 <li class="blockList">
 <h4>movementUP</h4>
 <pre>public&nbsp;void&nbsp;movementUP()</pre>
+<div class="block">Shifts character location up</div>
 </li>
 </ul>
 <a name="movementDOWN--">
@@ -377,6 +394,7 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
 <li class="blockList">
 <h4>movementDOWN</h4>
 <pre>public&nbsp;void&nbsp;movementDOWN()</pre>
+<div class="block">Shifts character location Down</div>
 </li>
 </ul>
 <a name="changeOrientation-int-">
@@ -386,6 +404,7 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
 <li class="blockList">
 <h4>changeOrientation</h4>
 <pre>public&nbsp;void&nbsp;changeOrientation(int&nbsp;orientation)</pre>
+<div class="block">Forcelly change the character orientation (used for testing purposes)</div>
 </li>
 </ul>
 </li>

@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.BombTesting" tests="7" skipped="0" failures="0" errors="0" timestamp="2021-11-05T07:30:55" hostname="DESKTOP-GJIUGBP" time="8.558">
+<testsuite name="demolition.BombTesting" tests="7" skipped="0" failures="0" errors="0" timestamp="2021-11-05T09:36:15" hostname="DESKTOP-GJIUGBP" time="8.248">
   <properties/>
-  <testcase name="appBombList()" classname="demolition.BombTesting" time="1.446"/>
-  <testcase name="testMultipleBombLocation()" classname="demolition.BombTesting" time="1.164"/>
-  <testcase name="testBombExplode()" classname="demolition.BombTesting" time="1.137"/>
-  <testcase name="bombKillPlayerKillEnemy()" classname="demolition.BombTesting" time="1.262"/>
-  <testcase name="bombBreakBlock()" classname="demolition.BombTesting" time="1.154"/>
-  <testcase name="playerSpaceDropBomb()" classname="demolition.BombTesting" time="1.143"/>
-  <testcase name="bombBreakMultipleBlock()" classname="demolition.BombTesting" time="1.25"/>
+  <testcase name="appBombList()" classname="demolition.BombTesting" time="1.061"/>
+  <testcase name="testMultipleBombLocation()" classname="demolition.BombTesting" time="1.157"/>
+  <testcase name="testBombExplode()" classname="demolition.BombTesting" time="1.147"/>
+  <testcase name="bombKillPlayerKillEnemy()" classname="demolition.BombTesting" time="1.303"/>
+  <testcase name="bombBreakBlock()" classname="demolition.BombTesting" time="1.135"/>
+  <testcase name="playerSpaceDropBomb()" classname="demolition.BombTesting" time="1.208"/>
+  <testcase name="bombBreakMultipleBlock()" classname="demolition.BombTesting" time="1.235"/>
   <system-out><![CDATA[No such file.
 ]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+  <system-err><![CDATA[java.util.ConcurrentModificationException
+	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:911)
+	at java.util.ArrayList$Itr.next(ArrayList.java:861)
+	at demolition.App.draw(App.java:141)
+	at processing.core.PApplet.handleDraw(PApplet.java:2426)
+	at processing.awt.PSurfaceAWT$12.callDraw(PSurfaceAWT.java:1557)
+	at processing.core.PSurfaceNone$AnimationThread.run(PSurfaceNone.java:316)
+java.util.ConcurrentModificationException
+	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:911)
+	at java.util.ArrayList$Itr.next(ArrayList.java:861)
+	at demolition.App.draw(App.java:138)
+	at processing.core.PApplet.handleDraw(PApplet.java:2426)
+	at processing.awt.PSurfaceAWT$12.callDraw(PSurfaceAWT.java:1557)
+	at processing.core.PSurfaceNone$AnimationThread.run(PSurfaceNone.java:316)
+java.util.ConcurrentModificationException
+	at java.util.ArrayList$Itr.checkForComodification(ArrayList.java:911)
+	at java.util.ArrayList$Itr.next(ArrayList.java:861)
+	at demolition.App.draw(App.java:141)
+	at processing.core.PApplet.handleDraw(PApplet.java:2426)
+	at processing.awt.PSurfaceAWT$12.callDraw(PSurfaceAWT.java:1557)
+	at processing.core.PSurfaceNone$AnimationThread.run(PSurfaceNone.java:316)
+]]></system-err>
 </testsuite>

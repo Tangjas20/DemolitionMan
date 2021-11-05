@@ -147,7 +147,7 @@ public class playerTesting {
         app.draw();
         app.keyPressed();
         app.keyReleased();
-        app.draw();
+
         assert(!app.gameOver == true); //False since 2nd level is loaded and this variable is still false
     }
 

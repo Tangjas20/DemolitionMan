@@ -6,10 +6,15 @@ import processing.core.PImage;
 import processing.core.PApplet;
 import java.util.Random;
 
+/**
+* Creates the redEnemy object which extends the PlayerClasses and implements the playerMovement interface. 
+*/
 public class redEnemy extends PlayerClasses implements playerMovement{
     
     private List<PImage[]> enemyRedSprite = new ArrayList<PImage[]>();
-
+/**
+* Takes in X and Y and PApplet app to create a redEnemy object which inherits methods from PlayerClasses.
+*/
     public redEnemy(int x, int y, PApplet app) {
         super(x, y, app);
                 //Enemy Red Sprite
@@ -43,7 +48,11 @@ public class redEnemy extends PlayerClasses implements playerMovement{
         enemyRedSprite.add(redEnemyRightSprite);
         enemyRedSprite.add(redEnemyLeftSprite);
     }
+
     //The Red Enemy moves in a straight line and turns to a random decision every time its path is blocked by a solid/broken wall
+    /**
+    * Has a timer which ticks up every time tick is called which resets at 12 and adds 1 to the imageTick to change the redEnemy animation.
+    */
     public void tick() {
         //Handles logic
         timer++;
@@ -56,10 +65,11 @@ public class redEnemy extends PlayerClasses implements playerMovement{
         }
     }
 
-
+/**
+* Draws the image in the Sprite list given the orientation and imagetick as well as the X and Y coordinates.
+*/
     public void draw(PApplet app) {
         //Handling graphics -- Single line or so, no logics
-
         app.image(this.enemyRedSprite.get(orientation)[imageTick], this.x*32, this.y*32+48);
     }
 

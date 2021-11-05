@@ -8,12 +8,19 @@ import java.util.LinkedHashMap;
 import java.io.File;
 import processing.data.JSONObject;
 
+/**
+* Class which will read from a JSON file and extract information based on levels, lives and time and put values into a HashMap which will be used for map loading. Contains attributes such as the String fileRead, numberOflevels, lives and pathTimeMap.
+*/
 public class readJsonObject {
     String fileRead = "";
     int numberOfLevels = 0;
     private int lives;
     private Map<String, String> pathTimeMap = new LinkedHashMap<String, String>();
 
+    /**
+    * Takes in a filePath String parameter and uses a scanner to append each Line to the fileRead variable. If filepath is invalid an exception of Config Load failed error will be printed. 
+    * Extracts all info relating to lives, path and time and stores it in variables to be used in the app.
+    */
     public void readFiles(String filePath){
         try{
             File f = new File(filePath);
@@ -34,8 +41,6 @@ public class readJsonObject {
             pathTimeMap.put(jsn1.getString("path"), jsn1.get("time").toString());
         }
     }
-
-
 
     public Map<String, String> getPathTimeHashMap() {
         return this.pathTimeMap;

@@ -6,11 +6,16 @@ import processing.core.PImage;
 import processing.core.PApplet;
 
 
+/**
+* Contains attributes which stores the images for each animation in each direction.
+ */
 public class Player extends PlayerClasses{
     
     protected List<PImage[]> sprites = new ArrayList<PImage[]>();
 
-
+    /**
+    * Takes in the x and y coordinates of the object and loads in the respective images for each direction.
+     */
     public Player(int x, int y, PApplet app) {
         super(x, y, app);
 

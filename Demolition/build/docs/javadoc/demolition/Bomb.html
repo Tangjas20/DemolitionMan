@@ -113,6 +113,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">Bomb</span>
 extends <a href="../demolition/GameObject.html" title="class in demolition">GameObject</a></pre>
+<div class="block">Extends from GameObject class to create a bomb which will tick for 2 seconds before exploding. This class will implement the core logic as well as loading the sprites and creating a path for explosions to occur</div>
 </li>
 </ul>
 </div>
@@ -149,7 +150,9 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
 <td class="colOne"><code><span class="memberNameLink"><a href="../demolition/Bomb.html#Bomb-int-int-processing.core.PApplet-java.lang.String:A:A-">Bomb</a></span>(int&nbsp;x,
     int&nbsp;y,
     processing.core.PApplet&nbsp;app,
-    java.lang.String[][]&nbsp;currentBoard)</code>&nbsp;</td>
+    java.lang.String[][]&nbsp;currentBoard)</code>
+<div class="block">Takes in the x and y coordinates of the player and currentBoard as well as PApplet app which will be used to find the positioning of the bomb on the map and determine its explosion.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -168,21 +171,29 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/Bomb.html#draw-processing.core.PApplet-">draw</a></span>(processing.core.PApplet&nbsp;app)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/Bomb.html#draw-processing.core.PApplet-">draw</a></span>(processing.core.PApplet&nbsp;app)</code>
+<div class="block">Draws the bomb sprite and changes the sprite based on the time elapsed.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/Bomb.html#drawExplosion-processing.core.PApplet-">drawExplosion</a></span>(processing.core.PApplet&nbsp;app)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/Bomb.html#drawExplosion-processing.core.PApplet-">drawExplosion</a></span>(processing.core.PApplet&nbsp;app)</code>
+<div class="block">Draws the explosion sprites depending on the value in the int array from the setCanExplodePath method.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../demolition/Bomb.html#explode-int-int-demolition.App-">explode</a></span>(int&nbsp;row,
        int&nbsp;column,
-       <a href="../demolition/App.html" title="class in demolition">App</a>&nbsp;app)</code>&nbsp;</td>
+       <a href="../demolition/App.html" title="class in demolition">App</a>&nbsp;app)</code>
+<div class="block">Checks the given coordinates and depending on the tile will either change to " ", do nothing or change booleans isEnemyDead or killedPlayer to true.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/Bomb.html#explosion-demolition.App-">explosion</a></span>(<a href="../demolition/App.html" title="class in demolition">App</a>&nbsp;app)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/Bomb.html#explosion-demolition.App-">explosion</a></span>(<a href="../demolition/App.html" title="class in demolition">App</a>&nbsp;app)</code>
+<div class="block">Calls the explode function for each tile.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.String[][]</code></td>
@@ -206,7 +217,9 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/Bomb.html#setCanExplodePath--">setCanExplodePath</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../demolition/Bomb.html#setCanExplodePath--">setCanExplodePath</a></span>()</code>
+<div class="block">Checks 2 blocks in each direction N, E, S, W and determines how far the explosion should occur in.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -247,6 +260,7 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
             int&nbsp;y,
             processing.core.PApplet&nbsp;app,
             java.lang.String[][]&nbsp;currentBoard)</pre>
+<div class="block">Takes in the x and y coordinates of the player and currentBoard as well as PApplet app which will be used to find the positioning of the bomb on the map and determine its explosion.</div>
 </li>
 </ul>
 </li>
@@ -264,6 +278,7 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
 <li class="blockList">
 <h4>setCanExplodePath</h4>
 <pre>public&nbsp;void&nbsp;setCanExplodePath()</pre>
+<div class="block">Checks 2 blocks in each direction N, E, S, W and determines how far the explosion should occur in. Changes the explodablePath attribute to an int array which stores values to be used in the explosion</div>
 </li>
 </ul>
 <a name="drawExplosion-processing.core.PApplet-">
@@ -273,6 +288,7 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
 <li class="blockList">
 <h4>drawExplosion</h4>
 <pre>public&nbsp;void&nbsp;drawExplosion(processing.core.PApplet&nbsp;app)</pre>
+<div class="block">Draws the explosion sprites depending on the value in the int array from the setCanExplodePath method. This ensures that the correct animations are delivered when the explosion occurs. I.e If there is a broken wall closest to the bomb, that direction will only show explosion for one block.</div>
 </li>
 </ul>
 <a name="draw-processing.core.PApplet-">
@@ -282,6 +298,7 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
 <li class="blockList">
 <h4>draw</h4>
 <pre>public&nbsp;void&nbsp;draw(processing.core.PApplet&nbsp;app)</pre>
+<div class="block">Draws the bomb sprite and changes the sprite based on the time elapsed. Will change the boolean isAlive</div>
 </li>
 </ul>
 <a name="explosion-demolition.App-">
@@ -291,6 +308,7 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
 <li class="blockList">
 <h4>explosion</h4>
 <pre>public&nbsp;void&nbsp;explosion(<a href="../demolition/App.html" title="class in demolition">App</a>&nbsp;app)</pre>
+<div class="block">Calls the explode function for each tile. Starts by exploding the closest block in each direction and if they are not solid walls or broken walls, the next block in the respective direction will be exploded</div>
 </li>
 </ul>
 <a name="explode-int-int-demolition.App-">
@@ -302,6 +320,7 @@ extends <a href="../demolition/GameObject.html" title="class in demolition">Game
 <pre>public&nbsp;boolean&nbsp;explode(int&nbsp;row,
                        int&nbsp;column,
                        <a href="../demolition/App.html" title="class in demolition">App</a>&nbsp;app)</pre>
+<div class="block">Checks the given coordinates and depending on the tile will either change to " ", do nothing or change booleans isEnemyDead or killedPlayer to true. The returned value of these will be used in the explosion method to extend the explosion to further blocks</div>
 </li>
 </ul>
 <a name="getIsAlive--">
