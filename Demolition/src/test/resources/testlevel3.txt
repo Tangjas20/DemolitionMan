@@ -3,11 +3,11 @@ W     BBB BBBBW
 W W W W W W W W
 W     G   B B W
 WBW   W W WBW W
-W P    R   B  W
+W      R   B  W
 W W W W W W W W
-WB       B    W
-WBW W W WBW W W
+WB P     B    W
+WBWYW W WBW W W
 W    YBB   B BW
 W WBW W W W W W
-W             W
+W    Y        W
 WWWWWWWWWWWWWWW

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class redEnemyTesting{
 
     @Test
-    public void moveRedEnemyUpDown(){
+    public void moveRedEnemyUpDown(){//Tests if enemy is able to move up and down thru its own algorithm
         App app = new App();
         app.noLoop();
         app.isTest = true;
@@ -26,7 +26,7 @@ public class redEnemyTesting{
     }
 
     @Test
-    public void moveRedEnemyLeftRight(){
+    public void moveRedEnemyLeftRight(){//Tests if enemy is able to move left or right with own algorithm
         App app = new App();
         app.noLoop();
         app.isTest = true;
@@ -45,7 +45,7 @@ public class redEnemyTesting{
     }
 
     @Test//x=13, y=2
-    public void redEnemyDeadEnd(){
+    public void redEnemyDeadEnd(){//Tests to see if enemy moves from a deadend by itself
         App app = new App();
         app.noLoop();
         app.isTest = true;
@@ -61,7 +61,7 @@ public class redEnemyTesting{
     }
 
     @Test 
-    public void tickRedEnemy(){
+    public void tickRedEnemy(){//Tests to see if the enemy tick works and animation will change
         App app = new App();
         app.noLoop();
         app.isTest = true;

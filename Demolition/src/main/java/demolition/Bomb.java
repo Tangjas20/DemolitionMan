@@ -208,6 +208,10 @@ public class Bomb extends GameObject {
     public boolean getIsAlive(){
         return this.isAlive;
     }
+    
+    public void notAlive(){
+        this.isAlive = false;
+    }
 
     public boolean getExplosionFinished(){
         return this.explosionFinished;

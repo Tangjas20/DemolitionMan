@@ -28,7 +28,7 @@ public class App extends PApplet {
     private int lives;
     timer timerIcon;
     boolean drewPlayer = false;
-    private List<Bomb> bombList;
+    List<Bomb> bombList;
     boolean gameOver = false;
     boolean isTest = false;
     readJsonObject fileData;
@@ -72,7 +72,7 @@ public class App extends PApplet {
         }
         else{
             readJsonObject fileData = new readJsonObject(); 
-            fileData.readFiles("testConfig.json");
+            fileData.readFiles("src/test/resources/testConfig.json");
             this.lives = fileData.getLives();
             pathTimeMap = fileData.getPathTimeHashMap(); //Stores the level name and time
         }   //Reads config file for level, time and lives info
@@ -86,10 +86,18 @@ public class App extends PApplet {
             boardArrayName.add(key);
         }
 
-        currentBoard = board.makeBoard(boardArrayName.get(boardCounter), this);
-        currentTimer =  boardArrayTime.get(boardCounter);
-        board.map(currentBoard, this);
-        this.timerIcon = new timer(currentTimer, this);
+        if(isTest == false){
+            currentBoard = board.makeBoard(boardArrayName.get(boardCounter), this);
+            currentTimer =  boardArrayTime.get(boardCounter);
+            board.map(currentBoard, this);
+            this.timerIcon = new timer(currentTimer, this);
+        }
+        else if(isTest == true){
+            currentBoard = board.testMakeBoard(boardArrayName.get(boardCounter), this);
+            currentTimer =  boardArrayTime.get(boardCounter);
+            board.map(currentBoard, this);
+            this.timerIcon = new timer(currentTimer, this);   
+        }
     }
 
     public void draw() {
@@ -427,4 +435,9 @@ public class App extends PApplet {
     public void changeLives(int lives){
         this.lives = lives;
     }
+
+    public int getBoardCount(){
+        return this.boardCounter;
+    }
+
 }

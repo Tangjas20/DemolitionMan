@@ -3,6 +3,10 @@
     {
       "path": "testlevel1.txt",
       "time": 180
+    },
+    {
+      "path": "testlevel3.txt",
+      "time":180
     }
   ],
   "lives": 2

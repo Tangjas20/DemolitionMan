@@ -45,6 +45,25 @@ public class Board {
         return madeBoard;
     }
 
+    public String[][] testMakeBoard(String fileName, PApplet app) {
+
+        try{
+            File firstFile = new File("src/test/resources/" + fileName);
+            Scanner scanner = new Scanner(firstFile);
+            int i = 0;
+
+            while(scanner.hasNextLine()){
+                String data = scanner.nextLine();
+                madeBoard[i] = data.split("(?!^)");
+                i++;
+            }
+            scanner.close();
+        } catch(FileNotFoundException e) {
+            System.out.println("No such file.");
+        }
+        return madeBoard;
+    }
+
     public void map(String[][] mapBoard, PApplet app){
         redEnemyTF = false;
         yellowEnemyTF = false;
@@ -151,7 +170,5 @@ public class Board {
     }
 
 
-    public static void main(String[] args){
-    }
 
 }

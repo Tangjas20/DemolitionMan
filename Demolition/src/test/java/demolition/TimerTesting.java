@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TimerTesting {
 
     @Test
-    public void timerTick(){//Create multiple bomb and tests its location and state
+    public void timerTick(){//Tests if timer ticks down after 60 frames.
         App app = new App();
         app.noLoop();
         app.isTest = true;

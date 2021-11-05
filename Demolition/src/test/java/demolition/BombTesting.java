@@ -127,16 +127,22 @@ public class BombTesting {
         app.delay(1000);
         Bomb e = new Bomb(3, 1, app, app.currentBoard);
         yellowEnemy y = new yellowEnemy(4, 1, app);
-        app.currentBoard[1][4] = "Y";
-        assertTrue(e.getIsAlive());
+        app.bombList.add(e);
+        for(Bomb i: app.bombList){
+            i.notAlive();
+        }
+        app.draw();
         e.explosion(app);
+        app.currentBoard[1][4] = "Y";
+        e.explode(4, 1, app);
+        assertEquals(app.currentBoard[1][4], " ");
+        assertTrue(!e.getIsAlive());
         assertTrue(e.killedPlayer);
         assertTrue(e.killedRedEnemy);
-        assertTrue(e.killedYellowEnemy);
     }
 
     @Test
-    public void playerSpaceDropBomb(){
+    public void playerSpaceDropBomb(){//Player Drops a bomb and is added to the bomblist
         App app = new App();
         app.noLoop();
         app.isTest = true;
@@ -153,4 +159,22 @@ public class BombTesting {
         assertNotNull(app.getBombList());
     }
     
+    @Test
+    public void appBombList(){//Tests bomb added to list and state of bomb and test if the bomb explosion counter works or not
+        App app = new App();
+        app.noLoop();
+        app.isTest = true;
+        PApplet.runSketch(new String[] {"App"}, app);
+        app.delay(1000);
+        Bomb a = new Bomb(9, 1, app, app.currentBoard);
+        Bomb b = new Bomb(3, 3, app, app.currentBoard);
+        app.bombList.add(a);
+        app.bombList.add(b);
+        for(Bomb i: app.bombList){
+            i.notAlive();
+        }
+        app.draw();
+        assert(app.currentBoard == b.getBoard());
+        assert(app.counter != 0);
+    }
 }

@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class yellowEnemyTesting{
 
     @Test
-    public void moveYellowEnemyUpDown(){
+    public void moveYellowEnemyUpDown(){//Tests if yellow enemy moves up or down
         App app = new App();
         app.noLoop();
         app.isTest = true;
@@ -26,7 +26,7 @@ public class yellowEnemyTesting{
     }
     
     @Test
-    public void moveYellowEnemyRightLeft(){
+    public void moveYellowEnemyRightLeft(){//Tests if yellow enemy moves left or right
         App app = new App();
         app.noLoop();
         app.isTest = true;

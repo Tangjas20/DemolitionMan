@@ -8,7 +8,6 @@ import java.util.Random;
 
 public class redEnemy extends PlayerClasses implements playerMovement{
     
-    int movementTimer = 0;
     private List<PImage[]> enemyRedSprite = new ArrayList<PImage[]>();
 
     public redEnemy(int x, int y, PApplet app) {

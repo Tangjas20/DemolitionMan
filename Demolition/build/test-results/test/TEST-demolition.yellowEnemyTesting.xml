@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.yellowEnemyTesting" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-11-04T11:31:32" hostname="DESKTOP-GJIUGBP" time="2.073">
+<testsuite name="demolition.yellowEnemyTesting" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-11-05T07:31:28" hostname="DESKTOP-GJIUGBP" time="2.066">
   <properties/>
-  <testcase name="moveYellowEnemyUpDown()" classname="demolition.yellowEnemyTesting" time="1.038"/>
-  <testcase name="moveYellowEnemyRightLeft()" classname="demolition.yellowEnemyTesting" time="1.034"/>
+  <testcase name="moveYellowEnemyUpDown()" classname="demolition.yellowEnemyTesting" time="1.033"/>
+  <testcase name="moveYellowEnemyRightLeft()" classname="demolition.yellowEnemyTesting" time="1.032"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

@@ -208,17 +208,21 @@ public class Bomb extends GameObject {
     public boolean getIsAlive(){
 <span class="fc" id="L209">        return this.isAlive;</span>
     }
+    
+    public void notAlive(){
+<span class="fc" id="L213">        this.isAlive = false;</span>
+<span class="fc" id="L214">    }</span>
 
     public boolean getExplosionFinished(){
-<span class="fc" id="L213">        return this.explosionFinished;</span>
+<span class="fc" id="L217">        return this.explosionFinished;</span>
     }
 
     public String[][] getBoard(){
-<span class="fc" id="L217">        return this.currentBoard;</span>
+<span class="fc" id="L221">        return this.currentBoard;</span>
     }
 
     public int getCurrentSprite(){
-<span class="fc" id="L221">        return this.currentSprite;</span>
+<span class="fc" id="L225">        return this.currentSprite;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

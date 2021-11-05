@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="demolition.redEnemyTesting" tests="4" skipped="0" failures="0" errors="0" timestamp="2021-11-04T11:31:27" hostname="DESKTOP-GJIUGBP" time="4.194">
+<testsuite name="demolition.redEnemyTesting" tests="4" skipped="0" failures="0" errors="0" timestamp="2021-11-05T07:31:23" hostname="DESKTOP-GJIUGBP" time="4.117">
   <properties/>
-  <testcase name="redEnemyDeadEnd()" classname="demolition.redEnemyTesting" time="1.085"/>
-  <testcase name="tickRedEnemy()" classname="demolition.redEnemyTesting" time="1.043"/>
-  <testcase name="moveRedEnemyUpDown()" classname="demolition.redEnemyTesting" time="1.034"/>
-  <testcase name="moveRedEnemyLeftRight()" classname="demolition.redEnemyTesting" time="1.032"/>
+  <testcase name="redEnemyDeadEnd()" classname="demolition.redEnemyTesting" time="1.029"/>
+  <testcase name="tickRedEnemy()" classname="demolition.redEnemyTesting" time="1.031"/>
+  <testcase name="moveRedEnemyUpDown()" classname="demolition.redEnemyTesting" time="1.027"/>
+  <testcase name="moveRedEnemyLeftRight()" classname="demolition.redEnemyTesting" time="1.03"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

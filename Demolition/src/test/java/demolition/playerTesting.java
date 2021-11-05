@@ -53,7 +53,7 @@ public class playerTesting {
     }
 
     @Test
-    public void resetGameTime(){//Resets the game 
+    public void resetGameTime(){//Tests to see if game is reset 
         App app = new App();
         app.noLoop();
         app.isTest = true;
@@ -80,7 +80,7 @@ public class playerTesting {
     }
 
     @Test
-    public void keyPressing(){
+    public void keyPressing(){//Testing if key presses work as well as dropping bomb
         App app = new App();
         app.noLoop();
         app.isTest = true;
@@ -118,8 +118,8 @@ public class playerTesting {
         assertNotNull(app.getBombList());
     }
     
-    @Test//DDRRRDD
-    public void playerWalkIntoGoal(){
+    @Test
+    public void playerWalkIntoGoal(){//Tests player walking into goal
         App app = new App();
         app.noLoop();
         app.isTest = true;
@@ -130,24 +130,29 @@ public class playerTesting {
         app.keyReleased();
         app.keyPressed();
         app.keyReleased();
+        app.draw();
         app.keyCode = 39;
         app.keyPressed();
         app.keyReleased();
-        app.keyPressed();
-        app.keyReleased();
-        app.keyPressed();
-        app.keyReleased();
-        app.keyCode = 40;
-        app.keyPressed();
-        app.keyReleased();
+        app.draw();
         app.keyPressed();
         app.keyReleased();
         app.draw();
-        assert(app.gameOver == true);
+        app.keyPressed();
+        app.keyReleased();
+        app.draw();
+        app.keyCode = 40;
+        app.keyPressed();
+        app.keyReleased();
+        app.draw();
+        app.keyPressed();
+        app.keyReleased();
+        app.draw();
+        assert(!app.gameOver == true); //False since 2nd level is loaded and this variable is still false
     }
 
     @Test
-    public void playerTick(){
+    public void playerTick(){//Tests the animation of player
         App app = new App();
         app.noLoop();
         app.isTest = true;
@@ -160,5 +165,19 @@ public class playerTesting {
         for(int i = 0; i < 40; i++)
             app.board.getPlayer().tick();
         assertTrue(app.board.getPlayer().imageTick == 0);
+    }
+
+    @Test
+    public void playerOnTop(){//Tests that if player is on top of enemy, the enemy is loaded first
+        App app = new App();
+        app.noLoop();
+        app.isTest = true;
+        PApplet.runSketch(new String[] {"App"}, app);
+        app.delay(1000);
+        app.draw();
+        app.currentBoard[1][1] = " ";
+        app.currentBoard[1][3] = "P";
+        app.currentBoard[2][3] = "Y";
+        app.draw();
     }
 }
